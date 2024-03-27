@@ -1,3 +1,4 @@
+#include "PreCompile.h"
 #include "HoloCore.h"
 
 UHoloCore::UHoloCore()
