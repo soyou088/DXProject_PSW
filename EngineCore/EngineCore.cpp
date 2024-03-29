@@ -3,6 +3,11 @@
 #include <EngineBase/EngineFile.h>
 #include <EngineBase/EngineDirectory.h>
 #include <EnginePlatform/EngineSound.h>
+#include <EngineCore/EngineTexture.h>
+#include "Level.h"
+#include "GameMode.h"
+
+#include "EngineVertexBuffer.h"
 
 UEngineCore::UEngineCore() 
 {
@@ -24,12 +29,19 @@ UEngineCore* GEngine = nullptr;
 
 void UEngineCore::EngineStart(HINSTANCE _Inst)
 {
+	// 릭체크
+	LeakCheck;
+	GEngine = this;
+
 	EngineOptionInit();
 
 	EngineWindow.Open(EngineOption.WindowTitle);
+	// 디바이스 초기화전에 크기가 다정해지면 해상도가 이미 결정 된거에요.
+	// EngineOption.WindowScale 해상도
+	// 해상도는 윈도우 크기와 관련이 없습니다.
 	EngineWindow.SetWindowScale(EngineOption.WindowScale);
+	EngineDevice.Initialize(EngineWindow, EngineOption.ClearColor);
 
-	EngineDevice.Initialize(EngineWindow);
 
 	{
 		UserCorePtr->Initialize();
@@ -37,8 +49,8 @@ void UEngineCore::EngineStart(HINSTANCE _Inst)
 	}
 
 	UEngineWindow::WindowMessageLoop(
-		std::bind(&UEngineCore::EngineUpdate, this),
-		nullptr
+		std::bind(&UEngineCore::EngineFrameUpdate, this),
+		std::bind(&UEngineCore::EngineEnd, this)
 	);
 }
 
@@ -68,8 +80,48 @@ void UEngineCore::EngineOptionInit()
 
 }
 
-void UEngineCore::EngineUpdate()
+void UEngineCore::EngineEnd()
+{
+	EngineDevice.EngineResourcesRelease();
+}
+
+void UEngineCore::EngineFrameUpdate()
 {
 	float DeltaTime = MainTimer.TimeCheck();
 	UEngineInput::KeyCheckTick(DeltaTime);
+
+	if (nullptr != NextLevel)
+	{
+		CurLevel = NextLevel;
+		NextLevel = nullptr;
+	}
+
+	CurLevel->Tick(DeltaTime);
+
+	// 화면 지우고
+	EngineDevice.RenderStart();
+	// 게임에 요소들을 그리고
+
+	CurLevel->Render(DeltaTime);
+
+	// 억지로 그냥 그려본다.
+
+	// 출력한다
+	EngineDevice.RenderEnd();
+}
+
+std::shared_ptr<ULevel> UEngineCore::NewLevelCreate(std::string& _Name, std::shared_ptr<AActor> _GameMode)
+{
+	std::shared_ptr <AGameMode> GameModePtr = std::dynamic_pointer_cast<AGameMode>(_GameMode);
+
+	if (nullptr == GameModePtr)
+	{
+		MsgBoxAssert("레벨의 첫 오브젝트가 GameMode를 상속받은 클래스가 아닙니다.");
+		return nullptr;
+	}
+
+	std::shared_ptr<ULevel> Level = std::make_shared<ULevel>();
+	Level->PushActor(_GameMode);
+	Levels[_Name] = Level;
+	return Level;
 }
