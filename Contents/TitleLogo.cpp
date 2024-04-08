@@ -20,9 +20,10 @@ void ATitleLogo::BeginPlay()
 
 	// Renderer->SetSprite("CharWalk1_0.png");
 
-	Renderer->CreateAnimation("Run", "Run", 0.1f);
+	Renderer->SetSprite("AmeIdle");
+	Renderer->CreateAnimation("AmeIdle", "AmeIdle", 0.1f);
 
-	Renderer->ChangeAnimation("Run");
+	Renderer->ChangeAnimation("AmeIdle");
 
 }
 

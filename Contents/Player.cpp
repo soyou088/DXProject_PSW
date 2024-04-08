@@ -20,7 +20,9 @@ void APlayer::BeginPlay()
 	SetActorScale3D(FVector(300.0f, 300.0f, 100.0f));
 
 	// 내부에서 샘플러도 같이 찾을
-	Renderer->SetSprite("CharIdle0.png");
+	Renderer->SetSprite("AmeRun");
+	Renderer->CreateAnimation("AmeRun", "AmeRun", 0.1f);
+	Renderer->ChangeAnimation("AmeRun");
 }
 
 void APlayer::Tick(float _DeltaTime)

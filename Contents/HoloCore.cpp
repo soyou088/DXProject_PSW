@@ -17,8 +17,8 @@ void UHoloCore::Initialize()
 	{
 		// 파일의 헤더
 		UEngineDirectory Dir;
-		Dir.MoveToSearchChild("ContentsResources");
-		Dir.Move("Image");
+		Dir.MoveToSearchChild("Resources");
+		Dir.Move("Player");
 		std::vector<UEngineFile> Files = Dir.GetAllFile({ ".png" }, true);
 		for (UEngineFile& File : Files)
 		{
@@ -47,7 +47,7 @@ void UHoloCore::Initialize()
 
 	{
 		UEngineDirectory Dir;
-		Dir.MoveToSearchChild("ContentsResources");
+		Dir.MoveToSearchChild("Resources");
 		Dir.Move("Sound");
 		std::vector<UEngineFile> Files = Dir.GetAllFile({ ".wav" });
 		for (UEngineFile& File : Files)
