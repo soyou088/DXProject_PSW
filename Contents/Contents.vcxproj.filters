@@ -7,11 +7,20 @@
     <ClInclude Include="HoloCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="PlayGameMode.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Level\PlayLevel\Object</Filter>
+      <Filter>Level\PlayLevel\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGameMode.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleGameMode.h">
+      <Filter>Level\TitleLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>Level\TitleLevel\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayBack.h">
+      <Filter>Level\PlayLevel\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -21,11 +30,20 @@
     <ClCompile Include="HoloCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="PlayGameMode.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Level\PlayLevel\Object</Filter>
+      <Filter>Level\PlayLevel\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGameMode.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleGameMode.cpp">
+      <Filter>Level\TitleLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>Level\TitleLevel\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayBack.cpp">
+      <Filter>Level\PlayLevel\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,7 +59,13 @@
     <Filter Include="Level\PlayLevel">
       <UniqueIdentifier>{f7cd771b-27b4-45df-8fb6-1928e398bc62}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\PlayLevel\Object">
+    <Filter Include="Level\TitleLevel">
+      <UniqueIdentifier>{97da6cae-c6b7-49b4-a332-a6917292167f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\TitleLevel\Actor">
+      <UniqueIdentifier>{28116382-d64e-47f1-be13-759b389da5c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\Actor">
       <UniqueIdentifier>{208e4a80-28bc-44b4-890b-999bcaed8ce8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
