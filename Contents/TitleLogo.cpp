@@ -20,10 +20,7 @@ void ATitleLogo::BeginPlay()
 
 	// Renderer->SetSprite("CharWalk1_0.png");
 
-	Renderer->SetSprite("AmeIdle");
-	Renderer->CreateAnimation("AmeIdle", "AmeIdle", 0.1f);
-
-	Renderer->ChangeAnimation("AmeIdle");
+	Renderer->SetSprite("menu_charselecBG_0.png");
 
 }
 

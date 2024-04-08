@@ -18,7 +18,7 @@ void UHoloCore::Initialize()
 		// 파일의 헤더
 		UEngineDirectory Dir;
 		Dir.MoveToSearchChild("Resources");
-		Dir.Move("Player");
+		Dir.Move("Object");
 		std::vector<UEngineFile> Files = Dir.GetAllFile({ ".png" }, true);
 		for (UEngineFile& File : Files)
 		{
@@ -26,6 +26,8 @@ void UHoloCore::Initialize()
 			// 스프라이트로도 1장짜리로 로드가 된 상황이야.
 			UEngineSprite::Load(File.GetFullPath());
 		}
+
+
 
 		// 로드폴더는 이렇게 한다고 칩시다.
 		std::vector<UEngineDirectory> Directorys = Dir.GetAllDirectory();
