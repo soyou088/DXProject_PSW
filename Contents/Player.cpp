@@ -16,26 +16,33 @@ APlayer::~APlayer()
 void APlayer::BeginPlay()
 {
 	Super::BeginPlay();
+	
+		SetActorScale3D(FVector(300.0f, 300.0f, 100.0f));
 
-	SetActorScale3D(FVector(300.0f, 300.0f, 100.0f));
+		// 내부에서 샘플러도 같이 찾을
+		Renderer->SetSprite("AmeIdle");
+		Renderer->CreateAnimation("AmeIdle", "AmeIdle", 0.1f);
+	
+	
+		SetActorScale3D(FVector(100.0f, 100.0f, 100.0f));
 
-	// 내부에서 샘플러도 같이 찾을
-	Renderer->SetSprite("Box");
-	Renderer->CreateAnimation("Box", "Box", 0.2f);
-	Renderer->ChangeAnimation("Box");
+		Renderer->SetSprite("AmeRun");
+		Renderer->CreateAnimation("AmeRun", "AmeRun", 0.1f);
+	
+		
+		
+	Renderer->ChangeAnimation("AmeIdle");
+	
 }
 
 
 
-void APlayer::Move()
-{
-
-}
 
 void APlayer::Tick(float _DeltaTime)
 {
 	// 위에 뭔가를 쳐야할때도 있다.
 	Super::Tick(_DeltaTime);
+
 
 	float Speed = 100.0f;
 
@@ -47,6 +54,7 @@ void APlayer::Tick(float _DeltaTime)
 	if (true == IsPress('D'))
 	{
 		AddActorLocation(FVector::Right * _DeltaTime * Speed);
+		Renderer->ChangeAnimation("AmeRun");
 	}
 
 	if (true == IsPress('W'))
@@ -89,5 +97,5 @@ void APlayer::Tick(float _DeltaTime)
 	{
 		Color.Z -= _DeltaTime;
 	}
-
+	
 }

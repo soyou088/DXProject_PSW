@@ -21,10 +21,12 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-	void Move();
+	void MoveUpdate();
 
 private:
 	USpriteRenderer* Renderer;
 	float4 Color;
+	bool Change = false;
+	float CurAniTime = 0.0f;
 };
 
