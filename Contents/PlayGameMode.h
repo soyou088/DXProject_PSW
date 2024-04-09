@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/GameMode.h>
+#include "PlayBack.h"
 
 // Ό³Έν :
 class APlayGameMode : public AGameMode
