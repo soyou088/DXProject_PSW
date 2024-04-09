@@ -17,10 +17,11 @@ void APlayBack::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	SetActorScale3D(FVector(1280.0f, 1280.0f, 100.0f));
 
 	// 내부에서 샘플러도 같이 찾을
-	Renderer->SetSprite("Stage_1.png");
+	Renderer->SetSprite("Holo_map_06.png");
+	Renderer->SetAutoSize(1.0f, true);
+	Renderer->SetOrder(ERenderOrder::Back);
 }
 
 void APlayBack::Tick(float _DeltaTime)

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include <EngineCore/SpriteRenderer.h>
+#include <EngineCore/Camera.h>
 
 //void Function(URenderer* Renderer)
 //{
@@ -42,7 +43,10 @@ void APlayer::StateInit()
 	State.SetUpdateFunction("Run", std::bind(&APlayer::Run, this, std::placeholders::_1));
 	State.SetStartFunction("Run", std::bind(&APlayer::RunStart, this));
 	// Ã¼ÀÎÁö
+	Renderer->SetAutoSize(1.0f, true);
 	State.ChangeState("Idle");
+
+	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 }
 
 void APlayer::Die(float _Update)
@@ -66,13 +70,15 @@ void APlayer::RunStart()
 
 void APlayer::Run(float _DeltaTime)
 {
-
+	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 	float Speed = 500.0f;
 
 	if (true == IsPress('A'))
 	{
-		SetActorScale3D(FVector(-100.0f, 100.0f, 100.0f));
+		SetActorScale3D(FVector(-64.0f, 64.0f, 100.0f));
 		AddActorLocation(FVector::Left * _DeltaTime * Speed);
+		Camera->AddActorLocation(FVector::Left * _DeltaTime * Speed);
+		
 	}
 	if (true == IsUp('A'))
 	{
@@ -81,8 +87,9 @@ void APlayer::Run(float _DeltaTime)
 
 	if (true == IsPress('D'))
 	{
-		SetActorScale3D(FVector(100.0f, 100.0f, 100.0f));
+		SetActorScale3D(FVector(64.0f, 64.0f, 100.0f));
 		AddActorLocation(FVector::Right * _DeltaTime * Speed);
+		Camera->AddActorLocation(FVector::Right * _DeltaTime * Speed);
 	}
 	if (true == IsUp('D'))
 	{
@@ -92,6 +99,7 @@ void APlayer::Run(float _DeltaTime)
 	if (true == IsPress('W'))
 	{
 		AddActorLocation(FVector::Up * _DeltaTime * Speed);
+		Camera->AddActorLocation(FVector::Up * _DeltaTime * Speed);
 	}
 	if (true == IsUp('W'))
 	{
@@ -101,6 +109,7 @@ void APlayer::Run(float _DeltaTime)
 	if (true == IsPress('S'))
 	{
 		AddActorLocation(FVector::Down * _DeltaTime * Speed);
+		Camera->AddActorLocation(FVector::Down * _DeltaTime * Speed);
 	}
 	if (true == IsUp('S'))
 	{

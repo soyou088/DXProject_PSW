@@ -16,16 +16,22 @@ void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UContentsConstValue::MapTex = UEngineTexture::FindRes("Stage_1.png");
+	UContentsConstValue::MapTex = UEngineTexture::FindRes("Holo_map_06.png");
 	UContentsConstValue::MapTexScale = UContentsConstValue::MapTex->GetScale();
 
-
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
-	Camera->SetActorLocation(FVector(640.0f, -360.0f, -100.0f));
+	Camera->SetActorLocation(FVector(1920.0f, -1920.0f, -500.0f));
+
 
 	{
 		std::shared_ptr<APlayer> Actor = GetWorld()->SpawnActor<APlayer>("Player");
-		Actor->SetActorLocation({ 640.0f, -360.0f, 200.0f });
+
+		float TileSize = UContentsConstValue::TileSize;
+		float4 TexScale = UContentsConstValue::MapTexScale;
+		float4 ImageScale = { TexScale.X * TileSize, TexScale.Y * TileSize, 0.0f };
+
+		Actor->SetActorScale3D(ImageScale);
+		Actor->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 1000.0f });
 	}
 
 	{
@@ -40,9 +46,13 @@ void APlayGameMode::BeginPlay()
 	}
 }
 
+
+
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	
 
 }
+
