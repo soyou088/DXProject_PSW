@@ -67,6 +67,18 @@ void APlayGameMode::BeginPlay()
 		Back7->SetActorLocation({ -ImageScale.hX() , -ImageScale.hY(), 500.0f });           // 왼쪽
 		Back8->SetActorScale3D(ImageScale);
 		Back8->SetActorLocation({ ImageScale.hX() , ImageScale.hY(), 500.0f });            // 위쪽
+
+		Back0->index = 0;
+		BackList.push_back(Back0);
+		BackList.push_back(Back1);
+		BackList.push_back(Back2);
+		BackList.push_back(Back3);
+		BackList.push_back(Back4);
+		BackList.push_back(Back5);
+		BackList.push_back(Back6);
+		BackList.push_back(Back7);
+		BackList.push_back(Back8);
+
 }
 
 
@@ -74,6 +86,25 @@ void APlayGameMode::BeginPlay()
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+//	std::shared_ptr<UEngineTexture> Tex = UContentsConstValue::MapTex;
+//
+//#ifdef _DEBUG
+//	if (nullptr == Tex)
+//	{
+//		MsgBoxAssert("이미지 충돌체크중 이미지가 존재하지 않습니다.");
+//	}
+//#endif
+//
+//	float4 Pos = GetActorLocation();
+//	Color8Bit Color = Tex->GetColor(Pos, Color8Bit::MagentaA);
+//
+//	if (Color == Color8Bit::MagentaA)
+//	{
+//
+//	}
+
+
 
 }
 

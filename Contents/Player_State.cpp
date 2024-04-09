@@ -147,22 +147,6 @@ void APlayer::Run(float _DeltaTime)
 		Color.Z -= _DeltaTime;
 	}
 
-	std::shared_ptr<UEngineTexture> Tex = UContentsConstValue::MapTex;
-
-#ifdef _DEBUG
-	if (nullptr == Tex)
-	{
-		MsgBoxAssert("이미지 충돌체크중 이미지가 존재하지 않습니다.");
-	}
-#endif
-
-	float4 Pos = GetActorLocation();
-
-	Pos /= UContentsConstValue::TileSize;
-	Pos.Y = -Pos.Y;
-
-
-
-
+	
 
 }

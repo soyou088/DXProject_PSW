@@ -17,11 +17,11 @@ public:
 	APlayBack(APlayBack&& _Other) noexcept = delete;
 	APlayBack& operator=(const APlayBack& _Other) = delete;
 	APlayBack& operator=(APlayBack&& _Other) noexcept = delete;
+	int index;
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-
 private:
 	USpriteRenderer* Renderer;
 

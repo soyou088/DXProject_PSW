@@ -21,7 +21,7 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-
+	std::list<std::shared_ptr<APlayBack>> BackList;
 private:
 	
 
