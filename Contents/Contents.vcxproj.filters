@@ -22,6 +22,12 @@
     <ClInclude Include="PlayBack.h">
       <Filter>Level\PlayLevel\Actor</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsConstValue.h">
+      <Filter>Option</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsEnum.h">
+      <Filter>Option</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -45,6 +51,12 @@
     <ClCompile Include="PlayBack.cpp">
       <Filter>Level\PlayLevel\Actor</Filter>
     </ClCompile>
+    <ClCompile Include="Player_State.cpp">
+      <Filter>Level\PlayLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsConstValue.cpp">
+      <Filter>Option</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -67,6 +79,9 @@
     </Filter>
     <Filter Include="Level\PlayLevel\Actor">
       <UniqueIdentifier>{208e4a80-28bc-44b4-890b-999bcaed8ce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Option">
+      <UniqueIdentifier>{a73859eb-3538-4fc1-9131-0fa5a6354e90}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

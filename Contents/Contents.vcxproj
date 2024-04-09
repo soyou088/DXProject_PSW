@@ -167,6 +167,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ContentsConstValue.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="HoloCore.h">
       <SubType>
       </SubType>
@@ -197,6 +202,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ContentsConstValue.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="HoloCore.cpp">
       <SubType>
       </SubType>
@@ -209,6 +218,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Player_State.cpp" />
     <ClCompile Include="PlayGameMode.cpp">
       <SubType>
       </SubType>

@@ -16,14 +16,28 @@ void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	UContentsConstValue::MapTex = UEngineTexture::FindRes("Stage_1.png");
+	UContentsConstValue::MapTexScale = UContentsConstValue::MapTex->GetScale();
+
+
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
-	Camera->SetActorLocation(FVector(0.0f, 0.0f, -100.0f));
+	Camera->SetActorLocation(FVector(640.0f, -360.0f, -100.0f));
 
-	GetWorld()->SpawnActor<APlayer>("Player");
+	{
+		std::shared_ptr<APlayer> Actor = GetWorld()->SpawnActor<APlayer>("Player");
+		Actor->SetActorLocation({ 640.0f, -360.0f, 200.0f });
+	}
 
-	std::shared_ptr<APlayBack> Back = GetWorld()->SpawnActor<APlayBack>("PlayBack");
-	Back->SetActorLocation({ 0.0f, 0.0f, 500.0f });
+	{
+		std::shared_ptr<APlayBack> Back = GetWorld()->SpawnActor<APlayBack>("PlayBack");
 
+		float TileSize = UContentsConstValue::TileSize;
+		float4 TexScale = UContentsConstValue::MapTexScale;
+		float4 ImageScale = { TexScale.X * TileSize, TexScale.Y * TileSize, 0.0f };
+
+		Back->SetActorScale3D(ImageScale);
+		Back->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f });
+	}
 }
 
 void APlayGameMode::Tick(float _DeltaTime)
