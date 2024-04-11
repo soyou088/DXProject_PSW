@@ -4,4 +4,5 @@ enum class ERenderOrder
 {
 	Back,
 	Player,
+	Title,
 };

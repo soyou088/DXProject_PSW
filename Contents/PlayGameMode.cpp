@@ -34,6 +34,7 @@ void APlayGameMode::BeginPlay()
 		Actor->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 1000.0f });
 	}
 
+
 		std::shared_ptr<APlayBack> Back0 = GetWorld()->SpawnActor<APlayBack>("PlayBack");
 		std::shared_ptr<APlayBack> Back1 = GetWorld()->SpawnActor<APlayBack>("PlayBack");
 		std::shared_ptr<APlayBack> Back2 = GetWorld()->SpawnActor<APlayBack>("PlayBack");
@@ -50,23 +51,24 @@ void APlayGameMode::BeginPlay()
 		float4 ImageScale = { TexScale.X * TileSize, TexScale.Y * TileSize, 0.0f };
 
 		Back0->SetActorScale3D(ImageScale);
-		Back0->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f });             // 가운데
+		Back0->SetActorLocation({ -ImageScale.hX() , ImageScale.hY(), 500.0f });            // 왼쪽 대각선 위
 		Back1->SetActorScale3D(ImageScale);
-		Back1->SetActorLocation({ ImageScale.hX(), -ImageScale.hY() * 3, 500.0f });         // 아래
+		Back1->SetActorLocation({ ImageScale.hX() , ImageScale.hY(), 500.0f });             // 위쪽
 		Back2->SetActorScale3D(ImageScale);
-		Back2->SetActorLocation({ ImageScale.hX() * 3, -ImageScale.hY(), 500.0f });         // 오른쪽
+		Back2->SetActorLocation({ ImageScale.hX() * 3, ImageScale.hY(), 500.0f });          // 오른쪽 대각선 위
 		Back3->SetActorScale3D(ImageScale);
-		Back3->SetActorLocation({ ImageScale.hX() * 3, -ImageScale.hY() * 3, 500.0f });     // 오른쪽 대각선 아래
+		Back3->SetActorLocation({ ImageScale.hX() * 3, -ImageScale.hY(), 500.0f });         // 오른쪽
 		Back4->SetActorScale3D(ImageScale);
-		Back4->SetActorLocation({ ImageScale.hX() * 3, ImageScale.hY(), 500.0f });          // 오른쪽 대각선 위
+		Back4->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f });             // 가운데
 		Back5->SetActorScale3D(ImageScale);
-		Back5->SetActorLocation({ -ImageScale.hX() , ImageScale.hY(), 500.0f });            // 왼쪽 대각선 위
+		Back5->SetActorLocation({ -ImageScale.hX() , -ImageScale.hY(), 500.0f });           // 왼쪽
 		Back6->SetActorScale3D(ImageScale);
-		Back6->SetActorLocation({ -ImageScale.hX() , -ImageScale.hY() * 3, 500.0f });       // 왼쪽 대각선 아래
+		Back6->SetActorLocation({ ImageScale.hX() * 3, -ImageScale.hY() * 3, 500.0f });     // 오른쪽 대각선 아래
 		Back7->SetActorScale3D(ImageScale);
-		Back7->SetActorLocation({ -ImageScale.hX() , -ImageScale.hY(), 500.0f });           // 왼쪽
+		Back7->SetActorLocation({ ImageScale.hX(), -ImageScale.hY() * 3, 500.0f });         // 아래
 		Back8->SetActorScale3D(ImageScale);
-		Back8->SetActorLocation({ ImageScale.hX() , ImageScale.hY(), 500.0f });            // 위쪽
+		Back8->SetActorLocation({ -ImageScale.hX() , -ImageScale.hY() * 3, 500.0f });       // 왼쪽 대각선 아래
+
 
 		Back0->index = 0;
 		BackList.push_back(Back0);

@@ -1,7 +1,7 @@
 #pragma once
 #include <EngineCore/GameMode.h>
 #include "PlayBack.h"
-
+#include "Player.h"
 // Ό³Έν :
 class APlayGameMode : public AGameMode
 {
@@ -22,7 +22,8 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	std::list<std::shared_ptr<APlayBack>> BackList;
+//	std::vector<std::shared_ptr<APlayer>> BackList;
+	std::vector<std::shared_ptr<APlayBack>> BackList;
 private:
 	
 

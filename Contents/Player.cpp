@@ -3,6 +3,8 @@
 #include <EngineCore/Renderer.h>
 #include <EngineCore/SpriteRenderer.h>
 
+//std::vector<std::shared_ptr<APlayer>> BackList;
+
 APlayer::APlayer()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
@@ -23,6 +25,8 @@ void APlayer::BeginPlay()
 
 		StateInit();
 		Renderer->SetOrder(ERenderOrder::Player);
+
+
 }
 
 
@@ -34,6 +38,28 @@ void APlayer::Tick(float _DeltaTime)
 	State.Update(_DeltaTime);
 	
 	
+}
+
+void APlayer::Loop()
+{
+	//
+	//for (size_t i = 0; i < BackList[]; i++)
+	//{
+
+	//}
+
+
+
+
+	//for (size_t i = 0; i < Components.size(); i++)
+	//{
+	//	if (false == Components[i]->IsActive())
+	//	{
+	//		continue;
+	//	}
+
+	//	Components[i]->Tick(_DeltaTime);
+	//}
 }
 
 

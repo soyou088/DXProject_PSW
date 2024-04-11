@@ -20,7 +20,7 @@ void ATitleLogo::BeginPlay()
 
 	// Renderer->SetSprite("CharWalk1_0.png");
 
-	Renderer->SetSprite("menu_charselecBG_0.png");
+	Renderer->SetSprite("HoloTitle.png");
 
 }
 
