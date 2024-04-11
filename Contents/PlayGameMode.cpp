@@ -34,7 +34,6 @@ void APlayGameMode::BeginPlay()
 	Camera->SetActorLocation(CameraPos);
 
 
-	float4 UIPos = PlayerStartPos;
 
 	{
 		Player = GetWorld()->SpawnActor<APlayer>("Player");
@@ -43,12 +42,12 @@ void APlayGameMode::BeginPlay()
 
 
 	{
-		UI = GetWorld()->SpawnActor<AUI>("UI");
-		UI->SetActorLocation(UIPos);
+		//UI = GetWorld()->SpawnActor<AUI>("UI");
+		//UI->SetActorLocation(PlayerStartPos);
 	}
 	{
 		Monster = GetWorld()->SpawnActor<AMonster>("Monster");
-		Monster->SetActorLocation(UIPos);
+		Monster->SetActorLocation(PlayerStartPos);
 	}
 
 	// 3840 x 3840

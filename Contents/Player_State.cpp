@@ -28,6 +28,8 @@ void APlayer::StateInit()
 	State.ChangeState("Idle");
 
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
+
+
 }
 
 

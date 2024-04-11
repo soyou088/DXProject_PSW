@@ -25,6 +25,7 @@ protected:
 
 private:
 	USpriteRenderer* Renderer;
-
+	FVector PlayerLocation;
+	float MoveSpeed = 100.f;
 };
 

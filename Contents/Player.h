@@ -10,6 +10,7 @@ class APlayer : public AActor
 	GENERATED_BODY(AActor)
 
 public:
+	static FVector PlayerPos;
 	// constrcuter destructer
 	APlayer();
 	~APlayer();
