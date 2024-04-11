@@ -48,7 +48,7 @@ void APlayGameMode::BeginPlay()
 	}
 	{
 		Monster = GetWorld()->SpawnActor<AMonster>("Monster");
-		Monster->SetActorLocation(FVector{20,20,20});
+		Monster->SetActorLocation(UIPos);
 	}
 
 	// 3840 x 3840

@@ -6,7 +6,6 @@
 AMonster::AMonster()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	InputOn();
 }
 
 AMonster::~AMonster()
@@ -16,11 +15,11 @@ AMonster::~AMonster()
 void AMonster::BeginPlay()
 {
 	Super::BeginPlay();
-	Renderer->SetSprite("spr_Bubba_0.png");
-	//Renderer->CreateAnimation("Bubba" , "Bubba" , 0.1f, true, 0 , 2);
-	//Renderer->SetAutoSize(1.0f, true);
-	Renderer->SetAutoSize(10, true);
-	Renderer->SetOrder(0);
+
+	Renderer->CreateAnimation("Bubba", "Bubba", 0.1f, true, 0, 2);
+	Renderer->SetAutoSize(1.0f, true);
+	Renderer->SetOrder(ERenderOrder::UI);
+	Renderer->ChangeAnimation("Bubba");
 }
 
 void AMonster::Tick(float _DeltaTime)
