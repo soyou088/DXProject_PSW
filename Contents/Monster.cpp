@@ -4,6 +4,8 @@
 #include <EngineCore/Renderer.h>
 #include <EngineCore/SpriteRenderer.h>
 
+
+
 AMonster::AMonster()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
@@ -31,7 +33,10 @@ void AMonster::Tick(float _DeltaTime)
 	FVector MonsterPos = GetActorLocation();
 	FVector MonsterDir = APlayer::PlayerPos - MonsterPos;
 	FVector MonsterDirNormal = MonsterDir.Normalize2DReturn();
-
 	AddActorLocation(MonsterDirNormal * _DeltaTime * MoveSpeed);
+
+
 }
+
+
 

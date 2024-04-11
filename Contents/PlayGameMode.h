@@ -49,7 +49,9 @@ protected:
 
 	FIntPoint PosToIndex(float4 _Pos);
 
+
 	void InfinityGroundCheck();
+	void SpawnMonsterRandomLocation();
 
 private:
 	FIntPoint CurIndex;
