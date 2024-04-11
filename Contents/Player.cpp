@@ -19,9 +19,9 @@ void APlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-		Renderer->CreateAnimation("AmeIdle", "AmeIdle");
+		Renderer->CreateAnimation("AmeIdle", "Ame",0.1f, true,0,3);
+		Renderer->CreateAnimation("AmeRun", "Ame", 0.1f, true, 5,10);
 		//Renderer->CreateAnimation("Die", "Die");
-		Renderer->CreateAnimation("AmeRun", "AmeRun");
 
 		StateInit();
 		Renderer->SetOrder(ERenderOrder::Player);

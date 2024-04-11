@@ -2,6 +2,8 @@
 #include <EngineCore/GameMode.h>
 #include "PlayBack.h"
 #include "Player.h"
+#include "Monster.h"
+#include "UI.h"
 
 struct FIntPoint
 {
@@ -40,6 +42,8 @@ protected:
 // 	std::map<__int64, std::shared_ptr<APlayBack>> Grounds;
 	std::vector<std::shared_ptr<APlayBack>> Grounds;
 	std::shared_ptr<APlayer> Player;
+	std::shared_ptr<AMonster> Monster;
+	std::shared_ptr<AUI> UI;
 
 	float4 IndexToCenterPos(FIntPoint _Index);
 

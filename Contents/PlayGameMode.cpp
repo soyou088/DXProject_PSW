@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "PlayBack.h"
 #include "ContentsValue.h"
+#include "UI.h"
+#include "Monster.h"
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/Camera.h>
 #include <EngineCore/EngineDebugMsgWindow.h>
@@ -14,6 +16,71 @@ APlayGameMode::APlayGameMode()
 APlayGameMode::~APlayGameMode()
 {
 }
+
+void APlayGameMode::BeginPlay()
+{
+	Super::BeginPlay();
+
+	std::shared_ptr<UEngineTexture> Tex = UEngineTexture::FindRes("Holo_map_04.png");
+
+	CurIndex = { 0, 0 };
+	float4 PlayerStartPos = IndexToCenterPos(CurIndex);
+
+
+	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
+
+	float4 CameraPos = PlayerStartPos;
+	CameraPos.Z = -500.0f;
+	Camera->SetActorLocation(CameraPos);
+
+
+	float4 UIPos = PlayerStartPos;
+
+	{
+		Player = GetWorld()->SpawnActor<APlayer>("Player");
+		Player->SetActorLocation(PlayerStartPos);
+	}
+
+
+	{
+		UI = GetWorld()->SpawnActor<AUI>("UI");
+		UI->SetActorLocation(UIPos);
+	}
+
+	{
+		Monster = GetWorld()->SpawnActor<AMonster>("Monster");
+		Monster->SetActorLocation(PlayerStartPos);
+	}
+
+	// 3840 x 3840
+
+	for (int y = -1; y < 2; y++)
+	{
+		for (int x = -1; x < 2; x++)
+		{
+			std::shared_ptr<APlayBack> Back = GetWorld()->SpawnActor<APlayBack>("PlayBack");
+
+			Back->SetActorScale3D(ContentsValue::GroundTileSize);
+
+			FIntPoint Point;
+			Point.X = x;
+			Point.Y = y;
+
+			float4 Pos;
+			Pos.X = ContentsValue::GroundTileSize.X * x;
+			Pos.Y = ContentsValue::GroundTileSize.Y * y;
+
+			Pos.X += ContentsValue::GroundTileSize.hX();
+			Pos.Y += ContentsValue::GroundTileSize.hY();
+			Back->SetActorLocation(Pos);
+
+			Grounds.push_back(Back);
+
+			// Grounds[Point.Key] = Back;
+		}
+	}
+}
+
 
 float4 APlayGameMode::IndexToCenterPos(FIntPoint _Index)
 {
@@ -51,55 +118,6 @@ FIntPoint APlayGameMode::PosToIndex(float4 _Pos)
 	return Index;
 }
 
-void APlayGameMode::BeginPlay()
-{
-	Super::BeginPlay();
-
-	std::shared_ptr<UEngineTexture> Tex = UEngineTexture::FindRes("Holo_map_04.png");
-
-	CurIndex = { 0, 0 };
-	float4 PlayerStartPos = IndexToCenterPos(CurIndex);
-
-
-	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
-
-	float4 CameraPos = PlayerStartPos;
-	CameraPos.Z = -500.0f;
-	Camera->SetActorLocation(CameraPos);
-
-	{
-		Player = GetWorld()->SpawnActor<APlayer>("Player");
-		Player->SetActorLocation(PlayerStartPos);
-	}
-
-	// 3840 x 3840
-
-	for (int y = -1; y < 2; y++)
-	{		
-		for (int x = -1; x < 2; x++)
-		{
-			std::shared_ptr<APlayBack> Back = GetWorld()->SpawnActor<APlayBack>("PlayBack");
-
-			Back->SetActorScale3D(ContentsValue::GroundTileSize);
-
-			FIntPoint Point;
-			Point.X = x;
-			Point.Y = y;
-
-			float4 Pos;
-			Pos.X = ContentsValue::GroundTileSize.X * x;
-			Pos.Y = ContentsValue::GroundTileSize.Y * y;
-
-			Pos.X += ContentsValue::GroundTileSize.hX();
-			Pos.Y += ContentsValue::GroundTileSize.hY();
-			Back->SetActorLocation(Pos);
-
-			Grounds.push_back(Back);
-
-			// Grounds[Point.Key] = Back;
-		}
-	}
-}
 
 
 void APlayGameMode::InfinityGroundCheck()

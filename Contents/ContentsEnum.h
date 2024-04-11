@@ -4,7 +4,10 @@ enum class ERenderOrder
 {
 	Back,
 	Player,
+	Monster,
 	Title,
+	UI,
+
 };
 
 enum class EActorDir

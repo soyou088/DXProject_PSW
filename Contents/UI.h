@@ -1,26 +1,30 @@
-//#pragma once
-//#include <EngineCore/Actor.h>
-//#include <EngineCore/StateManager.h>
-//
-//// 설명 :
-//class UI : public AActor
-//{
-//public:
-//	// constrcuter destructer
-//	UI();
-//	~UI();
-//
-//	// delete Function
-//	UI(const UI& _Other) = delete;
-//	UI(UI&& _Other) noexcept = delete;
-//	UI& operator=(const UI& _Other) = delete;
-//	UI& operator=(UI&& _Other) noexcept = delete;
-//
-//protected:
-//	void BeginPlay() override;
-//	void Tick(float _DeltaTime) override;
-//
-//private:
-//
-//};
-//
+#pragma once
+#include <EngineCore/Actor.h>
+#include <EngineCore/StateManager.h>
+
+
+// 설명 :
+class USpriteRenderer;
+class AUI : public AActor
+{
+	GENERATED_BODY(AActor)
+public:
+	// constrcuter destructer
+	AUI();
+	~AUI();
+
+	// delete Function
+	AUI(const AUI& _Other) = delete;
+	AUI(AUI&& _Other) noexcept = delete;
+	AUI& operator=(const AUI& _Other) = delete;
+	AUI& operator=(AUI&& _Other) noexcept = delete;
+
+protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
+
+
+private:
+	USpriteRenderer* Renderer;
+};
+

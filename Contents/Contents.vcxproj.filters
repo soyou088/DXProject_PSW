@@ -28,6 +28,12 @@
     <ClInclude Include="ContentsValue.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Level\PlayLevel\UIActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Level\PlayLevel\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -57,6 +63,12 @@
     <ClCompile Include="ContentsValue.cpp">
       <Filter>Header</Filter>
     </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Level\PlayLevel\UIActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Level\PlayLevel\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -85,6 +97,12 @@
     </Filter>
     <Filter Include="Header">
       <UniqueIdentifier>{4bad1fa8-ff4e-4f79-a8e8-a1ac1b99e33f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\UIActor">
+      <UniqueIdentifier>{f747f929-eff1-4f7c-a8db-c454f10d39b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\Monster">
+      <UniqueIdentifier>{8dc2bf40-d17a-4ba7-ac99-8ad1eb90fe30}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
