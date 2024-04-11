@@ -19,7 +19,7 @@ void APlayBack::BeginPlay()
 	
 
 	// 내부에서 샘플러도 같이 찾을
-	Renderer->SetSprite("Holo_map_04.png");
+	Renderer->SetSprite("Holo_map_06.png");
 	Renderer->SetAutoSize(1.0f, true);
 	Renderer->SetOrder(ERenderOrder::Back);
 }

@@ -18,28 +18,8 @@ void APlayer::StateInit()
 
 	// 함수들 세팅하고
 	State.SetUpdateFunction("Idle", std::bind(&APlayer::Idle, this, std::placeholders::_1));
+	State.SetStartFunction("Idle", std::bind(&APlayer::IdleStart, this));
 
-	// 즉석 함수
-	// = [ 람다캡쳐 Renderer]
-	// {
-	//    함수 내용
-	// }
-
-	// 람다캡처의 내용안에 =을 쓰면
-	// 현재 스택에서 사용가능한 복사본을 만든다.
-	// 메모리를 할당해서 Renderer를 같은 이름으로 복사한다.
-
-	USpriteRenderer* MyRender = Renderer;
-
-	State.SetStartFunction("Idle", [=] // USpriteRenderer* MyRender = MyRender
-		{
-			// 메모리를 할당해서 MyRender를 같은 이름으로 복사한다.
-			// 새로운 함수다.
-			// 스택이 달라진다.
-			// MyRender0->
-			MyRender->ChangeAnimation("AmeIdle");
-		}
-	);
 
 	State.SetUpdateFunction("Run", std::bind(&APlayer::Run, this, std::placeholders::_1));
 	State.SetStartFunction("Run", std::bind(&APlayer::RunStart, this));
@@ -65,6 +45,11 @@ void APlayer::Idle(float _Update)
 	}
 }
 
+void APlayer::IdleStart()
+{
+	Renderer->ChangeAnimation("AmeIdle");
+}
+
 void APlayer::RunStart()
 {
 	Renderer->ChangeAnimation("AmeRun");
@@ -85,7 +70,7 @@ void APlayer::Run(float _DeltaTime)
 	}
 	if (true == IsUp('A'))
 	{
-
+		Renderer->SetDir(EEngineDir::Left);
 		State.ChangeState("Idle");
 	}
 

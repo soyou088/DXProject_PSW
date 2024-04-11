@@ -40,9 +40,9 @@ private:
 	void Die(float _DeltaTime);
 
 	void Idle(float _DeltaTime);
-
-	void RunStart();
+	void IdleStart();
 	void Run(float _DeltaTime);
+	void RunStart();
 
 };
 
