@@ -76,7 +76,7 @@ void UHoloCore::Initialize()
 		// 파일의 헤더
 		UEngineDirectory Dir;
 		Dir.MoveToSearchChild("Resources");
-		Dir.Move("Map");
+		Dir.Move("Monster");
 		std::vector<UEngineFile> Files = Dir.GetAllFile({ ".png" }, true);
 		for (UEngineFile& File : Files)
 		{
@@ -102,7 +102,7 @@ void UHoloCore::Initialize()
 		// 파일의 헤더
 		UEngineDirectory Dir;
 		Dir.MoveToSearchChild("Resources");
-		Dir.Move("Monster");
+		Dir.Move("Map");
 		std::vector<UEngineFile> Files = Dir.GetAllFile({ ".png" }, true);
 		for (UEngineFile& File : Files)
 		{
@@ -118,10 +118,12 @@ void UHoloCore::Initialize()
 		for (size_t i = 0; i < Directorys.size(); i++)
 		{
 			std::string Name = Directorys[i].GetFolderName();
+
 			UEngineSprite::LoadFolder(Directorys[i].GetFullPath());
 		}
 
 	}
+
 
 	{
 		// 파일의 헤더

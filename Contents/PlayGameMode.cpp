@@ -46,10 +46,9 @@ void APlayGameMode::BeginPlay()
 		UI = GetWorld()->SpawnActor<AUI>("UI");
 		UI->SetActorLocation(UIPos);
 	}
-
 	{
 		Monster = GetWorld()->SpawnActor<AMonster>("Monster");
-		Monster->SetActorLocation(PlayerStartPos);
+		Monster->SetActorLocation(FVector{20,20,20});
 	}
 
 	// 3840 x 3840
@@ -76,7 +75,6 @@ void APlayGameMode::BeginPlay()
 
 			Grounds.push_back(Back);
 
-			// Grounds[Point.Key] = Back;
 		}
 	}
 }

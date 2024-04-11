@@ -32,8 +32,6 @@ private:
 	USpriteRenderer* Renderer;
 	float4 Color;
 
-	bool OnLeftUpStep = false;
-
 	//////////////////////// State
 	void StateInit();
 

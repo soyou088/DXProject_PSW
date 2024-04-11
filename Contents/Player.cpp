@@ -3,7 +3,6 @@
 #include <EngineCore/Renderer.h>
 #include <EngineCore/SpriteRenderer.h>
 
-//std::vector<std::shared_ptr<APlayer>> BackList;
 
 APlayer::APlayer()
 {
