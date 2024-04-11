@@ -40,26 +40,6 @@ void APlayer::Tick(float _DeltaTime)
 	
 }
 
-void APlayer::Loop()
-{
-	//
-	//for (size_t i = 0; i < BackList[]; i++)
-	//{
 
-	//}
-
-
-
-
-	//for (size_t i = 0; i < Components.size(); i++)
-	//{
-	//	if (false == Components[i]->IsActive())
-	//	{
-	//		continue;
-	//	}
-
-	//	Components[i]->Tick(_DeltaTime);
-	//}
-}
 
 

@@ -26,15 +26,15 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-	void Loop();
-
 
 
 private:
 	USpriteRenderer* Renderer;
 	float4 Color;
 
-	///////////////////////// State
+	bool OnLeftUpStep = false;
+
+	//////////////////////// State
 	void StateInit();
 
 	void Die(float _DeltaTime);

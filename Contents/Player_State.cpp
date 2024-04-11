@@ -2,6 +2,7 @@
 #include "Player.h"
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/Camera.h>
+#include "ContentsEnum.h"
 
 //void Function(URenderer* Renderer)
 //{
@@ -49,6 +50,7 @@ void APlayer::StateInit()
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 }
 
+
 void APlayer::Die(float _Update)
 {
 
@@ -70,6 +72,7 @@ void APlayer::RunStart()
 
 void APlayer::Run(float _DeltaTime)
 {
+
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 	float Speed = 500.0f;
 
@@ -82,6 +85,7 @@ void APlayer::Run(float _DeltaTime)
 	}
 	if (true == IsUp('A'))
 	{
+
 		State.ChangeState("Idle");
 	}
 

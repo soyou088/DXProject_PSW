@@ -6,3 +6,9 @@ enum class ERenderOrder
 	Player,
 	Title,
 };
+
+enum class EActorDir
+{
+	Left,
+	Right,
+};

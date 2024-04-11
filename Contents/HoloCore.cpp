@@ -143,7 +143,7 @@ void UHoloCore::Initialize()
 
 	GEngine->CreateLevel<APlayGameMode>("PlayLevel");
 	GEngine->CreateLevel<ATitleGameMode>("TitleLevel");
-	GEngine->ChangeLevel("TitleLevel");
+	GEngine->ChangeLevel("PlayLevel");
 
 
 }
