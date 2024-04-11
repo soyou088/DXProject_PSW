@@ -19,14 +19,14 @@
     <ClInclude Include="PlayBack.h">
       <Filter>Level\PlayLevel\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="ContentsConstValue.h">
-      <Filter>Option</Filter>
-    </ClInclude>
     <ClInclude Include="ContentsEnum.h">
       <Filter>Option</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Level\PlayLevel\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsValue.h">
+      <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -54,8 +54,8 @@
     <ClCompile Include="Player_State.cpp">
       <Filter>Level\PlayLevel</Filter>
     </ClCompile>
-    <ClCompile Include="ContentsConstValue.cpp">
-      <Filter>Option</Filter>
+    <ClCompile Include="ContentsValue.cpp">
+      <Filter>Header</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +82,9 @@
     </Filter>
     <Filter Include="Option">
       <UniqueIdentifier>{a73859eb-3538-4fc1-9131-0fa5a6354e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{4bad1fa8-ff4e-4f79-a8e8-a1ac1b99e33f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -2,7 +2,10 @@
 #include "PlayGameMode.h"
 #include "Player.h"
 #include "PlayBack.h"
+#include "ContentsValue.h"
+#include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/Camera.h>
+#include <EngineCore/EngineDebugMsgWindow.h>
 
 APlayGameMode::APlayGameMode()
 {
@@ -12,83 +15,149 @@ APlayGameMode::~APlayGameMode()
 {
 }
 
+float4 APlayGameMode::IndexToCenterPos(FIntPoint _Index)
+{
+	float4 Pos;
+	Pos.X = ContentsValue::GroundTileSize.X * _Index.X;
+	Pos.Y = ContentsValue::GroundTileSize.Y * _Index.Y;
+
+	Pos.X += ContentsValue::GroundTileSize.hX();
+	Pos.Y += ContentsValue::GroundTileSize.hY();
+
+	return Pos;
+}
+
+FIntPoint APlayGameMode::PosToIndex(float4 _Pos)
+{
+	FIntPoint Index;
+
+	float4 Location = _Pos;
+
+	float4 Pos;
+	Pos.X = Location.X / ContentsValue::GroundTileSize.X;
+	Pos.Y = Location.Y / ContentsValue::GroundTileSize.Y;
+
+	if (0 >= Pos.X)
+	{
+		Pos.X += -1;
+	}
+	if (0 >= Pos.Y)
+	{
+		Pos.Y += -1;
+	}
+
+	Index.X = Pos.X;
+	Index.Y = Pos.Y;
+	return Index;
+}
+
 void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UContentsConstValue::MapTex = UEngineTexture::FindRes("Holo_map_04.png");
-	UContentsConstValue::MapTexScale = UContentsConstValue::MapTex->GetScale();
+	std::shared_ptr<UEngineTexture> Tex = UEngineTexture::FindRes("Holo_map_04.png");
+
+	CurIndex = { 0, 0 };
+	float4 PlayerStartPos = IndexToCenterPos(CurIndex);
+
 
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
-	Camera->SetActorLocation(FVector(1920.0f, -1920.0f, -500.0f));
 
+	float4 CameraPos = PlayerStartPos;
+	CameraPos.Z = -500.0f;
+	Camera->SetActorLocation(CameraPos);
 
 	{
-		std::shared_ptr<APlayer> Actor = GetWorld()->SpawnActor<APlayer>("Player");
-
-		float TileSize = UContentsConstValue::TileSize;
-		float4 TexScale = UContentsConstValue::MapTexScale;
-		float4 ImageScale = { TexScale.X * TileSize, TexScale.Y * TileSize, 0.0f };
-
-		Actor->SetActorScale3D(ImageScale);
-		Actor->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 1000.0f });
+		Player = GetWorld()->SpawnActor<APlayer>("Player");
+		Player->SetActorLocation(PlayerStartPos);
 	}
 
+	// 3840 x 3840
 
-		std::shared_ptr<APlayBack> Back0 = GetWorld()->SpawnActor<APlayBack>("PlayBack");
-		std::shared_ptr<APlayBack> Back1 = GetWorld()->SpawnActor<APlayBack>("PlayBack");
-		std::shared_ptr<APlayBack> Back2 = GetWorld()->SpawnActor<APlayBack>("PlayBack");
-		std::shared_ptr<APlayBack> Back3 = GetWorld()->SpawnActor<APlayBack>("PlayBack");
-		std::shared_ptr<APlayBack> Back4 = GetWorld()->SpawnActor<APlayBack>("PlayBack");
-		std::shared_ptr<APlayBack> Back5 = GetWorld()->SpawnActor<APlayBack>("PlayBack");
-		std::shared_ptr<APlayBack> Back6 = GetWorld()->SpawnActor<APlayBack>("PlayBack");
-		std::shared_ptr<APlayBack> Back7 = GetWorld()->SpawnActor<APlayBack>("PlayBack");
-		std::shared_ptr<APlayBack> Back8 = GetWorld()->SpawnActor<APlayBack>("PlayBack");
+	for (int y = -1; y < 2; y++)
+	{		
+		for (int x = -1; x < 2; x++)
+		{
+			std::shared_ptr<APlayBack> Back = GetWorld()->SpawnActor<APlayBack>("PlayBack");
 
+			Back->SetActorScale3D(ContentsValue::GroundTileSize);
 
-		float TileSize = UContentsConstValue::TileSize;
-		float4 TexScale = UContentsConstValue::MapTexScale;
-		float4 ImageScale = { TexScale.X * TileSize, TexScale.Y * TileSize, 0.0f };
+			FIntPoint Point;
+			Point.X = x;
+			Point.Y = y;
 
-		Back0->SetActorScale3D(ImageScale);
-		Back0->SetActorLocation({ -ImageScale.hX() , ImageScale.hY(), 500.0f });            // 왼쪽 대각선 위
-		Back1->SetActorScale3D(ImageScale);
-		Back1->SetActorLocation({ ImageScale.hX() , ImageScale.hY(), 500.0f });             // 위쪽
-		Back2->SetActorScale3D(ImageScale);
-		Back2->SetActorLocation({ ImageScale.hX() * 3, ImageScale.hY(), 500.0f });          // 오른쪽 대각선 위
-		Back3->SetActorScale3D(ImageScale);
-		Back3->SetActorLocation({ ImageScale.hX() * 3, -ImageScale.hY(), 500.0f });         // 오른쪽
-		Back4->SetActorScale3D(ImageScale);
-		Back4->SetActorLocation({ ImageScale.hX(), -ImageScale.hY(), 500.0f });             // 가운데
-		Back5->SetActorScale3D(ImageScale);
-		Back5->SetActorLocation({ -ImageScale.hX() , -ImageScale.hY(), 500.0f });           // 왼쪽
-		Back6->SetActorScale3D(ImageScale);
-		Back6->SetActorLocation({ ImageScale.hX() * 3, -ImageScale.hY() * 3, 500.0f });     // 오른쪽 대각선 아래
-		Back7->SetActorScale3D(ImageScale);
-		Back7->SetActorLocation({ ImageScale.hX(), -ImageScale.hY() * 3, 500.0f });         // 아래
-		Back8->SetActorScale3D(ImageScale);
-		Back8->SetActorLocation({ -ImageScale.hX() , -ImageScale.hY() * 3, 500.0f });       // 왼쪽 대각선 아래
+			float4 Pos;
+			Pos.X = ContentsValue::GroundTileSize.X * x;
+			Pos.Y = ContentsValue::GroundTileSize.Y * y;
 
+			Pos.X += ContentsValue::GroundTileSize.hX();
+			Pos.Y += ContentsValue::GroundTileSize.hY();
+			Back->SetActorLocation(Pos);
 
-		Back0->index = 0;
-		BackList.push_back(Back0);
-		BackList.push_back(Back1);
-		BackList.push_back(Back2);
-		BackList.push_back(Back3);
-		BackList.push_back(Back4);
-		BackList.push_back(Back5);
-		BackList.push_back(Back6);
-		BackList.push_back(Back7);
-		BackList.push_back(Back8);
+			Grounds.push_back(Back);
 
+			// Grounds[Point.Key] = Back;
+		}
+	}
 }
 
 
+void APlayGameMode::InfinityGroundCheck()
+{
+	float4 PlayerPos = Player->GetActorLocation();
+
+	FIntPoint Index = PosToIndex(PlayerPos);
+
+	if (Index.X != CurIndex.X || Index.Y != CurIndex.Y)
+	{
+		int GroundCount = 0;
+
+		float4 MovePos;
+		MovePos.X = Index.X * ContentsValue::GroundTileSize.X;
+		MovePos.Y = Index.Y * ContentsValue::GroundTileSize.Y;
+
+		for (int y = -1; y < 2; y++)
+		{
+			for (int x = -1; x < 2; x++)
+			{
+				std::shared_ptr<APlayBack> Back = Grounds[GroundCount];
+
+				Back->SetActorScale3D(ContentsValue::GroundTileSize);
+				FIntPoint Point;
+				Point.X = x;
+				Point.Y = y;
+
+				float4 Pos;
+				Pos.X = ContentsValue::GroundTileSize.X * x;
+				Pos.Y = ContentsValue::GroundTileSize.Y * y;
+
+				Pos.X += ContentsValue::GroundTileSize.hX();
+				Pos.Y += ContentsValue::GroundTileSize.hY();
+				Back->SetActorLocation(Pos + MovePos);
+				++GroundCount;
+			}
+		}
+
+		CurIndex = Index;
+	}
+}
 
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	InfinityGroundCheck();
+
+
+	{
+
+		float4 PlayerPos = Player->GetActorLocation();
+		FIntPoint Index = PosToIndex(PlayerPos);
+		CurIndex = Index;
+		UEngineDebugMsgWindow::PushMsg(std::format("PlayerPos : {}", PlayerPos.ToString()));
+		UEngineDebugMsgWindow::PushMsg(std::format("PlayerIndex : {}, {}", Index.X, Index.Y));
+
+	}
 
 }
 

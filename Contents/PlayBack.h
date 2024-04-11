@@ -19,11 +19,12 @@ public:
 	APlayBack& operator=(APlayBack&& _Other) noexcept = delete;
 	int index;
 
+	USpriteRenderer* Renderer;
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 private:
-	USpriteRenderer* Renderer;
 
 	float4 Color;
 };

@@ -167,11 +167,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ContentsConstValue.h">
+    <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="ContentsValue.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="HoloCore.h">
       <SubType>
       </SubType>
@@ -202,7 +202,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ContentsConstValue.cpp">
+    <ClCompile Include="ContentsValue.cpp">
       <SubType>
       </SubType>
     </ClCompile>
