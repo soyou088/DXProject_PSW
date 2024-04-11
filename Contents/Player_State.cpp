@@ -82,6 +82,7 @@ void APlayer::Run(float _DeltaTime)
 	}
 	if (true == IsUp('D'))
 	{
+		Renderer->SetDir(EEngineDir::Right);
 		State.ChangeState("Idle");
 	}
 
