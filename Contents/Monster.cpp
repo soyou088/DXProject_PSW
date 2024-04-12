@@ -1,14 +1,13 @@
 #include "PreCompile.h"
 #include "Monster.h"
 #include "Player.h"
-#include <EngineCore/Renderer.h>
-#include <EngineCore/SpriteRenderer.h>
 
 
 
 AMonster::AMonster()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	SetRoot(Renderer);
 }
 
 AMonster::~AMonster()
@@ -31,9 +30,19 @@ void AMonster::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	FVector MonsterPos = GetActorLocation();
+
+
 	FVector MonsterDir = APlayer::PlayerPos - MonsterPos;
 	FVector MonsterDirNormal = MonsterDir.Normalize2DReturn();
 	AddActorLocation(MonsterDirNormal * _DeltaTime * MoveSpeed);
+	if (MonsterPos.X > APlayer::PlayerPos.X)
+	{
+		Renderer->SetDir(EEngineDir::Left);
+	}
+	else
+	{
+		Renderer->SetDir(EEngineDir::Right);
+	}
 
 
 }

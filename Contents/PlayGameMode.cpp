@@ -6,7 +6,6 @@
 #include "UI.h"
 #include "Monster.h"
 #include <random>
-#include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/Camera.h>
 #include <EngineCore/EngineDebugMsgWindow.h>
 
@@ -46,36 +45,10 @@ void APlayGameMode::BeginPlay()
 	{
 		SpawnMonsterRandomLocation();
 	}
-}
-
-// 랜덤한 위치에 몬스터 생성하는 함수
-void APlayGameMode::SpawnMonsterRandomLocation()
-{
-	float4 PlayerStartPos = IndexToCenterPos(CurIndex);
-	std::random_device rd;
-	std::mt19937 rng(rd());
-	std::uniform_int_distribution<int> distX(-5, 5); // X 축에서 -5부터 5까지의 랜덤한 위치
-	std::uniform_int_distribution<int> distY(-5, 5); // Y 축에서 -5부터 5까지의 랜덤한 위치
-
-	int randomX = distX(rng);
-	int randomY = distY(rng);
-
-	float4 MonsterStartPos = PlayerStartPos;
-	MonsterStartPos.X += randomX * 100.0f; // X 축 이동
-	MonsterStartPos.Y += randomY * 100.0f; // Y 축 이동
-
-	// 몬스터 생성 및 위치 설정
-	auto Monster = GetWorld()->SpawnActor<AMonster>("Monster");
-	Monster->SetActorLocation(MonsterStartPos);
-
 
 	{
 		//UI = GetWorld()->SpawnActor<AUI>("UI");
 		//UI->SetActorLocation(PlayerStartPos);
-	}
-	{
-		//Monster = GetWorld()->SpawnActor<AMonster>("Monster");
-		//Monster->SetActorLocation(PlayerStartPos);
 	}
 
 	// 3840 x 3840
@@ -104,6 +77,32 @@ void APlayGameMode::SpawnMonsterRandomLocation()
 
 		}
 	}
+
+
+}
+
+// 랜덤한 위치에 몬스터 생성하는 함수
+void APlayGameMode::SpawnMonsterRandomLocation()
+{
+	float4 PlayerStartPos = IndexToCenterPos(CurIndex);
+	std::random_device rd;
+	std::mt19937 rng(rd());
+	std::uniform_int_distribution<int> distX(-5, 5); // X 축에서 -5부터 5까지의 랜덤한 위치
+	std::uniform_int_distribution<int> distY(-5, 5); // Y 축에서 -5부터 5까지의 랜덤한 위치
+
+	int randomX = distX(rng);
+	int randomY = distY(rng);
+
+	float4 MonsterStartPos = PlayerStartPos;
+	MonsterStartPos.X += randomX * 100.0f; // X 축 이동
+	MonsterStartPos.Y += randomY * 100.0f; // Y 축 이동
+
+	// 몬스터 생성 및 위치 설정
+	auto Monster = GetWorld()->SpawnActor<AMonster>("Monster");
+	Monster->SetActorLocation(MonsterStartPos);
+
+
+	
 }
 
 

@@ -1,7 +1,5 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include <EngineCore/Renderer.h>
-#include <EngineCore/SpriteRenderer.h>
 
 
 FVector APlayer::PlayerPos = FVector::Zero;
@@ -9,6 +7,7 @@ FVector APlayer::PlayerPos = FVector::Zero;
 APlayer::APlayer()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	SetRoot(Renderer);
 	InputOn();
 }
 

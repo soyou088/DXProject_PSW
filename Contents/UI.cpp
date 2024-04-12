@@ -1,12 +1,11 @@
 #include "PreCompile.h"
 #include "UI.h"
-#include <EngineCore/Renderer.h>
-#include <EngineCore/SpriteRenderer.h>
 
 
 AUI::AUI()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	SetRoot(Renderer);
 }
 
 AUI::~AUI()

@@ -1,11 +1,10 @@
 #include "PreCompile.h"
 #include "PlayBack.h"
-#include <EngineCore/Renderer.h>
-#include <EngineCore/SpriteRenderer.h>
 
 APlayBack::APlayBack()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	SetRoot(Renderer);
 	InputOn();
 }
 
