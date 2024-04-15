@@ -46,7 +46,9 @@ void APlayer::BeginPlay()
 	PlayerCursor->SetOrder(ERenderOrder::Player);
 
 
-	PlayerCursor->SetPosition(PlayerPos);
+	FVector PCursor = FVector{ PlayerPos.X, PlayerPos.Y + 20 };
+
+	PlayerCursor->SetPosition(PCursor);
 
 
 
@@ -74,6 +76,30 @@ void APlayer::Tick(float _DeltaTime)
 		PlayerCursor->AddPosition(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 		Color.X += _DeltaTime;
 	}
+
+	if (true == IsDown('D'))
+	{
+		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,0.0f });
+	}
+
+	if (true == IsDown('W'))
+	{
+		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,90.0f });
+	}
+
+
+	if (true == IsDown('A'))
+	{
+		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,180.0f });
+	}
+
+
+	if (true == IsDown('S'))
+	{
+		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,270.0f });
+	}
+
+
 
 	int a = 0;
 

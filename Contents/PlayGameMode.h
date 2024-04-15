@@ -45,18 +45,21 @@ protected:
 
 	std::shared_ptr<AMouse> Mouse;
 	std::shared_ptr<APlayer> Player;
-	std::shared_ptr<AMonster> Monster;
+
 	std::shared_ptr<AUI> UI;
 	float4 IndexToCenterPos(FIntPoint _Index);
+
+	float4 RandomLocation();
+	void SpawnMonster(std::string _Name, float4 _Location);
 
 	FIntPoint PosToIndex(float4 _Pos);
 	float4 MousePos;
 
 	void InfinityGroundCheck();
-	void SpawnMonsterRandomLocation();
 
 private:
 	FIntPoint CurIndex;
 
+	float SpawnTerm = 0;
 };
 

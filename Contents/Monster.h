@@ -19,19 +19,23 @@ public:
 	AMonster& operator=(const AMonster& _Other) = delete;
 	AMonster& operator=(AMonster&& _Other) noexcept = delete;
 
+
+	void SetName(std::string _Name)
+	{
+		Name = _Name;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-	USpriteRenderer* Renderer;
 
-	void SetStatus();
-	
 
 private:
+	USpriteRenderer* Renderer;
 	FVector PlayerLocation;
+
+	std::string Name = "Shrimp";
 	float MoveSpeed = 100.0f;
-	int HP = 0;
-	int Att = 0;
 
 };
 

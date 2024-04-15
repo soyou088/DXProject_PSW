@@ -6,10 +6,11 @@
 
 AMonster::AMonster()
 {
+	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Renderer->SetupAttachment(Root);
 	Renderer->SetPivot(EPivot::BOT);
-	SetRoot(Renderer);
-
+	SetRoot(Root);
 }
 
 AMonster::~AMonster()
@@ -20,21 +21,11 @@ void AMonster::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Renderer->CreateAnimation("Bubba", "Shrimp", 0.1f, true, 0, 2);
+	Renderer->CreateAnimation(Name, Name, 0.1f, true, 0, 2);
 	Renderer->SetAutoSize(1.0f, true);
 	Renderer->SetOrder(ERenderOrder::Monster);
-	Renderer->ChangeAnimation("Bubba");
+	Renderer->ChangeAnimation(Name);
 }
-
-
-void AMonster::SetStatus()
-{
-	int HP = 0;
-	int Att = 0;
-	float MoveSpeed = 100.0f;
-}
-
-
 
 void AMonster::Tick(float _DeltaTime)
 {

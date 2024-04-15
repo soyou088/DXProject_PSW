@@ -9,7 +9,7 @@
 #include <random>
 #include <EngineCore/Camera.h>
 #include <EngineCore/EngineDebugMsgWindow.h>
-
+#include <EngineBase/EngineRandom.h>
 
 
 APlayGameMode::APlayGameMode()
@@ -38,14 +38,11 @@ void APlayGameMode::BeginPlay()
 	Camera->SetActorLocation(CameraPos);
 
 
-	{
+
 		Player = GetWorld()->SpawnActor<APlayer>("Player");
 		Player->SetActorLocation(PlayerStartPos);
-	}
-	for (int i = 0; i < 20; ++i) // 예를 들어 5마리의 몬스터를 생성하고 싶다면 5로 수정
-	{
-		SpawnMonsterRandomLocation();
-	}
+
+
 
 	{
 		//UI = GetWorld()->SpawnActor<AUI>("UI");
@@ -82,35 +79,23 @@ void APlayGameMode::BeginPlay()
 
 }
 
-// 랜덤한 위치에 몬스터 생성하는 함수
-void APlayGameMode::SpawnMonsterRandomLocation()
+float4 APlayGameMode::RandomLocation()
 {
-	float4 PlayerStartPos = IndexToCenterPos(CurIndex);
-	std::random_device rd;
-	std::mt19937 rng(rd());
-	std::uniform_int_distribution<int> distX(-5, 5); // X 축에서 -5부터 5까지의 랜덤한 위치
-	std::uniform_int_distribution<int> distY(-5, 5); // Y 축에서 -5부터 5까지의 랜덤한 위치
+	float4 MonsterPos = APlayer::PlayerPos;
+	MonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 200.0f;
+	MonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 200.0f;
 
-	int randomX = distX(rng);
-	int randomY = distY(rng);
-
-	float4 MonsterStartPos = PlayerStartPos;
-	MonsterStartPos.X += randomX * 200.0f; // X 축 이동
-	MonsterStartPos.Y += randomY * 200.0f; // Y 축 이동
-
-
-
-	// 몬스터 생성 및 위치 설정
-	auto Baerat = GetWorld()->SpawnActor<AMonster>("Monster");
-	Baerat->SetActorLocation(MonsterStartPos);
-
-
-	
+	return MonsterPos;
 }
 
-
-
-
+void APlayGameMode::SpawnMonster(std::string _Name, float4 _Location)
+{
+	std::shared_ptr<AMonster> Monster;
+	//Monster->SetName(_Name);
+	Monster = GetWorld()->SpawnActor<AMonster>(_Name);
+	Monster->SetActorLocation(_Location);
+	int a = 0;
+}
 
 float4 APlayGameMode::IndexToCenterPos(FIntPoint _Index)
 {
@@ -194,9 +179,22 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+
+
 	InfinityGroundCheck();
 
 
+	if (SpawnTerm <= 0)
+	{
+		SpawnMonster("Shrimp", RandomLocation());
+		SpawnTerm = 5.0f;
+	}
+	else
+	{
+		SpawnTerm -= _DeltaTime;
+	}
+	
+	
 	{
 
 		float4 PlayerPos = Player->GetActorLocation();
@@ -209,8 +207,6 @@ void APlayGameMode::Tick(float _DeltaTime)
 		UEngineDebugMsgWindow::PushMsg(std::format("MousePos : {}\n", GEngine->EngineWindow.GetScreenMousePos().ToString()));
 
 	}
-
-
 
 }
 
