@@ -22,11 +22,16 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
+	USpriteRenderer* Renderer;
+
+	void SetStatus();
 	
 
 private:
-	USpriteRenderer* Renderer;
 	FVector PlayerLocation;
-	float MoveSpeed = 100.f;
+	float MoveSpeed = 100.0f;
+	int HP = 0;
+	int Att = 0;
+
 };
 

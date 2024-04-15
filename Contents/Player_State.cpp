@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "ContentsEnum.h"
+#include "Mouse.h"
 #include <EngineCore/Camera.h>
 
 //void Function(URenderer* Renderer)
@@ -44,27 +45,42 @@ void APlayer::Idle(float _Update)
 		State.ChangeState("Run");
 		return;
 	}
+
+	if (true == IsDown(VK_LBUTTON))
+	{
+		MouseStart();
+	}
 }
 
 void APlayer::IdleStart()
 {
-	Renderer->ChangeAnimation("AmeIdle");
+	Renderer->ChangeAnimation("KroniiIdle");
 }
 
 void APlayer::RunStart()
 {
-	Renderer->ChangeAnimation("AmeRun");
+	Renderer->ChangeAnimation("KroniiRun");
 }
+
+void APlayer::MouseStart()
+{
+	MousePos = GEngine->EngineWindow.GetScreenMousePos();
+	PlayerPos = GetActorLocation();
+	Mouse->SetActorLocation(MousePos + PlayerPos);
+}
+
+
 
 void APlayer::Run(float _DeltaTime)
 {
 
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 	float Speed = 500.0f;
+	
 
 	if (true == IsPress('A'))
 	{
-		SetActorScale3D(FVector(-64.0f, 64.0f, 100.0f));
+		Renderer->SetDir(EEngineDir::Left);
 		AddActorLocation(FVector::Left * _DeltaTime * Speed);
 		Camera->AddActorLocation(FVector::Left * _DeltaTime * Speed);
 		
@@ -77,7 +93,7 @@ void APlayer::Run(float _DeltaTime)
 
 	if (true == IsPress('D'))
 	{
-		SetActorScale3D(FVector(64.0f, 64.0f, 100.0f));
+		Renderer->SetDir(EEngineDir::Right);
 		AddActorLocation(FVector::Right * _DeltaTime * Speed);
 		Camera->AddActorLocation(FVector::Right * _DeltaTime * Speed);
 	}
@@ -138,6 +154,8 @@ void APlayer::Run(float _DeltaTime)
 		Color.Z -= _DeltaTime;
 	}
 
-	
+
+
+
 
 }

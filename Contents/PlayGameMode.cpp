@@ -5,6 +5,7 @@
 #include "ContentsValue.h"
 #include "UI.h"
 #include "Monster.h"
+#include "Mouse.h"
 #include <random>
 #include <EngineCore/Camera.h>
 #include <EngineCore/EngineDebugMsgWindow.h>
@@ -22,7 +23,7 @@ APlayGameMode::~APlayGameMode()
 void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	std::shared_ptr<UEngineTexture> Tex = UEngineTexture::FindRes("Holo_map_04.png");
 
 	CurIndex = { 0, 0 };
@@ -30,12 +31,14 @@ void APlayGameMode::BeginPlay()
 
 
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
+	MousePos = GEngine->EngineWindow.GetScreenMousePos();
 
 	float4 CameraPos = PlayerStartPos;
 	CameraPos.Z = -500.0f;
 	Camera->SetActorLocation(CameraPos);
 
 
+	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
 
 	{
 		Player = GetWorld()->SpawnActor<APlayer>("Player");
@@ -84,22 +87,24 @@ void APlayGameMode::BeginPlay()
 // 랜덤한 위치에 몬스터 생성하는 함수
 void APlayGameMode::SpawnMonsterRandomLocation()
 {
-	float4 PlayerStartPos = IndexToCenterPos(CurIndex);
-	std::random_device rd;
-	std::mt19937 rng(rd());
-	std::uniform_int_distribution<int> distX(-5, 5); // X 축에서 -5부터 5까지의 랜덤한 위치
-	std::uniform_int_distribution<int> distY(-5, 5); // Y 축에서 -5부터 5까지의 랜덤한 위치
+	//float4 PlayerStartPos = IndexToCenterPos(CurIndex);
+	//std::random_device rd;
+	//std::mt19937 rng(rd());
+	//std::uniform_int_distribution<int> distX(-5, 5); // X 축에서 -5부터 5까지의 랜덤한 위치
+	//std::uniform_int_distribution<int> distY(-5, 5); // Y 축에서 -5부터 5까지의 랜덤한 위치
 
-	int randomX = distX(rng);
-	int randomY = distY(rng);
+	//int randomX = distX(rng);
+	//int randomY = distY(rng);
 
-	float4 MonsterStartPos = PlayerStartPos;
-	MonsterStartPos.X += randomX * 100.0f; // X 축 이동
-	MonsterStartPos.Y += randomY * 100.0f; // Y 축 이동
+	//float4 MonsterStartPos = PlayerStartPos;
+	//MonsterStartPos.X += randomX * 200.0f; // X 축 이동
+	//MonsterStartPos.Y += randomY * 200.0f; // Y 축 이동
 
-	// 몬스터 생성 및 위치 설정
-	auto Monster = GetWorld()->SpawnActor<AMonster>("Monster");
-	Monster->SetActorLocation(MonsterStartPos);
+
+
+	//// 몬스터 생성 및 위치 설정
+	//auto Baerat = GetWorld()->SpawnActor<AMonster>("Monster");
+	//Baerat->SetActorLocation(MonsterStartPos);
 
 
 	
@@ -199,10 +204,14 @@ void APlayGameMode::Tick(float _DeltaTime)
 		float4 PlayerPos = Player->GetActorLocation();
 		FIntPoint Index = PosToIndex(PlayerPos);
 		CurIndex = Index;
+		float4 PlayerScale = Player->GetActorScale3D();
 		UEngineDebugMsgWindow::PushMsg(std::format("PlayerPos : {}", PlayerPos.ToString()));
+		UEngineDebugMsgWindow::PushMsg(std::format("PlayerScale : {}", PlayerScale.ToString()));
 		UEngineDebugMsgWindow::PushMsg(std::format("PlayerIndex : {}, {}", Index.X, Index.Y));
+		UEngineDebugMsgWindow::PushMsg(std::format("MousePos : {}\n", GEngine->EngineWindow.GetScreenMousePos().ToString()));
 
 	}
+
 
 
 }

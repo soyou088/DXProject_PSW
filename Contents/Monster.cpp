@@ -25,6 +25,15 @@ void AMonster::BeginPlay()
 }
 
 
+void AMonster::SetStatus()
+{
+	int HP = 0;
+	int Att = 0;
+	float MoveSpeed = 100.0f;
+}
+
+
+
 void AMonster::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
@@ -46,6 +55,5 @@ void AMonster::Tick(float _DeltaTime)
 
 
 }
-
 
 
