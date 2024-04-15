@@ -86,24 +86,24 @@ void APlayGameMode::BeginPlay()
 // 랜덤한 위치에 몬스터 생성하는 함수
 void APlayGameMode::SpawnMonsterRandomLocation()
 {
-	//float4 PlayerStartPos = IndexToCenterPos(CurIndex);
-	//std::random_device rd;
-	//std::mt19937 rng(rd());
-	//std::uniform_int_distribution<int> distX(-5, 5); // X 축에서 -5부터 5까지의 랜덤한 위치
-	//std::uniform_int_distribution<int> distY(-5, 5); // Y 축에서 -5부터 5까지의 랜덤한 위치
+	float4 PlayerStartPos = IndexToCenterPos(CurIndex);
+	std::random_device rd;
+	std::mt19937 rng(rd());
+	std::uniform_int_distribution<int> distX(-5, 5); // X 축에서 -5부터 5까지의 랜덤한 위치
+	std::uniform_int_distribution<int> distY(-5, 5); // Y 축에서 -5부터 5까지의 랜덤한 위치
 
-	//int randomX = distX(rng);
-	//int randomY = distY(rng);
+	int randomX = distX(rng);
+	int randomY = distY(rng);
 
-	//float4 MonsterStartPos = PlayerStartPos;
-	//MonsterStartPos.X += randomX * 200.0f; // X 축 이동
-	//MonsterStartPos.Y += randomY * 200.0f; // Y 축 이동
+	float4 MonsterStartPos = PlayerStartPos;
+	MonsterStartPos.X += randomX * 200.0f; // X 축 이동
+	MonsterStartPos.Y += randomY * 200.0f; // Y 축 이동
 
 
 
-	//// 몬스터 생성 및 위치 설정
-	//auto Baerat = GetWorld()->SpawnActor<AMonster>("Monster");
-	//Baerat->SetActorLocation(MonsterStartPos);
+	// 몬스터 생성 및 위치 설정
+	auto Baerat = GetWorld()->SpawnActor<AMonster>("Monster");
+	Baerat->SetActorLocation(MonsterStartPos);
 
 
 	

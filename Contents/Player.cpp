@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include <EngineCore/DefaultSceneComponent.h>
 
 
 FVector APlayer::PlayerPos = FVector::Zero;
@@ -47,13 +46,10 @@ void APlayer::Tick(float _DeltaTime)
 
 	PlayerPos = GetActorLocation();
 	MousePos = GEngine->EngineWindow.GetScreenMousePos();
-
 	MouseCursor = PlayerPos + MousePos;
-	FVector MouseLocation = FVector{PlayerPos.X + MousePos.X - 640, PlayerPos.Y - MousePos.Y + 360};
-
-
+	FVector MouseLocation = FVector{ PlayerPos.X + MousePos.X - 640, PlayerPos.Y - MousePos.Y + 360 };
+	
 	Mouse->SetActorLocation(MouseLocation);
-
 
 	int a = 0;
 

@@ -21,8 +21,16 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-	USpriteRenderer* Renderer;
+
+	void CursorOFf();
+	void CursorON();
+	
+	bool MouseCursorON = false;
+
+	USpriteRenderer* MouseCursorRenderer;
 private:
+
+
 	float4 MousePos;
 
 	//플레이어 주변을 따라다닐꺼다 나는 함수 tick

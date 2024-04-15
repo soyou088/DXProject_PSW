@@ -32,7 +32,6 @@ protected:
 
 private:
 	USpriteRenderer* Renderer;
-	USpriteRenderer* MouseRenderer;
 	float4 Color;
 	float4 MousePos;
 

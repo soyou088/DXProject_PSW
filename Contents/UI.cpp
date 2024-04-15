@@ -2,10 +2,15 @@
 #include "UI.h"
 
 
+
+
 AUI::AUI()
 {
+	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	SetRoot(Renderer);
+	SetRoot(Root);
+	Renderer->SetupAttachment(Root);
+
 }
 
 AUI::~AUI()

@@ -32,7 +32,6 @@ void APlayer::StateInit()
 
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 
-
 }
 
 
@@ -49,7 +48,10 @@ void APlayer::Idle(float _Update)
 		return;
 	}
 
+	if (true)
+	{
 
+	}
 }
 
 void APlayer::IdleStart()
@@ -61,10 +63,6 @@ void APlayer::RunStart()
 {
 	Renderer->ChangeAnimation("KroniiRun");
 }
-
-
-
-
 
 void APlayer::Run(float _DeltaTime)
 {
