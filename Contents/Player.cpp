@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "Player.h"
+#include "Mouse.h"
 
 
 FVector APlayer::PlayerPos = FVector::Zero;
@@ -9,7 +10,11 @@ APlayer::APlayer()
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetupAttachment(Root);
+	Renderer->SetPivot(EPivot::BOT);
 
+	PlayerCursor = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	PlayerCursor->SetupAttachment(Root);
+	PlayerCursor->SetPivot(EPivot::MAX);
 	SetRoot(Root);
 
 	InputOn();
@@ -32,6 +37,19 @@ void APlayer::BeginPlay()
 
 	Mouse->SetActorLocation(PlayerPos);
 
+	PlayerCursor->CreateAnimation("pcursor", "spr_arrow_1.png", 0.1f, false);
+	PlayerCursor->SetAutoSize(1.0f, true);
+	PlayerCursor->ChangeAnimation("pcursor");
+
+	PlayerCursor->CreateAnimation("pmcursor", "spr_arrow_2.png", 0.1f, false);
+	PlayerCursor->SetAutoSize(1.0f, true);
+	PlayerCursor->SetOrder(ERenderOrder::Player);
+
+
+	PlayerCursor->SetPosition(PlayerPos);
+
+
+
 
 	StateInit();
 }
@@ -48,8 +66,14 @@ void APlayer::Tick(float _DeltaTime)
 	MousePos = GEngine->EngineWindow.GetScreenMousePos();
 	MouseCursor = PlayerPos + MousePos;
 	FVector MouseLocation = FVector{ PlayerPos.X + MousePos.X - 640, PlayerPos.Y - MousePos.Y + 360 };
-	
+
 	Mouse->SetActorLocation(MouseLocation);
+
+	if (true == IsDown(VK_LBUTTON))
+	{
+		PlayerCursor->AddPosition(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
+		Color.X += _DeltaTime;
+	}
 
 	int a = 0;
 

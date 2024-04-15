@@ -7,7 +7,9 @@
 AMonster::AMonster()
 {
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Renderer->SetPivot(EPivot::BOT);
 	SetRoot(Renderer);
+
 }
 
 AMonster::~AMonster()
@@ -18,7 +20,7 @@ void AMonster::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Renderer->CreateAnimation("Bubba", "Bubba", 0.1f, true, 0, 2);
+	Renderer->CreateAnimation("Bubba", "Shrimp", 0.1f, true, 0, 2);
 	Renderer->SetAutoSize(1.0f, true);
 	Renderer->SetOrder(ERenderOrder::Monster);
 	Renderer->ChangeAnimation("Bubba");

@@ -32,6 +32,8 @@ protected:
 
 private:
 	USpriteRenderer* Renderer;
+	USpriteRenderer* PlayerCursor;
+
 	float4 Color;
 	float4 MousePos;
 
@@ -46,7 +48,6 @@ private:
 	void Run(float _DeltaTime);
 	void RunStart();
 
-	void MouseStart();
 
 	//나는 마우스 방향을 가리키는 이미지 하나가 있었으면 좋겠다
 };

@@ -19,6 +19,7 @@ void AMouse::BeginPlay()
 {
 	Super::BeginPlay();
 	MouseCursorRenderer->CreateAnimation("Cursor", "spr_GameCursor1_0.png", 0.1f, false);
+	MouseCursorRenderer->CreateAnimation("MCursor", "spr_GameCursor_0.png", 0.1f, false);
 	MouseCursorRenderer->SetAutoSize(1.0f, true);
 	MouseCursorRenderer->SetOrder(10);
 }
@@ -28,10 +29,12 @@ void AMouse::CursorOFf()
 	ShowCursor(FALSE);
 }
 
-void AMouse::CursorON()
+void AMouse::GetMouseCursorON()
 {
-	ShowCursor(TRUE);
+	MouseCursorON = false;
 }
+
+
 
 
 void AMouse::Tick(float _DeltaTime)
@@ -51,8 +54,9 @@ void AMouse::Tick(float _DeltaTime)
 
 	if (true == MouseCursorON && true == IsPress(VK_RBUTTON))
 	{
-		CursorON();
-		MouseCursorRenderer->SetActive(false);
+		CursorOFf();
+		MouseCursorRenderer->ChangeAnimation("MCursor");
+		MouseCursorRenderer->SetActive(true);
 		MouseCursorON = false;
 	}
 

@@ -32,7 +32,7 @@
       <Filter>Level\PlayLevel\UIActor</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>Level\PlayLevel\Monster</Filter>
+      <Filter>Level\PlayLevel\Actor\Monster</Filter>
     </ClInclude>
     <ClInclude Include="Mouse.h">
       <Filter>Level\PlayLevel\UIActor</Filter>
@@ -70,7 +70,7 @@
       <Filter>Level\PlayLevel\UIActor</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>Level\PlayLevel\Monster</Filter>
+      <Filter>Level\PlayLevel\Actor\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>Level\PlayLevel\UIActor</Filter>
@@ -107,7 +107,7 @@
     <Filter Include="Level\PlayLevel\UIActor">
       <UniqueIdentifier>{f747f929-eff1-4f7c-a8db-c454f10d39b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\PlayLevel\Monster">
+    <Filter Include="Level\PlayLevel\Actor\Monster">
       <UniqueIdentifier>{8dc2bf40-d17a-4ba7-ac99-8ad1eb90fe30}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

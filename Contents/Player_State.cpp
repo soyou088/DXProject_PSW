@@ -118,8 +118,8 @@ void APlayer::Run(float _DeltaTime)
 
 	if (true == IsPress(VK_NUMPAD1))
 	{
-		// AddActorRotation(float4{0.0f, 0.0f, 1.0f} * 360.0f * _DeltaTime);
-		// Color.X += _DeltaTime;
+		 //AddActorRotation(float4{0.0f, 0.0f, 1.0f} * 360.0f * _DeltaTime);
+		 //Color.X += _DeltaTime;
 	}
 
 	if (true == IsPress(VK_NUMPAD2))

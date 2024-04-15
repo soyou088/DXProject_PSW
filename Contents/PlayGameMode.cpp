@@ -38,7 +38,6 @@ void APlayGameMode::BeginPlay()
 	Camera->SetActorLocation(CameraPos);
 
 
-
 	{
 		Player = GetWorld()->SpawnActor<APlayer>("Player");
 		Player->SetActorLocation(PlayerStartPos);

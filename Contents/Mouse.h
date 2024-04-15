@@ -23,9 +23,9 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	void CursorOFf();
-	void CursorON();
-	
+	void GetMouseCursorON();
 	bool MouseCursorON = false;
+	
 
 	USpriteRenderer* MouseCursorRenderer;
 private:
