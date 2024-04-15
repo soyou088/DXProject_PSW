@@ -78,42 +78,64 @@ void APlayer::Tick(float _DeltaTime)
 		Color.X += _DeltaTime;
 	}
 
-
+	DirCheck();
 	int a = 0;
 
 }
 
-void APlayer::DirCheck(EActorDir _Dir)
+void APlayer::DirCheck()
 {
 
 	// 처음들어올때
-	
-		if (_Dir == EActorDir::Right)
-		{
-			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,0.0f });
-		}
-		if (_Dir == EActorDir::Left)
-		{
-			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,180.0f });
-		}
-		if (_Dir == EActorDir::Top)
-		{
-			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,90.0f });
-		}
-		if (_Dir == EActorDir::Bottom)
-		{
-			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,270.0f });
-		}
 
+	//if (DirState == EActorDir::Right)
+	//{
+	//	PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,0.0f });
+	//}
+	//if (DirState == EActorDir::Left)
+	//{
+	//	PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,180.0f });
+	//}
+	//if (DirState == EActorDir::Top)
+	//{
+	//	PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,90.0f });
+	//}
+	//if (DirState == EActorDir::Bottom)
+	//{
+	//	PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,270.0f });
+	//}
 
-	if (_Dir == EActorDir::Right)
+	if (true == IsDown('W'))
+	{
+		DirState = EActorDir::Top;
+		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,90.0f });
+	}
+	if (true == IsDown('S'))
+	{
+		DirState = EActorDir::Bottom;
+		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,270.0f });
+	}
+	if (true == IsDown('A'))
+	{
+		DirState = EActorDir::Left;
+		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,180.0f });
+	}
+	if (true == IsDown('D'))
+	{
+		DirState = EActorDir::Right;
+		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,0.0f });
+	}
+
+	if (DirState == EActorDir::Right)
 	{
 		if (true == IsDown('W'))
 		{
+			DirState = EActorDir::Top;
 			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,45.0f });
 		}
 		if (true == IsDown('S'))
 		{
+			DirState = EActorDir::Bottom;
 			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,315.0f });
 		}
 		if (true == IsDown('A'))
@@ -122,14 +144,16 @@ void APlayer::DirCheck(EActorDir _Dir)
 		}
 	}
 
-	if (_Dir == EActorDir::Left)
+	if (DirState == EActorDir::Left)
 	{
 		if (true == IsDown('W'))
 		{
+			DirState = EActorDir::Top;
 			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,135.0f });
 		}
 		if (true == IsDown('S'))
 		{
+			DirState = EActorDir::Bottom;
 			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,225.0f });
 		}
 		if (true == IsDown('D'))
@@ -138,14 +162,16 @@ void APlayer::DirCheck(EActorDir _Dir)
 		}
 	}
 
-	if (_Dir == EActorDir::Bottom)
+	if (DirState == EActorDir::Bottom)
 	{
 		if (true == IsDown('D'))
 		{
+			EActorDir::Right;
 			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,315.0f });
 		}
 		if (true == IsDown('A'))
 		{
+			EActorDir::Left;
 			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,225.0f });
 		}
 		if (true == IsDown('W'))
@@ -154,18 +180,21 @@ void APlayer::DirCheck(EActorDir _Dir)
 		}
 	}
 
-	if (_Dir == EActorDir::Top)
+	if (DirState == EActorDir::Top)
 	{
 		if (true == IsDown('D'))
 		{
+			EActorDir::Right;
 			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,45.0f });
 		}
 		if (true == IsDown('A'))
 		{
+			EActorDir::Left;
 			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,135.0f });
 		}
 		if (true == IsDown('S'))
 		{
+
 			return;
 		}
 	}

@@ -30,7 +30,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 	std::shared_ptr<AMouse> Mouse;
 
-	void DirCheck(EActorDir _Dir);
+	void DirCheck();
 	void Dir();
 	EActorDir DirState = EActorDir::Right;
 
