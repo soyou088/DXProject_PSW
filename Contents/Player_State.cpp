@@ -27,6 +27,9 @@ void APlayer::StateInit()
 	Renderer->SetAutoSize(1.0f, true);
 	State.ChangeState("Idle");
 
+
+
+
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 
 
@@ -46,10 +49,7 @@ void APlayer::Idle(float _Update)
 		return;
 	}
 
-	if (true == IsDown(VK_LBUTTON))
-	{
-		MouseStart();
-	}
+
 }
 
 void APlayer::IdleStart()
@@ -62,12 +62,7 @@ void APlayer::RunStart()
 	Renderer->ChangeAnimation("KroniiRun");
 }
 
-void APlayer::MouseStart()
-{
-	MousePos = GEngine->EngineWindow.GetScreenMousePos();
-	PlayerPos = GetActorLocation();
-	Mouse->SetActorLocation(MousePos + PlayerPos);
-}
+
 
 
 

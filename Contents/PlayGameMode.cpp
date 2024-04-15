@@ -38,7 +38,6 @@ void APlayGameMode::BeginPlay()
 	Camera->SetActorLocation(CameraPos);
 
 
-	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
 
 	{
 		Player = GetWorld()->SpawnActor<APlayer>("Player");

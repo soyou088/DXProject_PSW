@@ -35,6 +35,8 @@ private:
 	USpriteRenderer* MouseRenderer;
 	float4 Color;
 	float4 MousePos;
+
+	float4 MouseCursor;
 	//////////////////////// State
 	void StateInit();
 

@@ -11,10 +11,6 @@ APlayer::APlayer()
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetupAttachment(Root);
 
-	MouseRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	MouseRenderer->SetScale(FVector(100.0f, 100.0f, 100.0f));
-	MouseRenderer->SetupAttachment(Root);
-
 	SetRoot(Root);
 
 	InputOn();
@@ -28,19 +24,17 @@ void APlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-		Renderer->CreateAnimation("KroniiIdle", "Kronii", 0.1f, true, 6, 9);
-		Renderer->CreateAnimation("KroniiRun", "Kronii", 0.1f, true, 0 , 3);
-		Renderer->SetAutoSize(1.0f, true);
-		Renderer->SetOrder(ERenderOrder::Player);
-		//Renderer->CreateAnimation("Die", "Die");
-		if (true == IsDown(VK_LBUTTON))
-		{
-			MouseRenderer->SetSprite("spr_GameCursor1_0.png");
-		}
+	Renderer->CreateAnimation("KroniiIdle", "Kronii", 0.1f, true, 6, 9);
+	Renderer->CreateAnimation("KroniiRun", "Kronii", 0.1f, true, 0, 3);
+	Renderer->SetAutoSize(1.0f, true);
+	Renderer->SetOrder(ERenderOrder::Player);
+	//Renderer->CreateAnimation("Die", "Die");
+	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
+
+	Mouse->SetActorLocation(PlayerPos);
 
 
-
-		StateInit();
+	StateInit();
 }
 
 
@@ -50,8 +44,18 @@ void APlayer::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	State.Update(_DeltaTime);
-	
 
+	PlayerPos = GetActorLocation();
+	MousePos = GEngine->EngineWindow.GetScreenMousePos();
+
+	MouseCursor = PlayerPos + MousePos;
+	FVector MouseLocation = FVector{PlayerPos.X + MousePos.X - 640, PlayerPos.Y - MousePos.Y + 360};
+
+
+	Mouse->SetActorLocation(MouseLocation);
+
+
+	int a = 0;
 
 }
 
