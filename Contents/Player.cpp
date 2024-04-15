@@ -71,39 +71,107 @@ void APlayer::Tick(float _DeltaTime)
 
 	Mouse->SetActorLocation(MouseLocation);
 
+
 	if (true == IsDown(VK_LBUTTON))
 	{
 		PlayerCursor->AddPosition(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
 		Color.X += _DeltaTime;
 	}
 
-	if (true == IsDown('D'))
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,0.0f });
-	}
-
-	if (true == IsDown('W'))
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,90.0f });
-	}
-
-
-	if (true == IsDown('A'))
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,180.0f });
-	}
-
-
-	if (true == IsDown('S'))
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,270.0f });
-	}
-
-
 
 	int a = 0;
 
 }
+
+void APlayer::DirCheck(EActorDir _Dir)
+{
+
+	// 처음들어올때
+	
+		if (_Dir == EActorDir::Right)
+		{
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,0.0f });
+		}
+		if (_Dir == EActorDir::Left)
+		{
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,180.0f });
+		}
+		if (_Dir == EActorDir::Top)
+		{
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,90.0f });
+		}
+		if (_Dir == EActorDir::Bottom)
+		{
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,270.0f });
+		}
+
+
+	if (_Dir == EActorDir::Right)
+	{
+		if (true == IsDown('W'))
+		{
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,45.0f });
+		}
+		if (true == IsDown('S'))
+		{
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,315.0f });
+		}
+		if (true == IsDown('A'))
+		{
+			return;
+		}
+	}
+
+	if (_Dir == EActorDir::Left)
+	{
+		if (true == IsDown('W'))
+		{
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,135.0f });
+		}
+		if (true == IsDown('S'))
+		{
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,225.0f });
+		}
+		if (true == IsDown('D'))
+		{
+			return;
+		}
+	}
+
+	if (_Dir == EActorDir::Bottom)
+	{
+		if (true == IsDown('D'))
+		{
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,315.0f });
+		}
+		if (true == IsDown('A'))
+		{
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,225.0f });
+		}
+		if (true == IsDown('W'))
+		{
+			return;
+		}
+	}
+
+	if (_Dir == EActorDir::Top)
+	{
+		if (true == IsDown('D'))
+		{
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,45.0f });
+		}
+		if (true == IsDown('A'))
+		{
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,135.0f });
+		}
+		if (true == IsDown('S'))
+		{
+			return;
+		}
+	}
+
+}
+
 
 
 

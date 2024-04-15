@@ -12,7 +12,12 @@ enum class ERenderOrder
 
 enum class EActorDir
 {
-	Left,
+	Top,
 	Right,
-
+	Left,
+	Bottom,
+	TopRight,
+	TopLeft,
+	BottomRight,
+	BottomLeft,
 };

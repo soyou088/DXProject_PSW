@@ -31,6 +31,7 @@ void APlayGameMode::BeginPlay()
 
 
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
+	Camera->SetActorLocation({ 0.0f, 0.0f, -200.0f });
 	MousePos = GEngine->EngineWindow.GetScreenMousePos();
 
 	float4 CameraPos = PlayerStartPos;
@@ -39,8 +40,8 @@ void APlayGameMode::BeginPlay()
 
 
 
-		Player = GetWorld()->SpawnActor<APlayer>("Player");
-		Player->SetActorLocation(PlayerStartPos);
+	Player = GetWorld()->SpawnActor<APlayer>("Player");
+	Player->SetActorLocation(PlayerStartPos);
 
 
 

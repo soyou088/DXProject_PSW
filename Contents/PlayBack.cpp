@@ -16,7 +16,7 @@ void APlayBack::BeginPlay()
 {
 	Super::BeginPlay();
 	
-
+	
 	// 내부에서 샘플러도 같이 찾을
 	Renderer->SetSprite("Holo_map_01.png");
 	Renderer->SetAutoSize(1.0f, true);
