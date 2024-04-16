@@ -209,7 +209,6 @@ void APlayGameMode::Tick(float _DeltaTime)
 		float4 PlayerScale = Player->GetActorScale3D();
 		UEngineDebugMsgWindow::PushMsg(std::format("PlayerPos : {}", PlayerPos.ToString()));
 		UEngineDebugMsgWindow::PushMsg(std::format("PlayerScale : {}", PlayerScale.ToString()));
-		UEngineDebugMsgWindow::PushMsg(std::format("PlayerIndex : {}, {}", Index.X, Index.Y));
 		UEngineDebugMsgWindow::PushMsg(std::format("MousePos : {}\n", GEngine->EngineWindow.GetScreenMousePos().ToString()));
 		
 		std::string PlayerDir = "";

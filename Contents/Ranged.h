@@ -1,8 +1,13 @@
 #pragma once
+#include <EngineCore/Actor.h>
+#include <EngineCore/StateManager.h>
+
 
 // Ό³Έν :
-class ARanged
+class USpriteRenderer;
+class ARanged : public AActor
 {
+	GENERATED_BODY(AActor)
 public:
 	// constrcuter destructer
 	ARanged();
@@ -15,8 +20,14 @@ public:
 	ARanged& operator=(ARanged&& _Other) noexcept = delete;
 
 protected:
+	void BeginPlay() override;
+	void Tick(float _DeltaTime) override;
 
 private:
+	USpriteRenderer* Renderer;
+	UCollision* Collision;
 
+	std::string Name = "Ame";
+	void CreatePlayerAnimation(std::string _Name);
 };
 
