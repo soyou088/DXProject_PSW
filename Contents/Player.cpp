@@ -15,6 +15,13 @@ APlayer::APlayer()
 	PlayerCursor = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	PlayerCursor->SetupAttachment(Root);
 	PlayerCursor->SetPivot(EPivot::MAX);
+
+	Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Root);
+
+	//Collision->SetCollisionGroup(ECollisionOrder::Player);
+	Collision->SetCollisionType(ECollisionType::Rect);
+
 	SetRoot(Root);
 
 	InputOn();
@@ -28,38 +35,30 @@ void APlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//Renderer->CreateAnimation("KroniiIdle", "Kronii", 0.1f, true, 6, 9);
-	//Renderer->CreateAnimation("KroniiRun", "Kronii", 0.1f, true, 0, 3);
-	//Renderer->SetAutoSize(1.0f, true);
-	//Renderer->SetOrder(ERenderOrder::Player);
-	//Renderer->CreateAnimation("Die", "Die");
+	CreatePlayerAnimation("Aqua");
+	CreatePlayerAnimation("Ame");
 
-	Renderer->CreateAnimation("TestAdle", "Test", 0.1f, true, 0, 3);
-	Renderer->CreateAnimation("TestRun", "Test", 0.1f, true, 4, 9);
-	Renderer->SetAutoSize(1.0f, true);
 	Renderer->SetOrder(ERenderOrder::Player);
 
 	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
 	Mouse->SetActorLocation(PlayerPos);
-
-	PlayerCursor->CreateAnimation("pcursor", "spr_arrow_1.png", 0.1f, false);
-	PlayerCursor->SetAutoSize(1.0f, true);
-	PlayerCursor->ChangeAnimation("pcursor");
-
-	PlayerCursor->CreateAnimation("pmcursor", "spr_arrow_2.png", 0.1f, false);
+	
+	PlayerCursor->SetSprite("spr_arrow_1.png");
 	PlayerCursor->SetAutoSize(1.0f, true);
 	PlayerCursor->SetOrder(ERenderOrder::Player);
 
-
 	FVector PCursor = FVector{ PlayerPos.X, PlayerPos.Y + 20 };
-
 	PlayerCursor->SetPosition(PCursor);
-
-
-
 
 	StateInit();
 }
+
+void APlayer::CreatePlayerAnimation(std::string _Name)
+{
+	Renderer->CreateAnimation(_Name + "_Idle", _Name, 0.1f, true, 0, 3);
+	Renderer->CreateAnimation(_Name + "_Run", _Name, 0.1f, true, 4, 9);
+}
+
 
 
 void APlayer::Tick(float _DeltaTime)
@@ -77,13 +76,25 @@ void APlayer::Tick(float _DeltaTime)
 	Mouse->SetActorLocation(MouseLocation);
 
 
-	if (true == IsDown(VK_LBUTTON))
-	{
-		PlayerCursor->AddPosition(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
-		Color.X += _DeltaTime;
-	}
+	//if (true == IsDown(VK_LBUTTON))
+	//{
+	//	PlayerCursor->AddPosition(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
+	//	Color.X += _DeltaTime;
+	//}
 
 	PCursorDirCheck();
+
+	if (false == MouseState && true == IsDown(VK_LBUTTON))
+	{
+		PlayerCursor->SetSprite("spr_arrow_2.png");
+		MouseState = true;
+	}
+	else if (true == MouseState && true == IsDown(VK_LBUTTON))
+	{
+		PlayerCursor->SetSprite("spr_arrow_1.png");
+		MouseState = false;
+	}
+
 	int a = 0;
 
 }

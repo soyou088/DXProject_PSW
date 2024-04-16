@@ -41,7 +41,7 @@ void AMouse::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (true != MouseCursorON && true == IsPress(VK_LBUTTON))
+	if (false == MouseCursorON && true == IsDown(VK_LBUTTON))
 	{
 		CursorOFf();
 		MouseCursorRenderer->SetActive(true);
@@ -50,9 +50,7 @@ void AMouse::Tick(float _DeltaTime)
 
 	}
 
-
-
-	if (true == MouseCursorON && true == IsPress(VK_RBUTTON))
+	else if (true == MouseCursorON && true == IsDown(VK_LBUTTON))
 	{
 		CursorOFf();
 		MouseCursorRenderer->ChangeAnimation("MCursor");

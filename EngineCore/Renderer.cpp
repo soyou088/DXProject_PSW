@@ -26,16 +26,8 @@ void URenderer::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 }
 
-void URenderer::Render(float _DeltaTime)
+void URenderer::RenderingSetting()
 {
-	// 순서는 상관업습니다.
-
-	// 여기에서 이걸 하는 이유는 딱 1개입니다.
-	// 교육용으로 랜더링파이프라인의 순서에 따라 세팅해주려는 것뿐이지
-	// 꼭 아래의 순서대로 세팅을 해야만 랜더링이 되는게 아니에요.
-	// Mesh->Setting()
-
-	// InputAssembler1
 	Mesh->InputAssembler1Setting();
 	LayOut->Setting();
 
@@ -52,6 +44,19 @@ void URenderer::Render(float _DeltaTime)
 	Material->PixelShaderSetting();
 
 	Material->BlendSetting();
+}
+
+void URenderer::Render(float _DeltaTime)
+{
+	// 순서는 상관업습니다.
+
+	// 여기에서 이걸 하는 이유는 딱 1개입니다.
+	// 교육용으로 랜더링파이프라인의 순서에 따라 세팅해주려는 것뿐이지
+	// 꼭 아래의 순서대로 세팅을 해야만 랜더링이 되는게 아니에요.
+	// Mesh->Setting()
+
+	RenderingSetting();
+
 
 	Resources->SettingAllShaderResources();
 
@@ -61,13 +66,16 @@ void URenderer::Render(float _DeltaTime)
 
 void URenderer::SetOrder(int _Order)
 {
-	UTickObject::SetOrder(_Order);
+	// UTickObject::SetOrder(_Order);
 
-	//int PrevOrder = GetOrder();
+	int PrevOrder = GetOrder();
 
-	//Super::SetOrder(_Order);
+	Super::SetOrder(_Order);
 
-	//GetWorld()->ChangeOrderRenderer(shared_from_this(), PrevOrder, _Order);
+	if (nullptr != GetWorld())
+	{
+		GetWorld()->ChangeOrderRenderer(shared_from_this(), PrevOrder, _Order);
+	}
 }
 
 void URenderer::SetMesh(std::string_view _Name)
