@@ -61,5 +61,7 @@ private:
 	FIntPoint CurIndex;
 
 	float SpawnTerm = 0;
+
+	void CursorOFf();
 };
 

@@ -11,6 +11,11 @@ AMonster::AMonster()
 	Renderer->SetupAttachment(Root);
 	Renderer->SetPivot(EPivot::BOT);
 	SetRoot(Root);
+
+	UCollision* Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Root);
+	Collision->SetCollisionGroup(ECollisionOrder::Monster);
+	Collision->SetCollisionType(ECollisionType::Rect);
 }
 
 AMonster::~AMonster()

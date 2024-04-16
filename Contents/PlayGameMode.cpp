@@ -176,6 +176,11 @@ void APlayGameMode::InfinityGroundCheck()
 	}
 }
 
+void APlayGameMode::CursorOFf()
+{
+	ShowCursor(FALSE);
+}
+
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
@@ -239,6 +244,9 @@ void APlayGameMode::Tick(float _DeltaTime)
 		}
 		UEngineDebugMsgWindow::PushMsg(std::format("PlayerDir : {}", PlayerDir));
 	}
+
+	CursorOFf();
+
 
 }
 

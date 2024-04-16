@@ -176,11 +176,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Melee.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Monster.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Mouse.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Multishot.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -197,6 +205,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="PreCompile.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Ranged.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -222,11 +234,19 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Melee.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Monster.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Multishot.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -250,6 +270,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Ranged.cpp">
+      <SubType>
+      </SubType>
     </ClCompile>
     <ClCompile Include="TitleGameMode.cpp">
       <SubType>

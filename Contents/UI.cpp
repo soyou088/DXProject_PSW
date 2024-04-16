@@ -8,9 +8,14 @@ AUI::AUI()
 {
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	SetRoot(Root);
 	Renderer->SetupAttachment(Root);
 
+
+
+
+
+
+	SetRoot(Root);
 }
 
 AUI::~AUI()
@@ -26,6 +31,8 @@ void AUI::BeginPlay()
 	Renderer->SetAutoSize(1.0f, true);
 	Renderer->SetOrder(ERenderOrder::UI);
 	
+	
+
 }
 
 void AUI::Tick(float _DeltaTime)

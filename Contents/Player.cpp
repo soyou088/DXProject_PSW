@@ -19,7 +19,7 @@ APlayer::APlayer()
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Root);
 
-	//Collision->SetCollisionGroup(ECollisionOrder::Player);
+	Collision->SetCollisionGroup(ECollisionOrder::Player);
 	Collision->SetCollisionType(ECollisionType::Rect);
 
 	SetRoot(Root);
@@ -35,8 +35,15 @@ void APlayer::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CreatePlayerAnimation("Aqua");
 	CreatePlayerAnimation("Ame");
+	CreatePlayerAnimation("Aqua");
+	CreatePlayerAnimation("Ayame");
+	CreatePlayerAnimation("AZKiPortrait");
+	CreatePlayerAnimation("Bae");
+	CreatePlayerAnimation("Calli");
+
+
+
 
 	Renderer->SetOrder(ERenderOrder::Player);
 
@@ -59,8 +66,6 @@ void APlayer::CreatePlayerAnimation(std::string _Name)
 	Renderer->CreateAnimation(_Name + "_Run", _Name, 0.1f, true, 4, 9);
 }
 
-
-
 void APlayer::Tick(float _DeltaTime)
 {
 	// 위에 뭔가를 쳐야할때도 있다.
@@ -74,13 +79,6 @@ void APlayer::Tick(float _DeltaTime)
 	FVector MouseLocation = FVector{ PlayerPos.X + MousePos.X - 640, PlayerPos.Y - MousePos.Y + 360 };
 
 	Mouse->SetActorLocation(MouseLocation);
-
-
-	//if (true == IsDown(VK_LBUTTON))
-	//{
-	//	PlayerCursor->AddPosition(float4{ 0.0f, 0.0f, 1.0f } *360.0f * _DeltaTime);
-	//	Color.X += _DeltaTime;
-	//}
 
 	PCursorDirCheck();
 
@@ -96,6 +94,12 @@ void APlayer::Tick(float _DeltaTime)
 	}
 
 	int a = 0;
+
+	Collision->CollisionEnter(ECollisionOrder::Monster, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			_Collison->GetActor()->Destroy();
+		}
+	);
 
 }
 

@@ -7,7 +7,12 @@ enum class ERenderOrder
 	Player,
 	Monster,
 	UI,
+};
 
+enum class ECollisionOrder
+{
+	Player,
+	Monster,
 };
 
 enum class EActorDir

@@ -57,10 +57,5 @@ void AMouse::Tick(float _DeltaTime)
 		MouseCursorRenderer->SetActive(true);
 		MouseCursorON = false;
 	}
-
-
-
-
-
 }
 

@@ -4,10 +4,6 @@
 #include "Mouse.h"
 #include <EngineCore/Camera.h>
 
-//void Function(URenderer* Renderer)
-//{
-//	Renderer->ChangeAnimation("Idle");
-//}
 
 void APlayer::StateInit()
 {

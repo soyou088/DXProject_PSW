@@ -37,6 +37,15 @@
     <ClInclude Include="Mouse.h">
       <Filter>Level\PlayLevel\UIActor</Filter>
     </ClInclude>
+    <ClInclude Include="Ranged.h">
+      <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Multishot.h">
+      <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Melee.h">
+      <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -75,6 +84,15 @@
     <ClCompile Include="Mouse.cpp">
       <Filter>Level\PlayLevel\UIActor</Filter>
     </ClCompile>
+    <ClCompile Include="Ranged.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Multishot.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Melee.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -109,6 +127,9 @@
     </Filter>
     <Filter Include="Level\PlayLevel\Actor\Monster">
       <UniqueIdentifier>{8dc2bf40-d17a-4ba7-ac99-8ad1eb90fe30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\Actor\Attack">
+      <UniqueIdentifier>{cfdc339c-6568-4a70-a5aa-e199e9fbd52b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

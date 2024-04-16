@@ -32,6 +32,7 @@ protected:
 
 private:
 	USpriteRenderer* Renderer;
+	UCollision* Collision;
 	FVector PlayerLocation;
 
 	std::string Name = "Shrimp";
