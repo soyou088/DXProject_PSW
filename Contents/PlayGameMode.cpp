@@ -24,7 +24,7 @@ void APlayGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	std::shared_ptr<UEngineTexture> Tex = UEngineTexture::FindRes("Holo_map_04.png");
+	std::shared_ptr<UEngineTexture> Tex = UEngineTexture::FindRes("Holo_map_03.png");
 
 	CurIndex = { 0, 0 };
 	float4 PlayerStartPos = IndexToCenterPos(CurIndex);
@@ -206,7 +206,38 @@ void APlayGameMode::Tick(float _DeltaTime)
 		UEngineDebugMsgWindow::PushMsg(std::format("PlayerScale : {}", PlayerScale.ToString()));
 		UEngineDebugMsgWindow::PushMsg(std::format("PlayerIndex : {}, {}", Index.X, Index.Y));
 		UEngineDebugMsgWindow::PushMsg(std::format("MousePos : {}\n", GEngine->EngineWindow.GetScreenMousePos().ToString()));
-
+		
+		std::string PlayerDir = "";
+		switch (Player->GetPlayerDir())
+		{
+		case EActorDir::N:
+			PlayerDir = "N";
+			break;
+		case EActorDir::NE:
+			PlayerDir = "NE";
+			break;
+		case EActorDir::NW:
+			PlayerDir = "NW";
+			break;
+		case EActorDir::E:
+			PlayerDir = "E";
+			break;
+		case EActorDir::W:
+			PlayerDir = "W";
+			break;
+		case EActorDir::S:
+			PlayerDir = "S";
+			break;
+		case EActorDir::SE:
+			PlayerDir = "SE";
+			break;
+		case EActorDir::SW:
+			PlayerDir = "SW";
+			break;
+		default:
+			break;
+		}
+		UEngineDebugMsgWindow::PushMsg(std::format("PlayerDir : {}", PlayerDir));
 	}
 
 }

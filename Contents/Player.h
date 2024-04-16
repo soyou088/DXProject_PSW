@@ -24,15 +24,18 @@ public:
 
 
 	UStateManager State;
+	EActorDir GetPlayerDir()
+	{
+		return DirState;
+	}
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	std::shared_ptr<AMouse> Mouse;
 
-	void DirCheck();
-	void Dir();
-	EActorDir DirState = EActorDir::Right;
+	void PCursorDirCheck();
+	EActorDir DirState = EActorDir::None;
 
 private:
 	USpriteRenderer* Renderer;

@@ -56,12 +56,12 @@ void APlayer::Idle(float _Update)
 
 void APlayer::IdleStart()
 {
-	Renderer->ChangeAnimation("KroniiIdle");
+	Renderer->ChangeAnimation("TestAdle");
 }
 
 void APlayer::RunStart()
 {
-	Renderer->ChangeAnimation("KroniiRun");
+	Renderer->ChangeAnimation("TestRun");
 }
 
 void APlayer::Run(float _DeltaTime)
@@ -71,84 +71,90 @@ void APlayer::Run(float _DeltaTime)
 	float Speed = 500.0f;
 	
 
-	if (true == IsPress('A'))
+	if (true == IsPress('W') && true == IsPress('A'))
+	{
+		AddActorLocation(FVector::Up * _DeltaTime * Speed);
+		Camera->AddActorLocation(FVector::Up * _DeltaTime * Speed);
+		Renderer->SetDir(EEngineDir::Left);
+		AddActorLocation(FVector::Left * _DeltaTime * Speed);
+		Camera->AddActorLocation(FVector::Left * _DeltaTime * Speed);
+		DirState = EActorDir::NW;
+	}
+	else if (true == IsPress('W') && true == IsPress('D'))
+	{
+		AddActorLocation(FVector::Up * _DeltaTime * Speed);
+		Camera->AddActorLocation(FVector::Up * _DeltaTime * Speed);
+		Renderer->SetDir(EEngineDir::Right);
+		AddActorLocation(FVector::Right * _DeltaTime * Speed);
+		Camera->AddActorLocation(FVector::Right * _DeltaTime * Speed);
+		DirState = EActorDir::NE;
+	}
+	else if (true == IsPress('S') && true == IsPress('A'))
+	{
+		AddActorLocation(FVector::Down * _DeltaTime * Speed);
+		Camera->AddActorLocation(FVector::Down * _DeltaTime * Speed);
+		Renderer->SetDir(EEngineDir::Left);
+		AddActorLocation(FVector::Left * _DeltaTime * Speed);
+		Camera->AddActorLocation(FVector::Left * _DeltaTime * Speed);
+		DirState = EActorDir::SW;
+	}
+	else if (true == IsPress('S') && true == IsPress('D'))
+	{
+		AddActorLocation(FVector::Down * _DeltaTime * Speed);
+		Camera->AddActorLocation(FVector::Down * _DeltaTime * Speed);
+		Renderer->SetDir(EEngineDir::Right);
+		AddActorLocation(FVector::Right * _DeltaTime * Speed);
+		Camera->AddActorLocation(FVector::Right * _DeltaTime * Speed);
+		DirState = EActorDir::SE;
+	}
+
+	else if (true == IsPress('A'))
 	{
 		Renderer->SetDir(EEngineDir::Left);
 		AddActorLocation(FVector::Left * _DeltaTime * Speed);
 		Camera->AddActorLocation(FVector::Left * _DeltaTime * Speed);
+		DirState = EActorDir::W;
 		
 	}
-	if (true == IsUp('A'))
+	else if (true == IsUp('A'))
 	{
 		Renderer->SetDir(EEngineDir::Left);
 		State.ChangeState("Idle");
 	}
 
-	if (true == IsPress('D'))
+	else if (true == IsPress('D'))
 	{
 		Renderer->SetDir(EEngineDir::Right);
 		AddActorLocation(FVector::Right * _DeltaTime * Speed);
 		Camera->AddActorLocation(FVector::Right * _DeltaTime * Speed);
+		DirState = EActorDir::E;
 	}
-	if (true == IsUp('D'))
+	else if (true == IsUp('D'))
 	{
 		Renderer->SetDir(EEngineDir::Right);
 		State.ChangeState("Idle");
 	}
 
-	if (true == IsPress('W'))
+	else if (true == IsPress('W'))
 	{
 		AddActorLocation(FVector::Up * _DeltaTime * Speed);
 		Camera->AddActorLocation(FVector::Up * _DeltaTime * Speed);
+		DirState = EActorDir::N;
 	}
-	if (true == IsUp('W'))
+	else if (true == IsUp('W'))
 	{
 		State.ChangeState("Idle");
 	}
 
-	if (true == IsPress('S'))
+	else if (true == IsPress('S'))
 	{
 		AddActorLocation(FVector::Down * _DeltaTime * Speed);
 		Camera->AddActorLocation(FVector::Down * _DeltaTime * Speed);
+		DirState = EActorDir::S;
 	}
-	if (true == IsUp('S'))
+	else if (true == IsUp('S'))
 	{
 		State.ChangeState("Idle");
 	}
-
-	if (true == IsPress(VK_NUMPAD1))
-	{
-		 //AddActorRotation(float4{0.0f, 0.0f, 1.0f} * 360.0f * _DeltaTime);
-		 //Color.X += _DeltaTime;
-	}
-
-	if (true == IsPress(VK_NUMPAD2))
-	{
-		Color.X -= _DeltaTime;
-	}
-
-	if (true == IsPress(VK_NUMPAD4))
-	{
-		Color.Y += _DeltaTime;
-	}
-
-	if (true == IsPress(VK_NUMPAD5))
-	{
-		Color.Y -= _DeltaTime;
-	}
-
-	if (true == IsPress(VK_NUMPAD7))
-	{
-		Color.Z += _DeltaTime;
-	}
-
-	if (true == IsPress(VK_NUMPAD8))
-	{
-		Color.Z -= _DeltaTime;
-	}
-
-
-
-
 
 }
