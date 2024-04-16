@@ -32,7 +32,7 @@ public:
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-	std::shared_ptr<AMouse> Mouse;
+	
 	
 
 	void PCursorDirCheck();
@@ -45,7 +45,7 @@ private:
 
 	std::string Name = "Ame";
 	void CreatePlayerAnimation(std::string _Name);
-
+	void ChangeMouseAimAtkDir();
 
 
 	float4 Color;

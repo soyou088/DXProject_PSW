@@ -9,6 +9,7 @@ class AMouse : public AActor
 	GENERATED_BODY(AActor)
 public:
 	// constrcuter destructer
+	static FVector MousePos;
 	AMouse();
 	~AMouse();
 
@@ -17,6 +18,7 @@ public:
 	AMouse(AMouse&& _Other) noexcept = delete;
 	AMouse& operator=(const AMouse& _Other) = delete;
 	AMouse& operator=(AMouse&& _Other) noexcept = delete;
+
 
 protected:
 	void BeginPlay() override;
@@ -30,8 +32,6 @@ protected:
 	USpriteRenderer* MouseCursorRenderer;
 private:
 
-
-	float4 MousePos;
 
 	//플레이어 주변을 따라다닐꺼다 나는 함수 tick
 };

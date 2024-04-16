@@ -43,7 +43,9 @@ void APlayGameMode::BeginPlay()
 	Player = GetWorld()->SpawnActor<APlayer>("Player");
 	Player->SetActorLocation(PlayerStartPos);
 
-
+	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
+	Mouse->SetActorLocation({0.0f,0.0f});
+	
 
 	{
 		//UI = GetWorld()->SpawnActor<AUI>("UI");

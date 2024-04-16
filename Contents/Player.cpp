@@ -47,8 +47,8 @@ void APlayer::BeginPlay()
 
 	Renderer->SetOrder(ERenderOrder::Player);
 
-	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
-	Mouse->SetActorLocation(PlayerPos);
+	
+	
 	
 	PlayerCursor->SetSprite("spr_arrow_1.png");
 	PlayerCursor->SetAutoSize(1.0f, true);
@@ -66,6 +66,15 @@ void APlayer::CreatePlayerAnimation(std::string _Name)
 	Renderer->CreateAnimation(_Name + "_Run", _Name, 0.1f, true, 4, 9);
 }
 
+void APlayer::ChangeMouseAimAtkDir()
+{
+	//if (true == AHoloCursor::MouseAimOn)
+	//{
+	//	float angle = atan2f((ContentsValue::PlayLevelMousePos.Y - APlayer::PlayerPos.Y), (ContentsValue::PlayLevelMousePos.X - APlayer::PlayerPos.X)) * 180.0f / UEngineMath::PI;
+	//	AtkDir->SetRotationDeg(FVector{ 0.0f, 0.0f, angle });
+	//}
+}
+
 void APlayer::Tick(float _DeltaTime)
 {
 	// 위에 뭔가를 쳐야할때도 있다.
@@ -76,9 +85,7 @@ void APlayer::Tick(float _DeltaTime)
 	PlayerPos = GetActorLocation();
 	MousePos = GEngine->EngineWindow.GetScreenMousePos();
 	MouseCursor = PlayerPos + MousePos;
-	FVector MouseLocation = FVector{ PlayerPos.X + MousePos.X - 640, PlayerPos.Y - MousePos.Y + 360 };
 
-	Mouse->SetActorLocation(MouseLocation);
 
 	PCursorDirCheck();
 
