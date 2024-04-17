@@ -48,6 +48,7 @@ void APlayer::BeginPlay()
 	CreatePlayerAnimation("Kiara");
 	
 	
+	Renderer->SetAutoSize(20.0f, true);
 	Renderer->SetOrder(ERenderOrder::Player);
 	
 	PlayerCursor->SetSprite("spr_arrow_1.png");

@@ -213,7 +213,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 
 
 	MeleeAttack(_DeltaTime);
-	Melee->SetActorLocation(APlayer::PlayerPos);
+	Melee->SetActorLocation({ APlayer::PlayerPos.X + 50 , APlayer::PlayerPos.Y});
 
 
 	if (SpawnTerm <= 0)

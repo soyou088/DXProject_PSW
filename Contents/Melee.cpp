@@ -25,7 +25,7 @@ void AMelee::BeginPlay()
 	Renderer->SetPosition(APlayer::PlayerPos);
 	Renderer->SetAutoSize(1.0f, true);
 	Renderer->ChangeAnimation("KiaraAttack");
-	Renderer->SetOrder(ERenderOrder::Player);
+	Renderer->SetOrder(ERenderOrder::Attack);
 }
 
 
