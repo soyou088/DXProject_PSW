@@ -19,6 +19,8 @@ public:
 	ARanged& operator=(const ARanged& _Other) = delete;
 	ARanged& operator=(ARanged&& _Other) noexcept = delete;
 
+	std::shared_ptr<ARanged> Ranged;
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

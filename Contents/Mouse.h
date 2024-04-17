@@ -8,8 +8,11 @@ class AMouse : public AActor
 {
 	GENERATED_BODY(AActor)
 public:
-	// constrcuter destructer
 	static FVector MousePos;
+	static bool MouseCursorON;
+
+	// constrcuter destructer
+
 	AMouse();
 	~AMouse();
 
@@ -25,9 +28,8 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	void CursorOFf();
-	void GetMouseCursorON();
-	bool MouseCursorON = false;
-	
+	void CurCursor();
+	void CheckCurCursor();
 
 	USpriteRenderer* MouseCursorRenderer;
 private:

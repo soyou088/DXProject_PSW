@@ -53,7 +53,6 @@ protected:
 	void SpawnMonster(std::string _Name, float4 _Location);
 
 	FIntPoint PosToIndex(float4 _Pos);
-	float4 MousePos;
 	FVector MousePosi;
 	void InfinityGroundCheck();
 

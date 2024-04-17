@@ -19,9 +19,6 @@
     <ClInclude Include="PlayBack.h">
       <Filter>Level\PlayLevel\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="ContentsEnum.h">
-      <Filter>Option</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Level\PlayLevel\Actor</Filter>
     </ClInclude>
@@ -45,6 +42,9 @@
     </ClInclude>
     <ClInclude Include="Melee.h">
       <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsEnum.h">
+      <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -115,9 +115,6 @@
     </Filter>
     <Filter Include="Level\PlayLevel\Actor">
       <UniqueIdentifier>{208e4a80-28bc-44b4-890b-999bcaed8ce8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Option">
-      <UniqueIdentifier>{a73859eb-3538-4fc1-9131-0fa5a6354e90}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header">
       <UniqueIdentifier>{4bad1fa8-ff4e-4f79-a8e8-a1ac1b99e33f}</UniqueIdentifier>

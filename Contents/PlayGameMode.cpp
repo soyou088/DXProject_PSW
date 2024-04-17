@@ -32,7 +32,7 @@ void APlayGameMode::BeginPlay()
 
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation({ 0.0f, 0.0f, -200.0f });
-	MousePos = GEngine->EngineWindow.GetScreenMousePos();
+	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
 
 	float4 CameraPos = PlayerStartPos;
 	CameraPos.Z = -500.0f;
@@ -189,8 +189,9 @@ void APlayGameMode::CursorOFf()
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	FVector MouseLocation = FVector{ APlayer::PlayerPos.X + MousePos.X - 640, APlayer::PlayerPos.Y - MousePos.Y + 360 };
-	Mouse->SetActorLocation(MouseLocation);
+	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
+	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerPos.X + AMouse::MousePos.X - 640, APlayer::PlayerPos.Y - AMouse::MousePos.Y + 360 };
+	Mouse->SetActorLocation(ContentsValue::PlayLevelMousePos);
 
 	int a = 0;
 	InfinityGroundCheck();

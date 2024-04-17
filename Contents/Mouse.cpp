@@ -2,7 +2,10 @@
 #include "Player.h"
 #include "Mouse.h"
 
+
 FVector AMouse::MousePos = FVector::Zero;
+bool AMouse::MouseCursorON = false;
+
 
 AMouse::AMouse()
 {
@@ -35,32 +38,45 @@ void AMouse::CursorOFf()
 	ShowCursor(FALSE);
 }
 
-void AMouse::GetMouseCursorON()
+
+void AMouse::CurCursor()
 {
-	MouseCursorON = false;
+	if (true == IsDown(VK_LBUTTON))
+	{
+		if (true != MouseCursorON)
+		{
+			MouseCursorON = true;
+		}
+		else
+		{
+			MouseCursorON = false;
+		}
+	}
 }
+
+void AMouse::CheckCurCursor()
+{
+	if (true != MouseCursorON)
+	{
+		CursorOFf();
+		MouseCursorRenderer->SetSprite("spr_GameCursor_0.png");
+		//Renderer->SetPivot();
+	}
+	else
+	{
+		CursorOFf();
+		MouseCursorRenderer->SetSprite("spr_GameCursor1_0.png");
+		MouseCursorRenderer->SetPivot(EPivot::MAX);
+	}
+}
+
 
 void AMouse::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (false == MouseCursorON && true == IsDown(VK_LBUTTON))
-	{
-		CursorOFf();
-		MouseCursorRenderer->SetSprite("spr_GameCursor1_0.png");
-		MouseCursorRenderer->SetActive(true);
-		MouseCursorON = true;
-
-	}
-
-	else if (true == MouseCursorON && true == IsDown(VK_LBUTTON))
-	{
-		CursorOFf();
-		MouseCursorRenderer->SetSprite("spr_GameCursor_0.png");
-		MouseCursorRenderer->SetActive(true);
-		MouseCursorON = false;
-	}
-
+	CurCursor();
+	CheckCurCursor();
 
 	FVector PPos = APlayer::PlayerPos;
 	MousePos = GEngine->EngineWindow.GetScreenMousePos();

@@ -42,13 +42,7 @@ void APlayer::BeginPlay()
 	CreatePlayerAnimation("Bae");
 	CreatePlayerAnimation("Calli");
 
-
-
-
 	Renderer->SetOrder(ERenderOrder::Player);
-
-	
-	
 	
 	PlayerCursor->SetSprite("spr_arrow_1.png");
 	PlayerCursor->SetAutoSize(1.0f, true);
@@ -66,14 +60,6 @@ void APlayer::CreatePlayerAnimation(std::string _Name)
 	Renderer->CreateAnimation(_Name + "_Run", _Name, 0.1f, true, 4, 9);
 }
 
-void APlayer::ChangeMouseAimAtkDir()
-{
-	//if (true == AHoloCursor::MouseAimOn)
-	//{
-	//	float angle = atan2f((ContentsValue::PlayLevelMousePos.Y - APlayer::PlayerPos.Y), (ContentsValue::PlayLevelMousePos.X - APlayer::PlayerPos.X)) * 180.0f / UEngineMath::PI;
-	//	AtkDir->SetRotationDeg(FVector{ 0.0f, 0.0f, angle });
-	//}
-}
 
 void APlayer::Tick(float _DeltaTime)
 {
@@ -83,22 +69,10 @@ void APlayer::Tick(float _DeltaTime)
 	State.Update(_DeltaTime);
 
 	PlayerPos = GetActorLocation();
-	MousePos = GEngine->EngineWindow.GetScreenMousePos();
-	MouseCursor = PlayerPos + MousePos;
-
-
+	
 	PCursorDirCheck();
-
-	if (false == MouseState && true == IsDown(VK_LBUTTON))
-	{
-		PlayerCursor->SetSprite("spr_arrow_2.png");
-		MouseState = true;
-	}
-	else if (true == MouseState && true == IsDown(VK_LBUTTON))
-	{
-		PlayerCursor->SetSprite("spr_arrow_1.png");
-		MouseState = false;
-	}
+	CursorDirChange();
+	ChangeMouseAimAtkDir();
 
 	int a = 0;
 
@@ -110,9 +84,25 @@ void APlayer::Tick(float _DeltaTime)
 
 }
 
+void APlayer::CursorDirChange()
+{
+	if (false == AMouse::MouseCursorON)
+	{
+		PlayerCursor->SetSprite("spr_arrow_1.png");
+		PlayerCursor->SetAutoSize(1.0f, true);
+	}
+	
+	if (true == AMouse::MouseCursorON)
+	{
+	
+		PlayerCursor->SetSprite("spr_arrow_2.png");
+		PlayerCursor->SetAutoSize(1.0f, true);
+
+	}
+}
+
 void APlayer::PCursorDirCheck()
 {
-
 	EActorDir InputDir = EActorDir::None;
 	// 처음들어올때
 	if (true == IsDown('W'))
@@ -149,13 +139,11 @@ void APlayer::PCursorDirCheck()
 		InputDir = EActorDir::E;
 	}
 
-
 	if (DirState == EActorDir::SW)
 	{
 		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,225.0f });
 		InputDir = EActorDir::W;
 	}
-
 
 	if (DirState == EActorDir::NW)
 	{
@@ -174,12 +162,10 @@ void APlayer::PCursorDirCheck()
 		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,270.0f });
 	}
 
-
 	if (DirState == EActorDir::W)
 	{
 		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,180.0f });
 	}
-
 
 	if (DirState == EActorDir::E)
 	{
@@ -188,6 +174,22 @@ void APlayer::PCursorDirCheck()
 }
 
 
+void APlayer::ChangeMouseAimAtkDir()
+{
+	if (true == AMouse::MouseCursorON)
+	{
+		Angle = atan2f((ContentsValue::PlayLevelMousePos.Y - APlayer::PlayerPos.Y), (ContentsValue::PlayLevelMousePos.X - APlayer::PlayerPos.X)) * 180.0f / UEngineMath::PI;
+		PlayerCursor->SetRotationDeg(FVector{ 0.0f, 0.0f, Angle });
 
+		if (-90.0f <= Angle && 90.0f > Angle)
+		{
+			Renderer->SetDir(EEngineDir::Right);
+		}
+		else
+		{
+			Renderer->SetDir(EEngineDir::Left);
+		}
+	}
+}
 
 

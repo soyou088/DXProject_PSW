@@ -8,6 +8,7 @@
 class USpriteRenderer;
 class APlayer : public AActor
 {
+	
 	GENERATED_BODY(AActor)
 
 public:
@@ -24,15 +25,23 @@ public:
 
 
 	UStateManager State;
+
 	EActorDir GetPlayerDir()
 	{
 		return DirState;
 	}
 
+
+	float GetAngle()
+	{
+		return Angle;
+	}
+
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-	
+	void CursorDirChange();
 	
 
 	void PCursorDirCheck();
@@ -50,8 +59,8 @@ private:
 
 	float4 Color;
 	float4 MousePos;
+	float Angle;
 
-	bool MouseState = false;
 
 	float Speed = 300.0f;
 	float LineSpeed = Speed * 0.75f;
