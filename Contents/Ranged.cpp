@@ -21,11 +21,8 @@ void ARanged::BeginPlay()
 	Super::BeginPlay();
 	CreatePlayerAnimation("Ame");
 
-
 	Renderer->SetOrder(ERenderOrder::Weapons);
 	Renderer->SetPosition(APlayer::PlayerPos);
-	Ranged = GetWorld()->SpawnActor<ARanged>("Ranged") ;
-
 }
 
 void ARanged::CreatePlayerAnimation(std::string _Name)
@@ -33,10 +30,12 @@ void ARanged::CreatePlayerAnimation(std::string _Name)
 	Renderer->CreateAnimation(_Name + "Attack", _Name, 0.1f, true, 0, 3);
 }
 
+
+
 void ARanged::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	Renderer->ChangeAnimation("Ame");
+	Renderer->ChangeAnimation("AmeAttack");
 
 }
 

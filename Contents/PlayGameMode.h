@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "Mouse.h"
+#include "Ranged.h"
 #include "UI.h"
 
 struct FIntPoint
@@ -40,17 +41,20 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-// 	std::map<__int64, std::shared_ptr<APlayBack>> Grounds;
 	std::vector<std::shared_ptr<APlayBack>> Grounds;
 
 	std::shared_ptr<AMouse> Mouse;
 	std::shared_ptr<APlayer> Player;
 
 	std::shared_ptr<AUI> UI;
+
+	std::shared_ptr<AMelee> Melee;
+	
 	float4 IndexToCenterPos(FIntPoint _Index);
 
 	float4 RandomLocation();
 	void SpawnMonster(std::string _Name, float4 _Location);
+	void MeleeAttack(float _DeltaTime);
 
 	FIntPoint PosToIndex(float4 _Pos);
 	FVector MousePosi;
@@ -62,5 +66,7 @@ private:
 	float SpawnTerm = 0;
 
 	void CursorOFf();
+
+	float AttackTime = 0;
 };
 

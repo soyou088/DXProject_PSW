@@ -1,6 +1,9 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "Mouse.h"
+#include "Ranged.h"
+#include "Melee.h"
+#include "Multishot.h"
 
 
 FVector APlayer::PlayerPos = FVector::Zero;
@@ -41,7 +44,10 @@ void APlayer::BeginPlay()
 	CreatePlayerAnimation("AZKiPortrait");
 	CreatePlayerAnimation("Bae");
 	CreatePlayerAnimation("Calli");
-
+	CreatePlayerAnimation("Suisei");
+	CreatePlayerAnimation("Kiara");
+	
+	
 	Renderer->SetOrder(ERenderOrder::Player);
 	
 	PlayerCursor->SetSprite("spr_arrow_1.png");
@@ -61,6 +67,8 @@ void APlayer::CreatePlayerAnimation(std::string _Name)
 }
 
 
+
+
 void APlayer::Tick(float _DeltaTime)
 {
 	// 위에 뭔가를 쳐야할때도 있다.
@@ -73,6 +81,7 @@ void APlayer::Tick(float _DeltaTime)
 	PCursorDirCheck();
 	CursorDirChange();
 	ChangeMouseAimAtkDir();
+
 
 	int a = 0;
 
@@ -100,6 +109,8 @@ void APlayer::CursorDirChange()
 
 	}
 }
+
+
 
 void APlayer::PCursorDirCheck()
 {

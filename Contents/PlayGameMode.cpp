@@ -38,15 +38,14 @@ void APlayGameMode::BeginPlay()
 	CameraPos.Z = -500.0f;
 	Camera->SetActorLocation(CameraPos);
 
-
-
 	Player = GetWorld()->SpawnActor<APlayer>("Player");
 	Player->SetActorLocation(PlayerStartPos);
 
-
 	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
-	//Mouse->SetActorLocation(MousePosi);
 
+	//Ranged = GetWorld()->SpawnActor<ARanged>("Ranged");
+	Melee = GetWorld()->SpawnActor<AMelee>("Melee");
+	//Multishot = GetWorld()->SpawnActor<ARanged>("Ranged");
 	int a = 0;
 	
 
@@ -83,6 +82,19 @@ void APlayGameMode::BeginPlay()
 	}
 
 
+}
+
+
+void APlayGameMode::MeleeAttack(float _DeltaTime)
+{
+	if (1.0f <= AttackTime)
+	{
+
+		Melee->SetActorLocation(APlayer::PlayerPos);
+		AttackTime = 0.0f;
+	}
+
+	AttackTime += _DeltaTime;
 }
 
 float4 APlayGameMode::RandomLocation()
@@ -193,8 +205,15 @@ void APlayGameMode::Tick(float _DeltaTime)
 	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerPos.X + AMouse::MousePos.X - 640, APlayer::PlayerPos.Y - AMouse::MousePos.Y + 360 };
 	Mouse->SetActorLocation(ContentsValue::PlayLevelMousePos);
 
+
+
+
 	int a = 0;
 	InfinityGroundCheck();
+
+
+	MeleeAttack(_DeltaTime);
+	Melee->SetActorLocation(APlayer::PlayerPos);
 
 
 	if (SpawnTerm <= 0)
@@ -215,7 +234,6 @@ void APlayGameMode::Tick(float _DeltaTime)
 		CurIndex = Index;
 		float4 PlayerScale = Player->GetActorScale3D();
 		UEngineDebugMsgWindow::PushMsg(std::format("PlayerPos : {}", PlayerPos.ToString()));
-		UEngineDebugMsgWindow::PushMsg(std::format("PlayerScale : {}", PlayerScale.ToString()));
 		UEngineDebugMsgWindow::PushMsg(std::format("MousePos : {}\n", GEngine->EngineWindow.GetScreenMousePos().ToString()));
 		
 		std::string PlayerDir = "";

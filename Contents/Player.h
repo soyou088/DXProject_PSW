@@ -1,5 +1,7 @@
 #pragma once
 #include "Mouse.h"
+#include "Melee.h"
+#include "Ranged.h"
 #include <EngineCore/Actor.h>
 #include <EngineCore/StateManager.h>
 
@@ -44,15 +46,20 @@ protected:
 	void CursorDirChange();
 	
 
+
 	void PCursorDirCheck();
 	EActorDir DirState = EActorDir::None;
+
+	// АјАн
+	//std::shared_ptr<AMultishot> Multishot;
+	std::shared_ptr<ARanged> Ranged;
 
 private:
 	USpriteRenderer* Renderer;
 	USpriteRenderer* PlayerCursor;
 	UCollision* Collision;
 
-	std::string Name = "Ame";
+	std::string Name = "Kiara";
 	void CreatePlayerAnimation(std::string _Name);
 	void ChangeMouseAimAtkDir();
 
@@ -64,6 +71,9 @@ private:
 
 	float Speed = 300.0f;
 	float LineSpeed = Speed * 0.75f;
+
+	
+
 
 	float4 MouseCursor;
 	//////////////////////// State
