@@ -26,6 +26,8 @@ void AMouse::BeginPlay()
 	MouseCursorRenderer->SetSprite("spr_GameCursor_0.png");
 	MouseCursorRenderer->SetAutoSize(1.0f, true);
 	MouseCursorRenderer->SetOrder(10);
+
+	int a = 0;
 }
 
 void AMouse::CursorOFf()
@@ -59,8 +61,12 @@ void AMouse::Tick(float _DeltaTime)
 		MouseCursorON = false;
 	}
 
-	FVector MouseLocation = FVector{ APlayer::PlayerPos.X + MousePos.X - 640, APlayer::PlayerPos.Y - MousePos.Y + 360 };
 
+	FVector PPos = APlayer::PlayerPos;
+	MousePos = GEngine->EngineWindow.GetScreenMousePos();
+	FVector MouseLocation = FVector{ PPos.X + MousePos.X - 640, PPos.Y - MousePos.Y + 360 };
 	SetActorLocation(MouseLocation);
+
+	int a = 0;
 }
 

@@ -43,8 +43,11 @@ void APlayGameMode::BeginPlay()
 	Player = GetWorld()->SpawnActor<APlayer>("Player");
 	Player->SetActorLocation(PlayerStartPos);
 
+
 	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
-	Mouse->SetActorLocation({0.0f,0.0f});
+	//Mouse->SetActorLocation(MousePosi);
+
+	int a = 0;
 	
 
 	{
@@ -186,9 +189,10 @@ void APlayGameMode::CursorOFf()
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+	FVector MouseLocation = FVector{ APlayer::PlayerPos.X + MousePos.X - 640, APlayer::PlayerPos.Y - MousePos.Y + 360 };
+	Mouse->SetActorLocation(MouseLocation);
 
-
-
+	int a = 0;
 	InfinityGroundCheck();
 
 

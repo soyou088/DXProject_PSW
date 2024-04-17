@@ -54,7 +54,7 @@ protected:
 
 	FIntPoint PosToIndex(float4 _Pos);
 	float4 MousePos;
-
+	FVector MousePosi;
 	void InfinityGroundCheck();
 
 private:
