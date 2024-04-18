@@ -25,18 +25,53 @@ public:
 		Name = _Name;
 	}
 
+	void SetMonsterStatus(float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType);
+
+	FVector CreateGroupToPlayerDir();
+
+	USpriteRenderer* GetRenderer()
+	{
+		return Renderer;
+	}
+
+
+	void SetToPlayerDir(FVector _ToPlayerDir)
+	{
+		ToPlayerDir = _ToPlayerDir;
+	}
+
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
 
+
 private:
 	USpriteRenderer* Renderer;
 	UCollision* Collision;
-	FVector PlayerLocation;
+	
 
 	std::string Name = "Shrimp";
+	float Hp = 8.0f;
+	float Atk = 2.0f;
+	float Speed = 0.35f;
+	float CalSpeed = 300.0f * Speed;
+	float Exp = 6.0f;
+	EMonsterMoveType MoveType = EMonsterMoveType::Follow;
+
+	FVector PlayerLocation;
+
+	FVector Dir = FVector::Zero;
+	FVector ToPlayerDir;
+
 	float MoveSpeed = 100.0f;
+
+
+	
+	void CheckPosComparePlayer();
+	void Move(float _DeltaTime, EMonsterMoveType _MoveType);
+	void CreateMonsterAnimation(std::string _Name);
 
 };
 

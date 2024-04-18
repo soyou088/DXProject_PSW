@@ -13,6 +13,7 @@ FVector APlayer::PlayerPos = FVector::Zero;
 APlayer::APlayer()
 {
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
+	
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetupAttachment(Root);
 	Renderer->SetPivot(EPivot::BOT);
@@ -50,14 +51,15 @@ void APlayer::BeginPlay()
 	CreatePlayerAnimation("Kiara");
 	
 	
-	Renderer->SetAutoSize(20.0f, true);
+	Renderer->SetAutoSize(2.0f, true);
 	Renderer->SetOrder(ERenderOrder::Player);
 	
+
 	PlayerCursor->SetSprite("spr_arrow_1.png");
 	PlayerCursor->SetAutoSize(1.0f, true);
 	PlayerCursor->SetOrder(ERenderOrder::Player);
 
-	FVector PCursor = FVector{ PlayerPos.X, PlayerPos.Y + 20 };
+	FVector PCursor = FVector{ PlayerPos.X, PlayerPos.Y + 20.0f };
 	PlayerCursor->SetPosition(PCursor);
 
 	StateInit();

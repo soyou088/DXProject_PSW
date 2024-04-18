@@ -90,14 +90,14 @@ void APlayGameMode::MeleeAttack(float _DeltaTime)
 	if (1.0f <= AttackTime)
 	{
 
-		Melee->SetActorLocation(APlayer::PlayerPos);
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50 , APlayer::PlayerPos.Y + 20 });
 		AttackTime = 0.0f;
 	}
 
 	AttackTime += _DeltaTime;
 }
 
-float4 APlayGameMode::RandomLocation()
+float4 APlayGameMode::RandomLocation(bool _Group)
 {
 	float4 MonsterPos = APlayer::PlayerPos;
 	MonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 200.0f;
@@ -193,89 +193,15 @@ void APlayGameMode::InfinityGroundCheck()
 	}
 }
 
-void APlayGameMode::CursorOFf()
+void APlayGameMode::PlayDebugText()
 {
-	ShowCursor(FALSE);
-}
-
-void APlayGameMode::Tick(float _DeltaTime)
-{
-	Super::Tick(_DeltaTime);
-	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
-	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerPos.X + AMouse::MousePos.X - 640, APlayer::PlayerPos.Y - AMouse::MousePos.Y + 360 };
-	Mouse->SetActorLocation(ContentsValue::PlayLevelMousePos);
-
-
-
-
-	int a = 0;
-	InfinityGroundCheck();
-
-	// Melee 공격
-	MeleeAttack(_DeltaTime);
-	if (Player->GetPlayerDir() == EActorDir::E)
-	{
-		Melee->SetActorLocation({ APlayer::PlayerPos.X + 50 , APlayer::PlayerPos.Y });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,0.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::N)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y + 50});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,90.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::S)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y - 50});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,270.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::W)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,180.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::NE)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y + 50});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,45.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::NW)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 50});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,135.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::SE)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y - 50});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,315.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::SW)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y - 50});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,225.0f });
-	}	
-
-	// 몬스터 스폰
-
-	if (SpawnTerm <= 0)
-	{
-		SpawnMonster("Shrimp", RandomLocation());
-		SpawnTerm = 5.0f;
-	}
-	else
-	{
-		SpawnTerm -= _DeltaTime;
-	}
-	
-	
-	{
-
 		float4 PlayerPos = Player->GetActorLocation();
 		FIntPoint Index = PosToIndex(PlayerPos);
 		CurIndex = Index;
 		float4 PlayerScale = Player->GetActorScale3D();
 		UEngineDebugMsgWindow::PushMsg(std::format("PlayerPos : {}", PlayerPos.ToString()));
 		UEngineDebugMsgWindow::PushMsg(std::format("MousePos : {}\n", GEngine->EngineWindow.GetScreenMousePos().ToString()));
-		
+
 		std::string PlayerDir = "";
 		switch (Player->GetPlayerDir())
 		{
@@ -307,10 +233,156 @@ void APlayGameMode::Tick(float _DeltaTime)
 			break;
 		}
 		UEngineDebugMsgWindow::PushMsg(std::format("PlayerDir : {}", PlayerDir));
+}
+
+void APlayGameMode::SpawnMonsterTimeSet(float _DeltaTime, float _SpawnBegin, float _SpawnEnd, float _Term,
+	std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType,
+	bool _Group, int _Quantity)
+{
+	if (PlayTime >= _SpawnBegin && PlayTime < _SpawnEnd)
+	{
+		if (SpawnTerm <= 0)
+		{
+			RandomSpawnMonster(_Name, _Size, _Hp, _Atk, _Speed, _Exp, _MoveType, _Group, _Quantity);
+			SpawnTerm = _Term;
+		}
+		else
+		{
+			SpawnTerm -= _DeltaTime;
+		}
+	}
+}
+
+void APlayGameMode::RandomSpawnMonster(std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType,
+	bool _Group, int _Quantity)
+{
+	if (0 >= _Quantity)
+	{
+		MsgBoxAssert("스폰하려는 몬스터의 수가 0 이하 입니다.");
+		return;
 	}
 
-	CursorOFf();
+	FVector GroupToPlayerDir;
 
+	for (int i = 0; i < _Quantity; i++)
+	{
+		std::shared_ptr<AMonster> Monster;
+
+		Monster = GetWorld()->SpawnActor<AMonster>(_Name);
+		Monster->GetRenderer()->SetAutoSize(_Size, true);
+		Monster->GetRenderer()->ChangeAnimation(_Name);
+		Monster->SetMonsterStatus(_Hp, _Atk, _Speed, _Exp, _MoveType);
+		FVector GroupPos = RandomLocation(_Group);
+		Monster->SetActorLocation(GroupPos);
+		if (true == _Group)
+		{
+			if (false == GroupSpawn)
+			{
+				GroupToPlayerDir = Monster->CreateGroupToPlayerDir();
+				Monster->SetToPlayerDir(GroupToPlayerDir);
+				GroupSpawn = true;
+			}
+			else
+			{
+				Monster->SetToPlayerDir(GroupToPlayerDir);
+			}
+		}
+		else
+		{
+			FVector Dir = APlayer::PlayerPos - Monster->GetActorLocation();
+			Dir = Dir.Normalize2DReturn();
+			Monster->SetToPlayerDir(Dir);
+		}
+	}
+	GroupSpawn = false;
+}
+
+void APlayGameMode::CursorOFf()
+{
+	ShowCursor(FALSE);
+}
+
+void APlayGameMode::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
+	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerPos.X + AMouse::MousePos.X - 640, APlayer::PlayerPos.Y - AMouse::MousePos.Y + 360 };
+	Mouse->SetActorLocation(ContentsValue::PlayLevelMousePos);
+
+
+
+
+	int a = 0;
+	InfinityGroundCheck();
+
+	// Melee 공격
+	MeleeAttack(_DeltaTime);
+	if (Player->GetPlayerDir() == EActorDir::E)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50 , APlayer::PlayerPos.Y + 20 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,0.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::N)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y + 70});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,90.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::S)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y - 30});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,270.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::W)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 20 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,180.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::NE)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y + 70});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,45.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::NW)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 70});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,135.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::SE)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y - 30});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,315.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::SW)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y - 30});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,225.0f });
+	}	
+
+	// 몬스터 스폰
+
+	SpawnMonsterTimeSet(_DeltaTime, 0.0f, 20.0f, 5.0f,
+		"Shrimp", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
+		false, 10);
+	SpawnMonsterTimeSet(_DeltaTime, 0.0f, 20.0f, 10.0f,
+		"Shrimp", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
+		true, 10);
+	//SpawnMonsterTimeSet(_DeltaTime, 20.0f, 40.0f, 5.0f,
+	//	"Deadbeat", 1.0f, 40.0f, 4.0f, 0.4f, 7.0f, EMonsterMoveType::Follow,
+	//	false, 5);
+	//SpawnMonsterTimeSet(_DeltaTime, 40.0f, 60.0f, 5.0f,
+	//	"Takodachi", 1.0f, 80.0f, 4.0f, 0.4f, 8.0f, EMonsterMoveType::Follow);
+	//SpawnMonsterTimeSet(_DeltaTime, 60.0f, 80.0f, 5.0f,
+	//	"KFP", 1.0f, 20.0f, 2.0f, 1.0f, 3.0f, EMonsterMoveType::StraightToPlayer,
+	//	true, 10);
+
+	PlayTime += _DeltaTime;
+
+	
+	
+	
+
+	CursorOFf();
+	PlayDebugText();
 
 }
 

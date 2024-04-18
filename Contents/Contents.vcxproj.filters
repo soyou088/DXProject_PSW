@@ -11,15 +11,12 @@
       <Filter>Level\PlayLevel</Filter>
     </ClInclude>
     <ClInclude Include="TitleGameMode.h">
-      <Filter>Level\TitleLevel</Filter>
+      <Filter>Level\PlayLevel\TitleLevel</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
-      <Filter>Level\TitleLevel\Actor</Filter>
+      <Filter>Level\PlayLevel\TitleLevel\Actor</Filter>
     </ClInclude>
     <ClInclude Include="PlayBack.h">
-      <Filter>Level\PlayLevel\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
       <Filter>Level\PlayLevel\Actor</Filter>
     </ClInclude>
     <ClInclude Include="ContentsValue.h">
@@ -46,6 +43,9 @@
     <ClInclude Include="ContentsEnum.h">
       <Filter>Header</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Level\PlayLevel\Actor\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -54,17 +54,14 @@
     <ClCompile Include="HoloCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Level\PlayLevel\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="PlayGameMode.cpp">
       <Filter>Level\PlayLevel</Filter>
     </ClCompile>
     <ClCompile Include="TitleGameMode.cpp">
-      <Filter>Level\TitleLevel</Filter>
+      <Filter>Level\PlayLevel\TitleLevel</Filter>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
-      <Filter>Level\TitleLevel\Actor</Filter>
+      <Filter>Level\PlayLevel\TitleLevel\Actor</Filter>
     </ClCompile>
     <ClCompile Include="PlayBack.cpp">
       <Filter>Level\PlayLevel\Actor</Filter>
@@ -93,6 +90,9 @@
     <ClCompile Include="Melee.cpp">
       <Filter>Level\PlayLevel\Actor\Attack</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Level\PlayLevel\Actor\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -106,12 +106,6 @@
     </Filter>
     <Filter Include="Level\PlayLevel">
       <UniqueIdentifier>{f7cd771b-27b4-45df-8fb6-1928e398bc62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\TitleLevel">
-      <UniqueIdentifier>{97da6cae-c6b7-49b4-a332-a6917292167f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\TitleLevel\Actor">
-      <UniqueIdentifier>{28116382-d64e-47f1-be13-759b389da5c1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Level\PlayLevel\Actor">
       <UniqueIdentifier>{208e4a80-28bc-44b4-890b-999bcaed8ce8}</UniqueIdentifier>
@@ -127,6 +121,15 @@
     </Filter>
     <Filter Include="Level\PlayLevel\Actor\Attack">
       <UniqueIdentifier>{cfdc339c-6568-4a70-a5aa-e199e9fbd52b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\Actor\Player">
+      <UniqueIdentifier>{903231db-adeb-431a-bc66-ec5cb32db949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\TitleLevel">
+      <UniqueIdentifier>{97da6cae-c6b7-49b4-a332-a6917292167f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\TitleLevel\Actor">
+      <UniqueIdentifier>{28116382-d64e-47f1-be13-759b389da5c1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -6,6 +6,8 @@ enum class ERenderOrder
 	Back,
 	Player,
 	Monster,
+	MonsterUp,
+	MonsterDown,
 	Attack,
 	Weapons,
 	UI,
@@ -28,4 +30,15 @@ enum class EActorDir
 	SW,
 	W,
 	NW,
+};
+
+enum class EMonsterMoveType
+{
+	Follow,
+	StraightToPlayer,
+	StraightToUp,
+	StraightToDown,
+	StraightToRight,
+	StraightToLeft,
+	Stop,
 };
