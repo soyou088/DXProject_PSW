@@ -56,6 +56,8 @@ protected:
 	void SpawnMonster(std::string _Name, float4 _Location);
 	void MeleeAttack(float _DeltaTime);
 
+	FVector AttackDir();
+
 	FIntPoint PosToIndex(float4 _Pos);
 	FVector MousePosi;
 	void InfinityGroundCheck();

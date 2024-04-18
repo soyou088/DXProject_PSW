@@ -22,7 +22,6 @@ void AMelee::BeginPlay()
 	Super::BeginPlay();
 
 	Renderer->CreateAnimation("KiaraAttack", "KiaraAttack", 0.1f);
-	Renderer->SetPosition(APlayer::PlayerPos);
 	Renderer->SetAutoSize(1.0f, true);
 	Renderer->ChangeAnimation("KiaraAttack");
 	Renderer->SetOrder(ERenderOrder::Attack);
@@ -33,6 +32,7 @@ void AMelee::BeginPlay()
 void AMelee::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
 	
 }
 

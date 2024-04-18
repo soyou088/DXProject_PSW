@@ -46,9 +46,8 @@ protected:
 	void CursorDirChange();
 	
 
-
-	void PCursorDirCheck();
 	EActorDir DirState = EActorDir::None;
+	void PCursorDirCheck();
 
 	// АјАн
 	//std::shared_ptr<AMultishot> Multishot;

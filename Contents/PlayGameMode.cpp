@@ -211,10 +211,50 @@ void APlayGameMode::Tick(float _DeltaTime)
 	int a = 0;
 	InfinityGroundCheck();
 
-
+	// Melee 공격
 	MeleeAttack(_DeltaTime);
-	Melee->SetActorLocation({ APlayer::PlayerPos.X + 50 , APlayer::PlayerPos.Y});
+	if (Player->GetPlayerDir() == EActorDir::E)
+	{
+		Melee->SetActorLocation({ APlayer::PlayerPos.X + 50 , APlayer::PlayerPos.Y });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,0.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::N)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y + 50});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,90.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::S)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y - 50});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,270.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::W)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,180.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::NE)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y + 50});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,45.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::NW)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 50});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,135.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::SE)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y - 50});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,315.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::SW)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y - 50});
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,225.0f });
+	}	
 
+	// 몬스터 스폰
 
 	if (SpawnTerm <= 0)
 	{

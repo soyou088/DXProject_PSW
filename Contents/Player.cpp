@@ -8,6 +8,8 @@
 
 FVector APlayer::PlayerPos = FVector::Zero;
 
+
+
 APlayer::APlayer()
 {
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
