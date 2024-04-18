@@ -71,33 +71,6 @@ void APlayer::CreatePlayerAnimation(std::string _Name)
 	Renderer->CreateAnimation(_Name + "_Run", _Name, 0.1f, true, 4, 9);
 }
 
-
-
-
-void APlayer::Tick(float _DeltaTime)
-{
-	// 위에 뭔가를 쳐야할때도 있다.
-	Super::Tick(_DeltaTime);
-
-	State.Update(_DeltaTime);
-
-	PlayerPos = GetActorLocation();
-	
-	PCursorDirCheck();
-	CursorDirChange();
-	ChangeMouseAimAtkDir();
-
-
-	int a = 0;
-
-	Collision->CollisionEnter(ECollisionOrder::Monster, [=](std::shared_ptr<UCollision> _Collison)
-		{
-			_Collison->GetActor()->Destroy();
-		}
-	);
-
-}
-
 void APlayer::CursorDirChange()
 {
 	if (false == AMouse::MouseCursorON)
@@ -114,8 +87,6 @@ void APlayer::CursorDirChange()
 
 	}
 }
-
-
 
 void APlayer::PCursorDirCheck()
 {
@@ -209,3 +180,27 @@ void APlayer::ChangeMouseAimAtkDir()
 }
 
 
+
+void APlayer::Tick(float _DeltaTime)
+{
+	// 위에 뭔가를 쳐야할때도 있다.
+	Super::Tick(_DeltaTime);
+
+	State.Update(_DeltaTime);
+
+	PlayerPos = GetActorLocation();
+
+	PCursorDirCheck();
+	CursorDirChange();
+	ChangeMouseAimAtkDir();
+
+
+	int a = 0;
+
+	Collision->CollisionEnter(ECollisionOrder::Monster, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			_Collison->GetActor()->Destroy();
+		}
+	);
+
+}

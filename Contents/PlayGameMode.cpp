@@ -29,33 +29,32 @@ void APlayGameMode::BeginPlay()
 	CurIndex = { 0, 0 };
 	float4 PlayerStartPos = IndexToCenterPos(CurIndex);
 
-
+	// Camera 세팅
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation({ 0.0f, 0.0f, -200.0f });
 	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
-
 	float4 CameraPos = PlayerStartPos;
 	CameraPos.Z = -500.0f;
 	Camera->SetActorLocation(CameraPos);
 
+
+	//Player 스폰
 	Player = GetWorld()->SpawnActor<APlayer>("Player");
+	Player->SetName("Kiara");
 	Player->SetActorLocation(PlayerStartPos);
-
+	
+	//Mouse 스폰
 	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
-
-	//Ranged = GetWorld()->SpawnActor<ARanged>("Ranged");
+		
+	//Attack 스폰
 	Melee = GetWorld()->SpawnActor<AMelee>("Melee");
+	//Ranged = GetWorld()->SpawnActor<ARanged>("Ranged");
 	//Multishot = GetWorld()->SpawnActor<ARanged>("Ranged");
 	int a = 0;
-	
 
-	{
-		//UI = GetWorld()->SpawnActor<AUI>("UI");
-		//UI->SetActorLocation(PlayerStartPos);
-	}
+
 
 	// 3840 x 3840
-
 	for (int y = -1; y < 2; y++)
 	{
 		for (int x = -1; x < 2; x++)
@@ -80,8 +79,6 @@ void APlayGameMode::BeginPlay()
 
 		}
 	}
-
-
 }
 
 
@@ -96,6 +93,103 @@ void APlayGameMode::MeleeAttack(float _DeltaTime)
 
 	AttackTime += _DeltaTime;
 }
+
+void APlayGameMode::AttackDir()
+{
+	if (Player->GetPlayerDir() == EActorDir::E)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50 , APlayer::PlayerPos.Y + 20 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,0.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::N)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y + 70 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,90.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::S)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y - 30 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,270.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::W)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 20 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,180.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::NE)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y + 70 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,45.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::NW)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 70 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,135.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::SE)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y - 30 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,315.0f });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::SW)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y - 30 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,225.0f });
+	}
+
+}
+
+void APlayGameMode::AttackAimDir()
+{
+		AttackAngle = Player->GetAngle();
+
+	if (Player->GetPlayerDir() == EActorDir::E)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50 , APlayer::PlayerPos.Y + 20 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f, AttackAngle });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::N)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y + 70 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::S)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y - 30 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::W)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 20 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::NE)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y + 70 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::NW)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 70 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::SE)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y - 30 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
+	}
+	else if (Player->GetPlayerDir() == EActorDir::SW)
+	{
+		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y - 30 });
+		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
+	}
+
+}
+
+
+
+
+
 
 float4 APlayGameMode::RandomLocation(bool _Group)
 {
@@ -308,78 +402,41 @@ void APlayGameMode::Tick(float _DeltaTime)
 	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
 	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerPos.X + AMouse::MousePos.X - 640, APlayer::PlayerPos.Y - AMouse::MousePos.Y + 360 };
 	Mouse->SetActorLocation(ContentsValue::PlayLevelMousePos);
-
-
-
-
-	int a = 0;
+	
 	InfinityGroundCheck();
+
 
 	// Melee 공격
 	MeleeAttack(_DeltaTime);
-	if (Player->GetPlayerDir() == EActorDir::E)
+	if (false == Mouse->MouseCursorON)
 	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50 , APlayer::PlayerPos.Y + 20 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,0.0f });
+		AttackDir();
 	}
-	else if (Player->GetPlayerDir() == EActorDir::N)
+	else
 	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y + 70});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,90.0f });
+		AttackAimDir();
 	}
-	else if (Player->GetPlayerDir() == EActorDir::S)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y - 30});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,270.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::W)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 20 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,180.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::NE)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y + 70});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,45.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::NW)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 70});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,135.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::SE)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y - 30});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,315.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::SW)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y - 30});
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,225.0f });
-	}	
-
+	
+	
+	
 	// 몬스터 스폰
-
 	SpawnMonsterTimeSet(_DeltaTime, 0.0f, 20.0f, 5.0f,
 		"Shrimp", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
 		false, 10);
 	SpawnMonsterTimeSet(_DeltaTime, 0.0f, 20.0f, 10.0f,
 		"Shrimp", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
 		true, 10);
-	//SpawnMonsterTimeSet(_DeltaTime, 20.0f, 40.0f, 5.0f,
-	//	"Deadbeat", 1.0f, 40.0f, 4.0f, 0.4f, 7.0f, EMonsterMoveType::Follow,
-	//	false, 5);
-	//SpawnMonsterTimeSet(_DeltaTime, 40.0f, 60.0f, 5.0f,
-	//	"Takodachi", 1.0f, 80.0f, 4.0f, 0.4f, 8.0f, EMonsterMoveType::Follow);
-	//SpawnMonsterTimeSet(_DeltaTime, 60.0f, 80.0f, 5.0f,
-	//	"KFP", 1.0f, 20.0f, 2.0f, 1.0f, 3.0f, EMonsterMoveType::StraightToPlayer,
-	//	true, 10);
+	SpawnMonsterTimeSet(_DeltaTime, 20.0f, 40.0f, 5.0f,
+		"Deadbeat", 1.0f, 40.0f, 4.0f, 0.4f, 7.0f, EMonsterMoveType::Follow,
+		false, 5);
+	SpawnMonsterTimeSet(_DeltaTime, 40.0f, 60.0f, 5.0f,
+		"Takodachi", 1.0f, 80.0f, 4.0f, 0.4f, 8.0f, EMonsterMoveType::Follow);
+	SpawnMonsterTimeSet(_DeltaTime, 60.0f, 80.0f, 5.0f,
+		"KFP", 1.0f, 20.0f, 2.0f, 1.0f, 3.0f, EMonsterMoveType::StraightToPlayer,
+		true, 10);
 
 	PlayTime += _DeltaTime;
 
-	
-	
-	
 
 	CursorOFf();
 	PlayDebugText();

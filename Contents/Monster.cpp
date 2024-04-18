@@ -28,9 +28,9 @@ void AMonster::BeginPlay()
 
 
 	CreateMonsterAnimation("Shrimp");
-	//CreateMonsterAnimation("Deadbeat");
-	//CreateMonsterAnimation("Takodachi");
-	//CreateMonsterAnimation("KFP");
+	CreateMonsterAnimation("Deadbeat");
+	CreateMonsterAnimation("Takodachi");
+	CreateMonsterAnimation("KFP");
 
 
 	Renderer->SetAutoSize(1.0f, true);
