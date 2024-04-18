@@ -39,4 +39,9 @@ void ARanged::Tick(float _DeltaTime)
 
 }
 
+void ARanged::RangedMove(float _DeltaTime)
+{
+	Ranged->AddActorLocation(FVector::Right * _DeltaTime * RangedSpeed);
+}
+
 

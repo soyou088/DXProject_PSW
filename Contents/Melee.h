@@ -4,6 +4,7 @@
 
 
 // Ό³Έν :
+class APlayer;
 class USpriteRenderer;
 class AMelee : public AActor
 {
@@ -20,11 +21,29 @@ public:
 	AMelee& operator=(AMelee&& _Other) noexcept = delete;
 
 	std::shared_ptr<AMelee> Melee;
+	std::shared_ptr<APlayer> Player;
+
+	EActorDir Test = EActorDir::None;
+
 protected:
 	void BeginPlay() override;
+	
 	void Tick(float _DeltaTime) override;
+	void CursorOFf();
+
+
+
 private:
 	USpriteRenderer* Renderer;
 	UCollision* Collision;
+
+
+	void AttackDir();
+	void AttackAimDir();
+	void MeleeAttack(float _DeltaTime);
+	float AttackAngle;
+
+
+	float AttackTime = 0;
 };
 

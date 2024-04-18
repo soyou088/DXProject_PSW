@@ -39,12 +39,13 @@ public:
 		return Angle;
 	}
 
-
+	std::shared_ptr<AMelee> Melee;
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 	void CursorDirChange();
 	
+	void AttackMelee();
 
 	EActorDir DirState = EActorDir::None;
 	void PCursorDirCheck();

@@ -25,11 +25,19 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void RangedMove(float _DeltaTime);
+
+
 private:
 	USpriteRenderer* Renderer;
 	UCollision* Collision;
 
 	std::string Name = "Ame";
 	void CreatePlayerAnimation(std::string _Name);
+
+
+
+	float Speed = 300.0f;
+	float RangedSpeed = Speed * 0.75f;
 };
 

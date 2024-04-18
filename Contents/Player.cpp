@@ -62,6 +62,9 @@ void APlayer::BeginPlay()
 	FVector PCursor = FVector{ PlayerPos.X, PlayerPos.Y + 20.0f };
 	PlayerCursor->SetPosition(PCursor);
 
+	// 공격 스폰
+	Melee = GetWorld()->SpawnActor<AMelee>("Melee");
+	Melee->SetActorLocation(GetActorLocation());
 	StateInit();
 }
 
@@ -70,6 +73,9 @@ void APlayer::CreatePlayerAnimation(std::string _Name)
 	Renderer->CreateAnimation(_Name + "_Idle", _Name, 0.1f, true, 0, 3);
 	Renderer->CreateAnimation(_Name + "_Run", _Name, 0.1f, true, 4, 9);
 }
+
+
+
 
 void APlayer::CursorDirChange()
 {
@@ -87,6 +93,9 @@ void APlayer::CursorDirChange()
 
 	}
 }
+
+
+
 
 void APlayer::PCursorDirCheck()
 {
@@ -186,6 +195,8 @@ void APlayer::Tick(float _DeltaTime)
 	// 위에 뭔가를 쳐야할때도 있다.
 	Super::Tick(_DeltaTime);
 
+	Melee->Test = GetPlayerDir();
+
 	State.Update(_DeltaTime);
 
 	PlayerPos = GetActorLocation();
@@ -202,5 +213,7 @@ void APlayer::Tick(float _DeltaTime)
 			_Collison->GetActor()->Destroy();
 		}
 	);
+
+
 
 }

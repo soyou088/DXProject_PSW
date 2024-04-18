@@ -48,16 +48,15 @@ protected:
 
 	std::shared_ptr<AUI> UI;
 
-	std::shared_ptr<AMelee> Melee;
+	
 	
 	float4 IndexToCenterPos(FIntPoint _Index);
 
 	float4 RandomLocation(bool _Group);
 	void SpawnMonster(std::string _Name, float4 _Location);
-	void MeleeAttack(float _DeltaTime);
-	void AttackDir();
-	void AttackAimDir();
-	float AttackAngle;
+	
+
+	FVector MeleeRocation;
 
 
 	FIntPoint PosToIndex(float4 _Pos);
@@ -80,7 +79,6 @@ private:
 
 	void CursorOFf();
 
-	float AttackTime = 0;
 }
 ;
 

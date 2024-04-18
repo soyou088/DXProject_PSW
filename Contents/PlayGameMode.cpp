@@ -46,10 +46,7 @@ void APlayGameMode::BeginPlay()
 	//Mouse 스폰
 	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
 		
-	//Attack 스폰
-	Melee = GetWorld()->SpawnActor<AMelee>("Melee");
-	//Ranged = GetWorld()->SpawnActor<ARanged>("Ranged");
-	//Multishot = GetWorld()->SpawnActor<ARanged>("Ranged");
+
 	int a = 0;
 
 
@@ -80,114 +77,6 @@ void APlayGameMode::BeginPlay()
 		}
 	}
 }
-
-
-void APlayGameMode::MeleeAttack(float _DeltaTime)
-{
-	if (1.0f <= AttackTime)
-	{
-
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50 , APlayer::PlayerPos.Y + 20 });
-		AttackTime = 0.0f;
-	}
-
-	AttackTime += _DeltaTime;
-}
-
-void APlayGameMode::AttackDir()
-{
-	if (Player->GetPlayerDir() == EActorDir::E)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50 , APlayer::PlayerPos.Y + 20 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,0.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::N)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y + 70 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,90.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::S)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y - 30 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,270.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::W)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 20 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,180.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::NE)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y + 70 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,45.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::NW)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 70 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,135.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::SE)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y - 30 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,315.0f });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::SW)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y - 30 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,225.0f });
-	}
-
-}
-
-void APlayGameMode::AttackAimDir()
-{
-		AttackAngle = Player->GetAngle();
-
-	if (Player->GetPlayerDir() == EActorDir::E)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50 , APlayer::PlayerPos.Y + 20 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f, AttackAngle });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::N)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y + 70 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::S)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y - 30 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::W)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 20 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::NE)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y + 70 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::NW)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y + 70 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::SE)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X + 50, APlayer::PlayerPos.Y - 30 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
-	}
-	else if (Player->GetPlayerDir() == EActorDir::SW)
-	{
-		Melee->SetActorLocation(FVector{ APlayer::PlayerPos.X - 50, APlayer::PlayerPos.Y - 30 });
-		Melee->SetActorRotation(FVector{ 0.0f,0.0f,AttackAngle });
-	}
-
-}
-
-
-
 
 
 
@@ -405,20 +294,8 @@ void APlayGameMode::Tick(float _DeltaTime)
 	
 	InfinityGroundCheck();
 
+	
 
-	// Melee 공격
-	MeleeAttack(_DeltaTime);
-	if (false == Mouse->MouseCursorON)
-	{
-		AttackDir();
-	}
-	else
-	{
-		AttackAimDir();
-	}
-	
-	
-	
 	// 몬스터 스폰
 	SpawnMonsterTimeSet(_DeltaTime, 0.0f, 20.0f, 5.0f,
 		"Shrimp", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
