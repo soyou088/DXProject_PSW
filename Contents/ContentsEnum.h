@@ -9,7 +9,6 @@ enum class ERenderOrder
 	MonsterUp,
 	MonsterDown,
 	Attack,
-	Weapons,
 	UI,
 };
 

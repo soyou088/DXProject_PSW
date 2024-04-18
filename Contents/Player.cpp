@@ -39,6 +39,10 @@ APlayer::~APlayer()
 
 void APlayer::BeginPlay()
 {
+	UEngineSerializer Ser;
+
+	Ser << this;
+
 	Super::BeginPlay();
 
 	CreatePlayerAnimation("Ame");
@@ -63,8 +67,12 @@ void APlayer::BeginPlay()
 	PlayerCursor->SetPosition(PCursor);
 
 	// 공격 스폰
-	Melee = GetWorld()->SpawnActor<AMelee>("Melee");
-	Melee->SetActorLocation(GetActorLocation());
+	//Melee = GetWorld()->SpawnActor<AMelee>("Melee");
+	//Melee->SetActorLocation(GetActorLocation());
+
+	Ranged = GetWorld()->SpawnActor<ARanged>("Ranged");
+	Ranged->SetActorLocation(GetActorLocation());
+
 	StateInit();
 }
 
@@ -195,7 +203,7 @@ void APlayer::Tick(float _DeltaTime)
 	// 위에 뭔가를 쳐야할때도 있다.
 	Super::Tick(_DeltaTime);
 
-	Melee->Test = GetPlayerDir();
+	Melee->AMelee::PlayerDir = GetPlayerDir();
 
 	State.Update(_DeltaTime);
 

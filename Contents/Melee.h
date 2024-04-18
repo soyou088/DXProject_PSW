@@ -10,6 +10,7 @@ class AMelee : public AActor
 {
 	GENERATED_BODY(AActor)
 public:
+	static EActorDir PlayerDir;
 	// constrcuter destructer
 	AMelee();
 	~AMelee();
@@ -23,13 +24,11 @@ public:
 	std::shared_ptr<AMelee> Melee;
 	std::shared_ptr<APlayer> Player;
 
-	EActorDir Test = EActorDir::None;
-
 protected:
 	void BeginPlay() override;
 	
 	void Tick(float _DeltaTime) override;
-	void CursorOFf();
+	void CursorOFF();
 
 
 

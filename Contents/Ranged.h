@@ -25,9 +25,12 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void AttackDir();
+	void AttackAimDir();
 	void RangedMove(float _DeltaTime);
+	void RangedAttack(float _DeltaTime);
 
-
+	void CursorOFf();
 private:
 	USpriteRenderer* Renderer;
 	UCollision* Collision;
@@ -35,8 +38,8 @@ private:
 	std::string Name = "Ame";
 	void CreatePlayerAnimation(std::string _Name);
 
-
-
+	float AttackAngle;
+	float AttackTime = 0;
 	float Speed = 300.0f;
 	float RangedSpeed = Speed * 0.75f;
 };

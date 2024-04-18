@@ -2,14 +2,16 @@
 #include "Melee.h"
 #include "Player.h"
 
+EActorDir AMelee::PlayerDir = EActorDir::None;;
+
 AMelee::AMelee()
 {
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	SetRoot(Root);
 	Renderer->SetupAttachment(Root);
 	Renderer->SetPivot(EPivot::MAX);
 
+	SetRoot(Root);
 
 }
 
@@ -38,45 +40,46 @@ void AMelee::MeleeAttack(float _DeltaTime)
 	AttackTime += _DeltaTime;
 }
 
+
+
 void AMelee::AttackDir()
 {
-
-	if (Test == EActorDir::E)
+	if (PlayerDir == EActorDir::E)
 	{
 		SetActorLocation(FVector{ APlayer::PlayerPos.X + 100 , APlayer::PlayerPos.Y + 20 });
 		SetActorRotation(FVector{ 0.0f,0.0f,0.0f });
 	}
-	else if (Test == EActorDir::N)
+	else if (PlayerDir == EActorDir::N)
 	{
 		SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y + 100 });
 		SetActorRotation(FVector{ 0.0f,0.0f,90.0f });
 	}
-	else if (Test == EActorDir::S)
+	else if (PlayerDir == EActorDir::S)
 	{
 		SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y - 30 });
 		SetActorRotation(FVector{ 0.0f,0.0f,270.0f });
 	}
-	else if (Test == EActorDir::W)
+	else if (PlayerDir == EActorDir::W)
 	{
 		SetActorLocation(FVector{ APlayer::PlayerPos.X - 100, APlayer::PlayerPos.Y + 20 });
 		SetActorRotation(FVector{ 0.0f,0.0f,180.0f });
 	}
-	else if (Test == EActorDir::NE)
+	else if (PlayerDir == EActorDir::NE)
 	{
 		SetActorLocation(FVector{ APlayer::PlayerPos.X + 100, APlayer::PlayerPos.Y + 70 });
 		SetActorRotation(FVector{ 0.0f,0.0f,45.0f });
 	}
-	else if (Test == EActorDir::NW)
+	else if (PlayerDir == EActorDir::NW)
 	{
 		SetActorLocation(FVector{ APlayer::PlayerPos.X - 100, APlayer::PlayerPos.Y + 70 });
 		SetActorRotation(FVector{ 0.0f,0.0f,135.0f });
 	}
-	else if (Test == EActorDir::SE)
+	else if (PlayerDir == EActorDir::SE)
 	{
 		SetActorLocation(FVector{ APlayer::PlayerPos.X + 100, APlayer::PlayerPos.Y - 30 });
 		SetActorRotation(FVector{ 0.0f,0.0f,315.0f });
 	}
-	else if (Test == EActorDir::SW)
+	else if (PlayerDir == EActorDir::SW)
 	{
 		SetActorLocation(FVector{ APlayer::PlayerPos.X - 100, APlayer::PlayerPos.Y - 30 });
 		SetActorRotation(FVector{ 0.0f,0.0f,225.0f });
@@ -99,12 +102,8 @@ void AMelee::AttackAimDir()
 	AddActorLocation(Dir * 100);
 	SetActorRotation(FVector{ 0.0f,0.0f, AttackAngle });
 
-
 	//애니메이션이 끝나고 다음 이 나가야한다.
 }
-
-
-
 
 
 void AMelee::Tick(float _DeltaTime)
@@ -121,10 +120,10 @@ void AMelee::Tick(float _DeltaTime)
 		AttackAimDir();
 	}
 
-	CursorOFf();
+	CursorOFF();
 }
 
-void AMelee::CursorOFf()
+void AMelee::CursorOFF()
 {
 	ShowCursor(FALSE);
 }

@@ -40,6 +40,8 @@ public:
 	}
 
 	std::shared_ptr<AMelee> Melee;
+	std::shared_ptr<ARanged> Ranged;
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -52,7 +54,6 @@ protected:
 
 	// АјАн
 	//std::shared_ptr<AMultishot> Multishot;
-	std::shared_ptr<ARanged> Ranged;
 
 private:
 	USpriteRenderer* Renderer;
