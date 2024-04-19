@@ -26,11 +26,17 @@ void ARanged::BeginPlay()
 	Renderer->SetOrder(ERenderOrder::Attack);
 
 
-
-	//AttackDir();
-	//FVector AttackRot = AttackDir();
-	//AttackRot.Normalize2D();
 	SetActorLocation(AttackDir());
+
+	if (false == AMouse::MouseCursorON)
+	{
+		AttackDir();
+	}
+	else if (true == AMouse::MouseCursorON)
+	{
+		AttackAimDir();
+	}
+
 }
 
 void ARanged::CreatePlayerAnimation(std::string _Name)
@@ -79,8 +85,6 @@ void ARanged::AttackDirr(float _DeltaTime)
 FVector ARanged::AttackDir()
 {
 
-	//SetActorRotation(FVector{ 0.0f,0.0f,0.0f }) = EActorDir::E;
-
 	if (AMelee::PlayerDir == EActorDir::E)
 	{
 		SetActorRotation(FVector{ 0.0f,0.0f,0.0f });
@@ -125,68 +129,33 @@ FVector ARanged::AttackDir()
 	return FVector::Zero;
 }
 
-void ARanged::AttackAimDir(float _DeltaTime)
+FVector ARanged::AttackAimDir()
 {
 	FVector MPos = GEngine->EngineWindow.GetScreenMousePos();
 	FVector WorldMPos = GetWorld()->GetMainCamera()->ScreenPosToWorldPos(MPos);
 
 	AttackAngle = atan2f((ContentsValue::PlayLevelMousePos.Y - APlayer::PlayerPos.Y), (ContentsValue::PlayLevelMousePos.X - APlayer::PlayerPos.X)) * 180.0f / UEngineMath::PI;
 
-	FVector Dir = WorldMPos - APlayer::PlayerPos;
-	Dir.Normalize2D();
-	Dir.Z = 0.0f;
-	SetActorLocation(APlayer::PlayerPos);
-	//AddActorLocation(Dir * 100);
+	MAtkDir = WorldMPos - APlayer::PlayerPos;
 	SetActorRotation(FVector{ 0.0f,0.0f, AttackAngle });
-	AddActorLocation(Dir * _DeltaTime * RangedSpeed);
+	MAtkDir = MAtkDir.Normalize3DReturn();
+
+	return FVector::Zero;
 }
-
-void ARanged::RangedMove(float _DeltaTime)
-{
-	if (AMelee::PlayerDir == EActorDir::E)
-	{
-		AddActorLocation(FVector::Right *_DeltaTime * RangedSpeed);
-	}
-	else if (AMelee::PlayerDir == EActorDir::N)
-	{
-		AddActorLocation(FVector::Up *_DeltaTime * RangedSpeed);
-	}
-	else if (AMelee::PlayerDir == EActorDir::S)
-	{
-		AddActorLocation(FVector::Down*_DeltaTime * RangedSpeed);
-	}
-	else if (AMelee::PlayerDir == EActorDir::W)
-	{
-		AddActorLocation(FVector::Left *_DeltaTime * RangedSpeed);
-	}
-	else if (AMelee::PlayerDir == EActorDir::NE)
-	{
-		//AddActorLocation(FVector::*_DeltaTime * RangedSpeed);
-	}
-	else if (AMelee::PlayerDir == EActorDir::NW)
-	{
-		//AddActorLocation(FVector{ 0.0f,0.0f,135.0f }*_DeltaTime * RangedSpeed);
-	}
-	else if (AMelee::PlayerDir == EActorDir::SE)
-	{
-		//AddActorLocation(FVector{ 0.0f,0.0f,315.0f }*_DeltaTime * RangedSpeed);
-	}
-	else if (AMelee::PlayerDir == EActorDir::SW)
-	{
-		//AddActorLocation(FVector{ 0.0f,0.0f,225.0f }*_DeltaTime * RangedSpeed);
-	}
-
-}
-
 void ARanged::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	AddActorLocation(AtkDir * 100 * _DeltaTime);
-//	AttackDirr(_DeltaTime);
-	//RangedMove(_DeltaTime);
+	if (false == AMouse::MouseCursorON)
+	{
+		AddActorLocation(AtkDir * _DeltaTime * RangedSpeed );
+	}
+	else 
+	{
+		AddActorLocation(MAtkDir * _DeltaTime  * RangedSpeed );
+	}
 
-	//CursorOFf();
+	CursorOFf();
 }
 
 void ARanged::CursorOFf()

@@ -103,7 +103,7 @@ void APlayer::CursorDirChange()
 
 void APlayer::SpawnRanged(float _DeltaTime)
 {
-	if (5.0f <= AttackTime)
+	if (1.0f <= AttackTime)
 	{
 		Ranged = GetWorld()->SpawnActor<ARanged>("Ranged");
 		Ranged->SetActorLocation(GetActorLocation());

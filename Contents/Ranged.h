@@ -27,14 +27,14 @@ protected:
 
 	float4 AttackDir();
 	void AttackDirr(float _DeltaTime);
-	void AttackAimDir(float _DeltaTime);
-	void RangedMove(float _DeltaTime);
+	FVector AttackAimDir();
 
 	void CursorOFf();
 private:
 	USpriteRenderer* Renderer;
 	UCollision* Collision;
 	float4 AtkDir = float4::Zero;
+	float4 MAtkDir = float4::Zero;
 
 	std::string Name = "Ame";
 	void CreatePlayerAnimation(std::string _Name);
