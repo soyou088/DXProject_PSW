@@ -70,8 +70,7 @@ void APlayer::BeginPlay()
 	//Melee = GetWorld()->SpawnActor<AMelee>("Melee");
 	//Melee->SetActorLocation(GetActorLocation());
 
-	Ranged = GetWorld()->SpawnActor<ARanged>("Ranged");
-	Ranged->SetActorLocation(GetActorLocation());
+
 
 	StateInit();
 }
@@ -102,8 +101,16 @@ void APlayer::CursorDirChange()
 	}
 }
 
-
-
+void APlayer::SpawnRanged(float _DeltaTime)
+{
+	if (5.0f <= AttackTime)
+	{
+		Ranged = GetWorld()->SpawnActor<ARanged>("Ranged");
+		Ranged->SetActorLocation(GetActorLocation());
+		AttackTime = 0.0f;
+	}
+	AttackTime += _DeltaTime;
+}
 
 void APlayer::PCursorDirCheck()
 {
@@ -212,8 +219,8 @@ void APlayer::Tick(float _DeltaTime)
 	PCursorDirCheck();
 	CursorDirChange();
 	ChangeMouseAimAtkDir();
-
-
+	SpawnRanged(_DeltaTime);
+	
 	int a = 0;
 
 	Collision->CollisionEnter(ECollisionOrder::Monster, [=](std::shared_ptr<UCollision> _Collison)

@@ -47,7 +47,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 	void CursorDirChange();
 	
-	void AttackMelee();
+	void SpawnRanged(float _DeltaTime);
 
 	EActorDir DirState = EActorDir::None;
 	void PCursorDirCheck();
@@ -73,7 +73,7 @@ private:
 	float Speed = 300.0f;
 	float LineSpeed = Speed * 0.75f;
 
-	
+	float AttackTime = 0;
 
 
 	float4 MouseCursor;

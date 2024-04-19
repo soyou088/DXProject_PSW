@@ -25,15 +25,16 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void AttackDir();
-	void AttackAimDir();
+	float4 AttackDir();
+	void AttackDirr(float _DeltaTime);
+	void AttackAimDir(float _DeltaTime);
 	void RangedMove(float _DeltaTime);
-	void RangedAttack(float _DeltaTime);
 
 	void CursorOFf();
 private:
 	USpriteRenderer* Renderer;
 	UCollision* Collision;
+	float4 AtkDir = float4::Zero;
 
 	std::string Name = "Ame";
 	void CreatePlayerAnimation(std::string _Name);
