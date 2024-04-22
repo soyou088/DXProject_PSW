@@ -22,13 +22,10 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void BackMove(float _DeltaTime);
 
 
 private:
 	USpriteRenderer* Renderer;
-	USpriteRenderer* TitleBack;
 
-	float MoveSpeed = 0.5f;
 
 };

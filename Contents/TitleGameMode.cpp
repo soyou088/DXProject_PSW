@@ -18,10 +18,21 @@ void ATitleGameMode::BeginPlay()
 
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation(FVector(0.0f, 0.0f, -100.0f));
-	TitleBack = GetWorld()->SpawnActor<ATitleLogo>("TitleLogo");
+	TitleLogo = GetWorld()->SpawnActor<ATitleLogo>("TitleLogo");
+	TitleBack = GetWorld()->SpawnActor<ATitleBack>("Ranged");
 
 
+}
 
+
+void ATitleGameMode::SpawnRanged(float _DeltaTime)
+{
+	if (0.1f <= AttackTime)
+	{
+		TitleBack = GetWorld()->SpawnActor<ATitleBack>("Ranged");
+		AttackTime = 0.0f;
+	}
+	AttackTime += _DeltaTime;
 }
 
 void ATitleGameMode::Tick(float _DeltaTime)
@@ -32,6 +43,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 	{
 		GEngine->ChangeLevel("PlayLevel");
 	}
+	SpawnRanged(_DeltaTime);
 }
 
 void ATitleGameMode::LevelEnd(ULevel* _NextLevel)

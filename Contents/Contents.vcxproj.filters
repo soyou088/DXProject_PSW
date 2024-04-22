@@ -43,6 +43,9 @@
     <ClInclude Include="PlayBack.h">
       <Filter>Level\PlayLevel\Actor\PlayBackGround</Filter>
     </ClInclude>
+    <ClInclude Include="TitleBack.h">
+      <Filter>Level\PlayLevel\TitleLevel\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -86,6 +89,9 @@
     </ClCompile>
     <ClCompile Include="Player_State.cpp">
       <Filter>Level\PlayLevel\Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBack.cpp">
+      <Filter>Level\PlayLevel\TitleLevel\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

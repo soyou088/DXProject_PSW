@@ -1,5 +1,6 @@
 #pragma once
 #include "TitleLogo.h"
+#include "TitleBack.h"
 #include <EngineCore/GameMode.h>
 
 // Ό³Έν :
@@ -24,8 +25,12 @@ protected:
 
 	void LevelEnd(ULevel* _NextLevel);
 	void LevelStart(ULevel* _PrevLevel);
+	void SpawnRanged(float _DeltaTime);
 
 private:
-	std::shared_ptr<ATitleLogo> TitleBack;
+	std::shared_ptr<ATitleLogo> TitleLogo;
+	std::shared_ptr<ATitleBack> TitleBack;
+
+	float AttackTime = 0;
 };
 
