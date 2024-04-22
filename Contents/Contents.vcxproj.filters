@@ -31,9 +31,6 @@
     <ClInclude Include="Ranged.h">
       <Filter>Level\PlayLevel\Actor\Attack</Filter>
     </ClInclude>
-    <ClInclude Include="Multishot.h">
-      <Filter>Level\PlayLevel\Actor\Attack</Filter>
-    </ClInclude>
     <ClInclude Include="Melee.h">
       <Filter>Level\PlayLevel\Actor\Attack</Filter>
     </ClInclude>
@@ -76,9 +73,6 @@
       <Filter>Level\PlayLevel\UIActor</Filter>
     </ClCompile>
     <ClCompile Include="Ranged.cpp">
-      <Filter>Level\PlayLevel\Actor\Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="Multishot.cpp">
       <Filter>Level\PlayLevel\Actor\Attack</Filter>
     </ClCompile>
     <ClCompile Include="Melee.cpp">

@@ -2,6 +2,7 @@
 #include "Ranged.h"
 #include "Player.h"
 
+
 ARanged::ARanged()
 {
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
@@ -10,6 +11,16 @@ ARanged::ARanged()
 	Renderer->SetPivot(EPivot::MAX);
 
 	SetRoot(Root);
+
+	Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Root);
+	Collision->SetScale({ 10.0f,10.f });
+
+	Collision->SetCollisionGroup(ECollisionOrder::Weapon);
+	Collision->SetCollisionType(ECollisionType::Rect);
+
+
+
 }
 
 ARanged::~ARanged()
@@ -21,7 +32,7 @@ void ARanged::BeginPlay()
 	Super::BeginPlay();
 	//CreatePlayerAnimation("Ame");
 	Renderer->CreateAnimation("AmeAttack", "AmeAttack", 0.1f, true);
-	Renderer->SetAutoSize(10.0f, true);
+	Renderer->SetAutoSize(1.0f, true);
 	Renderer->ChangeAnimation("AmeAttack");
 	Renderer->SetOrder(ERenderOrder::Attack);
 
@@ -42,43 +53,6 @@ void ARanged::BeginPlay()
 void ARanged::CreatePlayerAnimation(std::string _Name)
 {
 	//Renderer->CreateAnimation(_Name + "Attack", _Name + "Attack", 0.1f, true, 0, 3);
-}
-
-
-void ARanged::AttackDirr(float _DeltaTime)
-{
-	if (AMelee::PlayerDir == EActorDir::E)
-	{
-		SetActorRotation(FVector{ 0.0f,0.0f,0.0f });
-	}
-	else if (AMelee::PlayerDir == EActorDir::N)
-	{
-		SetActorRotation(FVector{ 0.0f,0.0f,90.0f });
-	}
-	else if (AMelee::PlayerDir == EActorDir::S)
-	{
-		SetActorRotation(FVector{ 0.0f,0.0f,270.0f });
-	}
-	else if (AMelee::PlayerDir == EActorDir::W)
-	{
-		SetActorRotation(FVector{ 0.0f,0.0f,180.0f });
-	}
-	else if (AMelee::PlayerDir == EActorDir::NE)
-	{
-		SetActorRotation(FVector{ 0.0f,0.0f,45.0f });
-	}
-	else if (AMelee::PlayerDir == EActorDir::NW)
-	{
-		SetActorRotation(FVector{ 0.0f,0.0f,135.0f });
-	}
-	else if (AMelee::PlayerDir == EActorDir::SE)
-	{
-		SetActorRotation(FVector{ 0.0f,0.0f,315.0f });
-	}
-	else if (AMelee::PlayerDir == EActorDir::SW)
-	{
-		SetActorRotation(FVector{ 0.0f,0.0f,225.0f });
-	}
 }
 
 
@@ -136,24 +110,35 @@ FVector ARanged::AttackAimDir()
 
 	AttackAngle = atan2f((ContentsValue::PlayLevelMousePos.Y - APlayer::PlayerPos.Y), (ContentsValue::PlayLevelMousePos.X - APlayer::PlayerPos.X)) * 180.0f / UEngineMath::PI;
 
-	MAtkDir = WorldMPos - APlayer::PlayerPos;
+	AtkDir = WorldMPos - APlayer::PlayerPos;
 	SetActorRotation(FVector{ 0.0f,0.0f, AttackAngle });
-	MAtkDir = MAtkDir.Normalize3DReturn();
+	AtkDir = AtkDir.Normalize2DReturn();
 
 	return FVector::Zero;
 }
+
 void ARanged::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (false == AMouse::MouseCursorON)
+	if (true == AMouse::MouseCursorON)
+	{
+		AddActorLocation(AtkDir * _DeltaTime  * RangedSpeed );
+	}
+	else
 	{
 		AddActorLocation(AtkDir * _DeltaTime * RangedSpeed );
 	}
-	else 
-	{
-		AddActorLocation(MAtkDir * _DeltaTime  * RangedSpeed );
-	}
+
+	Collision->CollisionEnter(ECollisionOrder::Monster, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			_Collison->GetActor()->Destroy();
+		}
+	);
+
+	
+
+
 
 	CursorOFf();
 }

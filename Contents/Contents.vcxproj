@@ -188,10 +188,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Multishot.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="PlayBack.h">
       <SubType>
       </SubType>
@@ -243,10 +239,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Multishot.cpp">
       <SubType>
       </SubType>
     </ClCompile>

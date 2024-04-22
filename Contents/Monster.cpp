@@ -14,6 +14,7 @@ AMonster::AMonster()
 
 	UCollision* Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Root);
+	Collision->SetScale({ 32.0f,32.0f });
 	Collision->SetCollisionGroup(ECollisionOrder::Monster);
 	Collision->SetCollisionType(ECollisionType::Rect);
 }

@@ -20,7 +20,6 @@ void APlayer::StateInit()
 	State.SetUpdateFunction("Run", std::bind(&APlayer::Run, this, std::placeholders::_1));
 	State.SetStartFunction("Run", std::bind(&APlayer::RunStart, this));
 	// Ã¼ÀÎÁö
-	Renderer->SetAutoSize(1.0f, true);
 	State.ChangeState("Idle");
 
 

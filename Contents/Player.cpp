@@ -3,7 +3,6 @@
 #include "Mouse.h"
 #include "Ranged.h"
 #include "Melee.h"
-#include "Multishot.h"
 
 
 FVector APlayer::PlayerPos = FVector::Zero;
@@ -24,6 +23,7 @@ APlayer::APlayer()
 
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Root);
+	Collision->SetScale({ 10.0f,10.f });
 
 	Collision->SetCollisionGroup(ECollisionOrder::Player);
 	Collision->SetCollisionType(ECollisionType::Rect);
@@ -55,7 +55,7 @@ void APlayer::BeginPlay()
 	CreatePlayerAnimation("Kiara");
 	
 	
-	Renderer->SetAutoSize(2.0f, true);
+	Renderer->SetAutoSize(1.5f, true);
 	Renderer->SetOrder(ERenderOrder::Player);
 	
 

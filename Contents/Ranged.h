@@ -34,7 +34,6 @@ private:
 	USpriteRenderer* Renderer;
 	UCollision* Collision;
 	float4 AtkDir = float4::Zero;
-	float4 MAtkDir = float4::Zero;
 
 	std::string Name = "Ame";
 	void CreatePlayerAnimation(std::string _Name);
