@@ -70,7 +70,7 @@ private:
 	float Angle;
 
 
-	float Speed = 300.0f;
+	float Speed = 200.0f;
 	float LineSpeed = Speed * 0.75f;
 
 	float AttackTime = 0;

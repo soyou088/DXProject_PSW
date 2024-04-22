@@ -55,7 +55,7 @@ void APlayer::BeginPlay()
 	CreatePlayerAnimation("Kiara");
 	
 	
-	Renderer->SetAutoSize(1.5f, true);
+	Renderer->SetAutoSize(2.0f, true);
 	Renderer->SetOrder(ERenderOrder::Player);
 	
 
@@ -106,7 +106,7 @@ void APlayer::SpawnRanged(float _DeltaTime)
 	if (1.0f <= AttackTime)
 	{
 		Ranged = GetWorld()->SpawnActor<ARanged>("Ranged");
-		Ranged->SetActorLocation(GetActorLocation());
+		Ranged->SetActorLocation(APlayer::PlayerPos);
 		AttackTime = 0.0f;
 	}
 	AttackTime += _DeltaTime;

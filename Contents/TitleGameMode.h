@@ -1,4 +1,5 @@
 #pragma once
+#include "TitleLogo.h"
 #include <EngineCore/GameMode.h>
 
 // Ό³Έν :
@@ -25,6 +26,6 @@ protected:
 	void LevelStart(ULevel* _PrevLevel);
 
 private:
-
+	std::shared_ptr<ATitleLogo> TitleBack;
 };
 

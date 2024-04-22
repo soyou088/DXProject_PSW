@@ -53,7 +53,6 @@ protected:
 	float4 IndexToCenterPos(FIntPoint _Index);
 
 	float4 RandomLocation(bool _Group);
-	void SpawnMonster(std::string _Name, float4 _Location);
 	
 
 	FVector MeleeRocation;
@@ -77,7 +76,7 @@ private:
 	float4 GroupMonsterPos;
 	bool GroupSpawn = false;
 
-	void CursorOFf();
+	void CursorOFF();
 
 }
 ;

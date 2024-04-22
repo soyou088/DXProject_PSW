@@ -26,21 +26,20 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	float4 AttackDir();
-	void AttackDirr(float _DeltaTime);
 	FVector AttackAimDir();
 
 	void CursorOFf();
 private:
 	USpriteRenderer* Renderer;
 	UCollision* Collision;
-	float4 AtkDir = float4::Zero;
+	float4 AtkDir = float4::Right;
 
 	std::string Name = "Ame";
 	void CreatePlayerAnimation(std::string _Name);
 
 	float AttackAngle;
 	float AttackTime = 0;
-	float Speed = 300.0f;
+	float Speed = 700.0f;
 	float RangedSpeed = Speed * 0.75f;
 };
 

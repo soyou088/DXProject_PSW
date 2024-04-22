@@ -32,12 +32,9 @@ void ARanged::BeginPlay()
 	Super::BeginPlay();
 	//CreatePlayerAnimation("Ame");
 	Renderer->CreateAnimation("AmeAttack", "AmeAttack", 0.1f, true);
-	Renderer->SetAutoSize(1.0f, true);
+	Renderer->SetAutoSize(2.0f, true);
 	Renderer->ChangeAnimation("AmeAttack");
 	Renderer->SetOrder(ERenderOrder::Attack);
-
-
-	SetActorLocation(AttackDir());
 
 	if (false == AMouse::MouseCursorON)
 	{
@@ -107,9 +104,7 @@ FVector ARanged::AttackAimDir()
 {
 	FVector MPos = GEngine->EngineWindow.GetScreenMousePos();
 	FVector WorldMPos = GetWorld()->GetMainCamera()->ScreenPosToWorldPos(MPos);
-
 	AttackAngle = atan2f((ContentsValue::PlayLevelMousePos.Y - APlayer::PlayerPos.Y), (ContentsValue::PlayLevelMousePos.X - APlayer::PlayerPos.X)) * 180.0f / UEngineMath::PI;
-
 	AtkDir = WorldMPos - APlayer::PlayerPos;
 	SetActorRotation(FVector{ 0.0f,0.0f, AttackAngle });
 	AtkDir = AtkDir.Normalize2DReturn();

@@ -89,14 +89,6 @@ float4 APlayGameMode::RandomLocation(bool _Group)
 	return MonsterPos;
 }
 
-void APlayGameMode::SpawnMonster(std::string _Name, float4 _Location)
-{
-	std::shared_ptr<AMonster> Monster;
-	//Monster->SetName(_Name);
-	Monster = GetWorld()->SpawnActor<AMonster>(_Name);
-	Monster->SetActorLocation(_Location);
-	int a = 0;
-}
 
 float4 APlayGameMode::IndexToCenterPos(FIntPoint _Index)
 {
@@ -280,11 +272,6 @@ void APlayGameMode::RandomSpawnMonster(std::string _Name, float _Size, float _Hp
 	GroupSpawn = false;
 }
 
-void APlayGameMode::CursorOFf()
-{
-	ShowCursor(FALSE);
-}
-
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
@@ -315,8 +302,13 @@ void APlayGameMode::Tick(float _DeltaTime)
 	PlayTime += _DeltaTime;
 
 
-	CursorOFf();
+	CursorOFF();
 	PlayDebugText();
 
 }
 
+
+void APlayGameMode::CursorOFF()
+{
+	ShowCursor(FALSE);
+}
