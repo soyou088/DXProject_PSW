@@ -9,6 +9,7 @@ ATitleBack::ATitleBack()
 	TitleBack->SetPivot(EPivot::BOT);
 
 	SetRoot(Root);
+
 }
 
 ATitleBack::~ATitleBack()
@@ -35,4 +36,5 @@ void ATitleBack::BackMove(float _DeltaTime)
 void ATitleBack::Tick(float _DeltaTime)
 {
 	BackMove(_DeltaTime);
+
 }

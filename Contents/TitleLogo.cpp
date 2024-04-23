@@ -20,10 +20,10 @@ void ATitleLogo::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetActorScale3D(FVector(700.0f, 300.0f, 100.0f));
+	SetActorScale3D(FVector(500.0f, 200.0f, 100.0f));
 	// Renderer->SetSprite("CharWalk1_0.png");
 	Renderer->SetSprite("HoloTitle.png");
-	Renderer->SetPosition(FVector({0.7f, 0.0f }));
+	Renderer->SetPosition(FVector({0.8f, 0.8f }));
 	Renderer->SetOrder(ERenderOrder::Title);
 }
 

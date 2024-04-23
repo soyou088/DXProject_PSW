@@ -25,7 +25,7 @@ protected:
 
 	void LevelEnd(ULevel* _NextLevel);
 	void LevelStart(ULevel* _PrevLevel);
-	void SpawnRanged(float _DeltaTime);
+	void SpawnTitleBack(float _DeltaTime);
 
 private:
 	std::shared_ptr<ATitleLogo> TitleLogo;
