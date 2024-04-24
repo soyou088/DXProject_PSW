@@ -3,25 +3,28 @@
 #include <EngineCore/SpriteRenderer.h>
 
 // Ό³Έν :
-class TitleCh : public AActor
+class ATitleCh : public AActor
 {
 	GENERATED_BODY(AActor)
 public:
 	// constrcuter destructer
-	TitleCh();
-	~TitleCh();
+	ATitleCh();
+	~ATitleCh();
 
 	// delete Function
-	TitleCh(const TitleCh& _Other) = delete;
-	TitleCh(TitleCh&& _Other) noexcept = delete;
-	TitleCh& operator=(const TitleCh& _Other) = delete;
-	TitleCh& operator=(TitleCh&& _Other) noexcept = delete;
+	ATitleCh(const ATitleCh& _Other) = delete;
+	ATitleCh(ATitleCh&& _Other) noexcept = delete;
+	ATitleCh& operator=(const ATitleCh& _Other) = delete;
+	ATitleCh& operator=(ATitleCh&& _Other) noexcept = delete;
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+
+
 private:
+	std::shared_ptr<ATitleCh> Ame;
 	USpriteRenderer* Ame;
 	USpriteRenderer* Bae;
 	USpriteRenderer* Gura;
@@ -51,5 +54,10 @@ private:
 	USpriteRenderer* Aki;
 	USpriteRenderer* Ayame;
 	USpriteRenderer* Aqua;
+	USpriteRenderer* Melpitsa;
+	USpriteRenderer* Olri;
+	USpriteRenderer* Rice;
+	USpriteRenderer* Eopiputin;
+
 };
 

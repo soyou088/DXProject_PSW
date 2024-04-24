@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "TitleCh.h"
 
-TitleCh::TitleCh()
+ATitleCh::ATitleCh()
 {
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 	Ame = CreateDefaultSubObject<USpriteRenderer>("Renderer");
@@ -120,19 +120,48 @@ TitleCh::TitleCh()
 	Aqua->SetupAttachment(Root);
 	Aqua->SetPivot(EPivot::BOT);
 
-	SetRoot(Root);
+	Melpitsa = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Melpitsa->SetupAttachment(Root);
+	Melpitsa->SetPivot(EPivot::BOT);
+	
+	Olri = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Olri->SetupAttachment(Root);
+	Olri->SetPivot(EPivot::BOT);
+	
+	Rice = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Rice->SetupAttachment(Root);
+	Rice->SetPivot(EPivot::BOT);
+
+	Eopiputin = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Eopiputin->SetupAttachment(Root);
+	Eopiputin->SetPivot(EPivot::BOT);
+
+
+
+
+
+
+
+
+
+
+	SetRoot(Root); 
 }
 
-TitleCh::~TitleCh()
+ATitleCh::~ATitleCh()
 {
 }
 
-void TitleCh::BeginPlay()
+void ATitleCh::BeginPlay()
 {
 	Super::BeginPlay();
-}
 
-void TitleCh::Tick(float _DeltaTime)
+	Ame->SetSprite("spr_Title_Ame_0.pmg");
+	Ame->SetAutoSize(1.0f, true);
+	Ame->SetPosition({ 0.0f,-500.0f });
+	Ame->SetOrder(ERenderOrder::TitleF);
+}
+void ATitleCh::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 }

@@ -4,10 +4,12 @@ enum class ERenderOrder
 {
 	Back,
 	Title,
-	Player,
+	TitleF,
+	TitleB,
 	Monster,
 	MonsterUp,
 	MonsterDown,
+	Player,
 	Attack,
 	UI,
 };
