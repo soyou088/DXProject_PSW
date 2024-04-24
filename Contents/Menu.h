@@ -23,8 +23,14 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 private:
-	USpriteRenderer* MenuRenderer;
-
+	USpriteRenderer* MenuRenderer0;
+	USpriteRenderer* MenuRenderer1;
+	USpriteRenderer* MenuRenderer2;
+	USpriteRenderer* MenuRenderer3;
+	USpriteRenderer* MenuRenderer4;
+	USpriteRenderer* MenuRenderer5;
+	USpriteRenderer* MenuRenderer6;
+	USpriteRenderer* MenuRenderer7;
 
 };
 
