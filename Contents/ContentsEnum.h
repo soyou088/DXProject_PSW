@@ -2,8 +2,8 @@
 
 enum class ERenderOrder
 {
-	Title,
 	Back,
+	Title,
 	Player,
 	Monster,
 	MonsterUp,

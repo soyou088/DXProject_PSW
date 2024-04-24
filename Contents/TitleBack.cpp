@@ -21,9 +21,15 @@ void ATitleBack::BeginPlay()
 	Super::BeginPlay();
 	SetActorScale3D(FVector(700.0f, 300.0f, 100.0f));
 	TitleBack->SetSprite("menu_charselec_bar_0.png");
-	TitleBack->SetScale(FVector{ 1.5f,3.5f });
-	TitleBack->SetPosition(FVector{ 1.5f,-0.5f });
+	TitleBack->SetScale(FVector{ 1.0f,3.5f });
+	TitleBack->SetPosition(FVector{ 1.5f,0.0f });
 	TitleBack->SetOrder(ERenderOrder::Title);
+	TitleBack->SetRotationDeg({0.0f,0.0f,-10.0f});
+
+	DelayCallBack(8.0f, [=]()
+		{
+			Destroy();
+		});
 }
 
 
@@ -35,6 +41,7 @@ void ATitleBack::BackMove(float _DeltaTime)
 
 void ATitleBack::Tick(float _DeltaTime)
 {
+	Super::Tick(_DeltaTime);
 	BackMove(_DeltaTime);
 
 }

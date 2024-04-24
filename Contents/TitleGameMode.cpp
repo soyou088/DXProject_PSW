@@ -19,14 +19,21 @@ void ATitleGameMode::BeginPlay()
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation(FVector(0.0f, 0.0f, -100.0f));
 	TitleLogo = GetWorld()->SpawnActor<ATitleLogo>("TitleLogo");
-	TitleBack = GetWorld()->SpawnActor<ATitleBack>("TitleBack");
 
-	FVector TPos = TitleBack->GetActorLocation();
-	for (int i = 1; i < 47 ;i++)
+	std::shared_ptr<ATitleBack> InitialTitleBack = GetWorld()->SpawnActor<ATitleBack>("TitleBack");
+	TitleBack.push_back(InitialTitleBack);
+
+	FVector TPos = InitialTitleBack->GetActorLocation();
+	for (int i = 1; i < 47; i++)
 	{
-		TitleBack = GetWorld()->SpawnActor<ATitleBack>("TitleBack");
-		TitleBack->SetActorLocation({ TPos.X - 38 * i, TPos.Y });
-
+		std::shared_ptr<ATitleBack> NewTitleBack = GetWorld()->SpawnActor<ATitleBack>("TitleBack");
+		NewTitleBack->SetActorLocation({ TPos.X - 38 * i, TPos.Y });
+		TitleBack.push_back(NewTitleBack);
+		//NewTitleBack->DelayCallBack(2.0f, [=]()
+		//	{
+		//		TitleBack.remove(NewTitleBack);
+		//		NewTitleBack->Destroy();
+		//	});
 	}
 }
 
@@ -35,16 +42,11 @@ void ATitleGameMode::SpawnTitleBack(float _DeltaTime)
 {
 	if (0.1f <= AttackTime)
 	{
-		TitleBack = GetWorld()->SpawnActor<ATitleBack>("TitleBack");
+		std::shared_ptr<ATitleBack> NewTitleBack = GetWorld()->SpawnActor<ATitleBack>("TitleBack");
+		TitleBack.push_back(NewTitleBack);
 		AttackTime = 0.0f;
-		TitleBack->DelayCallBack(0.5f, [this]()
-			{
-				TitleBack->Destroy();
-			});
 	}
-	
 	AttackTime += _DeltaTime;
-	
 }
 
 void ATitleGameMode::Tick(float _DeltaTime)

@@ -22,10 +22,10 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-
+	void Move();
 
 private:
 	USpriteRenderer* Renderer;
-
+	USpriteRenderer* BackRenderer;
 
 };

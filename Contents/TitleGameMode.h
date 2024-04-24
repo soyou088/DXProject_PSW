@@ -29,7 +29,7 @@ protected:
 
 private:
 	std::shared_ptr<ATitleLogo> TitleLogo;
-	std::shared_ptr<ATitleBack> TitleBack;
+	std::list<std::shared_ptr<ATitleBack>> TitleBack;
 
 	float AttackTime = 0;
 };
