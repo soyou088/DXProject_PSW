@@ -13,9 +13,6 @@
     <ClInclude Include="TitleGameMode.h">
       <Filter>Level\PlayLevel\TitleLevel</Filter>
     </ClInclude>
-    <ClInclude Include="TitleLogo.h">
-      <Filter>Level\PlayLevel\TitleLevel\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="ContentsValue.h">
       <Filter>Header</Filter>
     </ClInclude>
@@ -44,10 +41,16 @@
       <Filter>Level\PlayLevel\Actor\PlayBackGround</Filter>
     </ClInclude>
     <ClInclude Include="TitleBack.h">
-      <Filter>Level\PlayLevel\TitleLevel\Actor</Filter>
+      <Filter>Level\PlayLevel\TitleLevel\Actor\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="TitleCh.h">
-      <Filter>Level\PlayLevel\TitleLevel\Actor</Filter>
+      <Filter>Level\PlayLevel\TitleLevel\Actor\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>Level\PlayLevel\TitleLevel\Actor\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Level\PlayLevel\TitleLevel\Actor\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -62,9 +65,6 @@
     </ClCompile>
     <ClCompile Include="TitleGameMode.cpp">
       <Filter>Level\PlayLevel\TitleLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleLogo.cpp">
-      <Filter>Level\PlayLevel\TitleLevel\Actor</Filter>
     </ClCompile>
     <ClCompile Include="ContentsValue.cpp">
       <Filter>Header</Filter>
@@ -94,10 +94,16 @@
       <Filter>Level\PlayLevel\Actor\Player</Filter>
     </ClCompile>
     <ClCompile Include="TitleBack.cpp">
-      <Filter>Level\PlayLevel\TitleLevel\Actor</Filter>
+      <Filter>Level\PlayLevel\TitleLevel\Actor\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="TitleCh.cpp">
-      <Filter>Level\PlayLevel\TitleLevel\Actor</Filter>
+      <Filter>Level\PlayLevel\TitleLevel\Actor\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>Level\PlayLevel\TitleLevel\Actor\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Level\PlayLevel\TitleLevel\Actor\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +145,12 @@
     </Filter>
     <Filter Include="Level\PlayLevel\Actor\PlayBackGround">
       <UniqueIdentifier>{0e34bc11-f720-471a-9913-e9ff89c50e23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\TitleLevel\Actor\Menu">
+      <UniqueIdentifier>{467f8029-946a-407d-a5be-e7f3cf48f307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\TitleLevel\Actor\BackGround">
+      <UniqueIdentifier>{11b18c2b-7dc8-4cbb-81bb-c0e6141364f0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

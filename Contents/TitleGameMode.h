@@ -1,6 +1,7 @@
 #pragma once
 #include "TitleLogo.h"
 #include "TitleBack.h"
+#include "Menu.h"
 #include <EngineCore/GameMode.h>
 
 // Ό³Έν :
@@ -30,6 +31,7 @@ protected:
 private:
 	std::shared_ptr<ATitleLogo> TitleLogo;
 	std::list<std::shared_ptr<ATitleBack>> TitleBack;
+	std::shared_ptr<AMenu> Menu;
 
 	float AttackTime = 0;
 };

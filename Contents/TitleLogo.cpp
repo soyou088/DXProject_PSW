@@ -23,7 +23,7 @@ void ATitleLogo::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetActorScale3D(FVector(600.0f, 200.0f, 100.0f));
+	SetActorScale3D(FVector(550.0f, 220.0f, 100.0f));
 	Renderer->SetSprite("HoloTitle.png");
 	Renderer->SetPosition(FVector({0.65f, 0.7f }));
 	Renderer->SetOrder(ERenderOrder::Title);
@@ -34,15 +34,27 @@ void ATitleLogo::BeginPlay()
 }
 
 
-void ATitleLogo::Move()
+void ATitleLogo::Move(float _DeltaTime)
 {
+	if (0.0f <= LogoMoveTime && LogoMoveTime < 1.5f)
+	{
+		Renderer->AddPosition(LogoMove * _DeltaTime);
+	}
+	if (1.7f <= LogoMoveTime && LogoMoveTime < 3.5f)
+	{
+		Renderer->AddPosition(LogoMove * -1 * _DeltaTime);
+	}
+	if (3.7f <= LogoMoveTime)
+	{
+		LogoMoveTime = 0.0f;
+	}
+	LogoMoveTime += _DeltaTime;
 }
 
 void ATitleLogo::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	
-	
+	Move(_DeltaTime);
 	int a = 0;
 }

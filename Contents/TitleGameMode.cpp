@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "TitleGameMode.h"
 #include "TitleLogo.h"
+#include "Menu.h"
 #include <EngineCore/Camera.h>
 
 ATitleGameMode::ATitleGameMode()
@@ -19,6 +20,8 @@ void ATitleGameMode::BeginPlay()
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation(FVector(0.0f, 0.0f, -100.0f));
 	TitleLogo = GetWorld()->SpawnActor<ATitleLogo>("TitleLogo");
+	Menu = GetWorld()->SpawnActor<AMenu>("Menu");
+
 
 	std::shared_ptr<ATitleBack> InitialTitleBack = GetWorld()->SpawnActor<ATitleBack>("TitleBack");
 	TitleBack.push_back(InitialTitleBack);
@@ -29,12 +32,10 @@ void ATitleGameMode::BeginPlay()
 		std::shared_ptr<ATitleBack> NewTitleBack = GetWorld()->SpawnActor<ATitleBack>("TitleBack");
 		NewTitleBack->SetActorLocation({ TPos.X - 38 * i, TPos.Y });
 		TitleBack.push_back(NewTitleBack);
-		//NewTitleBack->DelayCallBack(2.0f, [=]()
-		//	{
-		//		TitleBack.remove(NewTitleBack);
-		//		NewTitleBack->Destroy();
-		//	});
+
 	}
+
+
 }
 
 

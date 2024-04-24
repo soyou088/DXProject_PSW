@@ -178,6 +178,7 @@ void UHoloCore::Initialize()
 	}
 
 
+
 	{
 		UEngineDirectory Dir;
 		Dir.MoveToSearchChild("Resources");
