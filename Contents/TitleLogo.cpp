@@ -23,10 +23,9 @@ void ATitleLogo::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetActorScale3D(FVector(550.0f, 200.0f, 100.0f));
-	// Renderer->SetSprite("CharWalk1_0.png");
+	SetActorScale3D(FVector(600.0f, 200.0f, 100.0f));
 	Renderer->SetSprite("HoloTitle.png");
-	Renderer->SetPosition(FVector({0.7f, 0.8f }));
+	Renderer->SetPosition(FVector({0.65f, 0.7f }));
 	Renderer->SetOrder(ERenderOrder::Title);
 
 	BackRenderer->SetSprite("menu_charselecBG_0.png");

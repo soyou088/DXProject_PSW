@@ -23,7 +23,7 @@ void AMelee::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Renderer->CreateAnimation("KiaraAttack", "KiaraAttack", 0.1f);
+	Renderer->CreateAnimation("KiaraAttack", "KiaraAttack", 0.05f);
 	Renderer->SetAutoSize(1.5f, true);
 	Renderer->ChangeAnimation("KiaraAttack");
 	Renderer->SetOrder(ERenderOrder::Attack);
@@ -32,7 +32,7 @@ void AMelee::BeginPlay()
 
 void AMelee::MeleeAttack(float _DeltaTime)
 {
-	if (1.0f <= AttackTime)
+	if (2.0f <= AttackTime)
 	{
 		AttackTime = 0.0f;
 	}

@@ -67,8 +67,8 @@ void APlayer::BeginPlay()
 	PlayerCursor->SetPosition(PCursor);
 
 	// 공격 스폰
-	//Melee = GetWorld()->SpawnActor<AMelee>("Melee");
-	//Melee->SetActorLocation(GetActorLocation());
+	Melee = GetWorld()->SpawnActor<AMelee>("Melee");
+	Melee->SetActorLocation(GetActorLocation());
 
 
 
