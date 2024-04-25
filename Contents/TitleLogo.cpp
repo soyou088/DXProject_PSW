@@ -31,6 +31,8 @@ void ATitleLogo::BeginPlay()
 	BackRenderer->SetSprite("menu_charselecBG_0.png");
 	BackRenderer->SetScale({10.0f,10.0f});
 	BackRenderer->SetOrder(ERenderOrder::Back);
+
+
 }
 
 
@@ -40,11 +42,11 @@ void ATitleLogo::Move(float _DeltaTime)
 	{
 		Renderer->AddPosition(LogoMove * _DeltaTime);
 	}
-	if (1.7f <= LogoMoveTime && LogoMoveTime < 3.5f)
+	if (1.7f <= LogoMoveTime && LogoMoveTime < 3.3f)
 	{
 		Renderer->AddPosition(LogoMove * -1 * _DeltaTime);
 	}
-	if (3.7f <= LogoMoveTime)
+	if (3.5f <= LogoMoveTime)
 	{
 		LogoMoveTime = 0.0f;
 	}

@@ -35,6 +35,18 @@ void ATitleGameMode::BeginPlay()
 
 	}
 
+	Ame = GetWorld()->SpawnActor<ATitleCh>("Ame");
+	Bae = GetWorld()->SpawnActor<ATitleCh>("Bae");
+	Mumei = GetWorld()->SpawnActor<ATitleCh>("Mumei");
+	Fauna = GetWorld()->SpawnActor<ATitleCh>("Fauna");
+	Gura = GetWorld()->SpawnActor<ATitleCh>("Gura");
+	Ina = GetWorld()->SpawnActor<ATitleCh>("Ina");
+	Kiara = GetWorld()->SpawnActor<ATitleCh>("Kiara");
+	Kronii = GetWorld()->SpawnActor<ATitleCh>("Kiara");
+
+
+
+
 
 }
 

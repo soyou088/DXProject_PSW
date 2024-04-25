@@ -24,11 +24,13 @@ protected:
 
 
 private:
-	std::shared_ptr<ATitleCh> Ame;
 	USpriteRenderer* Ame;
 	USpriteRenderer* Bae;
-	USpriteRenderer* Gura;
 	USpriteRenderer* Mumei;
+	USpriteRenderer* Gura;
+	USpriteRenderer* Ina;
+	USpriteRenderer* Kiara;
+	USpriteRenderer* Kronii;
 	USpriteRenderer* Fauna;
 	USpriteRenderer* Suisei;
 	USpriteRenderer* Sana;
@@ -38,13 +40,10 @@ private:
 	USpriteRenderer* Mio;
 	USpriteRenderer* Okayu;
 	USpriteRenderer* Roboco;
-	USpriteRenderer* Kronii;
 	USpriteRenderer* Matsuri;
 	USpriteRenderer* Mel;
 	USpriteRenderer* Miko;
-	USpriteRenderer* Ina;
 	USpriteRenderer* Irys;
-	USpriteRenderer* Kiara;
 	USpriteRenderer* Korone;
 	USpriteRenderer* Fubuki;
 	USpriteRenderer* Haato;
@@ -58,6 +57,13 @@ private:
 	USpriteRenderer* Olri;
 	USpriteRenderer* Rice;
 	USpriteRenderer* Eopiputin;
+	USpriteRenderer* Hosinoba;
+	USpriteRenderer* Laine;
+	USpriteRenderer* Kanaeru;
+	USpriteRenderer* Cobalskia;
+	USpriteRenderer* Zeta;
+
+
 
 };
 

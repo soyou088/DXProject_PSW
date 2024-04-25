@@ -136,13 +136,25 @@ ATitleCh::ATitleCh()
 	Eopiputin->SetupAttachment(Root);
 	Eopiputin->SetPivot(EPivot::BOT);
 
+	Hosinoba = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Hosinoba->SetupAttachment(Root);
+	Hosinoba->SetPivot(EPivot::BOT);
+	
+	Laine = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Laine->SetupAttachment(Root);
+	Laine->SetPivot(EPivot::BOT);
+	
+	Kanaeru = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Kanaeru->SetupAttachment(Root);
+	Kanaeru->SetPivot(EPivot::BOT);
 
-
-
-
-
-
-
+	Cobalskia = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Cobalskia->SetupAttachment(Root);
+	Cobalskia->SetPivot(EPivot::BOT);
+	
+	Zeta = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Zeta->SetupAttachment(Root);
+	Zeta->SetPivot(EPivot::BOT);
 
 
 	SetRoot(Root); 
@@ -156,10 +168,49 @@ void ATitleCh::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Ame->SetSprite("spr_Title_Ame_0.pmg");
-	Ame->SetAutoSize(1.0f, true);
-	Ame->SetPosition({ 0.0f,-500.0f });
+	Ame->SetSprite("spr_Title_Ame_0.png");
+	Ame->SetAutoSize(2.0f, true);
+	Ame->SetPosition({ -143.0f,-330.0f });
 	Ame->SetOrder(ERenderOrder::TitleF);
+	
+	Bae->SetSprite("spr_Title_bae_1.png");
+	Bae->SetAutoSize(2.0f, true);
+	Bae->SetPosition({ -241.0f,-330.0f });
+	Bae->SetOrder(ERenderOrder::TitleF);
+	
+	Mumei->SetSprite("spr_Title_Mumei_3.png");
+	Mumei->SetAutoSize(2.0f, true);
+	Mumei->SetPosition({ -340.0f,-330.0f });
+	Mumei->SetOrder(ERenderOrder::TitleF);
+	
+	Fauna->SetSprite("spr_Title_Fauna_4.png");
+	Fauna->SetAutoSize(2.0f, true);
+	Fauna->SetPosition({ -440.0f,-330.0f });
+	Fauna->SetOrder(ERenderOrder::TitleF);
+		
+	Kronii->SetSprite("spr_Title_Kronii_5.png");
+	Kronii->SetAutoSize(2.0f, true);
+	Kronii->SetPosition({ -550.0f,-300.0f });
+	Kronii->SetOrder(ERenderOrder::TitleF);
+
+	Gura->SetSprite("spr_Title_Gura_2.png");
+	Gura->SetAutoSize(2.0f, true);
+	Gura->SetPosition({ -55.0f,-330.0f });
+	Gura->SetOrder(ERenderOrder::TitleF);
+	
+	Ina->SetSprite("spr_Title_Ina_3.png");
+	Ina->SetAutoSize(2.0f, true);
+	Ina->SetPosition({ 40.0f,-320.0f });
+	Ina->SetOrder(ERenderOrder::TitleF);
+	
+	Kiara->SetSprite("spr_Title_Kiara_0.png");
+	Kiara->SetAutoSize(2.0f, true);
+	Kiara->SetPosition({ 120.0f,-300.0f });
+	Kiara->SetOrder(ERenderOrder::TitleF);
+	
+
+
+
 }
 void ATitleCh::Tick(float _DeltaTime)
 {
