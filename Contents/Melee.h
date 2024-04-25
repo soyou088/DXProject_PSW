@@ -41,7 +41,8 @@ private:
 	void AttackAimDir();
 	void MeleeAttack(float _DeltaTime);
 	float AttackAngle;
-
+	float Angle = 0.0f;
+	float Delay = 1.0f;
 
 	float AttackTime = 0;
 };

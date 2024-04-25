@@ -7,12 +7,6 @@
     <ClInclude Include="HoloCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="PlayGameMode.h">
-      <Filter>Level\PlayLevel</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleGameMode.h">
-      <Filter>Level\PlayLevel\TitleLevel</Filter>
-    </ClInclude>
     <ClInclude Include="ContentsValue.h">
       <Filter>Header</Filter>
     </ClInclude>
@@ -52,6 +46,21 @@
     <ClInclude Include="Menu.h">
       <Filter>Level\PlayLevel\TitleLevel\Actor\Menu</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleGameMode.h">
+      <Filter>Level\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGameMode.h">
+      <Filter>Level\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackMelee.h">
+      <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -59,12 +68,6 @@
     </ClCompile>
     <ClCompile Include="HoloCore.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayGameMode.cpp">
-      <Filter>Level\PlayLevel</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleGameMode.cpp">
-      <Filter>Level\PlayLevel\TitleLevel</Filter>
     </ClCompile>
     <ClCompile Include="ContentsValue.cpp">
       <Filter>Header</Filter>
@@ -104,6 +107,21 @@
     </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Level\PlayLevel\TitleLevel\Actor\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleGameMode.cpp">
+      <Filter>Level\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGameMode.cpp">
+      <Filter>Level\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackMelee.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +169,9 @@
     </Filter>
     <Filter Include="Level\PlayLevel\TitleLevel\Actor\BackGround">
       <UniqueIdentifier>{11b18c2b-7dc8-4cbb-81bb-c0e6141364f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\GameMode">
+      <UniqueIdentifier>{c42ccb04-43ef-4486-8d20-5a7a0e3657af}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

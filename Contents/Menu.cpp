@@ -52,43 +52,43 @@ void AMenu::BeginPlay()
 
 	MenuRenderer0->SetSprite("menu_hiscoreButtons_2.png");
 	MenuRenderer0->SetAutoSize(2.0f, true);
-	MenuRenderer0->SetPosition({ 400.0f,95.0f});
-	MenuRenderer0->SetOrder(ERenderOrder::Title);
+	MenuRenderer0->SetPosition({ 430.0f,200.0f});
+	MenuRenderer0->SetOrder(ERenderOrder::Menu);
 
 	MenuRenderer1->SetSprite("menu_hiscoreButtons_2.png");
 	MenuRenderer1->SetAutoSize(2.0f, true);
-	MenuRenderer1->SetPosition({ 400.0f, 38.0f });
-	MenuRenderer1->SetOrder(ERenderOrder::Title);
+	MenuRenderer1->SetPosition({ 430.0f, 130.0f });
+	MenuRenderer1->SetOrder(ERenderOrder::Menu);
 
 	MenuRenderer2->SetSprite("menu_hiscoreButtons_2.png");
 	MenuRenderer2->SetAutoSize(2.0f, true);
-	MenuRenderer2->SetPosition({ 400.0f, -19.0f });
-	MenuRenderer2->SetOrder(ERenderOrder::Title);
+	MenuRenderer2->SetPosition({ 430.0f, 60.0f });
+	MenuRenderer2->SetOrder(ERenderOrder::Menu);
 
 	MenuRenderer3->SetSprite("menu_hiscoreButtons_2.png");
 	MenuRenderer3->SetAutoSize(2.0f, true);
-	MenuRenderer3->SetPosition({ 400.0f,-76.0f });
-	MenuRenderer3->SetOrder(ERenderOrder::Title);
+	MenuRenderer3->SetPosition({ 430.0f, -10.0f });
+	MenuRenderer3->SetOrder(ERenderOrder::Menu);
 
 	MenuRenderer4->SetSprite("menu_hiscoreButtons_2.png");
 	MenuRenderer4->SetAutoSize(2.0f, true);
-	MenuRenderer4->SetPosition({ 400.0f,-133.0f });
-	MenuRenderer4->SetOrder(ERenderOrder::Title);
+	MenuRenderer4->SetPosition({ 430.0f,-80.0f });
+	MenuRenderer4->SetOrder(ERenderOrder::Menu);
 
 	MenuRenderer5->SetSprite("menu_hiscoreButtons_2.png");
 	MenuRenderer5->SetAutoSize(2.0f, true);
-	MenuRenderer5->SetPosition({ 400.0f,-190.0f });
-	MenuRenderer5->SetOrder(ERenderOrder::Title);
+	MenuRenderer5->SetPosition({ 430.0f,-150.0f });
+	MenuRenderer5->SetOrder(ERenderOrder::Menu);
 
 	MenuRenderer6->SetSprite("menu_hiscoreButtons_2.png");
 	MenuRenderer6->SetAutoSize(2.0f, true);
-	MenuRenderer6->SetPosition({ 400.0f,-247.0f });
-	MenuRenderer6->SetOrder(ERenderOrder::Title);
+	MenuRenderer6->SetPosition({ 430.0f,-220.0f });
+	MenuRenderer6->SetOrder(ERenderOrder::Menu);
 
 	MenuRenderer7->SetSprite("menu_hiscoreButtons_2.png");
 	MenuRenderer7->SetAutoSize(2.0f, true);
-	MenuRenderer7->SetPosition({ 400.0f,-304.0f });
-	MenuRenderer7->SetOrder(ERenderOrder::Title);
+	MenuRenderer7->SetPosition({ 430.0f,-290.0f });
+	MenuRenderer7->SetOrder(ERenderOrder::Menu);
 }
 
 void AMenu::Tick(float _DeltaTime)

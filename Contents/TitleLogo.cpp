@@ -23,13 +23,13 @@ void ATitleLogo::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetActorScale3D(FVector(500.0f, 200.0f, 100.0f));
 	Renderer->SetSprite("HoloTitle.png");
-	Renderer->SetPosition(FVector({0.8f, 0.8f }));
+	Renderer->SetAutoSize(0.7f, true);
+	Renderer->SetPosition(FVector({-150.0f, -60.0f }));
 	Renderer->SetOrder(ERenderOrder::Title);
 
 	BackRenderer->SetSprite("menu_charselecBG_0.png");
-	BackRenderer->SetScale({10.0f,10.0f});
+	BackRenderer->SetAutoSize(10.0f, true);
 	BackRenderer->SetOrder(ERenderOrder::Back);
 
 
@@ -38,15 +38,15 @@ void ATitleLogo::BeginPlay()
 
 void ATitleLogo::Move(float _DeltaTime)
 {
-	if (0.0f <= LogoMoveTime && LogoMoveTime < 1.5f)
+	if (0.0f <= LogoMoveTime && LogoMoveTime < 1.3f)
 	{
 		Renderer->AddPosition(LogoMove * _DeltaTime);
 	}
-	if (1.7f <= LogoMoveTime && LogoMoveTime < 3.3f)
+	if (1.4f <= LogoMoveTime && LogoMoveTime < 2.7f)
 	{
 		Renderer->AddPosition(LogoMove * -1 * _DeltaTime);
 	}
-	if (3.5f <= LogoMoveTime)
+	if (2.8f <= LogoMoveTime)
 	{
 		LogoMoveTime = 0.0f;
 	}

@@ -9,9 +9,16 @@ AMelee::AMelee()
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetupAttachment(Root);
-	Renderer->SetPivot(EPivot::MAX);
 
 	SetRoot(Root);
+
+
+	Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Root);
+	Collision->SetScale({ 100.0f,100.f });
+	
+	Collision->SetCollisionGroup(ECollisionOrder::Weapon);
+	Collision->SetCollisionType(ECollisionType::Rect);
 
 }
 
@@ -28,16 +35,39 @@ void AMelee::BeginPlay()
 	Renderer->ChangeAnimation("KiaraAttack");
 	Renderer->SetOrder(ERenderOrder::Attack);
 
+	
 }
 
 void AMelee::MeleeAttack(float _DeltaTime)
 {
-	if (2.0f <= AttackTime)
+	if (true == Renderer->IsActive())
 	{
-		AttackTime = 0.0f;
+		//공격 애니메이션이 종료된 직후
+		if (true == Renderer->IsCurAnimationEnd())
+		{
+			Renderer->SetActive(false);
+		}
+		else
+		{
+			int a = 0;
+		}
+	}
+	else // 공격이 실행되지 않을 때
+	{
+		Angle = AttackAngle;
+		if (0 < Delay) // 공격 쿨이 돌기 전
+		{
+			Renderer->SetRotationDeg(FVector{ 0.0f, 0.0f, Angle });
+			Delay -= _DeltaTime;
+		}
+		else // 공격 시작
+		{
+			Delay = AttackTime;
+			Renderer->SetActive(true);
+		}
 	}
 
-	AttackTime += _DeltaTime;
+	//AttackTime += _DeltaTime;
 }
 
 
@@ -120,7 +150,16 @@ void AMelee::Tick(float _DeltaTime)
 		AttackAimDir();
 	}
 
+
+
 	CursorOFF();
+
+
+	Collision->CollisionEnter(ECollisionOrder::Monster, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			_Collison->GetActor()->Destroy();
+		}
+	);
 }
 
 void AMelee::CursorOFF()

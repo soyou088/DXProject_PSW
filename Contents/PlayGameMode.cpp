@@ -80,14 +80,14 @@ void APlayGameMode::BeginPlay()
 
 
 
-float4 APlayGameMode::RandomLocation(bool _Group)
-{
-	float4 MonsterPos = APlayer::PlayerPos;
-	MonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 200.0f;
-	MonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 200.0f;
-
-	return MonsterPos;
-}
+//float4 APlayGameMode::RandomLocation(bool _Group)
+//{
+//	float4 MonsterPos = APlayer::PlayerPos;
+//	MonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 200.0f;
+//	MonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 200.0f;
+//
+//	return MonsterPos;
+//}
 
 
 float4 APlayGameMode::IndexToCenterPos(FIntPoint _Index)
@@ -208,6 +208,7 @@ void APlayGameMode::PlayDebugText()
 			break;
 		}
 		UEngineDebugMsgWindow::PushMsg(std::format("PlayerDir : {}", PlayerDir));
+		
 }
 
 void APlayGameMode::SpawnMonsterTimeSet(float _DeltaTime, float _SpawnBegin, float _SpawnEnd, float _Term,
@@ -271,6 +272,51 @@ void APlayGameMode::RandomSpawnMonster(std::string _Name, float _Size, float _Hp
 	}
 	GroupSpawn = false;
 }
+
+
+float4 APlayGameMode::RandomLocation(bool _Group)
+{
+	float4 MonsterPos;
+	// 뭉쳐서 나오지 않을 때
+	if (false == _Group)
+	{
+		MonsterPos = APlayer::PlayerPos;
+
+		while (MonsterPos.X > (APlayer::PlayerPos.X - 300.0f) && MonsterPos.X < (APlayer::PlayerPos.X + 300.0f))
+		{
+			MonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 100.0f;
+		}
+		while (MonsterPos.Y > (APlayer::PlayerPos.Y - 250.0f) && MonsterPos.Y < (APlayer::PlayerPos.Y + 250.0f))
+		{
+			MonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 100.0f;
+		}
+	}
+	else
+	{
+		//뭉쳐서 나올 때 
+		if (false == GroupSpawn)
+		{
+			GroupMonsterPos = APlayer::PlayerPos;
+
+			while (GroupMonsterPos.X > (APlayer::PlayerPos.X - 300.0f) && GroupMonsterPos.X < (APlayer::PlayerPos.X + 300.0f))
+			{
+				GroupMonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 100.0f;
+			}
+			while (GroupMonsterPos.Y > (APlayer::PlayerPos.Y - 250.0f) && GroupMonsterPos.Y < (APlayer::PlayerPos.Y + 250.0f))
+			{
+				GroupMonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 100.0f;
+			}
+		}
+
+		MonsterPos = GroupMonsterPos;
+
+		MonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 10.0f;
+		MonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 10.0f;
+	}
+
+	return MonsterPos;
+}
+
 
 void APlayGameMode::Tick(float _DeltaTime)
 {

@@ -23,8 +23,8 @@ APlayer::APlayer()
 
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Root);
-	Collision->SetScale({ 10.0f,10.f });
-
+	Collision->SetScale({ 65.0f,65.f });
+	Collision->SetPosition({ 0.0f,35.0f });
 	Collision->SetCollisionGroup(ECollisionOrder::Player);
 	Collision->SetCollisionType(ECollisionType::Rect);
 
@@ -103,13 +103,13 @@ void APlayer::CursorDirChange()
 
 void APlayer::SpawnRanged(float _DeltaTime)
 {
-	if (1.0f <= AttackTime)
-	{
-		Ranged = GetWorld()->SpawnActor<ARanged>("Ranged");
-		Ranged->SetActorLocation(APlayer::PlayerPos);
-		AttackTime = 0.0f;
-	}
-	AttackTime += _DeltaTime;
+	//if (1.0f <= AttackTime)
+	//{
+	//	Ranged = GetWorld()->SpawnActor<ARanged>("Ranged");
+	//	Ranged->SetActorLocation(APlayer::PlayerPos);
+	//	AttackTime = 0.0f;
+	//}
+	//AttackTime += _DeltaTime;
 }
 
 void APlayer::PCursorDirCheck()
@@ -221,14 +221,5 @@ void APlayer::Tick(float _DeltaTime)
 	ChangeMouseAimAtkDir();
 	SpawnRanged(_DeltaTime);
 	
-	int a = 0;
-
-	Collision->CollisionEnter(ECollisionOrder::Monster, [=](std::shared_ptr<UCollision> _Collison)
-		{
-			_Collison->GetActor()->Destroy();
-		}
-	);
-
-
 
 }

@@ -30,5 +30,5 @@ private:
 
 
 	float LogoMoveTime = 0;
-	float4 LogoMove = FVector::Down * 0.05f;
+	float4 LogoMove = FVector::Down * 10.0f;
 };

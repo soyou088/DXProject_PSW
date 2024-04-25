@@ -4,6 +4,7 @@ enum class ERenderOrder
 {
 	Back,
 	Title,
+	Menu,
 	TitleF,
 	TitleB,
 	Monster,

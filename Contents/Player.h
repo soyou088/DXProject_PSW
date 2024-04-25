@@ -49,7 +49,7 @@ protected:
 	
 	void SpawnRanged(float _DeltaTime);
 
-	EActorDir DirState = EActorDir::None;
+	EActorDir DirState = EActorDir::E;
 	void PCursorDirCheck();
 
 	// АјАн
