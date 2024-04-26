@@ -30,8 +30,7 @@ protected:
 
 	void CursorOFf();
 private:
-	USpriteRenderer* Renderer;
-	UCollision* Collision;
+
 	float4 AtkDir = float4::Right;
 
 	std::string Name = "Ame";

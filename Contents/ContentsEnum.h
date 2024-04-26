@@ -6,8 +6,6 @@ enum class ERenderOrder
 	Title,
 	Menu,
 	TitleF,
-	TitleB,
-	Monster,
 	MonsterUp,
 	MonsterDown,
 	Player,
@@ -18,6 +16,7 @@ enum class ERenderOrder
 enum class ECollisionOrder
 {
 	Player,
+	Menu,
 	Weapon,
 	Monster,
 };

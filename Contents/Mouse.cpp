@@ -10,11 +10,21 @@ bool AMouse::MouseCursorON = false;
 AMouse::AMouse()
 {
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
-	SetRoot(Root);
 	
 	MouseCursorRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	MouseCursorRenderer->SetupAttachment(Root);
+
 	
+	Collision = CreateDefaultSubObject<UCollision>("Collision");
+	Collision->SetupAttachment(Root);
+	Collision->SetScale({ 10.0f,20.f });
+	Collision->SetPosition({-10.0f,10.0f});
+	Collision->SetCollisionGroup(ECollisionOrder::Player);
+	Collision->SetCollisionType(ECollisionType::Rect);
+
+
+
+	SetRoot(Root);
 	InputOn();
 }
 
@@ -84,5 +94,6 @@ void AMouse::Tick(float _DeltaTime)
 	SetActorLocation(MouseLocation);
 
 	int a = 0;
+
 }
 

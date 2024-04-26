@@ -32,5 +32,15 @@ private:
 	USpriteRenderer* MenuRenderer6;
 	USpriteRenderer* MenuRenderer7;
 
+
+	UCollision* Collision0;
+	UCollision* Collision1;
+	UCollision* Collision2;
+	UCollision* Collision3;
+	UCollision* Collision4;
+	UCollision* Collision5;
+	UCollision* Collision6;
+	UCollision* Collision7;
+
 };
 

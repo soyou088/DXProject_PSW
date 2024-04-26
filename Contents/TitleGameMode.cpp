@@ -45,7 +45,7 @@ void ATitleGameMode::BeginPlay()
 	Kronii = GetWorld()->SpawnActor<ATitleCh>("Kiara");
 
 
-
+	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
 
 
 }

@@ -19,9 +19,6 @@
     <ClInclude Include="Mouse.h">
       <Filter>Level\PlayLevel\UIActor</Filter>
     </ClInclude>
-    <ClInclude Include="Ranged.h">
-      <Filter>Level\PlayLevel\Actor\Attack</Filter>
-    </ClInclude>
     <ClInclude Include="Melee.h">
       <Filter>Level\PlayLevel\Actor\Attack</Filter>
     </ClInclude>
@@ -46,9 +43,6 @@
     <ClInclude Include="Menu.h">
       <Filter>Level\PlayLevel\TitleLevel\Actor\Menu</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Level\PlayLevel\Actor\Attack</Filter>
-    </ClInclude>
     <ClInclude Include="TitleGameMode.h">
       <Filter>Level\GameMode</Filter>
     </ClInclude>
@@ -60,6 +54,12 @@
     </ClInclude>
     <ClInclude Include="AttackMelee.h">
       <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Ranged.h">
+      <Filter>Level\PlayLevel\Actor\Attack\Ranged</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Level\PlayLevel\Actor\Attack\Ranged</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,9 +80,6 @@
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>Level\PlayLevel\UIActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Ranged.cpp">
-      <Filter>Level\PlayLevel\Actor\Attack</Filter>
     </ClCompile>
     <ClCompile Include="Melee.cpp">
       <Filter>Level\PlayLevel\Actor\Attack</Filter>
@@ -108,9 +105,6 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Level\PlayLevel\TitleLevel\Actor\Menu</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Level\PlayLevel\Actor\Attack</Filter>
-    </ClCompile>
     <ClCompile Include="TitleGameMode.cpp">
       <Filter>Level\GameMode</Filter>
     </ClCompile>
@@ -122,6 +116,12 @@
     </ClCompile>
     <ClCompile Include="AttackMelee.cpp">
       <Filter>Level\PlayLevel\Actor\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="Ranged.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack\Ranged</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack\Ranged</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +172,9 @@
     </Filter>
     <Filter Include="Level\GameMode">
       <UniqueIdentifier>{c42ccb04-43ef-4486-8d20-5a7a0e3657af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\Actor\Attack\Ranged">
+      <UniqueIdentifier>{04c53a30-cc46-4923-b5e5-4a4c52e59c3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

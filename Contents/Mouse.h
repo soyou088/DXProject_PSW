@@ -33,8 +33,8 @@ protected:
 
 	USpriteRenderer* MouseCursorRenderer;
 private:
+	UCollision* Collision;
 
 
-	//플레이어 주변을 따라다닐꺼다 나는 함수 tick
 };
 

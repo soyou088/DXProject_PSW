@@ -79,17 +79,6 @@ void APlayGameMode::BeginPlay()
 }
 
 
-
-//float4 APlayGameMode::RandomLocation(bool _Group)
-//{
-//	float4 MonsterPos = APlayer::PlayerPos;
-//	MonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 200.0f;
-//	MonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 200.0f;
-//
-//	return MonsterPos;
-//}
-
-
 float4 APlayGameMode::IndexToCenterPos(FIntPoint _Index)
 {
 	float4 Pos;

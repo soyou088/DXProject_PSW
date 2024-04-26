@@ -3,6 +3,7 @@
 #include "TitleBack.h"
 #include "Menu.h"
 #include "TitleCh.h"
+#include "Mouse.h"
 #include <EngineCore/GameMode.h>
 
 // Ό³Έν :
@@ -73,7 +74,7 @@ private:
 	std::shared_ptr<ATitleCh> Cobalskia;
 	std::shared_ptr<ATitleCh> Zeta;
 
-
+	std::shared_ptr<AMouse> Mouse;
 
 	float AttackTime = 0;
 };
