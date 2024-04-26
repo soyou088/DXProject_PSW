@@ -1,4 +1,5 @@
 #pragma once
+#include "Burton.h"
 #include <Enginecore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
 
@@ -22,25 +23,13 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	void CollisionCheck();
+	bool CurCollision = false;
+	
+	std::shared_ptr<ABurton> Burton;
+
 private:
-	USpriteRenderer* MenuRenderer0;
-	USpriteRenderer* MenuRenderer1;
-	USpriteRenderer* MenuRenderer2;
-	USpriteRenderer* MenuRenderer3;
-	USpriteRenderer* MenuRenderer4;
-	USpriteRenderer* MenuRenderer5;
-	USpriteRenderer* MenuRenderer6;
-	USpriteRenderer* MenuRenderer7;
 
-
-	UCollision* Collision0;
-	UCollision* Collision1;
-	UCollision* Collision2;
-	UCollision* Collision3;
-	UCollision* Collision4;
-	UCollision* Collision5;
-	UCollision* Collision6;
-	UCollision* Collision7;
 
 };
 
