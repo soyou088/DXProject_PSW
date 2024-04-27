@@ -32,16 +32,16 @@
       <Filter>Level\PlayLevel\Actor\PlayBackGround</Filter>
     </ClInclude>
     <ClInclude Include="TitleBack.h">
-      <Filter>Level\PlayLevel\TitleLevel\Actor\BackGround</Filter>
+      <Filter>Level\TitleLevel\Actor\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="TitleCh.h">
-      <Filter>Level\PlayLevel\TitleLevel\Actor\BackGround</Filter>
+      <Filter>Level\TitleLevel\Actor\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
-      <Filter>Level\PlayLevel\TitleLevel\Actor\BackGround</Filter>
+      <Filter>Level\TitleLevel\Actor\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
-      <Filter>Level\PlayLevel\TitleLevel\Actor\Menu</Filter>
+      <Filter>Level\TitleLevel\Actor\Menu</Filter>
     </ClInclude>
     <ClInclude Include="TitleGameMode.h">
       <Filter>Level\GameMode</Filter>
@@ -62,7 +62,13 @@
       <Filter>Level\PlayLevel\Actor\Attack\Ranged</Filter>
     </ClInclude>
     <ClInclude Include="Burton.h">
-      <Filter>Level\PlayLevel\TitleLevel\Actor\Menu</Filter>
+      <Filter>Level\TitleLevel\Actor\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectBack.h">
+      <Filter>Level\SelectLevel\Actor\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectGametMode.h">
+      <Filter>Level\GameMode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -97,16 +103,16 @@
       <Filter>Level\PlayLevel\Actor\Player</Filter>
     </ClCompile>
     <ClCompile Include="TitleBack.cpp">
-      <Filter>Level\PlayLevel\TitleLevel\Actor\BackGround</Filter>
+      <Filter>Level\TitleLevel\Actor\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="TitleCh.cpp">
-      <Filter>Level\PlayLevel\TitleLevel\Actor\BackGround</Filter>
+      <Filter>Level\TitleLevel\Actor\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
-      <Filter>Level\PlayLevel\TitleLevel\Actor\BackGround</Filter>
+      <Filter>Level\TitleLevel\Actor\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
-      <Filter>Level\PlayLevel\TitleLevel\Actor\Menu</Filter>
+      <Filter>Level\TitleLevel\Actor\Menu</Filter>
     </ClCompile>
     <ClCompile Include="TitleGameMode.cpp">
       <Filter>Level\GameMode</Filter>
@@ -127,7 +133,13 @@
       <Filter>Level\PlayLevel\Actor\Attack\Ranged</Filter>
     </ClCompile>
     <ClCompile Include="Burton.cpp">
-      <Filter>Level\PlayLevel\TitleLevel\Actor\Menu</Filter>
+      <Filter>Level\TitleLevel\Actor\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectBack.cpp">
+      <Filter>Level\SelectLevel\Actor\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectGametMode.cpp">
+      <Filter>Level\GameMode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,17 +152,32 @@
     <Filter Include="Level">
       <UniqueIdentifier>{5d532f8a-2015-4da7-97bb-0fa4da7ba77e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{4bad1fa8-ff4e-4f79-a8e8-a1ac1b99e33f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\GameMode">
+      <UniqueIdentifier>{c42ccb04-43ef-4486-8d20-5a7a0e3657af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\TitleLevel">
+      <UniqueIdentifier>{97da6cae-c6b7-49b4-a332-a6917292167f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\TitleLevel\Actor">
+      <UniqueIdentifier>{28116382-d64e-47f1-be13-759b389da5c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\TitleLevel\Actor\Menu">
+      <UniqueIdentifier>{467f8029-946a-407d-a5be-e7f3cf48f307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\TitleLevel\Actor\BackGround">
+      <UniqueIdentifier>{11b18c2b-7dc8-4cbb-81bb-c0e6141364f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\SelectLevel">
+      <UniqueIdentifier>{d0305418-8681-421c-a318-d0626616385e}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Level\PlayLevel">
       <UniqueIdentifier>{f7cd771b-27b4-45df-8fb6-1928e398bc62}</UniqueIdentifier>
     </Filter>
     <Filter Include="Level\PlayLevel\Actor">
       <UniqueIdentifier>{208e4a80-28bc-44b4-890b-999bcaed8ce8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header">
-      <UniqueIdentifier>{4bad1fa8-ff4e-4f79-a8e8-a1ac1b99e33f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\PlayLevel\UIActor">
-      <UniqueIdentifier>{f747f929-eff1-4f7c-a8db-c454f10d39b8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Level\PlayLevel\Actor\Monster">
       <UniqueIdentifier>{8dc2bf40-d17a-4ba7-ac99-8ad1eb90fe30}</UniqueIdentifier>
@@ -158,29 +185,23 @@
     <Filter Include="Level\PlayLevel\Actor\Attack">
       <UniqueIdentifier>{cfdc339c-6568-4a70-a5aa-e199e9fbd52b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Level\PlayLevel\Actor\Attack\Ranged">
+      <UniqueIdentifier>{04c53a30-cc46-4923-b5e5-4a4c52e59c3c}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Level\PlayLevel\Actor\Player">
       <UniqueIdentifier>{903231db-adeb-431a-bc66-ec5cb32db949}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\PlayLevel\TitleLevel">
-      <UniqueIdentifier>{97da6cae-c6b7-49b4-a332-a6917292167f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\PlayLevel\TitleLevel\Actor">
-      <UniqueIdentifier>{28116382-d64e-47f1-be13-759b389da5c1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Level\PlayLevel\Actor\PlayBackGround">
       <UniqueIdentifier>{0e34bc11-f720-471a-9913-e9ff89c50e23}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\PlayLevel\TitleLevel\Actor\Menu">
-      <UniqueIdentifier>{467f8029-946a-407d-a5be-e7f3cf48f307}</UniqueIdentifier>
+    <Filter Include="Level\PlayLevel\UIActor">
+      <UniqueIdentifier>{f747f929-eff1-4f7c-a8db-c454f10d39b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\PlayLevel\TitleLevel\Actor\BackGround">
-      <UniqueIdentifier>{11b18c2b-7dc8-4cbb-81bb-c0e6141364f0}</UniqueIdentifier>
+    <Filter Include="Level\SelectLevel\Actor">
+      <UniqueIdentifier>{39ff1db6-1278-4a92-987e-9553786b04c7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\GameMode">
-      <UniqueIdentifier>{c42ccb04-43ef-4486-8d20-5a7a0e3657af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\PlayLevel\Actor\Attack\Ranged">
-      <UniqueIdentifier>{04c53a30-cc46-4923-b5e5-4a4c52e59c3c}</UniqueIdentifier>
+    <Filter Include="Level\SelectLevel\Actor\BackGround">
+      <UniqueIdentifier>{aaaa2fd7-d624-451c-a57b-61dbf3b09cc7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

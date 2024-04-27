@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SelectGametMode.h" />
     <ClInclude Include="AttackMelee.h">
       <SubType>
       </SubType>
@@ -224,6 +225,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="SelectBack.h" />
     <ClInclude Include="TitleBack.h">
       <SubType>
       </SubType>
@@ -250,6 +252,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SelectGametMode.cpp" />
     <ClCompile Include="AttackMelee.cpp">
       <SubType>
       </SubType>
@@ -311,6 +314,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="SelectBack.cpp" />
     <ClCompile Include="TitleBack.cpp">
       <SubType>
       </SubType>
