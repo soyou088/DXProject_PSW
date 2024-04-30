@@ -2,6 +2,7 @@
 #include "SelectGametMode.h"
 #include "SelectMenu.h"
 #include "CharacterSelection.h"
+#include "CharacterSelectionButon.h"
 
 #include <EngineCore/Camera.h>
 
@@ -22,7 +23,7 @@ void ASelectGametMode::BeginPlay()
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation(FVector(0.0f, 0.0f, -100.0f));
 	SelectMenu = GetWorld()->SpawnActor<ASelectMenu>("SelectMenu");
-
+	CharacterSelectionButon = GetWorld()->SpawnActor<ACharacterSelectionButon>("CharacterSelectionButon");
 
 	std::shared_ptr<ASelectBack> InitialSelectBack = GetWorld()->SpawnActor<ASelectBack>("SelectBack");
 	SelectBack.push_back(InitialSelectBack);
@@ -36,7 +37,6 @@ void ASelectGametMode::BeginPlay()
 
 	}
 	
-	std::shared_ptr<ACharacterSelection> InitialACharacterSelection = GetWorld()->SpawnActor<ACharacterSelection>("CharacterSelection");
 
 	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
 

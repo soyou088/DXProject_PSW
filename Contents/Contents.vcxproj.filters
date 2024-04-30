@@ -76,6 +76,9 @@
     <ClInclude Include="CharacterSelection.h">
       <Filter>Level\SelectLevel\Actor\Menu</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterSelectionButon.h">
+      <Filter>Level\SelectLevel\Actor\Menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -151,6 +154,9 @@
       <Filter>Level\SelectLevel\Actor\Menu</Filter>
     </ClCompile>
     <ClCompile Include="CharacterSelection.cpp">
+      <Filter>Level\SelectLevel\Actor\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterSelectionButon.cpp">
       <Filter>Level\SelectLevel\Actor\Menu</Filter>
     </ClCompile>
   </ItemGroup>

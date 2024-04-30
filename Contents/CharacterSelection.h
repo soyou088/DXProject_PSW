@@ -21,7 +21,11 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	
+
 private:
-	USpriteRenderer* CharacterSelection;
+	USpriteRenderer* CharacterSelection0;
+	USpriteRenderer* CharacterSelection1;
+	USpriteRenderer* CharacterSelection2;
 };
 

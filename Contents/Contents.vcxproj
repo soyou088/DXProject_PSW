@@ -171,6 +171,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="CharacterSelectionButon.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SelectGametMode.h" />
     <ClInclude Include="AttackMelee.h">
       <SubType>
@@ -261,6 +265,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CharacterSelection.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="CharacterSelectionButon.cpp">
       <SubType>
       </SubType>
     </ClCompile>
