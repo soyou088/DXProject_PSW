@@ -78,16 +78,45 @@ void ASelectMenu::BeginPlay()
 	ExplanationFrame->SetPosition({ 0.0f,-200.0f,-20.0f });
 	ExplanationFrame->SetOrder(ERenderOrder::Player);
 
-	ChAnimation->CreateAnimation("KiaraMove", "Kiara", 0.1f,true);
+	ChAnimation->CreateAnimation("KiaraIdle", "Kiara", 0.1f, true,0, 3);
+	ChAnimation->CreateAnimation("KiaraRun", "Kiara", 0.1f, true, 4, 9 );
 	ChAnimation->SetAutoSize(4.0f, true);
-	ChAnimation->ChangeAnimation("KiaraMove");
 	ChAnimation->SetPosition({ -480.0f,-150.0f });
 	ChAnimation->SetOrder(ERenderOrder::Player);
 
+	ChAnimation->ChangeAnimation("KiaraIdle");
+}
+
+void ASelectMenu::Chanimation()
+{
+
+	if (ChAnimation->IsCurAnimationEnd())
+	{
+		switch (Count)
+		{
+		case 0:
+		case 1:
+		case 2:
+		case 3:
+		case 4:
+			ChAnimation->ChangeAnimation("KiaraRun");
+			Count++;
+			break;
+		case 5:
+			ChAnimation->ChangeAnimation("KiaraIdle");
+			Count = 0;
+		case 6:
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void ASelectMenu::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	Chanimation();
 }
 
