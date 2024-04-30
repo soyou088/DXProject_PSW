@@ -26,6 +26,12 @@ protected:
 
 private:
 	USpriteRenderer* TopGround;
-	USpriteRenderer* BackChaGround;
+	USpriteRenderer* BackChaGroundL;
+	USpriteRenderer* BackChaGroundR;
+
+	USpriteRenderer* Explanation0;
+	USpriteRenderer* Explanation1;
+	USpriteRenderer* Explanation2;
+
 };
 
