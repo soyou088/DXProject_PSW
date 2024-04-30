@@ -1,6 +1,7 @@
 #pragma once
 #include "SelectBack.h"
 #include "Mouse.h"
+#include "list"
 #include <EngineCore/GameMode.h>
 
 // Ό³Έν :
@@ -25,10 +26,10 @@ protected:
 
 	void LevelEnd(ULevel* _NextLevel);
 	void LevelStart(ULevel* _PrevLevel);
-	void SpawnTitleBack(float _DeltaTime);
+	void SpawnSelectBack(float _DeltaTime);
 
 private:
 
-	std::list<std::shared_ptr<ASelectBack>> SelectBack;
+	std::list<std::shared_ptr<ASelectGametMode>> SelectBack;
 	float AttackTime = 0;
 };

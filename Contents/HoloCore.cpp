@@ -2,6 +2,7 @@
 #include "HoloCore.h"
 #include "PlayGameMode.h"
 #include "TitleGameMode.h"
+#include "SelectGametMode.h"
 #include <EngineCore/EngineSprite.h>
 UHoloCore::UHoloCore()
 {
@@ -198,7 +199,7 @@ void UHoloCore::Initialize()
 
 	GEngine->CreateLevel<APlayGameMode>("PlayLevel");
 	GEngine->CreateLevel<ATitleGameMode>("TitleLevel");
-	GEngine->CreateLevel<ASelectGametMode>("SelectLevel")
+	GEngine->CreateLevel<ASelectGametMode>("SelectLevel");
 	GEngine->ChangeLevel("TitleLevel");
 
 
