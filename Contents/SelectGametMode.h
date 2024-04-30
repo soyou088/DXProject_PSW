@@ -30,6 +30,7 @@ protected:
 
 private:
 
-	std::list<std::shared_ptr<ASelectGametMode>> SelectBack;
+	std::list<std::shared_ptr<ASelectBack>> SelectBack;
+	std::shared_ptr<AMouse> Mouse;
 	float AttackTime = 0;
 };

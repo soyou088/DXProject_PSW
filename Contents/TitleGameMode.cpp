@@ -68,7 +68,7 @@ void ATitleGameMode::Tick(float _DeltaTime)
 
 	if (true == IsDown('P'))
 	{
-		GEngine->ChangeLevel("PlayLevel");
+		GEngine->ChangeLevel("SelectLevel");
 	}
 
 	SpawnTitleBack(_DeltaTime);
