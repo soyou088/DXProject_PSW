@@ -167,6 +167,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CharacterSelection.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="SelectGametMode.h" />
     <ClInclude Include="AttackMelee.h">
       <SubType>
@@ -256,6 +260,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CharacterSelection.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="SelectGametMode.cpp" />
     <ClCompile Include="AttackMelee.cpp">
       <SubType>

@@ -1,8 +1,8 @@
 #pragma once
 #include "SelectBack.h"
 #include "SelectMenu.h"
+#include "CharacterSelection.h"
 #include "Mouse.h"
-
 #include <EngineCore/GameMode.h>
 
 // Ό³Έν :
@@ -33,7 +33,7 @@ private:
 
 	std::list<std::shared_ptr<ASelectBack>> SelectBack;
 	std::shared_ptr< ASelectMenu> SelectMenu;
-	
+	std::vector<std::shared_ptr<ACharacterSelection>> CharacterSelection;
 	std::shared_ptr<AMouse> Mouse;
 	float AttackTime = 0;
 };

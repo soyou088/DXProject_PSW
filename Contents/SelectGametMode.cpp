@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "SelectGametMode.h"
 #include "SelectMenu.h"
+#include "CharacterSelection.h"
 
 #include <EngineCore/Camera.h>
 
@@ -34,6 +35,8 @@ void ASelectGametMode::BeginPlay()
 		SelectBack.push_back(NewSelectBack);
 
 	}
+	
+	std::shared_ptr<ACharacterSelection> InitialACharacterSelection = GetWorld()->SpawnActor<ACharacterSelection>("CharacterSelection");
 
 	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
 
