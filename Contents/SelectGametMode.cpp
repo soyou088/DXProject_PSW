@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "SelectGametMode.h"
+#include "SelectMenu.h"
 
 #include <EngineCore/Camera.h>
 
@@ -19,6 +20,8 @@ void ASelectGametMode::BeginPlay()
 
 	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
 	Camera->SetActorLocation(FVector(0.0f, 0.0f, -100.0f));
+	SelectMenu = GetWorld()->SpawnActor<ASelectMenu>("SelectMenu");
+
 
 	std::shared_ptr<ASelectBack> InitialSelectBack = GetWorld()->SpawnActor<ASelectBack>("SelectBack");
 	SelectBack.push_back(InitialSelectBack);
@@ -52,7 +55,7 @@ void ASelectGametMode::SpawnSelectBack(float _DeltaTime)
 void ASelectGametMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	if (true == IsAnykeyDown())
+	if (true == IsDown('P'))
 	{
 		GEngine->ChangeLevel("PlayLevel");
 	}

@@ -226,6 +226,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="SelectBack.h" />
+    <ClInclude Include="SelectMenu.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="TitleBack.h">
       <SubType>
       </SubType>
@@ -315,6 +319,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="SelectBack.cpp" />
+    <ClCompile Include="SelectMenu.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="TitleBack.cpp">
       <SubType>
       </SubType>

@@ -70,6 +70,9 @@
     <ClInclude Include="SelectGametMode.h">
       <Filter>Level\GameMode</Filter>
     </ClInclude>
+    <ClInclude Include="SelectMenu.h">
+      <Filter>Level\SelectLevel\Actor\Menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -141,6 +144,9 @@
     <ClCompile Include="SelectGametMode.cpp">
       <Filter>Level\GameMode</Filter>
     </ClCompile>
+    <ClCompile Include="SelectMenu.cpp">
+      <Filter>Level\SelectLevel\Actor\Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -202,6 +208,9 @@
     </Filter>
     <Filter Include="Level\SelectLevel\Actor\BackGround">
       <UniqueIdentifier>{aaaa2fd7-d624-451c-a57b-61dbf3b09cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\SelectLevel\Actor\Menu">
+      <UniqueIdentifier>{9e3d863c-40ba-48d1-9ef1-c2ce6dd58494}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

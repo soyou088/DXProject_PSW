@@ -9,6 +9,10 @@ ASelectBack::ASelectBack()
 	SelectBack->SetupAttachment(Root);
 	SelectBack->SetPivot(EPivot::BOT);
 
+	SelectBackGround = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	SelectBackGround->SetupAttachment(Root);
+
+
 	SetRoot(Root);
 
 
@@ -29,10 +33,19 @@ void ASelectBack::BeginPlay()
 	SelectBack->SetOrder(ERenderOrder::Title);
 	SelectBack->SetRotationDeg({ 0.0f,0.0f,-10.0f });
 
-	DelayCallBack(8.0f, [=]()
+
+	SelectBack->DelayCallBack(8.0f, [=]()
 		{
 			Destroy();
 		});
+
+
+	SelectBackGround->SetSprite("menu_charselecBG_0.png");
+	SelectBackGround->SetAutoSize(1.0f, true);
+	SelectBackGround->SetOrder(ERenderOrder::Back);
+
+
+
 }
 
 void ASelectBack::BackMove(float _DeltaTime)

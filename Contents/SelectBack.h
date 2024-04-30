@@ -29,6 +29,9 @@ protected:
 private:
 
 	USpriteRenderer* SelectBack;
+	USpriteRenderer* SelectBackGround;
+
+
 
 	float MoveSpeed = 0.5f;
 

@@ -1,7 +1,8 @@
 #pragma once
 #include "SelectBack.h"
+#include "SelectMenu.h"
 #include "Mouse.h"
-#include "list"
+
 #include <EngineCore/GameMode.h>
 
 // Ό³Έν :
@@ -31,6 +32,8 @@ protected:
 private:
 
 	std::list<std::shared_ptr<ASelectBack>> SelectBack;
+	std::shared_ptr< ASelectMenu> SelectMenu;
+	
 	std::shared_ptr<AMouse> Mouse;
 	float AttackTime = 0;
 };
