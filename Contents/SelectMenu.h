@@ -29,9 +29,14 @@ private:
 	USpriteRenderer* BackChaGroundL;
 	USpriteRenderer* BackChaGroundR;
 
+	USpriteRenderer* ChAnimation;
+
 	USpriteRenderer* Explanation0;
 	USpriteRenderer* Explanation1;
 	USpriteRenderer* Explanation2;
+
+	USpriteRenderer* ExplanationFrame;
+
 
 };
 
