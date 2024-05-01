@@ -16,8 +16,24 @@ void ACharacterSelectionButon::BeginPlay()
 
 	for (int i = 0; i < 10; i++)
 	{
-		CharacterSelection = GetWorld()->SpawnActor<ACharacterSelection>("CharacterSelection");
-		CharacterSelection->SetActorLocation({ -425.0f - (i*-95), 0.0f });
+		// CharacterSelections벡터의 0 ~ 9까지
+		std::shared_ptr<ACharacterSelection> Selection = GetWorld()->SpawnActor<ACharacterSelection>("test");
+		Selection->SetActorLocation({ -425.0f - (i * -95.0f) ,0.0f });
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		std::shared_ptr<ACharacterSelection> Selection = GetWorld()->SpawnActor<ACharacterSelection>("test");
+		Selection->SetActorLocation({ -425.0f - (i * -95.0f),-85.0f });
+	}
+	for (int i = 0; i < 9; i++)
+	{
+		std::shared_ptr<ACharacterSelection> Selection = GetWorld()->SpawnActor<ACharacterSelection>("test");
+		Selection->SetActorLocation({ -380.0f - (i * -95.0f),-170.0f });
+	}
+	for (int i = 0; i < 9; i++)
+	{
+		std::shared_ptr<ACharacterSelection> Selection = GetWorld()->SpawnActor<ACharacterSelection>("test");
+		Selection->SetActorLocation({ -380.0f - (i * -95.0f),-255.0f });
 	}
 
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "CharacterSelection.h"
+#include "vector"
 #include <Enginecore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
 
@@ -23,7 +24,7 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	std::shared_ptr<ACharacterSelection> CharacterSelection;
+	std::vector<std::shared_ptr<ACharacterSelection>> CharacterSelections;
 private:
 
 };

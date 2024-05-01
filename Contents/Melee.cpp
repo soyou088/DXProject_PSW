@@ -57,7 +57,6 @@ void AMelee::MeleeAttack(float _DeltaTime)
 		Angle = AttackAngle;
 		if (0 < Delay) // 공격 쿨이 돌기 전
 		{
-			Renderer->SetRotationDeg(FVector{ 0.0f, 0.0f, Angle });
 			Delay -= _DeltaTime;
 		}
 		else // 공격 시작

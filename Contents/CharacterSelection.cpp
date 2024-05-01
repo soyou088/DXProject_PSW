@@ -36,17 +36,17 @@ void ACharacterSelection::BeginPlay()
 	CharacterSelection0->SetOrder(ERenderOrder::Player);
 	
 
-	// 두번째줄
-	CharacterSelection1->SetSprite("menu_charselecLocked2_0.png");
-	CharacterSelection1->SetAutoSize(2.0f, true);
-	CharacterSelection1->SetPosition({ 0.0f,145.0f });
-	CharacterSelection1->SetOrder(ERenderOrder::Player);
+	//// 두번째줄
+	//CharacterSelection1->SetSprite("menu_charselecLocked2_0.png");
+	//CharacterSelection1->SetAutoSize(2.0f, true);
+	//CharacterSelection1->SetPosition({ 0.0f,145.0f });
+	//CharacterSelection1->SetOrder(ERenderOrder::Player);
 
-	// 세번쨰줄
-	CharacterSelection2->SetSprite("menu_charselecLocked2_0.png");
-	CharacterSelection2->SetAutoSize(2.0f, true);
-	CharacterSelection2->SetPosition({ 0.0f, 0.0f });
-	CharacterSelection2->SetOrder(ERenderOrder::Player);
+	//// 세번쨰줄
+	//CharacterSelection2->SetSprite("menu_charselecLocked2_0.png");
+	//CharacterSelection2->SetAutoSize(2.0f, true);
+	//CharacterSelection2->SetPosition({ 0.0f, 0.0f });
+	//CharacterSelection2->SetOrder(ERenderOrder::Player);
 
 		
 

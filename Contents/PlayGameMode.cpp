@@ -11,6 +11,9 @@
 #include <EngineCore/EngineDebugMsgWindow.h>
 #include <EngineBase/EngineRandom.h>
 
+std::shared_ptr<APlayer> APlayGameMode::MainPlayer = nullptr;
+
+
 
 APlayGameMode::APlayGameMode()
 {
@@ -42,7 +45,9 @@ void APlayGameMode::BeginPlay()
 	Player = GetWorld()->SpawnActor<APlayer>("Player");
 	Player->SetName("Kiara");
 	Player->SetActorLocation(PlayerStartPos);
-	
+	MainPlayer = Player;
+	Player->State.ChangeState("Idle");
+
 	//Mouse ½ºÆù
 	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
 		

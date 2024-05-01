@@ -28,6 +28,8 @@ class APlayGameMode : public AGameMode
 
 public:
 	// constrcuter destructer
+	static std::shared_ptr<APlayer> MainPlayer;
+
 	APlayGameMode();
 	~APlayGameMode();
 
