@@ -65,6 +65,7 @@ void ATitleGameMode::SpawnTitleBack(float _DeltaTime)
 void ATitleGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+	AMouse::MouseCursorON = false;
 
 	if (true == IsDown('P'))
 	{
@@ -72,6 +73,8 @@ void ATitleGameMode::Tick(float _DeltaTime)
 	}
 
 	SpawnTitleBack(_DeltaTime);
+
+	CursorOFF();
 }
 
 void ATitleGameMode::LevelEnd(ULevel* _NextLevel)
@@ -83,4 +86,8 @@ void ATitleGameMode::LevelStart(ULevel* _PrevLevel)
 {
 	Super::LevelStart(_PrevLevel);
 
+}
+void ATitleGameMode::CursorOFF()
+{
+	ShowCursor(FALSE);
 }

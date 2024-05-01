@@ -84,9 +84,12 @@ void AMouse::CheckCurCursor()
 void AMouse::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+	if ("PlayLevel" == GetWorld()->GetName())
+	{
+		CurCursor();
+		CheckCurCursor();
+	}
 
-	CurCursor();
-	CheckCurCursor();
 
 	FVector PPos = APlayer::PlayerPos;
 	MousePos = GEngine->EngineWindow.GetScreenMousePos();

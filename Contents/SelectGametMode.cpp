@@ -58,12 +58,16 @@ void ASelectGametMode::SpawnSelectBack(float _DeltaTime)
 void ASelectGametMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	AMouse::MouseCursorON = false;
+
 	if (true == IsDown('P'))
 	{
 		GEngine->ChangeLevel("PlayLevel");
 	}
-
 	SpawnSelectBack(_DeltaTime);
+
+	CursorOFF();
 }
 
 void ASelectGametMode::LevelEnd(ULevel* _NextLevel)
@@ -75,4 +79,9 @@ void ASelectGametMode::LevelEnd(ULevel* _NextLevel)
 void ASelectGametMode::LevelStart(ULevel* _PrevLevel)
 {
 	Super::LevelStart(_PrevLevel);
+}
+
+void ASelectGametMode::CursorOFF()
+{
+	ShowCursor(FALSE);
 }

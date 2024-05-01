@@ -30,6 +30,7 @@ protected:
 	void LevelStart(ULevel* _PrevLevel);
 	void SpawnTitleBack(float _DeltaTime);
 
+
 private:
 	std::shared_ptr<ATitleLogo> TitleLogo;
 	std::list<std::shared_ptr<ATitleBack>> TitleBack;
@@ -77,5 +78,6 @@ private:
 	std::shared_ptr<AMouse> Mouse;
 
 	float AttackTime = 0;
+	void CursorOFF();
 };
 

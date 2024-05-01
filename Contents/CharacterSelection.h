@@ -25,7 +25,6 @@ protected:
 
 private:
 	USpriteRenderer* CharacterSelection0;
-	USpriteRenderer* CharacterSelection1;
-	USpriteRenderer* CharacterSelection2;
+	UCollision* Collision;
 };
 

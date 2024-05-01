@@ -4,6 +4,9 @@
 
 ACharacterSelectionButon::ACharacterSelectionButon()
 {
+
+
+
 }
 
 ACharacterSelectionButon::~ACharacterSelectionButon()
