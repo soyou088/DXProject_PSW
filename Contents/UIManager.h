@@ -32,9 +32,11 @@ protected:
 	UImage* HUDHP = nullptr;
 	UImage* HUDFrame = nullptr;
 
+	UImage* Weapon = nullptr;
+	UImage* Item = nullptr;
 
 	UImage* Gold = nullptr;
-	UImage* Kill = nullptr;
+	UImage* KillCount = nullptr;
 
 private:
 

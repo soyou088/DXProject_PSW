@@ -28,7 +28,7 @@ void UIManager::UISpawn()
 {
 
 	//EXP
-	EXPBarBack = CreateWidget<UImage>(GetWorld(), "HUDHP");
+	EXPBarBack = CreateWidget<UImage>(GetWorld(), "EXPBarBack");
 	EXPBarBack->AddToViewPort(1);
 	EXPBarBack->SetSprite("hud_expbar_bg_0.png");
 	EXPBarBack->SetAutoSize(ContentsValue::MultipleSize, true);
@@ -65,6 +65,30 @@ void UIManager::UISpawn()
 	HUDFrame->SetSprite("hud_new_HUDFrame_0.png");
 	HUDFrame->SetAutoSize(ContentsValue::MultipleSize, true);
 	HUDFrame->SetPosition(FVector(-445.f, 270.0f));
+	
+	//Weapon = CreateWidget<UImage>(GetWorld(), "HUDWeapon");
+	//Weapon->AddToViewPort(1);
+	//Weapon->SetSprite("ui_empty_slot_weapon_0.png");
+	//Weapon->SetAutoSize(ContentsValue::MultipleSize, true);
+	//Weapon->SetPosition(FVector(-445.f, 270.0f));
+
+	//Item = CreateWidget<UImage>(GetWorld(), "HUDItem");
+	//Item->AddToViewPort(1);
+	//Item->SetSprite("ui_empty_slot_item_0.png");
+	//Item->SetAutoSize(ContentsValue::MultipleSize, true);
+	//Item->SetPosition(FVector(-445.f, 270.0f));
+
+	Gold = CreateWidget<UImage>(GetWorld(), "Gold");
+	Gold->AddToViewPort(1);
+	Gold->SetSprite("ui_holoCoin_0.png");
+	Gold->SetAutoSize(ContentsValue::MultipleSize, true);
+	Gold->SetPosition(FVector(360.f, 310.0f));
+	
+	KillCount = CreateWidget<UImage>(GetWorld(), "KillCount");
+	KillCount->AddToViewPort(1);
+	KillCount->SetSprite("ui_defeatedEnemies_0.png");
+	KillCount->SetAutoSize(ContentsValue::MultipleSize, true);
+	KillCount->SetPosition(FVector(360.f, 275.0f));
 
 }
 
