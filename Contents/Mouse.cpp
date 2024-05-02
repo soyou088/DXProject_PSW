@@ -101,10 +101,14 @@ void AMouse::Tick(float _DeltaTime)
 	FVector PPos = APlayer::PlayerPos;
 	FVector Pos = GEngine->EngineWindow.GetScreenMousePos();
 	MousePos = GEngine->EngineWindow.GetScreenMousePos() - PPos;
-	FVector MouseLocation = FVector{ PPos.X + MousePos.X - 640, PPos.Y - MousePos.Y + 360 };
+	FVector MouseLocation = FVector{ PPos.X + MousePos.X - 700, PPos.Y - MousePos.Y - 4868 };
 	MouseCursorRenderer->SetPosition(MouseLocation);
 
 	int a = 0;
 
+	{
+		std::string MousePos_str = std::format("Mouse Pos : {}\n", MouseLocation.ToString());
+		UEngineDebugMsgWindow::PushMsg(MousePos_str);
+	}
 }
 
