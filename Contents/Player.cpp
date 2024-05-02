@@ -1,13 +1,14 @@
 #include "PreCompile.h"
 #include "Player.h"
+#include <EngineCore/Renderer.h>
+#include <EngineCore/SpriteRenderer.h>
+#include <EngineBase/EngineMath.h>
 #include "Mouse.h"
-#include "Ranged.h"
-#include "Melee.h"
+#include "Weapon.h"
+#include "Kiara.h"
 
-
-FVector APlayer::PlayerPos = FVector::Zero;
-
-
+float4 APlayer::PlayerColPos = float4::Zero;
+float4 APlayer::PlayerPos = float4::Zero;
 
 APlayer::APlayer()
 {
@@ -46,34 +47,61 @@ void APlayer::BeginPlay()
 	Super::BeginPlay();
 
 	CreatePlayerAnimation("Ame");
-	CreatePlayerAnimation("Aqua");
-	CreatePlayerAnimation("Ayame");
-	CreatePlayerAnimation("AZKiPortrait");
-	CreatePlayerAnimation("Bae");
-	CreatePlayerAnimation("Calli");
-	CreatePlayerAnimation("Suisei");
 	CreatePlayerAnimation("Kiara");
 	
 	
-	Renderer->SetAutoSize(2.0f, true);
+	Renderer->SetAutoSize(ContentsValue::MultipleSize, true);
 	Renderer->SetOrder(ERenderOrder::Player);
 	
+	Collision->SetPosition({ GetActorLocation().X, GetActorLocation().Y + (10.0f * ContentsValue::MultipleSize) });
+
 
 	PlayerCursor->SetSprite("spr_arrow_1.png");
 	PlayerCursor->SetAutoSize(1.0f, true);
-	PlayerCursor->SetOrder(ERenderOrder::Player);
-
-	FVector PCursor = FVector{ PlayerPos.X, PlayerPos.Y + 20.0f };
-	PlayerCursor->SetPosition(PCursor);
+	PlayerCursor->SetOrder(ERenderOrder::Mouse);
+	PlayerCursor->SetPosition(FVector{ PlayerPos.X, PlayerPos.Y + (20.0f * ContentsValue::MultipleSize) });
 
 	// 공격 스폰
-	Melee = GetWorld()->SpawnActor<AMelee>("Melee");
-	Melee->SetActorLocation(GetActorLocation());
 
-
+	AddWeapon<AKiara>("AKiara");
 
 	StateInit();
 }
+
+
+
+void APlayer::Tick(float _DeltaTime)
+{
+	// 위에 뭔가를 쳐야할때도 있다.
+	Super::Tick(_DeltaTime);
+
+	State.Update(_DeltaTime);
+
+	PlayerColPos = GetActorLocation();
+	PlayerPos = float4{ PlayerColPos.X, PlayerColPos.Y + (20.0f * ContentsValue::MultipleSize) };
+	
+	CursorDirChange();
+	PCursorDirCheck();
+	ChangeMouseAimAtkDir();
+
+	{
+		for (VPlayerWeaponsIter = VPlayerWeapons.begin(); VPlayerWeaponsIter != VPlayerWeapons.end(); ++VPlayerWeaponsIter)
+		{
+			std::shared_ptr<AWeapon> Weapon = *VPlayerWeaponsIter;
+
+			*VPlayerWeaponsIter = Weapon;
+		}
+	}
+
+}
+
+template<typename WeaponType>
+void APlayer::AddWeapon(std::string _Name)
+{
+	std::shared_ptr<AWeapon> Weapon = GetWorld()->SpawnActor<WeaponType>(_Name);
+	VPlayerWeapons.push_back(Weapon);
+}
+
 
 void APlayer::CreatePlayerAnimation(std::string _Name)
 {
@@ -82,6 +110,13 @@ void APlayer::CreatePlayerAnimation(std::string _Name)
 }
 
 
+void APlayer::CalStatus()
+{
+	AtkTime = roundf(1.0f / (1.0f + Haste));
+
+	CalSpeed = ContentsValue::BaseSpeed * Speed;
+	LineSpeed = CalSpeed * 0.75f;
+}
 
 
 void APlayer::CursorDirChange()
@@ -101,86 +136,47 @@ void APlayer::CursorDirChange()
 	}
 }
 
-void APlayer::SpawnRanged(float _DeltaTime)
-{
-	//if (1.0f <= AttackTime)
-	//{
-	//	Ranged = GetWorld()->SpawnActor<ARanged>("Ranged");
-	//	Ranged->SetActorLocation(APlayer::PlayerPos);
-	//	AttackTime = 0.0f;
-	//}
-	//AttackTime += _DeltaTime;
-}
-
 void APlayer::PCursorDirCheck()
 {
-	EActorDir InputDir = EActorDir::None;
-	// 처음들어올때
-	if (true == IsDown('W'))
+	if (false == AMouse::MouseCursorON)
 	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,90.0f });
-		InputDir = EActorDir::N;
-	}
-	if (true == IsDown('S'))
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,270.0f });
-		InputDir = EActorDir::S;
-	}
-	if (true == IsDown('A'))
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,180.0f });
-		InputDir = EActorDir::W;
-	}
-	if (true == IsDown('D'))
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,0.0f });
-		InputDir = EActorDir::E;
-	}
-
-	// 두 같이 방향일때
-	if (DirState == EActorDir::NE)
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,45.0f });
-		InputDir = EActorDir::E;
-	}
-
-	if (DirState == EActorDir::SE)
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,315.0f });
-		InputDir = EActorDir::E;
-	}
-
-	if (DirState == EActorDir::SW)
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,225.0f });
-		InputDir = EActorDir::W;
-	}
-
-	if (DirState == EActorDir::NW)
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,135.0f });
-		InputDir = EActorDir::W;
-	}
-
-	// 한뱡향일때
-	if (DirState == EActorDir::N)
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,90.0f });
-	}
-
-	if (DirState == EActorDir::S)
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,270.0f });
-	}
-
-	if (DirState == EActorDir::W)
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,180.0f });
-	}
-
-	if (DirState == EActorDir::E)
-	{
-		PlayerCursor->SetRotationDeg(FVector{ 0.0f,0.0f,0.0f });
+		switch (PlayerDir)
+		{
+		case EActorDir::N:
+			Angle = 90.0f;
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f, 0.0f, Angle });
+			break;
+		case EActorDir::NE:
+			Angle = 45.0f;
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f, 0.0f, Angle });
+			break;
+		case EActorDir::E:
+			Angle = 0.0f;
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f, 0.0f, Angle });
+			break;
+		case EActorDir::SE:
+			Angle = 315.0f;
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f, 0.0f, Angle });
+			break;
+		case EActorDir::S:
+			Angle = 270.0f;
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f, 0.0f, Angle });
+			break;
+		case EActorDir::SW:
+			Angle = 225.0f;
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f, 0.0f, Angle });
+			break;
+		case EActorDir::W:
+			Angle = 180.0f;
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f, 0.0f, Angle });
+			break;
+		case EActorDir::NW:
+			Angle = 135.0f;
+			PlayerCursor->SetRotationDeg(FVector{ 0.0f, 0.0f, Angle });
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -204,22 +200,3 @@ void APlayer::ChangeMouseAimAtkDir()
 }
 
 
-
-void APlayer::Tick(float _DeltaTime)
-{
-	// 위에 뭔가를 쳐야할때도 있다.
-	Super::Tick(_DeltaTime);
-
-	Melee->AMelee::PlayerDir = GetPlayerDir();
-
-	State.Update(_DeltaTime);
-
-	PlayerPos = GetActorLocation();
-
-	PCursorDirCheck();
-	CursorDirChange();
-	ChangeMouseAimAtkDir();
-	SpawnRanged(_DeltaTime);
-	
-
-}

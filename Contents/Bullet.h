@@ -1,13 +1,10 @@
 #pragma once
-#include <EngineCore/Actor.h>
-#include <EngineCore/StateManager.h>
+#include "Weapon.h"
 
-
-// Ό³Έν :
-class USpriteRenderer;
-class ABullet : public AActor
+class ABullet : public AWeapon
 {
-	GENERATED_BODY(AActor)
+	GENERATED_BODY(AWeapon)
+
 public:
 	// constrcuter destructer
 	ABullet();
@@ -23,10 +20,14 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-private:
-	USpriteRenderer* Renderer;
 	UCollision* Collision;
 
+	float BulletSpeed = 0.0f;
+	float TimeOutDestoryTime = 20.0f;
+
+	void TimeOutDestory(float _DeltaTime);
+
+private:
 
 };
 

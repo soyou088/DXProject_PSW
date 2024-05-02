@@ -7,9 +7,12 @@ enum class ERenderOrder
 	Menu,
 	TitleF,
 	MonsterUp,
+	MonsterUIUp,
 	MonsterDown,
+	MonsterUIDown,
 	Player,
 	Attack,
+	Mouse,
 	UI,
 };
 

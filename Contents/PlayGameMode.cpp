@@ -1,19 +1,13 @@
 #include "PreCompile.h"
 #include "PlayGameMode.h"
-#include "Player.h"
-#include "PlayBack.h"
 #include "ContentsValue.h"
-#include "UI.h"
 #include "Monster.h"
-#include "Mouse.h"
-#include <random>
+#include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/Camera.h>
 #include <EngineCore/EngineDebugMsgWindow.h>
 #include <EngineBase/EngineRandom.h>
 
 std::shared_ptr<APlayer> APlayGameMode::MainPlayer = nullptr;
-
-
 
 APlayGameMode::APlayGameMode()
 {
@@ -50,11 +44,9 @@ void APlayGameMode::BeginPlay()
 
 	//Mouse 스폰
 	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
-		
-
-	int a = 0;
-
-
+	AMouse::MouseCursorON = false;
+	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
+	Mouse->SetActorLocation(AMouse::MousePos);
 
 	// 3840 x 3840
 	for (int y = -1; y < 2; y++)
@@ -162,6 +154,22 @@ void APlayGameMode::InfinityGroundCheck()
 	}
 }
 
+template <typename Monster>
+std::shared_ptr<Monster> APlayGameMode::SpawnMonster(std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType)
+{
+	std::shared_ptr<AMonster> Monster;
+
+	Monster = GetWorld()->SpawnActor<AMonster>(_Name);
+	Monster->GetRenderer()->SetAutoSize(_Size * ContentsValue::MultipleSize, true);
+	Monster->GetRenderer()->ChangeAnimation(_Name);
+	Monster->SetMonsterStatus(_Hp, _Atk, _Speed, _Exp, _MoveType);
+	Monster->GetCollosion()->SetScale({ _Size * 16.0f * ContentsValue::MultipleSize, _Size * 16.0f * ContentsValue::MultipleSize });
+	Monster->GetCollosion()->SetPosition({ Monster->GetActorLocation().X, Monster->GetActorLocation().Y + (_Size * 10.0f * ContentsValue::MultipleSize) });
+	Monster->GetSavedRenderer()->SetPosition({ Monster->GetActorLocation().X, Monster->GetActorLocation().Y + (50.0f * ContentsValue::MultipleSize) });
+
+	return Monster;
+}
+
 void APlayGameMode::PlayDebugText()
 {
 		float4 PlayerPos = Player->GetActorLocation();
@@ -202,8 +210,9 @@ void APlayGameMode::PlayDebugText()
 			break;
 		}
 		UEngineDebugMsgWindow::PushMsg(std::format("PlayerDir : {}", PlayerDir));
-		
+		UEngineDebugMsgWindow::PushMsg(std::format("Angle : {}", Player->GetAngle()));
 }
+
 
 void APlayGameMode::SpawnMonsterTimeSet(float _DeltaTime, float _SpawnBegin, float _SpawnEnd, float _Term,
 	std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType,
@@ -236,12 +245,8 @@ void APlayGameMode::RandomSpawnMonster(std::string _Name, float _Size, float _Hp
 
 	for (int i = 0; i < _Quantity; i++)
 	{
-		std::shared_ptr<AMonster> Monster;
+		std::shared_ptr<AMonster> Monster = SpawnMonster<AMonster>(_Name, _Size, _Hp, _Atk, _Speed, _Exp, _MoveType);
 
-		Monster = GetWorld()->SpawnActor<AMonster>(_Name);
-		Monster->GetRenderer()->SetAutoSize(_Size, true);
-		Monster->GetRenderer()->ChangeAnimation(_Name);
-		Monster->SetMonsterStatus(_Hp, _Atk, _Speed, _Exp, _MoveType);
 		FVector GroupPos = RandomLocation(_Group);
 		Monster->SetActorLocation(GroupPos);
 		if (true == _Group)
@@ -315,17 +320,15 @@ float4 APlayGameMode::RandomLocation(bool _Group)
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
 	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
-	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerPos.X + AMouse::MousePos.X - 640, APlayer::PlayerPos.Y - AMouse::MousePos.Y + 360 };
+	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerColPos.X + AMouse::MousePos.X - (ContentsValue::WindowSize.X / 2.0f), APlayer::PlayerColPos.Y - AMouse::MousePos.Y + (ContentsValue::WindowSize.Y / 2.0f) };
 	Mouse->SetActorLocation(ContentsValue::PlayLevelMousePos);
-	
+
 	InfinityGroundCheck();
 
-	
-
-	// 몬스터 스폰
 	SpawnMonsterTimeSet(_DeltaTime, 0.0f, 20.0f, 5.0f,
-		"Shrimp", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
+		"Shrimp", 2.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
 		false, 10);
 	SpawnMonsterTimeSet(_DeltaTime, 0.0f, 20.0f, 10.0f,
 		"Shrimp", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
@@ -339,12 +342,19 @@ void APlayGameMode::Tick(float _DeltaTime)
 		"KFP", 1.0f, 20.0f, 2.0f, 1.0f, 3.0f, EMonsterMoveType::StraightToPlayer,
 		true, 10);
 
+
 	PlayTime += _DeltaTime;
 
+}
 
-	CursorOFF();
-	PlayDebugText();
+void APlayGameMode::LevelEnd(ULevel* _NextLevel)
+{
+	Super::LevelEnd(_NextLevel);
+}
 
+void APlayGameMode::LevelStart(ULevel* _PrevLevel)
+{
+	Super::LevelStart(_PrevLevel);
 }
 
 

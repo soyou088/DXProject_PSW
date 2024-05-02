@@ -1,9 +1,8 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include "ContentsEnum.h"
 #include "Mouse.h"
 #include <EngineCore/Camera.h>
-
+#include <EngineCore/SpriteRenderer.h>
 
 void APlayer::StateInit()
 {
@@ -42,11 +41,6 @@ void APlayer::Idle(float _Update)
 		State.ChangeState("Run");
 		return;
 	}
-
-	if (true)
-	{
-
-	}
 }
 
 void APlayer::IdleStart()
@@ -61,95 +55,87 @@ void APlayer::RunStart()
 
 void APlayer::Run(float _DeltaTime)
 {
-
-	std::shared_ptr<UCamera> Camera = GetWorld()->GetMainCamera();
-
-	
+	Camera = GetWorld()->GetMainCamera();
 
 	if (true == IsPress('W') && true == IsPress('A'))
 	{
-		AddActorLocation(FVector::Up * _DeltaTime * LineSpeed);
-		Camera->AddActorLocation(FVector::Up * _DeltaTime * LineSpeed);
-		Renderer->SetDir(EEngineDir::Left);
-		AddActorLocation(FVector::Left * _DeltaTime * LineSpeed);
-		Camera->AddActorLocation(FVector::Left * _DeltaTime * LineSpeed);
-		DirState = EActorDir::NW;
+		if (false == AMouse::MouseCursorON)
+		{
+			Renderer->SetDir(EEngineDir::Left);
+		}
+		KeyLineMove(_DeltaTime, FVector::Up, FVector::Left);
+		PlayerDir = EActorDir::NW;
 	}
 	else if (true == IsPress('W') && true == IsPress('D'))
 	{
-		AddActorLocation(FVector::Up * _DeltaTime * LineSpeed);
-		Camera->AddActorLocation(FVector::Up * _DeltaTime * LineSpeed);
-		Renderer->SetDir(EEngineDir::Right);
-		AddActorLocation(FVector::Right * _DeltaTime * LineSpeed);
-		Camera->AddActorLocation(FVector::Right * _DeltaTime * LineSpeed);
-		DirState = EActorDir::NE;
+		if (false == AMouse::MouseCursorON)
+		{
+			Renderer->SetDir(EEngineDir::Right);
+		}
+		KeyLineMove(_DeltaTime, FVector::Up, FVector::Right);
+		PlayerDir = EActorDir::NE;
 	}
 	else if (true == IsPress('S') && true == IsPress('A'))
 	{
-		AddActorLocation(FVector::Down * _DeltaTime * LineSpeed);
-		Camera->AddActorLocation(FVector::Down * _DeltaTime * LineSpeed);
-		Renderer->SetDir(EEngineDir::Left);
-		AddActorLocation(FVector::Left * _DeltaTime * LineSpeed);
-		Camera->AddActorLocation(FVector::Left * _DeltaTime * LineSpeed);
-		DirState = EActorDir::SW;
+		if (false == AMouse::MouseCursorON)
+		{
+			Renderer->SetDir(EEngineDir::Left);
+		}
+		KeyLineMove(_DeltaTime, FVector::Down, FVector::Left);
+		PlayerDir = EActorDir::SW;
 	}
 	else if (true == IsPress('S') && true == IsPress('D'))
 	{
-		AddActorLocation(FVector::Down * _DeltaTime * LineSpeed);
-		Camera->AddActorLocation(FVector::Down * _DeltaTime * LineSpeed);
-		Renderer->SetDir(EEngineDir::Right);
-		AddActorLocation(FVector::Right * _DeltaTime * LineSpeed);
-		Camera->AddActorLocation(FVector::Right * _DeltaTime * LineSpeed);
-		DirState = EActorDir::SE;
+		if (false == AMouse::MouseCursorON)
+		{
+			Renderer->SetDir(EEngineDir::Right);
+		}
+		KeyLineMove(_DeltaTime, FVector::Down, FVector::Right);
+		PlayerDir = EActorDir::SE;
 	}
-
 	else if (true == IsPress('A'))
 	{
-		Renderer->SetDir(EEngineDir::Left);
-		AddActorLocation(FVector::Left * _DeltaTime * Speed);
-		Camera->AddActorLocation(FVector::Left * _DeltaTime * Speed);
-		DirState = EActorDir::W;
-		
+		if (false == AMouse::MouseCursorON)
+		{
+			Renderer->SetDir(EEngineDir::Left);
+		}
+		KeyMove(_DeltaTime, FVector::Left, CalSpeed);
+		PlayerDir = EActorDir::W;
 	}
-	else if (true == IsUp('A'))
-	{
-		Renderer->SetDir(EEngineDir::Left);
-		State.ChangeState("Idle");
-	}
-
 	else if (true == IsPress('D'))
 	{
-		Renderer->SetDir(EEngineDir::Right);
-		AddActorLocation(FVector::Right * _DeltaTime * Speed);
-		Camera->AddActorLocation(FVector::Right * _DeltaTime * Speed);
-		DirState = EActorDir::E;
+		if (false == AMouse::MouseCursorON)
+		{
+			Renderer->SetDir(EEngineDir::Right);
+		}
+		KeyMove(_DeltaTime, FVector::Right, CalSpeed);
+		PlayerDir = EActorDir::E;
 	}
-	else if (true == IsUp('D'))
-	{
-		Renderer->SetDir(EEngineDir::Right);
-		State.ChangeState("Idle");
-	}
-
 	else if (true == IsPress('W'))
 	{
-		AddActorLocation(FVector::Up * _DeltaTime * Speed);
-		Camera->AddActorLocation(FVector::Up * _DeltaTime * Speed);
-		DirState = EActorDir::N;
+		KeyMove(_DeltaTime, FVector::Up, CalSpeed);
+		PlayerDir = EActorDir::N;
 	}
-	else if (true == IsUp('W'))
-	{
-		State.ChangeState("Idle");
-	}
-
 	else if (true == IsPress('S'))
 	{
-		AddActorLocation(FVector::Down * _DeltaTime * Speed);
-		Camera->AddActorLocation(FVector::Down * _DeltaTime * Speed);
-		DirState = EActorDir::S;
+		KeyMove(_DeltaTime, FVector::Down, CalSpeed);
+		PlayerDir = EActorDir::S;
 	}
-	else if (true == IsUp('S'))
+
+	if (true == IsUp('A') || true == IsUp('D') || true == IsUp('W') || true == IsUp('S'))
 	{
 		State.ChangeState("Idle");
 	}
+}
 
+void APlayer::KeyMove(float _DeltaTime, float4 _Dir, float _Speed)
+{
+	AddActorLocation(_Dir * _DeltaTime * _Speed);
+	Camera->AddActorLocation(_Dir * _DeltaTime * _Speed);
+}
+
+void APlayer::KeyLineMove(float _DeltaTime, float4 _Dir1, float4 _Dir2)
+{
+	KeyMove(_DeltaTime, _Dir1, LineSpeed);
+	KeyMove(_DeltaTime, _Dir2, LineSpeed);
 }

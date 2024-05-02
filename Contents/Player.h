@@ -1,12 +1,11 @@
 #pragma once
-#include "Mouse.h"
-#include "Melee.h"
-#include "Ranged.h"
 #include <EngineCore/Actor.h>
 #include <EngineCore/StateManager.h>
+#include "ContentsEnum.h"
 
 
 // 설명 :
+class AWeapon;
 class USpriteRenderer;
 class APlayer : public AActor
 {
@@ -14,7 +13,8 @@ class APlayer : public AActor
 	GENERATED_BODY(AActor)
 
 public:
-	static FVector PlayerPos;
+	static float4 PlayerColPos;
+	static float4 PlayerPos;
 	// constrcuter destructer
 	APlayer();
 	~APlayer();
@@ -30,7 +30,7 @@ public:
 
 	EActorDir GetPlayerDir()
 	{
-		return DirState;
+		return PlayerDir;
 	}
 
 
@@ -39,18 +39,38 @@ public:
 		return Angle;
 	}
 
-	std::shared_ptr<AMelee> Melee;
-	std::shared_ptr<ARanged> Ranged;
+	float GetHp()
+	{
+		return Hp;
+	}
+
+	float GetAtk()
+	{
+		return Atk;
+	}
+
+	float GetAtkTime()
+	{
+		return AtkTime;
+	}
+
+	float GetSpeed()
+	{
+		return Speed;
+	}
+
+	template <typename WeaponType>
+	void AddWeapon(std::string _Name);
 
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
-	void CursorDirChange();
+	
 	
 	void SpawnRanged(float _DeltaTime);
 
-	EActorDir DirState = EActorDir::E;
-	void PCursorDirCheck();
+
+
 
 	// 공격
 	//std::shared_ptr<AMultishot> Multishot;
@@ -61,19 +81,31 @@ private:
 	UCollision* Collision;
 
 	std::string Name = "Kiara";
-	void CreatePlayerAnimation(std::string _Name);
-	void ChangeMouseAimAtkDir();
 
+	std::shared_ptr<UCamera> Camera;
+	EActorDir PlayerDir = EActorDir::E;
+	float Hp = 100.0f;
+	float Atk = 1;
+	float CriRate = 0.05f;
+	float Haste = 0.0f;
+	float AtkTime = 1.0f;
+	float Speed = 1.0f;
+	float CalSpeed = ContentsValue::BaseSpeed * Speed;
+	float LineSpeed = CalSpeed * 0.75f;
+	float Exp = 0;
+
+	std::vector<std::shared_ptr<AWeapon>> VPlayerWeapons;
+	std::vector<std::shared_ptr<AWeapon>>::iterator VPlayerWeaponsIter = VPlayerWeapons.begin();
 
 	float4 Color;
 	float4 MousePos;
 	float Angle;
 
-
-	float Speed = 200.0f;
-	float LineSpeed = Speed * 0.75f;
-
-	float AttackTime = 0;
+	void CreatePlayerAnimation(std::string _Name);
+	void PCursorDirCheck();
+	void ChangeMouseAimAtkDir();
+	void CursorDirChange();
+	void CalStatus();
 
 
 	float4 MouseCursor;
@@ -87,7 +119,8 @@ private:
 	void Run(float _DeltaTime);
 	void RunStart();
 
-
+	void KeyMove(float _DeltaTime, float4 _Dir, float _Speed);
+	void KeyLineMove(float _DeltaTime, float4 _Dir1, float4 _Dir2);
 	//나는 마우스 방향을 가리키는 이미지 하나가 있었으면 좋겠다
 };
 

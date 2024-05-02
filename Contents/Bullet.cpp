@@ -3,19 +3,21 @@
 
 ABullet::ABullet()
 {
-	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
+	Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
+
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetupAttachment(Root);
+	Renderer->SetOrder(ERenderOrder::Attack);
 	Renderer->SetPivot(EPivot::MAX);
-
-	SetRoot(Root);
 
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Root);
-	Collision->SetScale({ 10.0f,10.f });
-
 	Collision->SetCollisionGroup(ECollisionOrder::Weapon);
 	Collision->SetCollisionType(ECollisionType::Rect);
+
+	SetRoot(Root);
+
+	SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y });
 }
 
 ABullet::~ABullet()
@@ -25,21 +27,27 @@ ABullet::~ABullet()
 void ABullet::BeginPlay()
 {
 	Super::BeginPlay();
-	//CreatePlayerAnimation("Ame");
-	Renderer->CreateAnimation("AmeAttack", "AmeAttack", 0.1f, true);
-	Renderer->SetAutoSize(2.0f, true);
-	Renderer->ChangeAnimation("AmeAttack");
-	Renderer->SetOrder(ERenderOrder::Attack);
 }
 
 void ABullet::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	Collision->CollisionEnter(ECollisionOrder::Monster, [=](std::shared_ptr<UCollision> _Collison)
-		{
-			_Collison->GetActor()->Destroy();
-		}
-	);
 
+	Renderer->SetRotationDeg(FVector{ 0.0f, 0.0f, Angle });
+
+	Dir = float4::DegToDir(Angle);
+	Dir.Z = 0.0f;
+
+	AddActorLocation(Dir * _DeltaTime * BulletSpeed * ContentsValue::MultipleSize);
+
+	TimeOutDestory(_DeltaTime);
 }
 
+void ABullet::TimeOutDestory(float _DeltaTime)
+{
+	TimeOutDestoryTime -= _DeltaTime;
+	if (0 > TimeOutDestoryTime)
+	{
+		Destroy();
+	}
+}

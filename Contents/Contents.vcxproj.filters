@@ -19,9 +19,6 @@
     <ClInclude Include="Mouse.h">
       <Filter>Level\PlayLevel\UIActor</Filter>
     </ClInclude>
-    <ClInclude Include="Melee.h">
-      <Filter>Level\PlayLevel\Actor\Attack</Filter>
-    </ClInclude>
     <ClInclude Include="ContentsEnum.h">
       <Filter>Header</Filter>
     </ClInclude>
@@ -52,9 +49,6 @@
     <ClInclude Include="Weapon.h">
       <Filter>Level\PlayLevel\Actor\Attack</Filter>
     </ClInclude>
-    <ClInclude Include="AttackMelee.h">
-      <Filter>Level\PlayLevel\Actor\Attack</Filter>
-    </ClInclude>
     <ClInclude Include="Ranged.h">
       <Filter>Level\PlayLevel\Actor\Attack\Ranged</Filter>
     </ClInclude>
@@ -79,6 +73,12 @@
     <ClInclude Include="CharacterSelectionButon.h">
       <Filter>Level\SelectLevel\Actor\Menu</Filter>
     </ClInclude>
+    <ClInclude Include="Melee.h">
+      <Filter>Level\PlayLevel\Actor\Attack\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Kiara.h">
+      <Filter>Level\PlayLevel\Actor\Attack\Melee\Character</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -98,9 +98,6 @@
     </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>Level\PlayLevel\UIActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Melee.cpp">
-      <Filter>Level\PlayLevel\Actor\Attack</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Level\PlayLevel\Actor\Player</Filter>
@@ -132,9 +129,6 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Level\PlayLevel\Actor\Attack</Filter>
     </ClCompile>
-    <ClCompile Include="AttackMelee.cpp">
-      <Filter>Level\PlayLevel\Actor\Attack</Filter>
-    </ClCompile>
     <ClCompile Include="Ranged.cpp">
       <Filter>Level\PlayLevel\Actor\Attack\Ranged</Filter>
     </ClCompile>
@@ -158,6 +152,12 @@
     </ClCompile>
     <ClCompile Include="CharacterSelectionButon.cpp">
       <Filter>Level\SelectLevel\Actor\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Melee.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Kiara.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack\Melee\Character</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +223,12 @@
     </Filter>
     <Filter Include="Level\PlayLevel\Actor\Player">
       <UniqueIdentifier>{903231db-adeb-431a-bc66-ec5cb32db949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\Actor\Attack\Melee">
+      <UniqueIdentifier>{af0635cc-9267-4bc4-ab40-048bfae8b4be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\Actor\Attack\Melee\Character">
+      <UniqueIdentifier>{dfdbe2af-a6f5-4dff-a303-7b005732b5de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

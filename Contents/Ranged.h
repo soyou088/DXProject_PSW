@@ -1,13 +1,10 @@
 #pragma once
-#include <EngineCore/Actor.h>
-#include <EngineCore/StateManager.h>
+#include "Weapon.h"
 
-
-// Ό³Έν :
-class USpriteRenderer;
-class ARanged : public AActor
+class ARanged : public AWeapon
 {
-	GENERATED_BODY(AActor)
+	GENERATED_BODY(AWeapon)
+
 public:
 	// constrcuter destructer
 	ARanged();
@@ -19,26 +16,15 @@ public:
 	ARanged& operator=(const ARanged& _Other) = delete;
 	ARanged& operator=(ARanged&& _Other) noexcept = delete;
 
-	std::shared_ptr<ARanged> Ranged;
-
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	float4 AttackDir();
-	FVector AttackAimDir();
+	bool IsMultiShot = false;
 
-	void CursorOFf();
+	void CreateBullet();
+
 private:
 
-	float4 AtkDir = float4::Right;
-
-	std::string Name = "Ame";
-	void CreatePlayerAnimation(std::string _Name);
-
-	float AttackAngle;
-	float AttackTime = 0;
-	float Speed = 700.0f;
-	float RangedSpeed = Speed * 0.75f;
 };
 
