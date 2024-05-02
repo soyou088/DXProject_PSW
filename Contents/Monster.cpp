@@ -36,7 +36,7 @@ void AMonster::BeginPlay()
 	Super::BeginPlay();
 
 
-	CreateMonsterAnimation("Shrimp");
+	CreateMonsterAnimation("Fubuzilla",11);
 	CreateMonsterAnimation("Deadbeat");
 	CreateMonsterAnimation("Takodachi");
 	CreateMonsterAnimation("KFP");

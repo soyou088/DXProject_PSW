@@ -2,12 +2,15 @@
 #include "PlayGameMode.h"
 #include "ContentsValue.h"
 #include "Monster.h"
+#include "UIManager.h"
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/Camera.h>
 #include <EngineCore/EngineDebugMsgWindow.h>
 #include <EngineBase/EngineRandom.h>
 
 std::shared_ptr<APlayer> APlayGameMode::MainPlayer = nullptr;
+std::shared_ptr<class UIManager> APlayGameMode::PlayUIManager;
+
 
 APlayGameMode::APlayGameMode()
 {
@@ -48,6 +51,9 @@ void APlayGameMode::BeginPlay()
 	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
 	Mouse->SetActorLocation(AMouse::MousePos);
 
+
+	//UI ½ºÆù
+	PlayUIManager = GetWorld()->SpawnActor<UIManager>("UIManager");
 
 	// 3840 x 3840
 	for (int y = -1; y < 2; y++)
@@ -329,10 +335,10 @@ void APlayGameMode::Tick(float _DeltaTime)
 	InfinityGroundCheck();
 
 	SpawnMonsterTimeSet(_DeltaTime, 0.0f, 20.0f, 5.0f,
-		"Shrimp", 2.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
+		"Fubuzilla", 2.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
 		false, 10);
 	SpawnMonsterTimeSet(_DeltaTime, 0.0f, 20.0f, 10.0f,
-		"Shrimp", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
+		"Fubuzilla", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
 		true, 10);
 	SpawnMonsterTimeSet(_DeltaTime, 20.0f, 40.0f, 5.0f,
 		"Deadbeat", 1.0f, 40.0f, 4.0f, 0.4f, 7.0f, EMonsterMoveType::Follow,

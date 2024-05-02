@@ -10,9 +10,6 @@
     <ClInclude Include="ContentsValue.h">
       <Filter>Header</Filter>
     </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>Level\PlayLevel\UIActor</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Level\PlayLevel\Actor\Monster</Filter>
     </ClInclude>
@@ -79,6 +76,9 @@
     <ClInclude Include="Kiara.h">
       <Filter>Level\PlayLevel\Actor\Attack\Melee\Character</Filter>
     </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Level\PlayLevel\UIActor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -89,9 +89,6 @@
     </ClCompile>
     <ClCompile Include="ContentsValue.cpp">
       <Filter>Header</Filter>
-    </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>Level\PlayLevel\UIActor</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Level\PlayLevel\Actor\Monster</Filter>
@@ -158,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="Kiara.cpp">
       <Filter>Level\PlayLevel\Actor\Attack\Melee\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Level\PlayLevel\UIActor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

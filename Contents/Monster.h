@@ -74,7 +74,7 @@ private:
 	FVector Dir = FVector::Zero;
 	FVector ToPlayerDir;
 
-	std::string Name = "Shrimp";
+	std::string Name = "Fubuzilla";
 	float Hp = 8.0f;
 	float Atk = 2.0f;
 	float Speed = 0.35f;

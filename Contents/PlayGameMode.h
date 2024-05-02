@@ -26,6 +26,7 @@ class APlayGameMode : public AGameMode
 public:
 	// constrcuter destructer
 	static std::shared_ptr<APlayer> MainPlayer;
+	static std::shared_ptr<class UIManager> PlayUIManager;
 
 	APlayGameMode();
 	~APlayGameMode();
@@ -46,6 +47,7 @@ protected:
 	void LevelStart(ULevel* _PrevLevel);
 
 	std::vector<std::shared_ptr<APlayBack>> Grounds;
+	
 
 	std::shared_ptr<AMouse> Mouse;
 	std::shared_ptr<APlayer> Player;
