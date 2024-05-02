@@ -54,18 +54,17 @@ void UIManager::UISpawn()
 	HUDHP->SetAutoSize(ContentsValue::MultipleSize, true);
 	HUDHP->SetPosition(FVector(-450.f, 269.f));
 
-
 	HPBar = CreateWidget<UImage>(GetWorld(), "HPBar");
 	HPBar->AddToViewPort(1);
 	HPBar->SetSprite("hud_HUD_HP_green_0.png");
 	HPBar->SetAutoSize(ContentsValue::MultipleSize, true);
-	HPBar->SetPosition(FVector(-587.f, 293.f));
+	HPBar->SetPosition(FVector(-382.f, 320.f));
 	
 	HUDFrame = CreateWidget<UImage>(GetWorld(), "HUDFrame");
 	HUDFrame->AddToViewPort(1);
 	HUDFrame->SetSprite("hud_new_HUDFrame_0.png");
 	HUDFrame->SetAutoSize(ContentsValue::MultipleSize, true);
-	HUDFrame->SetPosition(FVector(0.f, -30.f));
+	HUDFrame->SetPosition(FVector(-445.f, 270.0f));
 
 }
 
