@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineCore/Image.h>
+#include <EngineCore/TextWidget.h>
 
 // Ό³Έν :
 class UIManager : public AActor
@@ -37,6 +38,12 @@ protected:
 
 	UImage* Gold = nullptr;
 	UImage* KillCount = nullptr;
+
+	UTextWidget* TimeUI = nullptr;
+	UTextWidget* GoldText = nullptr;
+	UTextWidget* KillCountText = nullptr;
+	UTextWidget* StateText = nullptr;
+	UTextWidget* CharacterName = nullptr;
 
 private:
 

@@ -90,6 +90,14 @@ void UIManager::UISpawn()
 	KillCount->SetAutoSize(ContentsValue::MultipleSize, true);
 	KillCount->SetPosition(FVector(360.f, 275.0f));
 
+	TimeUI = CreateWidget<UTextWidget>(GetWorld(), "Time");
+	TimeUI->AddToViewPort(4);
+	TimeUI->SetScale(30.f);
+	TimeUI->SetFont("Galmuri9");
+	TimeUI->SetColor(Color8Bit::White);
+	TimeUI->SetPosition(FVector(0.f, 315.f));
+	TimeUI->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_CENTER | FW1_TEXT_FLAG::FW1_VCENTER));
+
 }
 
 

@@ -11,8 +11,8 @@ bool AMouse::MouseCursorON = false;
 AMouse::AMouse()
 {
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
-	MouseCursorRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	MouseCursorRenderer->SetupAttachment(Root);
+	//MouseCursorRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	//MouseCursorRenderer->SetupAttachment(Root);
 
 	
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
@@ -36,11 +36,17 @@ void AMouse::BeginPlay()
 {
 	Super::BeginPlay();
 
+	MouseCursorRenderer = CreateWidget<UImage>(GetWorld(), "EXPBarBack");
+	MouseCursorRenderer->AddToViewPort(1);
 	MouseCursorRenderer->SetSprite("spr_GameCursor_0.png");
-	MouseCursorRenderer->SetAutoSize(1.0f, true);
-	MouseCursorRenderer->SetOrder(10);
+	MouseCursorRenderer->SetAutoSize(ContentsValue::MultipleSize, true);
+	//EXPBarBack->SetPosition(FVector(10.0f, 340.0f));
 
-	MousePos = GEngine->EngineWindow.GetScreenMousePos();
+	//MouseCursorRenderer->SetSprite("spr_GameCursor_0.png");
+	//MouseCursorRenderer->SetAutoSize(1.0f, true);
+	//MouseCursorRenderer->SetOrder(10);
+
+	
 	int a = 0;
 }
 
@@ -77,7 +83,7 @@ void AMouse::CheckCurCursor()
 	{
 		CursorOFf();
 		MouseCursorRenderer->SetSprite("spr_GameCursor1_0.png");
-		MouseCursorRenderer->SetPivot(EPivot::MAX);
+		//MouseCursorRenderer->SetPivot(EPivot::MAX);
 	}
 }
 
@@ -93,9 +99,10 @@ void AMouse::Tick(float _DeltaTime)
 
 
 	FVector PPos = APlayer::PlayerPos;
-	MousePos = GEngine->EngineWindow.GetScreenMousePos();
+	FVector Pos = GEngine->EngineWindow.GetScreenMousePos();
+	MousePos = GEngine->EngineWindow.GetScreenMousePos() - PPos;
 	FVector MouseLocation = FVector{ PPos.X + MousePos.X - 640, PPos.Y - MousePos.Y + 360 };
-	SetActorLocation(MouseLocation);
+	MouseCursorRenderer->SetPosition(MouseLocation);
 
 	int a = 0;
 

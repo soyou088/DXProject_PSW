@@ -4,6 +4,9 @@
 #include "TitleGameMode.h"
 #include "SelectGametMode.h"
 #include <EngineCore/EngineSprite.h>
+#include <EngineCore/EngineEditorGUI.h>
+#include <EngineCore/EngineFont.h>
+
 UHoloCore::UHoloCore()
 {
 }
@@ -14,6 +17,8 @@ UHoloCore::~UHoloCore()
 
 void UHoloCore::Initialize()
 {
+	UEngineFont::Load("Galmuri9");
+
 
 	{
 		// 파일의 헤더
