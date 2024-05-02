@@ -1,6 +1,7 @@
 #include "PreCompile.h"
-#include "Player.h"
 #include "Mouse.h"
+#include "ContentsValue.h"
+#include "Player.h"
 
 
 FVector AMouse::MousePos = FVector::Zero;
@@ -10,7 +11,6 @@ bool AMouse::MouseCursorON = false;
 AMouse::AMouse()
 {
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
-	
 	MouseCursorRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	MouseCursorRenderer->SetupAttachment(Root);
 
@@ -40,6 +40,7 @@ void AMouse::BeginPlay()
 	MouseCursorRenderer->SetAutoSize(1.0f, true);
 	MouseCursorRenderer->SetOrder(10);
 
+	MousePos = GEngine->EngineWindow.GetScreenMousePos();
 	int a = 0;
 }
 

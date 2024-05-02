@@ -31,8 +31,8 @@ protected:
 	void CurCursor();
 	void CheckCurCursor();
 
-	USpriteRenderer* MouseCursorRenderer;
 private:
+	USpriteRenderer* MouseCursorRenderer;
 	UCollision* Collision;
 
 

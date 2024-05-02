@@ -48,6 +48,7 @@ void APlayGameMode::BeginPlay()
 	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
 	Mouse->SetActorLocation(AMouse::MousePos);
 
+
 	// 3840 x 3840
 	for (int y = -1; y < 2; y++)
 	{
@@ -322,7 +323,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
-	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerColPos.X + AMouse::MousePos.X - (ContentsValue::WindowSize.X / 2.0f), APlayer::PlayerColPos.Y - AMouse::MousePos.Y + (ContentsValue::WindowSize.Y / 2.0f) };
+	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerColPos.X + AMouse::MousePos.X - 645, APlayer::PlayerColPos.Y - AMouse::MousePos.Y + 400 };
 	Mouse->SetActorLocation(ContentsValue::PlayLevelMousePos);
 
 	InfinityGroundCheck();
