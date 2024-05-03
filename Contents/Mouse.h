@@ -29,11 +29,11 @@ protected:
 
 	void CursorOFf();
 	void CurCursor();
-	void CheckCurCursor();
+	void CheckCurCursor(FVector _MousePos);
 
 private:
 	UImage* MouseCursorRenderer;
-	//USpriteRenderer* MouseCursorRenderer;
+
 	UCollision* Collision;
 
 

@@ -100,15 +100,11 @@ void UIManager::UISpawn()
 	TimeUI->SetPosition(FVector(0.f, 285.f));
 	TimeUI->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_CENTER | FW1_TEXT_FLAG::FW1_VCENTER));
 
-	StageText = CreateWidget<UTextWidget>(GetWorld(), "KillCount");
+	StageText = CreateWidget<UImage>(GetWorld(), "StageText");
 	StageText->AddToViewPort(5);
-	StageText->SetFont("8-bit-hud");
-	StageText->SetColor(Color8Bit::White);
-	StageText->SetPosition(FVector(0.f, 310.f));
-	StageText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_CENTER | FW1_TEXT_FLAG::FW1_VCENTER));
-	StageText->SetText("STAGE");
-	
-
+	StageText->SetSprite("STAGE.png");
+	StageText->SetAutoSize(0.6f, true);
+	StageText->SetPosition(FVector(0.f, 305.f));
 
 }
 

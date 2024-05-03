@@ -77,7 +77,7 @@ private:
 
 	std::shared_ptr<AMouse> Mouse;
 
-	float AttackTime = 0;
+	float BackSpawnTime = 0;
 	void CursorOFF();
 };
 

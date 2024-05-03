@@ -53,13 +53,13 @@ void ATitleGameMode::BeginPlay()
 
 void ATitleGameMode::SpawnTitleBack(float _DeltaTime)
 {
-	if (0.1f <= AttackTime)
+	if (0.1f <= BackSpawnTime)
 	{
 		std::shared_ptr<ATitleBack> NewTitleBack = GetWorld()->SpawnActor<ATitleBack>("TitleBack");
 		TitleBack.push_back(NewTitleBack);
-		AttackTime = 0.0f;
+		BackSpawnTime = 0.0f;
 	}
-	AttackTime += _DeltaTime;
+	BackSpawnTime += _DeltaTime;
 }
 
 void ATitleGameMode::Tick(float _DeltaTime)

@@ -45,13 +45,13 @@ void ASelectGametMode::BeginPlay()
 
 void ASelectGametMode::SpawnSelectBack(float _DeltaTime)
 {
-	if (0.1f <= AttackTime)
+	if (0.1f <= BackSpawnTime)
 	{
 		std::shared_ptr<ASelectBack> NewSelectBack = GetWorld()->SpawnActor<ASelectBack>("SelectBack");
 		SelectBack.push_back(NewSelectBack);
-		AttackTime = 0.0f;
+		BackSpawnTime = 0.0f;
 	}
-	AttackTime += _DeltaTime;
+	BackSpawnTime += _DeltaTime;
 }
 
 

@@ -38,11 +38,11 @@ protected:
 	UImage* Weapon = nullptr;
 	UImage* Item = nullptr;
 
+	UImage* StageText = nullptr;
 	UImage* Gold = nullptr;
 	UImage* KillCount = nullptr;
 
 	UTextWidget* TimeUI = nullptr;
-	UTextWidget* StageText = nullptr;
 	UTextWidget* GoldText = nullptr;
 	UTextWidget* KillCountText = nullptr;
 	UTextWidget* StateText = nullptr;

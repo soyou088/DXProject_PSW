@@ -328,6 +328,11 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
+	if (true)
+	{
+		PlayTime += _DeltaTime;
+	}
+
 	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
 	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerColPos.X + AMouse::MousePos.X - 645, APlayer::PlayerColPos.Y - AMouse::MousePos.Y + 400 };
 	Mouse->SetActorLocation(ContentsValue::PlayLevelMousePos);
@@ -348,9 +353,6 @@ void APlayGameMode::Tick(float _DeltaTime)
 	SpawnMonsterTimeSet(_DeltaTime, 60.0f, 80.0f, 5.0f,
 		"KFP", 1.0f, 20.0f, 2.0f, 1.0f, 3.0f, EMonsterMoveType::StraightToPlayer,
 		true, 10);
-
-
-	PlayTime += _DeltaTime;
 
 	PlayDebugText();
 
