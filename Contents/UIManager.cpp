@@ -29,7 +29,7 @@ void UIManager::UISpawn()
 
 	//EXP
 	EXPBarBack = CreateWidget<UImage>(GetWorld(), "EXPBarBack");
-	EXPBarBack->AddToViewPort(1);
+	EXPBarBack->AddToViewPort(2);
 	EXPBarBack->SetSprite("hud_expbar_bg_0.png");
 	EXPBarBack->SetAutoSize(ContentsValue::MultipleSize, true);
 	EXPBarBack->SetPosition(FVector(10.0f, 340.0f));
@@ -37,31 +37,31 @@ void UIManager::UISpawn()
 	//HUD
 	
 	Character = CreateWidget<UImage>(GetWorld(), "HUDCharacter");
-	Character->AddToViewPort(2);
+	Character->AddToViewPort(3);
 	Character->SetSprite("spr_KiaraPortrait_0.png");
 	Character->SetAutoSize(ContentsValue::MultipleSize, true);
 	Character->SetPosition(FVector(-590.f, 288.f));
 	
 	CharacterFrame = CreateWidget<UImage>(GetWorld(), "HUDCharacterFrame");
-	CharacterFrame->AddToViewPort(1);
+	CharacterFrame->AddToViewPort(2);
 	CharacterFrame->SetSprite("HUDCharacterFrame.png");
 	CharacterFrame->SetAutoSize(ContentsValue::MultipleSize, true);
 	CharacterFrame->SetPosition(FVector(-587.f, 293.f));
 
 	HUDHP = CreateWidget<UImage>(GetWorld(), "HUDHP");
-	HUDHP->AddToViewPort(1);
+	HUDHP->AddToViewPort(2);
 	HUDHP->SetSprite("hud_new_HUDHP_0.png");
 	HUDHP->SetAutoSize(ContentsValue::MultipleSize, true);
 	HUDHP->SetPosition(FVector(-450.f, 269.f));
 
 	HPBar = CreateWidget<UImage>(GetWorld(), "HPBar");
-	HPBar->AddToViewPort(1);
+	HPBar->AddToViewPort(2);
 	HPBar->SetSprite("hud_HUD_HP_green_0.png");
 	HPBar->SetAutoSize(ContentsValue::MultipleSize, true);
 	HPBar->SetPosition(FVector(-382.f, 320.f));
 	
 	HUDFrame = CreateWidget<UImage>(GetWorld(), "HUDFrame");
-	HUDFrame->AddToViewPort(1);
+	HUDFrame->AddToViewPort(2);
 	HUDFrame->SetSprite("hud_new_HUDFrame_0.png");
 	HUDFrame->SetAutoSize(ContentsValue::MultipleSize, true);
 	HUDFrame->SetPosition(FVector(-445.f, 270.0f));
@@ -79,19 +79,19 @@ void UIManager::UISpawn()
 	//Item->SetPosition(FVector(-445.f, 270.0f));
 
 	Gold = CreateWidget<UImage>(GetWorld(), "Gold");
-	Gold->AddToViewPort(1);
+	Gold->AddToViewPort(2);
 	Gold->SetSprite("ui_holoCoin_0.png");
 	Gold->SetAutoSize(ContentsValue::MultipleSize, true);
 	Gold->SetPosition(FVector(360.f, 310.0f));
 	
 	KillCount = CreateWidget<UImage>(GetWorld(), "KillCount");
-	KillCount->AddToViewPort(1);
+	KillCount->AddToViewPort(2);
 	KillCount->SetSprite("ui_defeatedEnemies_0.png");
 	KillCount->SetAutoSize(ContentsValue::MultipleSize, true);
 	KillCount->SetPosition(FVector(360.f, 275.0f));
 
 	TimeUI = CreateWidget<UTextWidget>(GetWorld(), "Time");
-	TimeUI->AddToViewPort(4);
+	TimeUI->AddToViewPort(5);
 	TimeUI->SetScale(30.f);
 	TimeUI->SetFont("Galmuri9");
 	TimeUI->SetColor(Color8Bit::White);

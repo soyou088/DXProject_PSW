@@ -11,8 +11,7 @@ bool AMouse::MouseCursorON = false;
 AMouse::AMouse()
 {
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
-	//MouseCursorRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	//MouseCursorRenderer->SetupAttachment(Root);
+
 
 	
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
@@ -37,14 +36,10 @@ void AMouse::BeginPlay()
 	Super::BeginPlay();
 
 	MouseCursorRenderer = CreateWidget<UImage>(GetWorld(), "EXPBarBack");
-	MouseCursorRenderer->AddToViewPort(1);
+	MouseCursorRenderer->AddToViewPort(10);
 	MouseCursorRenderer->SetSprite("spr_GameCursor_0.png");
 	MouseCursorRenderer->SetAutoSize(ContentsValue::MultipleSize, true);
-	//EXPBarBack->SetPosition(FVector(10.0f, 340.0f));
 
-	//MouseCursorRenderer->SetSprite("spr_GameCursor_0.png");
-	//MouseCursorRenderer->SetAutoSize(1.0f, true);
-	//MouseCursorRenderer->SetOrder(10);
 
 	
 	int a = 0;
@@ -97,11 +92,8 @@ void AMouse::Tick(float _DeltaTime)
 		CheckCurCursor();
 	}
 
-
-	FVector PPos = APlayer::PlayerPos;
-	FVector Pos = GEngine->EngineWindow.GetScreenMousePos();
-	MousePos = GEngine->EngineWindow.GetScreenMousePos() - PPos;
-	FVector MouseLocation = FVector{ PPos.X + MousePos.X - 700, PPos.Y - MousePos.Y - 4868 };
+	MousePos = GEngine->EngineWindow.GetScreenMousePos();
+	FVector MouseLocation = FVector{MousePos.X - 640,-MousePos.Y + 360 };
 	MouseCursorRenderer->SetPosition(MouseLocation);
 
 	int a = 0;
