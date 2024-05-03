@@ -333,9 +333,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 		PlayTime += _DeltaTime;
 	}
 
-	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
 	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerColPos.X + AMouse::MousePos.X - 645, APlayer::PlayerColPos.Y - AMouse::MousePos.Y + 400 };
-	Mouse->SetActorLocation(ContentsValue::PlayLevelMousePos);
 
 	InfinityGroundCheck();
 

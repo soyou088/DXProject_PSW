@@ -74,8 +74,6 @@ void AMouse::CheckCurCursor(FVector _MousePos)
 		CursorOFf();
 		MouseCursorRenderer->SetSprite("spr_GameCursor_0.png");
 		MouseCursorRenderer->SetPosition({ _MousePos.X- 595, -_MousePos.Y+ 310 });
-		Collision->SetPosition(_MousePos);
-	
 	}
 	else
 	{
@@ -91,12 +89,17 @@ void AMouse::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 	MousePos = GEngine->EngineWindow.GetScreenMousePos();
 	FVector MouseLocation = FVector{ MousePos.X - 640,-MousePos.Y + 360 };
+	FVector MPos = ContentsValue::PlayLevelMousePos;
 	if ("PlayLevel" == GetWorld()->GetName())
 	{
 		CurCursor();
+		Collision->SetPosition({ MPos.X + 5 , MPos.Y - 40.0f });
+	}
+	else
+	{
+		Collision->SetPosition(MouseLocation);
 	}
 	CheckCurCursor(MousePos);
-	Collision->SetPosition(MouseLocation);
 	
 	int a = 0;
 
