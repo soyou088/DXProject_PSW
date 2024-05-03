@@ -16,5 +16,7 @@ public:
 	static const float BasePUR;
 
 	static float Time;
+	static int KillCount;
+	static int Gold;
 };
 

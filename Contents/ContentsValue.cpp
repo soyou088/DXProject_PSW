@@ -13,3 +13,5 @@ const float ContentsValue::BaseHaste = 1.0f;
 const float ContentsValue::BasePUR = 40.0f;
 
 float ContentsValue::Time = 0.f;
+int ContentsValue::KillCount = 0;
+int ContentsValue::Gold = 0;

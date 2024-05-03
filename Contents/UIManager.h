@@ -24,7 +24,7 @@ protected:
 
 	void UISpawn();
 	void TimeUpdate(float _DeltaTime);
-
+	void KillCountUpdate();
 
 	UImage* Character = nullptr;
 	UImage* CharacterFrame = nullptr;

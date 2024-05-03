@@ -188,6 +188,7 @@ void AMonster::Saved(float _DeltaTime)
 	if (true == SavedRenderer->IsCurAnimationEnd())
 	{
 		Destroy();
+		++ContentsValue::KillCount;
 	}
 }
 

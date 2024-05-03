@@ -23,6 +23,7 @@ void UIManager::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	TimeUpdate(_DeltaTime);
+	KillCountUpdate();
 
 }
 
@@ -106,6 +107,15 @@ void UIManager::UISpawn()
 	StageText->SetAutoSize(0.6f, true);
 	StageText->SetPosition(FVector(0.f, 305.f));
 
+	KillCountText = CreateWidget<UTextWidget>(GetWorld(), "KillCount");
+	KillCountText->AddToViewPort(4);
+	KillCountText->SetScale(20.f);
+	KillCountText->SetFont("PixelMplus10-Regular");
+	KillCountText->SetColor(Color8Bit::White);
+	KillCountText->SetPosition(FVector(385.f, 275.f));
+	KillCountText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT | FW1_TEXT_FLAG::FW1_VCENTER));
+
+
 }
 
 
@@ -124,4 +134,9 @@ void UIManager::TimeUpdate(float _DeltaTime)
 	std::string MinuteText = MinuteZeroPadding.substr(MinuteZeroPadding.size() - 2, 2);
 
 	TimeUI->SetText(MinuteText + " : " + SecondText);
+}
+
+void UIManager::KillCountUpdate()
+{
+	KillCountText->SetText(std::to_string(ContentsValue::KillCount));
 }
