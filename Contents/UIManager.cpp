@@ -37,6 +37,12 @@ void UIManager::UISpawn()
 	EXPBarBack->SetAutoSize(ContentsValue::MultipleSize, true);
 	EXPBarBack->SetPosition(FVector(10.0f, 340.0f));
 
+	EXPBar = CreateWidget<UImage>(GetWorld(), "EXPBar");
+	EXPBar->AddToViewPort(3);
+	EXPBar->SetSprite("hud_expbar_gauge_0.png");
+	EXPBar->SetAutoSize(ContentsValue::MultipleSize, true);
+	EXPBar->SetPosition(FVector(10.0f, 340.0f));
+
 	//HUD
 	
 	Character = CreateWidget<UImage>(GetWorld(), "HUDCharacter");
