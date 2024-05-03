@@ -14,5 +14,7 @@ public:
 	static const float BaseSpeed;
 	static const float BaseHaste;
 	static const float BasePUR;
+
+	static float Time;
 };
 

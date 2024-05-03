@@ -11,3 +11,5 @@ float4 ContentsValue::PlayLevelMousePos = float4::Zero;
 const float ContentsValue::BaseSpeed = 200.0f;
 const float ContentsValue::BaseHaste = 1.0f;
 const float ContentsValue::BasePUR = 40.0f;
+
+float ContentsValue::Time = 0.f;

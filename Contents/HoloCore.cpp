@@ -18,7 +18,7 @@ UHoloCore::~UHoloCore()
 void UHoloCore::Initialize()
 {
 	UEngineFont::Load("Galmuri9");
-
+	UEngineFont::Load("8-bit-hud");
 
 	{
 		// 파일의 헤더

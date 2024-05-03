@@ -23,6 +23,8 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	void UISpawn();
+	void TimeUpdate(float _DeltaTime);
+
 
 	UImage* Character = nullptr;
 	UImage* CharacterFrame = nullptr;
@@ -40,6 +42,7 @@ protected:
 	UImage* KillCount = nullptr;
 
 	UTextWidget* TimeUI = nullptr;
+	UTextWidget* StageText = nullptr;
 	UTextWidget* GoldText = nullptr;
 	UTextWidget* KillCountText = nullptr;
 	UTextWidget* StateText = nullptr;

@@ -98,9 +98,5 @@ void AMouse::Tick(float _DeltaTime)
 
 	int a = 0;
 
-	{
-		std::string MousePos_str = std::format("Mouse Pos : {}\n", MouseLocation.ToString());
-		UEngineDebugMsgWindow::PushMsg(MousePos_str);
-	}
 }
 
