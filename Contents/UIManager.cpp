@@ -107,10 +107,25 @@ void UIManager::UISpawn()
 	StageText->SetAutoSize(0.6f, true);
 	StageText->SetPosition(FVector(0.f, 305.f));
 
+	// UI TEXT
+	HPText = CreateWidget<UTextWidget>(GetWorld(), "HP");
+	HPText->AddToViewPort(4);
+	HPText->SetScale(15.f);
+	HPText->SetFont("Galmuri9");
+	HPText->SetColor(Color8Bit::White);
+	HPText->SetPosition(FVector(-225.f, 320.f));
+	
+	HPTextBack = CreateWidget<UTextWidget>(GetWorld(), "HP");
+	HPTextBack->AddToViewPort(3);
+	HPTextBack->SetScale(16.f);
+	HPTextBack->SetFont("Galmuri9");
+	HPTextBack->SetColor(Color8Bit::Black);
+	HPTextBack->SetPosition(FVector(-225.f, 320.f));
+
 	KillCountText = CreateWidget<UTextWidget>(GetWorld(), "KillCount");
 	KillCountText->AddToViewPort(4);
 	KillCountText->SetScale(20.f);
-	KillCountText->SetFont("PixelMplus10-Regular");
+	KillCountText->SetFont("Galmuri9");
 	KillCountText->SetColor(Color8Bit::White);
 	KillCountText->SetPosition(FVector(385.f, 275.f));
 	KillCountText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT | FW1_TEXT_FLAG::FW1_VCENTER));
@@ -139,4 +154,9 @@ void UIManager::TimeUpdate(float _DeltaTime)
 void UIManager::KillCountUpdate()
 {
 	KillCountText->SetText(std::to_string(ContentsValue::KillCount));
+}
+
+void UIManager::HPUpdate()
+{
+	//HPText->APlayer::GetHp();
 }

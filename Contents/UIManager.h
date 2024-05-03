@@ -25,6 +25,7 @@ protected:
 	void UISpawn();
 	void TimeUpdate(float _DeltaTime);
 	void KillCountUpdate();
+	void HPUpdate();
 
 	UImage* Character = nullptr;
 	UImage* CharacterFrame = nullptr;
@@ -42,6 +43,8 @@ protected:
 	UImage* Gold = nullptr;
 	UImage* KillCount = nullptr;
 
+	UTextWidget* HPText = nullptr;
+	UTextWidget* HPTextBack = nullptr;
 	UTextWidget* TimeUI = nullptr;
 	UTextWidget* GoldText = nullptr;
 	UTextWidget* KillCountText = nullptr;
