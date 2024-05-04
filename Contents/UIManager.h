@@ -51,6 +51,12 @@ protected:
 	UTextWidget* StateText = nullptr;
 	UTextWidget* CharacterName = nullptr;
 
+	std::vector<UImage*> WeaponIconBack;
+	std::vector<std::vector<UImage*>> WeaponIcon;
+
+	std::vector<UImage*> ITemIconBack;
+	std::vector<std::vector<UImage*>> ITemIcon;
+
 private:
 
 };

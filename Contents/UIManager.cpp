@@ -75,6 +75,26 @@ void UIManager::UISpawn()
 	HUDFrame->SetAutoSize(ContentsValue::MultipleSize, true);
 	HUDFrame->SetPosition(FVector(-445.f, 270.0f));
 	
+	WeaponIcon.resize(6);
+	for (int i = 0; i < 6; i++)
+	{
+		UImage* WeaponIconBack = CreateWidget<UImage>(GetWorld(), "WeaponIconBack");
+		WeaponIconBack->AddToViewPort(1);
+		WeaponIconBack->SetSprite("ui_empty_slot_weapon_0.png");
+		WeaponIconBack->SetAutoSize(ContentsValue::MultipleSize, true);
+		WeaponIconBack->SetPosition(FVector(-520.f + 50.f * i, 275.f));
+		WeaponIconBack->SetMulColor({ 1.0f,1.0f,1.0f,0.7f });
+		
+
+
+		UImage* ITemIcon = CreateWidget<UImage>(GetWorld(), "ITemIconBack");
+		ITemIcon->AddToViewPort(1);
+		ITemIcon->SetSprite("ui_empty_slot_item_0.png");
+		ITemIcon->SetAutoSize(ContentsValue::MultipleSize, true);
+		ITemIcon->SetPosition(FVector(-520.f + 50.f * i, 225.f));
+		ITemIcon->SetMulColor({ 1.0f,1.0f,1.0f,0.7f });
+
+	}
 	//Weapon = CreateWidget<UImage>(GetWorld(), "HUDWeapon");
 	//Weapon->AddToViewPort(1);
 	//Weapon->SetSprite("ui_empty_slot_weapon_0.png");
