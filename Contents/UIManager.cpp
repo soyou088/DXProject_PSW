@@ -136,6 +136,14 @@ void UIManager::UISpawn()
 	SetBack->SetPosition(FVector(0.f, 0.f));
 	SetBack->SetActive(false);
 
+	
+	CharacterBack = CreateWidget<UImage>(GetWorld(), "SetBack");
+	CharacterBack->AddToViewPort(1);
+	CharacterBack->SetSprite("spr_Title_Kiara_0.png");
+	CharacterBack->SetAutoSize(ContentsValue::MultipleSize * 1.5, true);
+	CharacterBack->SetPosition(FVector(-550.f, 0.f));
+	CharacterBack->SetMulColor({ 1.0f,1.0f,1.0f,0.5f });
+	CharacterBack->SetActive(false);
 
 	for (int i = 0; i < 5; i++)
 	{
@@ -272,6 +280,7 @@ void UIManager::PauseChack()
 		CRT->SetActive(true);
 		PickUP->SetActive(true);
 		Haste->SetActive(true);
+		CharacterBack->SetActive(true);
 
 		for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
 		{
@@ -290,6 +299,8 @@ void UIManager::PauseChack()
 		CRT->SetActive(false);
 		PickUP->SetActive(false);
 		Haste->SetActive(false);
+		CharacterBack->SetActive(false);
+
 
 		for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
 		{

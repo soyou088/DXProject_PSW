@@ -47,6 +47,7 @@ protected:
 
 	UImage* PuaseBack = nullptr;
 	UImage* SetBack = nullptr;
+	UImage* CharacterBack = nullptr;
 	UImage* HP = nullptr;
 	UImage* ATK = nullptr;
 	UImage* SPD = nullptr;
