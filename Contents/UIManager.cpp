@@ -157,44 +157,44 @@ void UIManager::UISpawn()
 	 
 	HP = CreateWidget<UImage>(GetWorld(), "PuaseHP");
 	HP->AddToViewPort(2);
-	HP->SetSprite("HP.png");
-	HP->SetAutoSize(ContentsValue::MultipleSize / 2, true);
+	HP->SetSprite("hud_HPicon_0.png");
+	HP->SetAutoSize(ContentsValue::MultipleSize, true);
 	HP->SetPosition(FVector(-550.f, 0.f));
 	HP->SetActive(false);
 
 	ATK = CreateWidget<UImage>(GetWorld(), "PuaseATK");
 	ATK->AddToViewPort(2);
-	ATK->SetSprite("ATK.png");
-	ATK->SetAutoSize(ContentsValue::MultipleSize / 2, true);
-	ATK->SetPosition(FVector(-550.f, -35.f));
+	ATK->SetSprite("hud_atkicon_0.png");
+	ATK->SetAutoSize(ContentsValue::MultipleSize, true);
+	ATK->SetPosition(FVector(-550.f, -40.f));
 	ATK->SetActive(false);
 	
 	SPD = CreateWidget<UImage>(GetWorld(), "PuaseSPD");
 	SPD->AddToViewPort(2);
-	SPD->SetSprite("SPD.png");
-	SPD->SetAutoSize(ContentsValue::MultipleSize / 2, true);
-	SPD->SetPosition(FVector(-550.f, -70.f));
+	SPD->SetSprite("hud_spdicon_0.png");
+	SPD->SetAutoSize(ContentsValue::MultipleSize, true);
+	SPD->SetPosition(FVector(-550.f, -80.f));
 	SPD->SetActive(false);
 
 	CRT = CreateWidget<UImage>(GetWorld(), "PuaseCRT");
 	CRT->AddToViewPort(2);
-	CRT->SetSprite("CRT.png");
-	CRT->SetAutoSize(ContentsValue::MultipleSize / 2, true);
-	CRT->SetPosition(FVector(-550.f, -105.f));
+	CRT->SetSprite("hud_criticon_0.png");
+	CRT->SetAutoSize(ContentsValue::MultipleSize, true);
+	CRT->SetPosition(FVector(-550.f, -120.f));
 	CRT->SetActive(false);
 
 	PickUP = CreateWidget<UImage>(GetWorld(), "PuasePickUP");
 	PickUP->AddToViewPort(2);
-	PickUP->SetSprite("PickUP.png");
-	PickUP->SetAutoSize(ContentsValue::MultipleSize / 2, true);
-	PickUP->SetPosition(FVector(-550.f, -140.f));
+	PickUP->SetSprite("hud_pickupicon_0.png");
+	PickUP->SetAutoSize(ContentsValue::MultipleSize, true);
+	PickUP->SetPosition(FVector(-550.f, -160.f));
 	PickUP->SetActive(false);
 
 	Haste = CreateWidget<UImage>(GetWorld(), "PuaseHaste");
 	Haste->AddToViewPort(2);
-	Haste->SetSprite("Haste.png");
-	Haste->SetAutoSize(ContentsValue::MultipleSize / 2, true);
-	Haste->SetPosition(FVector(-550.f, -175.f));
+	Haste->SetSprite("hud_cooldownicon_0.png");
+	Haste->SetAutoSize(ContentsValue::MultipleSize, true);
+	Haste->SetPosition(FVector(-550.f, -200.f));
 	Haste->SetActive(false);
 
 
