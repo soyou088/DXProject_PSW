@@ -10,10 +10,11 @@
 
 std::shared_ptr<APlayer> APlayGameMode::MainPlayer = nullptr;
 std::shared_ptr<class UIManager> APlayGameMode::PlayUIManager;
-
+bool APlayGameMode::PauseON = false;
 
 APlayGameMode::APlayGameMode()
 {
+	InputOn();
 }
 
 APlayGameMode::~APlayGameMode()
@@ -161,6 +162,11 @@ void APlayGameMode::InfinityGroundCheck()
 	}
 }
 
+void APlayGameMode::Pause()
+{
+	GEngine->SetOrderTimeScale(0, 0.f);
+}
+
 template <typename Monster>
 std::shared_ptr<Monster> APlayGameMode::SpawnMonster(std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType)
 {
@@ -231,6 +237,8 @@ void APlayGameMode::SpawnMonsterTimeSet(float _DeltaTime, float _SpawnBegin, flo
 		{
 			RandomSpawnMonster(_Name, _Size, _Hp, _Atk, _Speed, _Exp, _MoveType, _Group, _Quantity);
 			SpawnTerm = _Term;
+			
+
 		}
 		else
 		{
@@ -328,9 +336,15 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (true)
+	PlayTime += _DeltaTime;
+
+	if (true == IsPress(VK_ESCAPE))
 	{
-		PlayTime += _DeltaTime;
+		Pause();
+	}
+	if (true == IsPress(VK_RBUTTON))
+	{
+		GEngine->SetOrderTimeScale(0, 1.f);
 	}
 
 	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerColPos.X + AMouse::MousePos.X - 645, APlayer::PlayerColPos.Y - AMouse::MousePos.Y + 400 };

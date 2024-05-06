@@ -18,5 +18,7 @@ public:
 	static float Time;
 	static int KillCount;
 	static int Gold;
+
+
 };
 

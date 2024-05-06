@@ -27,6 +27,7 @@ public:
 	// constrcuter destructer
 	static std::shared_ptr<APlayer> MainPlayer;
 	static std::shared_ptr<class UIManager> PlayUIManager;
+	static bool PauseON;
 
 	APlayGameMode();
 	~APlayGameMode();
@@ -57,7 +58,7 @@ protected:
 	FIntPoint PosToIndex(float4 _Pos);
 
 	void InfinityGroundCheck();
-
+	void Pause();
 	
 	// 몬스터 스폰 관련
 	template <typename Monster>

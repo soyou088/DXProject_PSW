@@ -85,8 +85,6 @@ void UIManager::UISpawn()
 		WeaponIconBack->SetPosition(FVector(-520.f + 50.f * i, 275.f));
 		WeaponIconBack->SetMulColor({ 1.0f,1.0f,1.0f,0.7f });
 		
-
-
 		UImage* ITemIcon = CreateWidget<UImage>(GetWorld(), "ITemIconBack");
 		ITemIcon->AddToViewPort(1);
 		ITemIcon->SetSprite("ui_empty_slot_item_0.png");
@@ -95,17 +93,6 @@ void UIManager::UISpawn()
 		ITemIcon->SetMulColor({ 1.0f,1.0f,1.0f,0.7f });
 
 	}
-	//Weapon = CreateWidget<UImage>(GetWorld(), "HUDWeapon");
-	//Weapon->AddToViewPort(1);
-	//Weapon->SetSprite("ui_empty_slot_weapon_0.png");
-	//Weapon->SetAutoSize(ContentsValue::MultipleSize, true);
-	//Weapon->SetPosition(FVector(-445.f, 270.0f));
-
-	//Item = CreateWidget<UImage>(GetWorld(), "HUDItem");
-	//Item->AddToViewPort(1);
-	//Item->SetSprite("ui_empty_slot_item_0.png");
-	//Item->SetAutoSize(ContentsValue::MultipleSize, true);
-	//Item->SetPosition(FVector(-445.f, 270.0f));
 
 	Gold = CreateWidget<UImage>(GetWorld(), "Gold");
 	Gold->AddToViewPort(2);

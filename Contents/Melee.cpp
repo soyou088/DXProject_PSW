@@ -22,6 +22,16 @@ void AMelee::BeginPlay()
 	Renderer->SetOrder(ERenderOrder::Attack);
 }
 
+void AMelee::SetKnifeTypeMeleeLocation(float _DistanceFromPlayer)
+{
+	Dir = float4::DegToDir(Angle);
+	Dir.Z = 0.0f;
+
+
+	SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y });
+	AddActorLocation(Dir * _DistanceFromPlayer * ContentsValue::MultipleSize);
+}
+
 void AMelee::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
@@ -55,11 +65,3 @@ void AMelee::Tick(float _DeltaTime)
 	}
 }
 
-void AMelee::SetKnifeTypeMeleeLocation(float _DistanceFromPlayer)
-{
-	Dir = float4::DegToDir(Angle);
-	Dir.Z = 0.0f;
-
-	SetActorLocation(FVector{ APlayer::PlayerPos.X, APlayer::PlayerPos.Y });
-	AddActorLocation(Dir * _DistanceFromPlayer * ContentsValue::MultipleSize);
-}
