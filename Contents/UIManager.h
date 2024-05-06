@@ -26,6 +26,8 @@ protected:
 	void TimeUpdate(float _DeltaTime);
 	void KillCountUpdate();
 	void HPUpdate();
+	void PauseChack();
+	void CollisionChack();
 
 	UImage* Character = nullptr;
 	UImage* CharacterFrame = nullptr;
@@ -43,6 +45,17 @@ protected:
 	UImage* Gold = nullptr;
 	UImage* KillCount = nullptr;
 
+	UImage* PuaseBack = nullptr;
+	UImage* SetBack = nullptr;
+	UImage* HP = nullptr;
+	UImage* ATK = nullptr;
+	UImage* SPD = nullptr;
+	UImage* CRT = nullptr;
+	UImage* PickUP = nullptr;
+	UImage* Haste = nullptr;
+
+
+
 	UTextWidget* HPText = nullptr;
 	UTextWidget* HPTextBack = nullptr;
 	UTextWidget* TimeUI = nullptr;
@@ -56,6 +69,10 @@ protected:
 
 	std::vector<UImage*> ITemIconBack;
 	std::vector<std::vector<UImage*>> ITemIcon;
+
+	std::vector<UImage*> SetBurtonVector;
+	std::vector<UImage*>::iterator SetBurtonIter = SetBurtonVector.begin();
+	UCollision* SetBurtonCollision;
 
 private:
 

@@ -24,6 +24,7 @@ void UIManager::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 	TimeUpdate(_DeltaTime);
 	KillCountUpdate();
+	PauseChack();
 
 }
 
@@ -108,7 +109,7 @@ void UIManager::UISpawn()
 
 	TimeUI = CreateWidget<UTextWidget>(GetWorld(), "Time");
 	TimeUI->AddToViewPort(5);
-	TimeUI->SetScale(20.f);
+	TimeUI->SetScale(ContentsValue::MultipleSize * 10);
 	TimeUI->SetFont("Galmuri9");
 	TimeUI->SetColor(Color8Bit::White);
 	TimeUI->SetPosition(FVector(0.f, 285.f));
@@ -120,6 +121,90 @@ void UIManager::UISpawn()
 	StageText->SetAutoSize(0.6f, true);
 	StageText->SetPosition(FVector(0.f, 305.f));
 
+	//ESC´©¸¥ ÈÄ
+	PuaseBack = CreateWidget<UImage>(GetWorld(), "PuaseBack");
+	PuaseBack->AddToViewPort(1);
+	PuaseBack->SetSprite("menu_charselecLocked_0.png");
+	PuaseBack->SetAutoSize(ContentsValue::MultipleSize * 15, true);
+	PuaseBack->SetPosition(FVector(0.f, 0.f));
+	PuaseBack->SetActive(false);
+
+	SetBack = CreateWidget<UImage>(GetWorld(), "SetBack");
+	SetBack->AddToViewPort(1);
+	SetBack->SetSprite("hud_pausemenu_0.png");
+	SetBack->SetAutoSize(ContentsValue::MultipleSize, true);
+	SetBack->SetPosition(FVector(0.f, 0.f));
+	SetBack->SetActive(false);
+
+
+	for (int i = 0; i < 5; i++)
+	{
+		UImage* SetBurton = CreateWidget<UImage>(GetWorld(), "SetBurton");
+		SetBurton->AddToViewPort(2);
+		SetBurton->SetSprite("hud_OptionButton_0.png");
+		SetBurton->SetAutoSize(ContentsValue::MultipleSize, true);
+		SetBurton->SetPosition(FVector(0.f, 100.f - 50.f * i));
+		SetBurton->SetActive(false);
+		SetBurtonVector.push_back(SetBurton);
+
+		//SetBurtonCollision = CreateDefaultSubObject<UCollision>("SetBurtonCollision");
+		//SetBurtonCollision->SetScale({ 85.0f, 80.0f });
+		//SetBurtonCollision->SetPosition(FVector(0.f, 100.f - 50.f * i));
+		//SetBurtonCollision->SetCollisionGroup(ECollisionOrder::Menu);
+		//SetBurtonCollision->SetCollisionType(ECollisionType::Rect);
+	}
+
+	 
+	HP = CreateWidget<UImage>(GetWorld(), "PuaseHP");
+	HP->AddToViewPort(2);
+	HP->SetSprite("HP.png");
+	HP->SetAutoSize(ContentsValue::MultipleSize / 2, true);
+	HP->SetPosition(FVector(-550.f, 0.f));
+	HP->SetActive(false);
+
+	ATK = CreateWidget<UImage>(GetWorld(), "PuaseATK");
+	ATK->AddToViewPort(2);
+	ATK->SetSprite("ATK.png");
+	ATK->SetAutoSize(ContentsValue::MultipleSize / 2, true);
+	ATK->SetPosition(FVector(-550.f, -35.f));
+	ATK->SetActive(false);
+	
+	SPD = CreateWidget<UImage>(GetWorld(), "PuaseSPD");
+	SPD->AddToViewPort(2);
+	SPD->SetSprite("SPD.png");
+	SPD->SetAutoSize(ContentsValue::MultipleSize / 2, true);
+	SPD->SetPosition(FVector(-550.f, -70.f));
+	SPD->SetActive(false);
+
+	CRT = CreateWidget<UImage>(GetWorld(), "PuaseCRT");
+	CRT->AddToViewPort(2);
+	CRT->SetSprite("CRT.png");
+	CRT->SetAutoSize(ContentsValue::MultipleSize / 2, true);
+	CRT->SetPosition(FVector(-550.f, -105.f));
+	CRT->SetActive(false);
+
+	PickUP = CreateWidget<UImage>(GetWorld(), "PuasePickUP");
+	PickUP->AddToViewPort(2);
+	PickUP->SetSprite("PickUP.png");
+	PickUP->SetAutoSize(ContentsValue::MultipleSize / 2, true);
+	PickUP->SetPosition(FVector(-550.f, -140.f));
+	PickUP->SetActive(false);
+
+	Haste = CreateWidget<UImage>(GetWorld(), "PuaseHaste");
+	Haste->AddToViewPort(2);
+	Haste->SetSprite("Haste.png");
+	Haste->SetAutoSize(ContentsValue::MultipleSize / 2, true);
+	Haste->SetPosition(FVector(-550.f, -175.f));
+	Haste->SetActive(false);
+
+
+
+	
+	
+	
+	
+
+
 	// UI TEXT
 	HPText = CreateWidget<UTextWidget>(GetWorld(), "HP");
 	HPText->AddToViewPort(4);
@@ -130,19 +215,18 @@ void UIManager::UISpawn()
 	
 	HPTextBack = CreateWidget<UTextWidget>(GetWorld(), "HP");
 	HPTextBack->AddToViewPort(3);
-	HPTextBack->SetScale(16.f);
+	HPTextBack->SetScale(ContentsValue::MultipleSize * 8);
 	HPTextBack->SetFont("Galmuri9");
 	HPTextBack->SetColor(Color8Bit::Black);
 	HPTextBack->SetPosition(FVector(-225.f, 320.f));
 
 	KillCountText = CreateWidget<UTextWidget>(GetWorld(), "KillCount");
 	KillCountText->AddToViewPort(4);
-	KillCountText->SetScale(20.f);
+	KillCountText->SetScale(ContentsValue::MultipleSize * 10);
 	KillCountText->SetFont("Galmuri9");
 	KillCountText->SetColor(Color8Bit::White);
 	KillCountText->SetPosition(FVector(385.f, 275.f));
 	KillCountText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT | FW1_TEXT_FLAG::FW1_VCENTER));
-
 
 }
 
@@ -162,6 +246,8 @@ void UIManager::TimeUpdate(float _DeltaTime)
 	std::string MinuteText = MinuteZeroPadding.substr(MinuteZeroPadding.size() - 2, 2);
 
 	TimeUI->SetText(MinuteText + " : " + SecondText);
+
+
 }
 
 void UIManager::KillCountUpdate()
@@ -173,3 +259,50 @@ void UIManager::HPUpdate()
 {
 	//HPText->APlayer::GetHp();
 }
+
+void UIManager::PauseChack()
+{
+	if (true == APlayGameMode::PauseON)
+	{
+		PuaseBack->SetActive(true);
+		SetBack->SetActive(true);
+		HP->SetActive(true);
+		ATK->SetActive(true);
+		SPD->SetActive(true);
+		CRT->SetActive(true);
+		PickUP->SetActive(true);
+		Haste->SetActive(true);
+
+		for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
+		{
+			UImage* SetBurton = *SetBurtonIter;
+
+			SetBurton->SetActive(true);
+		}
+	}
+	else
+	{
+		PuaseBack->SetActive(false);
+		SetBack->SetActive(false);
+		HP->SetActive(false);
+		ATK->SetActive(false);
+		SPD->SetActive(false);
+		CRT->SetActive(false);
+		PickUP->SetActive(false);
+		Haste->SetActive(false);
+
+		for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
+		{
+			UImage* SetBurton = *SetBurtonIter;
+
+			SetBurton->SetActive(false);
+		}
+	}
+}
+
+void UIManager::CollisionChack()
+{
+
+}
+
+

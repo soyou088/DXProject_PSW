@@ -81,6 +81,9 @@ private:
 	float PlayTime = 0;
 	float SpawnTerm = 0;
 
+	float PlayDeltaTime = 0.0f;
+	bool IsPause = false;
+
 	void CursorOFF();
 
 }

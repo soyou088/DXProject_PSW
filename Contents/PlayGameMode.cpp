@@ -242,7 +242,7 @@ void APlayGameMode::SpawnMonsterTimeSet(float _DeltaTime, float _SpawnBegin, flo
 		}
 		else
 		{
-			SpawnTerm -= _DeltaTime;
+			SpawnTerm -= PlayDeltaTime;
 		}
 	}
 }
@@ -336,33 +336,52 @@ void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	PlayTime += _DeltaTime;
 
-	if (true == IsPress(VK_ESCAPE))
+	if (true == IsDown(VK_ESCAPE))
 	{
-		Pause();
+		if (true == IsPause)
+		{
+			IsPause = false;
+			GEngine->SetOrderTimeScale(0, 1.f);
+			PauseON = false;
+		}
+		else
+		{
+			IsPause = true;
+			PauseON = true;
+		}
 	}
-	if (true == IsPress(VK_RBUTTON))
+
+	if (false == IsPause)
 	{
-		GEngine->SetOrderTimeScale(0, 1.f);
+		PlayDeltaTime = _DeltaTime;
+		
 	}
+	else
+	{
+		PlayDeltaTime = 0.0f;
+		GEngine->SetOrderTimeScale(0, 0.f);
+	}
+	PlayTime += PlayDeltaTime;
+	_DeltaTime = 0.0f;
+
 
 	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerColPos.X + AMouse::MousePos.X - 645, APlayer::PlayerColPos.Y - AMouse::MousePos.Y + 400 };
 
 	InfinityGroundCheck();
 
-	SpawnMonsterTimeSet(_DeltaTime, 0.0f, 20.0f, 5.0f,
+	SpawnMonsterTimeSet(PlayTime, 0.0f, 20.0f, 5.0f,
 		"Fubuzilla", 2.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
 		false, 10);
-	SpawnMonsterTimeSet(_DeltaTime, 0.0f, 20.0f, 10.0f,
+	SpawnMonsterTimeSet(PlayTime, 0.0f, 20.0f, 10.0f,
 		"Fubuzilla", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
 		true, 10);
-	SpawnMonsterTimeSet(_DeltaTime, 20.0f, 40.0f, 5.0f,
+	SpawnMonsterTimeSet(PlayTime, 20.0f, 40.0f, 5.0f,
 		"Deadbeat", 1.0f, 40.0f, 4.0f, 0.4f, 7.0f, EMonsterMoveType::Follow,
 		false, 5);
-	SpawnMonsterTimeSet(_DeltaTime, 40.0f, 60.0f, 5.0f,
+	SpawnMonsterTimeSet(PlayTime, 40.0f, 60.0f, 5.0f,
 		"Takodachi", 1.0f, 80.0f, 4.0f, 0.4f, 8.0f, EMonsterMoveType::Follow);
-	SpawnMonsterTimeSet(_DeltaTime, 60.0f, 80.0f, 5.0f,
+	SpawnMonsterTimeSet(PlayTime, 60.0f, 80.0f, 5.0f,
 		"KFP", 1.0f, 20.0f, 2.0f, 1.0f, 3.0f, EMonsterMoveType::StraightToPlayer,
 		true, 10);
 

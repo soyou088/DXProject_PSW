@@ -40,9 +40,6 @@ APlayer::~APlayer()
 
 void APlayer::BeginPlay()
 {
-	UEngineSerializer Ser;
-
-	Ser << this;
 
 	Super::BeginPlay();
 
