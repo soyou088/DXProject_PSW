@@ -512,73 +512,81 @@ void UIManager::CollisionChack()
 		SetBurtonCollision0->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[0]->SetSprite("hud_Button_1.png");
+				PuaseSkillText->SetColor(Color8Bit::Black);
 			}
 		);
 		SetBurtonCollision0->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[0]->SetSprite("hud_Button_0.png");
+				PuaseSkillText->SetColor(Color8Bit::White);
 			}
 		);
 
 		SetBurtonCollision1->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[1]->SetSprite("hud_Button_1.png");
+				PuaseStampText->SetColor(Color8Bit::Black);
 			}
 		);
 		SetBurtonCollision1->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[1]->SetSprite("hud_Button_0.png");
+				PuaseStampText->SetColor(Color8Bit::White);
 			}
 		);
 
 		SetBurtonCollision2->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[2]->SetSprite("hud_Button_1.png");
+				PuaseCollaborationText->SetColor(Color8Bit::Black);
 			}
 		);
 		SetBurtonCollision2->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[2]->SetSprite("hud_Button_0.png");
+				PuaseCollaborationText->SetColor(Color8Bit::White);
 			}
 		);
 
 		SetBurtonCollision3->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[3]->SetSprite("hud_Button_1.png");
+				PuaseContinueText->SetColor(Color8Bit::Black);
 			}
 		);
 		SetBurtonCollision3->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[3]->SetSprite("hud_Button_0.png");
+				PuaseContinueText->SetColor(Color8Bit::White);
 			}
 		);
 
 		SetBurtonCollision4->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[4]->SetSprite("hud_Button_1.png");
+				PuaseSettingText->SetColor(Color8Bit::Black);
 			}
 		);
 		SetBurtonCollision4->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[4]->SetSprite("hud_Button_0.png");
+				PuaseSettingText->SetColor(Color8Bit::White);
 			}
 		);
 
 		SetBurtonCollision5->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[5]->SetSprite("hud_Button_1.png");
+				PuaseExitText->SetColor(Color8Bit::Black);
 			}
 		);
 		SetBurtonCollision5->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[5]->SetSprite("hud_Button_0.png");
+				PuaseExitText->SetColor(Color8Bit::White);
 			}
 		);
-
-
 	}
-
-
 }
 
 void UIManager::CollisionPos()
