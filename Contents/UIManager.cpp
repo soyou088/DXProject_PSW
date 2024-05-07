@@ -7,6 +7,10 @@
 
 UIManager::UIManager()
 {
+	SetBurtonCollision = CreateDefaultSubObject<UCollision>("SetBurtonCollision");
+	SetBurtonCollision->SetPosition(BurtonPos);
+	SetBurtonCollision->SetCollisionGroup(ECollisionOrder::Menu);
+	SetBurtonCollision->SetCollisionType(ECollisionType::Rect);
 }
 
 UIManager::~UIManager()
@@ -154,12 +158,12 @@ void UIManager::UISpawn()
 		SetBurton->SetPosition(FVector(0.f, 120.f - 60.f * i));
 		SetBurton->SetActive(false);
 		SetBurtonVector.push_back(SetBurton);
-
-		//SetBurtonCollision = CreateDefaultSubObject<UCollision>("SetBurtonCollision");
-		//SetBurtonCollision->SetScale({ 85.0f, 80.0f });
-		//SetBurtonCollision->SetPosition(FVector(0.f, 100.f - 50.f * i));
-		//SetBurtonCollision->SetCollisionGroup(ECollisionOrder::Menu);
-		//SetBurtonCollision->SetCollisionType(ECollisionType::Rect);
+		
+		FVector BurtonPos = SetBurton->GetLocalPosition();
+		
+		SetBurtonCollision->SetScale(FVector(20.f, 20.f));
+		SetBurtonCollision->SetPosition(BurtonPos);
+		SetBurtonCollision->SetActive(true);
 	}
 
 	for (int i = 0; i < 6; i++)
@@ -296,7 +300,7 @@ void UIManager::UISpawn()
 	StatHasteText->SetActive(false);
 	
 	PuaseSkillText = CreateWidget<UTextWidget>(GetWorld(), "PuaseSkillText");
-	PuaseSkillText->AddToViewPort(4);
+	PuaseSkillText->AddToViewPort(2);
 	PuaseSkillText->SetScale(ContentsValue::MultipleSize * 11);
 	PuaseSkillText->SetFont("Galmuri9");
 	PuaseSkillText->SetColor(Color8Bit::White);
@@ -305,7 +309,7 @@ void UIManager::UISpawn()
 	PuaseSkillText->SetActive(false);
 	
 	PuaseStampText = CreateWidget<UTextWidget>(GetWorld(), "PuaseStampText");
-	PuaseStampText->AddToViewPort(10);
+	PuaseStampText->AddToViewPort(2);
 	PuaseStampText->SetScale(ContentsValue::MultipleSize * 11);
 	PuaseStampText->SetFont("Galmuri9");
 	PuaseStampText->SetColor(Color8Bit::White);
@@ -314,7 +318,7 @@ void UIManager::UISpawn()
 	PuaseStampText->SetActive(false);
 
 	PuaseCollaborationText = CreateWidget<UTextWidget>(GetWorld(), "PuaseCollaborationText");
-	PuaseCollaborationText->AddToViewPort(10);
+	PuaseCollaborationText->AddToViewPort(2);
 	PuaseCollaborationText->SetScale(ContentsValue::MultipleSize * 11);
 	PuaseCollaborationText->SetFont("Galmuri9");
 	PuaseCollaborationText->SetColor(Color8Bit::White);
@@ -323,7 +327,7 @@ void UIManager::UISpawn()
 	PuaseCollaborationText->SetActive(false);
 
 	PuaseContinueText = CreateWidget<UTextWidget>(GetWorld(), "PuaseContinueText");
-	PuaseContinueText->AddToViewPort(4);
+	PuaseContinueText->AddToViewPort(2);
 	PuaseContinueText->SetScale(ContentsValue::MultipleSize * 11);
 	PuaseContinueText->SetFont("Galmuri9");
 	PuaseContinueText->SetColor(Color8Bit::White);
@@ -332,7 +336,7 @@ void UIManager::UISpawn()
 	PuaseContinueText->SetActive(false);
 
 	PuaseSettingText = CreateWidget<UTextWidget>(GetWorld(), "PuaseSettingText");
-	PuaseSettingText->AddToViewPort(4);
+	PuaseSettingText->AddToViewPort(2);
 	PuaseSettingText->SetScale(ContentsValue::MultipleSize * 11);
 	PuaseSettingText->SetFont("Galmuri9");
 	PuaseSettingText->SetColor(Color8Bit::White);
@@ -341,7 +345,7 @@ void UIManager::UISpawn()
 	PuaseSettingText->SetActive(false);
 
 	PuaseExitText = CreateWidget<UTextWidget>(GetWorld(), "PuaseExitText");
-	PuaseExitText->AddToViewPort(4);
+	PuaseExitText->AddToViewPort(2);
 	PuaseExitText->SetScale(ContentsValue::MultipleSize * 11);
 	PuaseExitText->SetFont("Galmuri9");
 	PuaseExitText->SetColor(Color8Bit::White);
@@ -468,12 +472,27 @@ void UIManager::PauseChack()
 		PuaseSettingText->SetActive(false);
 		PuaseExitText->SetActive(false);
 	}
-
-
 }
 
 void UIManager::CollisionChack()
 {
+
+	for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
+	{
+		UImage* SetBurton = *SetBurtonIter;
+
+		SetBurtonCollision->CollisionEnter(ECollisionOrder::Player, [=](std::shared_ptr<UCollision> _Collison)
+			{
+				SetBurton->SetSprite("hud_Button_1.png");
+			}
+		);
+		SetBurtonCollision->CollisionExit(ECollisionOrder::Player, [=](std::shared_ptr<UCollision> _Collison)
+			{
+				SetBurton->SetSprite("hud_Button_1.png");
+			}
+		);
+	}
+
 
 }
 
