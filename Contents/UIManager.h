@@ -28,6 +28,7 @@ protected:
 	void HPUpdate();
 	void PauseChack();
 	void CollisionChack();
+	void CollisionPos();
 
 	UImage* Character = nullptr;
 	UImage* CharacterFrame = nullptr;
@@ -90,7 +91,15 @@ protected:
 
 	std::vector<UImage*> SetBurtonVector;
 	std::vector<UImage*>::iterator SetBurtonIter = SetBurtonVector.begin();
-	UCollision* SetBurtonCollision;
+	UCollision* SetBurtonCollision0;
+	UCollision* SetBurtonCollision1;
+	UCollision* SetBurtonCollision2;
+	UCollision* SetBurtonCollision3;
+	UCollision* SetBurtonCollision4;
+	UCollision* SetBurtonCollision5;
+
+
+
 
 	std::vector<UImage*> StatLineVector;
 	std::vector<UImage*>::iterator StatLineIter = StatLineVector.begin();

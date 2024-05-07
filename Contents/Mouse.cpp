@@ -18,7 +18,7 @@ AMouse::AMouse()
 	Collision->SetupAttachment(Root);
 	Collision->SetScale({ 5.0f,5.f });
 	Collision->SetPosition({-10.0f,10.0f});
-	Collision->SetCollisionGroup(ECollisionOrder::Player);
+	Collision->SetCollisionGroup(ECollisionOrder::Mouse);
 	Collision->SetCollisionType(ECollisionType::Rect);
 
 

@@ -7,10 +7,31 @@
 
 UIManager::UIManager()
 {
-	SetBurtonCollision = CreateDefaultSubObject<UCollision>("SetBurtonCollision");
-	SetBurtonCollision->SetPosition(BurtonPos);
-	SetBurtonCollision->SetCollisionGroup(ECollisionOrder::Menu);
-	SetBurtonCollision->SetCollisionType(ECollisionType::Rect);
+
+	SetBurtonCollision0 = CreateDefaultSubObject<UCollision>("Collision");
+	SetBurtonCollision0->SetCollisionGroup(ECollisionOrder::Menu);
+	SetBurtonCollision0->SetCollisionType(ECollisionType::Rect);
+
+	SetBurtonCollision1 = CreateDefaultSubObject<UCollision>("Collision");
+	SetBurtonCollision1->SetCollisionGroup(ECollisionOrder::Menu);
+	SetBurtonCollision1->SetCollisionType(ECollisionType::Rect);
+
+	SetBurtonCollision2 = CreateDefaultSubObject<UCollision>("Collision");
+	SetBurtonCollision2->SetCollisionGroup(ECollisionOrder::Menu);
+	SetBurtonCollision2->SetCollisionType(ECollisionType::Rect);
+
+	SetBurtonCollision3 = CreateDefaultSubObject<UCollision>("Collision");
+	SetBurtonCollision3->SetCollisionGroup(ECollisionOrder::Menu);
+	SetBurtonCollision3->SetCollisionType(ECollisionType::Rect);
+
+	SetBurtonCollision4 = CreateDefaultSubObject<UCollision>("Collision");
+	SetBurtonCollision4->SetCollisionGroup(ECollisionOrder::Menu);
+	SetBurtonCollision4->SetCollisionType(ECollisionType::Rect);
+
+	SetBurtonCollision5 = CreateDefaultSubObject<UCollision>("Collision");
+	SetBurtonCollision5->SetCollisionGroup(ECollisionOrder::Menu);
+	SetBurtonCollision5->SetCollisionType(ECollisionType::Rect);
+
 }
 
 UIManager::~UIManager()
@@ -29,7 +50,8 @@ void UIManager::Tick(float _DeltaTime)
 	TimeUpdate(_DeltaTime);
 	KillCountUpdate();
 	PauseChack();
-
+	CollisionChack();
+	CollisionPos();
 }
 
 void UIManager::UISpawn()
@@ -158,13 +180,17 @@ void UIManager::UISpawn()
 		SetBurton->SetPosition(FVector(0.f, 120.f - 60.f * i));
 		SetBurton->SetActive(false);
 		SetBurtonVector.push_back(SetBurton);
-		
-		FVector BurtonPos = SetBurton->GetLocalPosition();
-		
-		SetBurtonCollision->SetScale(FVector(20.f, 20.f));
-		SetBurtonCollision->SetPosition(BurtonPos);
-		SetBurtonCollision->SetActive(true);
+	
 	}
+
+	SetBurtonCollision0->SetScale({ 180.0f,50.0f });
+	SetBurtonCollision1->SetScale({ 180.0f,50.0f });
+	SetBurtonCollision2->SetScale({ 180.0f,50.0f });
+	SetBurtonCollision3->SetScale({ 180.0f,50.0f });
+	SetBurtonCollision4->SetScale({ 180.0f,50.0f });
+	SetBurtonCollision5->SetScale({ 180.0f,50.0f });
+
+
 
 	for (int i = 0; i < 6; i++)
 	{
@@ -477,23 +503,98 @@ void UIManager::PauseChack()
 void UIManager::CollisionChack()
 {
 
+
+
 	for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
 	{
 		UImage* SetBurton = *SetBurtonIter;
 
-		SetBurtonCollision->CollisionEnter(ECollisionOrder::Player, [=](std::shared_ptr<UCollision> _Collison)
+		SetBurtonCollision0->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
-				SetBurton->SetSprite("hud_Button_1.png");
+				SetBurtonVector[0]->SetSprite("hud_Button_1.png");
 			}
 		);
-		SetBurtonCollision->CollisionExit(ECollisionOrder::Player, [=](std::shared_ptr<UCollision> _Collison)
+		SetBurtonCollision0->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
-				SetBurton->SetSprite("hud_Button_1.png");
+				SetBurtonVector[0]->SetSprite("hud_Button_0.png");
 			}
 		);
+
+		SetBurtonCollision1->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+			{
+				SetBurtonVector[1]->SetSprite("hud_Button_1.png");
+			}
+		);
+		SetBurtonCollision1->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+			{
+				SetBurtonVector[1]->SetSprite("hud_Button_0.png");
+			}
+		);
+
+		SetBurtonCollision2->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+			{
+				SetBurtonVector[2]->SetSprite("hud_Button_1.png");
+			}
+		);
+		SetBurtonCollision2->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+			{
+				SetBurtonVector[2]->SetSprite("hud_Button_0.png");
+			}
+		);
+
+		SetBurtonCollision3->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+			{
+				SetBurtonVector[3]->SetSprite("hud_Button_1.png");
+			}
+		);
+		SetBurtonCollision3->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+			{
+				SetBurtonVector[3]->SetSprite("hud_Button_0.png");
+			}
+		);
+
+		SetBurtonCollision4->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+			{
+				SetBurtonVector[4]->SetSprite("hud_Button_1.png");
+			}
+		);
+		SetBurtonCollision4->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+			{
+				SetBurtonVector[4]->SetSprite("hud_Button_0.png");
+			}
+		);
+
+		SetBurtonCollision5->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+			{
+				SetBurtonVector[5]->SetSprite("hud_Button_1.png");
+			}
+		);
+		SetBurtonCollision5->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+			{
+				SetBurtonVector[5]->SetSprite("hud_Button_0.png");
+			}
+		);
+
+
 	}
 
 
+}
+
+void UIManager::CollisionPos()
+{
+	SetBurtonCollision0->SetPosition(APlayer::PlayerPos);
+	SetBurtonCollision0->AddPosition(FVector::Up * 80);
+	SetBurtonCollision1->SetPosition(APlayer::PlayerPos);
+	SetBurtonCollision1->AddPosition(FVector::Up * 20);
+	SetBurtonCollision2->SetPosition(APlayer::PlayerPos);
+	SetBurtonCollision2->AddPosition(FVector::Down * 40);
+	SetBurtonCollision3->SetPosition(APlayer::PlayerPos);
+	SetBurtonCollision3->AddPosition(FVector::Down * 100);
+	SetBurtonCollision4->SetPosition(APlayer::PlayerPos);
+	SetBurtonCollision4->AddPosition(FVector::Down * 160);
+	SetBurtonCollision5->SetPosition(APlayer::PlayerPos);
+	SetBurtonCollision5->AddPosition(FVector::Down * 220);
 }
 
 
