@@ -65,6 +65,15 @@ protected:
 	UTextWidget* StateText = nullptr;
 	UTextWidget* CharacterName = nullptr;
 
+	// Stat Text
+	UTextWidget* StatHPText = nullptr;
+	UTextWidget* StatATKText = nullptr;
+	UTextWidget* StatSPDText = nullptr;
+	UTextWidget* StatCRTText = nullptr;
+	UTextWidget* StatPickUPText = nullptr;
+	UTextWidget* StatHasteText = nullptr;
+
+
 	std::vector<UImage*> WeaponIconBack;
 	std::vector<std::vector<UImage*>> WeaponIcon;
 
@@ -74,6 +83,9 @@ protected:
 	std::vector<UImage*> SetBurtonVector;
 	std::vector<UImage*>::iterator SetBurtonIter = SetBurtonVector.begin();
 	UCollision* SetBurtonCollision;
+
+	std::vector<UImage*> StatLineVector;
+	std::vector<UImage*>::iterator StatLineIter = StatLineVector.begin();
 
 private:
 

@@ -145,13 +145,13 @@ void UIManager::UISpawn()
 	CharacterBack->SetMulColor({ 1.0f,1.0f,1.0f,0.5f });
 	CharacterBack->SetActive(false);
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 6; i++)
 	{
 		UImage* SetBurton = CreateWidget<UImage>(GetWorld(), "SetBurton");
 		SetBurton->AddToViewPort(2);
-		SetBurton->SetSprite("hud_OptionButton_0.png");
-		SetBurton->SetAutoSize(ContentsValue::MultipleSize, true);
-		SetBurton->SetPosition(FVector(0.f, 100.f - 50.f * i));
+		SetBurton->SetSprite("hud_Button_0.png");
+		SetBurton->SetAutoSize(ContentsValue::MultipleSize * 1.3, true);
+		SetBurton->SetPosition(FVector(0.f, 120.f - 60.f * i));
 		SetBurton->SetActive(false);
 		SetBurtonVector.push_back(SetBurton);
 
@@ -162,7 +162,17 @@ void UIManager::UISpawn()
 		//SetBurtonCollision->SetCollisionType(ECollisionType::Rect);
 	}
 
-	 
+	for (int i = 0; i < 6; i++)
+	{
+		UImage* StatLine = CreateWidget<UImage>(GetWorld(), "StatLine");
+		StatLine->AddToViewPort(2);
+		StatLine->SetSprite("ui_menu_stats_divider_0.png");
+		StatLine->SetAutoSize(ContentsValue::MultipleSize, true);
+		StatLine->SetPosition(FVector(-400.f, -10.f - 45.f * i));
+		StatLine->SetActive(false);
+		StatLineVector.push_back(StatLine);
+	}
+
 	HP = CreateWidget<UImage>(GetWorld(), "PuaseHP");
 	HP->AddToViewPort(2);
 	HP->SetSprite("hud_HPicon_0.png");
@@ -174,48 +184,41 @@ void UIManager::UISpawn()
 	ATK->AddToViewPort(2);
 	ATK->SetSprite("hud_atkicon_0.png");
 	ATK->SetAutoSize(ContentsValue::MultipleSize, true);
-	ATK->SetPosition(FVector(-550.f, -40.f));
+	ATK->SetPosition(FVector(-550.f, -42.f));
 	ATK->SetActive(false);
 	
 	SPD = CreateWidget<UImage>(GetWorld(), "PuaseSPD");
 	SPD->AddToViewPort(2);
 	SPD->SetSprite("hud_spdicon_0.png");
 	SPD->SetAutoSize(ContentsValue::MultipleSize, true);
-	SPD->SetPosition(FVector(-550.f, -80.f));
+	SPD->SetPosition(FVector(-550.f, -84.f));
 	SPD->SetActive(false);
 
 	CRT = CreateWidget<UImage>(GetWorld(), "PuaseCRT");
 	CRT->AddToViewPort(2);
 	CRT->SetSprite("hud_criticon_0.png");
 	CRT->SetAutoSize(ContentsValue::MultipleSize, true);
-	CRT->SetPosition(FVector(-550.f, -120.f));
+	CRT->SetPosition(FVector(-550.f, -130.f));
 	CRT->SetActive(false);
 
 	PickUP = CreateWidget<UImage>(GetWorld(), "PuasePickUP");
 	PickUP->AddToViewPort(2);
 	PickUP->SetSprite("hud_pickupicon_0.png");
 	PickUP->SetAutoSize(ContentsValue::MultipleSize, true);
-	PickUP->SetPosition(FVector(-550.f, -160.f));
+	PickUP->SetPosition(FVector(-550.f, -178.f));
 	PickUP->SetActive(false);
 
 	Haste = CreateWidget<UImage>(GetWorld(), "PuaseHaste");
 	Haste->AddToViewPort(2);
 	Haste->SetSprite("hud_cooldownicon_0.png");
 	Haste->SetAutoSize(ContentsValue::MultipleSize, true);
-	Haste->SetPosition(FVector(-550.f, -200.f));
+	Haste->SetPosition(FVector(-550.f, -220.f));
 	Haste->SetActive(false);
-
-
-
-	
-	
-	
-	
 
 
 	// UI TEXT
 	HPText = CreateWidget<UTextWidget>(GetWorld(), "HP");
-	HPText->AddToViewPort(4);
+	HPText->AddToViewPort(3);
 	HPText->SetScale(15.f);
 	HPText->SetFont("Galmuri9");
 	HPText->SetColor(Color8Bit::White);
@@ -229,12 +232,72 @@ void UIManager::UISpawn()
 	HPTextBack->SetPosition(FVector(-225.f, 320.f));
 
 	KillCountText = CreateWidget<UTextWidget>(GetWorld(), "KillCount");
-	KillCountText->AddToViewPort(4);
+	KillCountText->AddToViewPort(3);
 	KillCountText->SetScale(ContentsValue::MultipleSize * 10);
 	KillCountText->SetFont("Galmuri9");
 	KillCountText->SetColor(Color8Bit::White);
 	KillCountText->SetPosition(FVector(385.f, 275.f));
 	KillCountText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT | FW1_TEXT_FLAG::FW1_VCENTER));
+
+	// StatUI TEXT
+	StatHPText = CreateWidget<UTextWidget>(GetWorld(), "StatHPText");
+	StatHPText->AddToViewPort(3);
+	StatHPText->SetScale(ContentsValue::MultipleSize * 10);
+	StatHPText->SetFont("Galmuri9");
+	StatHPText->SetColor(Color8Bit::White);
+	StatHPText->SetPosition(FVector(-507.f, 4.f));
+	StatHPText->SetText("HP");
+	StatHPText->SetActive(false);
+
+	StatATKText = CreateWidget<UTextWidget>(GetWorld(), "StatATKText");
+	StatATKText->AddToViewPort(3);
+	StatATKText->SetScale(ContentsValue::MultipleSize * 10);
+	StatATKText->SetFont("Galmuri9");
+	StatATKText->SetColor(Color8Bit::White);
+	StatATKText->SetPosition(FVector(-504.f, -40.f));
+	StatATKText->SetText("ATK");
+	StatATKText->SetActive(false);
+
+	StatSPDText = CreateWidget<UTextWidget>(GetWorld(), "StatSPDText");
+	StatSPDText->AddToViewPort(3);
+	StatSPDText->SetScale(ContentsValue::MultipleSize * 10);
+	StatSPDText->SetFont("Galmuri9");
+	StatSPDText->SetColor(Color8Bit::White);
+	StatSPDText->SetPosition(FVector(-504.f, -84.f));
+	StatSPDText->SetText("SPD");
+	StatSPDText->SetActive(false);
+
+	StatCRTText = CreateWidget<UTextWidget>(GetWorld(), "StatCRTText");
+	StatCRTText->AddToViewPort(3);
+	StatCRTText->SetScale(ContentsValue::MultipleSize * 10);
+	StatCRTText->SetFont("Galmuri9");
+	StatCRTText->SetColor(Color8Bit::White);
+	StatCRTText->SetPosition(FVector(-503.f, -128.f));
+	StatCRTText->SetText("CRT");
+	StatCRTText->SetActive(false);
+
+	StatPickUPText = CreateWidget<UTextWidget>(GetWorld(), "StatPickUPText");
+	StatPickUPText->AddToViewPort(3);
+	StatPickUPText->SetScale(ContentsValue::MultipleSize * 10);
+	StatPickUPText->SetFont("Galmuri9");
+	StatPickUPText->SetColor(Color8Bit::White);
+	StatPickUPText->SetPosition(FVector(-490.f, -175.f));
+	StatPickUPText->SetText("PickUP");
+	StatPickUPText->SetActive(false);
+
+	StatHasteText = CreateWidget<UTextWidget>(GetWorld(), "StatHasteText");
+	StatHasteText->AddToViewPort(3);
+	StatHasteText->SetScale(ContentsValue::MultipleSize * 10);
+	StatHasteText->SetFont("Galmuri9");
+	StatHasteText->SetColor(Color8Bit::White);
+	StatHasteText->SetPosition(FVector(-493.f, -218.f));
+	StatHasteText->SetText("Haste");
+	StatHasteText->SetActive(false);
+	
+	
+	
+	
+	
 
 }
 
@@ -282,11 +345,24 @@ void UIManager::PauseChack()
 		Haste->SetActive(true);
 		CharacterBack->SetActive(true);
 
+		StatHPText->SetActive(true);
+		StatATKText->SetActive(true);
+		StatSPDText->SetActive(true);
+		StatCRTText->SetActive(true);
+		StatPickUPText->SetActive(true);
+		StatHasteText->SetActive(true);
 		for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
 		{
 			UImage* SetBurton = *SetBurtonIter;
 
 			SetBurton->SetActive(true);
+		}
+
+		for (StatLineIter = StatLineVector.begin(); StatLineIter != StatLineVector.end(); StatLineIter++)
+		{
+			UImage* StatLine = *StatLineIter;
+
+			StatLine->SetActive(true);
 		}
 	}
 	else
@@ -301,12 +377,25 @@ void UIManager::PauseChack()
 		Haste->SetActive(false);
 		CharacterBack->SetActive(false);
 
-
+		StatHPText->SetActive(false);
+		StatATKText->SetActive(false);
+		StatSPDText->SetActive(false);
+		StatCRTText->SetActive(false);
+		StatPickUPText->SetActive(false);
+		StatHasteText->SetActive(false);
 		for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
 		{
 			UImage* SetBurton = *SetBurtonIter;
 
 			SetBurton->SetActive(false);
+		}
+
+
+		for (StatLineIter = StatLineVector.begin(); StatLineIter != StatLineVector.end(); StatLineIter++)
+		{
+			UImage* StatLine = *StatLineIter;
+
+			StatLine->SetActive(false);
 		}
 	}
 }
