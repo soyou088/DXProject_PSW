@@ -69,12 +69,14 @@ protected:
 private:
 	USpriteRenderer* Renderer;
 	USpriteRenderer* SavedRenderer;
+	USpriteRenderer* Shadow;
+
 	UCollision* Collision;
 
 	FVector Dir = FVector::Zero;
 	FVector ToPlayerDir;
 
-	std::string Name = "Fubuzilla";
+	std::string Name = "Shrimp";
 	float Hp = 8.0f;
 	float Atk = 2.0f;
 	float Speed = 0.35f;

@@ -18,6 +18,10 @@ APlayer::APlayer()
 	Renderer->SetupAttachment(Root);
 	Renderer->SetPivot(EPivot::BOT);
 
+	Shadow = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Shadow->SetupAttachment(Root);
+	Shadow->SetPivot(EPivot::BOT);
+
 	PlayerCursor = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	PlayerCursor->SetupAttachment(Root);
 	PlayerCursor->SetPivot(EPivot::MAX);
@@ -50,6 +54,11 @@ void APlayer::BeginPlay()
 	Renderer->SetAutoSize(ContentsValue::MultipleSize, true);
 	Renderer->SetOrder(ERenderOrder::Player);
 	
+	Shadow->SetSprite("Shadow_0.png");
+	Shadow->SetAutoSize(ContentsValue::MultipleSize, true);
+	Shadow->SetOrder(ERenderOrder::Shadow);
+	Shadow->SetMulColor({ 1.f,1.f,1.f,0.7f });
+
 	Collision->SetPosition({ GetActorLocation().X, GetActorLocation().Y + (10.0f * ContentsValue::MultipleSize) });
 
 

@@ -78,6 +78,8 @@ protected:
 private:
 	USpriteRenderer* Renderer;
 	USpriteRenderer* PlayerCursor;
+	USpriteRenderer* Shadow;
+	
 	UCollision* Collision;
 
 	std::string Name = "Kiara";

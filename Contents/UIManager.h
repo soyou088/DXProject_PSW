@@ -55,7 +55,7 @@ protected:
 	UImage* PickUP = nullptr;
 	UImage* Haste = nullptr;
 
-
+	UImage* Charge = nullptr;
 
 	UTextWidget* HPText = nullptr;
 	UTextWidget* HPTextBack = nullptr;
@@ -72,6 +72,14 @@ protected:
 	UTextWidget* StatCRTText = nullptr;
 	UTextWidget* StatPickUPText = nullptr;
 	UTextWidget* StatHasteText = nullptr;
+	
+	UTextWidget* PuaseSkillText = nullptr;
+	UTextWidget* PuaseStampText = nullptr;
+	UTextWidget* PuaseCollaborationText = nullptr;
+	UTextWidget* PuaseContinueText = nullptr;
+	UTextWidget* PuaseSettingText = nullptr;
+	UTextWidget* PuaseExitText = nullptr;
+
 
 
 	std::vector<UImage*> WeaponIconBack;

@@ -214,7 +214,7 @@ void UIManager::UISpawn()
 	Haste->SetAutoSize(ContentsValue::MultipleSize, true);
 	Haste->SetPosition(FVector(-550.f, -220.f));
 	Haste->SetActive(false);
-
+	
 
 	// UI TEXT
 	HPText = CreateWidget<UTextWidget>(GetWorld(), "HP");
@@ -230,6 +230,7 @@ void UIManager::UISpawn()
 	HPTextBack->SetFont("Galmuri9");
 	HPTextBack->SetColor(Color8Bit::Black);
 	HPTextBack->SetPosition(FVector(-225.f, 320.f));
+	
 
 	KillCountText = CreateWidget<UTextWidget>(GetWorld(), "KillCount");
 	KillCountText->AddToViewPort(3);
@@ -294,6 +295,60 @@ void UIManager::UISpawn()
 	StatHasteText->SetText("Haste");
 	StatHasteText->SetActive(false);
 	
+	PuaseSkillText = CreateWidget<UTextWidget>(GetWorld(), "PuaseSkillText");
+	PuaseSkillText->AddToViewPort(4);
+	PuaseSkillText->SetScale(ContentsValue::MultipleSize * 11);
+	PuaseSkillText->SetFont("Galmuri9");
+	PuaseSkillText->SetColor(Color8Bit::White);
+	PuaseSkillText->SetPosition(FVector(0.f, 125.f));
+	PuaseSkillText->SetText("스킬");
+	PuaseSkillText->SetActive(false);
+	
+	PuaseStampText = CreateWidget<UTextWidget>(GetWorld(), "PuaseStampText");
+	PuaseStampText->AddToViewPort(10);
+	PuaseStampText->SetScale(ContentsValue::MultipleSize * 11);
+	PuaseStampText->SetFont("Galmuri9");
+	PuaseStampText->SetColor(Color8Bit::White);
+	PuaseStampText->SetPosition(FVector(0.f, 65.f));
+	PuaseStampText->SetText("스탬프");
+	PuaseStampText->SetActive(false);
+
+	PuaseCollaborationText = CreateWidget<UTextWidget>(GetWorld(), "PuaseCollaborationText");
+	PuaseCollaborationText->AddToViewPort(10);
+	PuaseCollaborationText->SetScale(ContentsValue::MultipleSize * 11);
+	PuaseCollaborationText->SetFont("Galmuri9");
+	PuaseCollaborationText->SetColor(Color8Bit::White);
+	PuaseCollaborationText->SetPosition(FVector(0.f, 5.f));
+	PuaseCollaborationText->SetText("콜라보");
+	PuaseCollaborationText->SetActive(false);
+
+	PuaseContinueText = CreateWidget<UTextWidget>(GetWorld(), "PuaseContinueText");
+	PuaseContinueText->AddToViewPort(4);
+	PuaseContinueText->SetScale(ContentsValue::MultipleSize * 11);
+	PuaseContinueText->SetFont("Galmuri9");
+	PuaseContinueText->SetColor(Color8Bit::White);
+	PuaseContinueText->SetPosition(FVector(0.f, -55.f));
+	PuaseContinueText->SetText("이어서 하기");
+	PuaseContinueText->SetActive(false);
+
+	PuaseSettingText = CreateWidget<UTextWidget>(GetWorld(), "PuaseSettingText");
+	PuaseSettingText->AddToViewPort(4);
+	PuaseSettingText->SetScale(ContentsValue::MultipleSize * 11);
+	PuaseSettingText->SetFont("Galmuri9");
+	PuaseSettingText->SetColor(Color8Bit::White);
+	PuaseSettingText->SetPosition(FVector(0.f, -115.f));
+	PuaseSettingText->SetText("설정");
+	PuaseSettingText->SetActive(false);
+
+	PuaseExitText = CreateWidget<UTextWidget>(GetWorld(), "PuaseExitText");
+	PuaseExitText->AddToViewPort(4);
+	PuaseExitText->SetScale(ContentsValue::MultipleSize * 11);
+	PuaseExitText->SetFont("Galmuri9");
+	PuaseExitText->SetColor(Color8Bit::White);
+	PuaseExitText->SetPosition(FVector(0.f, -175.f));
+	PuaseExitText->SetText("나가기");
+	PuaseExitText->SetActive(false);
+
 	
 	
 	
@@ -364,6 +419,14 @@ void UIManager::PauseChack()
 
 			StatLine->SetActive(true);
 		}
+
+		PuaseSkillText->SetActive(true);
+		PuaseStampText->SetActive(true);
+		PuaseCollaborationText->SetActive(true);
+		PuaseContinueText->SetActive(true);
+		PuaseSettingText->SetActive(true);
+		PuaseExitText->SetActive(true);
+
 	}
 	else
 	{
@@ -397,7 +460,16 @@ void UIManager::PauseChack()
 
 			StatLine->SetActive(false);
 		}
+
+		PuaseSkillText->SetActive(false);
+		PuaseStampText->SetActive(false);
+		PuaseCollaborationText->SetActive(false);
+		PuaseContinueText->SetActive(false);
+		PuaseSettingText->SetActive(false);
+		PuaseExitText->SetActive(false);
 	}
+
+
 }
 
 void UIManager::CollisionChack()

@@ -11,6 +11,10 @@ AMonster::AMonster()
 	Renderer->SetupAttachment(Root);
 	Renderer->SetPivot(EPivot::BOT);
 
+	Shadow = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	Shadow->SetupAttachment(Root);
+	Shadow->SetPivot(EPivot::BOT);
+
 	SavedRenderer = CreateDefaultSubObject<USpriteRenderer>("SavedRenderer");
 	SavedRenderer->SetupAttachment(Root);
 	SavedRenderer->SetAutoSize(ContentsValue::MultipleSize, true);
@@ -36,7 +40,8 @@ void AMonster::BeginPlay()
 	Super::BeginPlay();
 
 
-	CreateMonsterAnimation("Fubuzilla",11);
+	//CreateMonsterAnimation("Fubuzilla",11);
+	CreateMonsterAnimation("Shrimp");
 	CreateMonsterAnimation("Deadbeat");
 	CreateMonsterAnimation("Takodachi");
 	CreateMonsterAnimation("KFP");
@@ -44,6 +49,11 @@ void AMonster::BeginPlay()
 	Renderer->SetAutoSize(ContentsValue::MultipleSize, true);
 	Renderer->ChangeAnimation(Name);
 	Renderer->SetOrder(ERenderOrder::MonsterUp);
+
+	Shadow->SetSprite("Shadow_0.png");
+	Shadow->SetAutoSize(ContentsValue::MultipleSize, true);
+	Shadow->SetOrder(ERenderOrder::Shadow);
+	Shadow->SetMulColor({ 1.f,1.f,1.f,0.7f });
 
 	SavedRenderer->CreateAnimation("MonsterSavedHeart", "MonsterSavedHeart", 0.1f, false);
 	SavedRenderer->SetOrder(ERenderOrder::MonsterUIUp);

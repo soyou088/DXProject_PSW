@@ -371,10 +371,10 @@ void APlayGameMode::Tick(float _DeltaTime)
 	InfinityGroundCheck();
 
 	SpawnMonsterTimeSet(PlayTime, 0.0f, 20.0f, 5.0f,
-		"Fubuzilla", 2.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
+		"Shrimp", 2.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
 		false, 10);
 	SpawnMonsterTimeSet(PlayTime, 0.0f, 20.0f, 10.0f,
-		"Fubuzilla", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
+		"Shrimp", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
 		true, 10);
 	SpawnMonsterTimeSet(PlayTime, 20.0f, 40.0f, 5.0f,
 		"Deadbeat", 1.0f, 40.0f, 4.0f, 0.4f, 7.0f, EMonsterMoveType::Follow,

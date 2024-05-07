@@ -10,6 +10,7 @@ enum class ERenderOrder
 	MonsterUIUp,
 	MonsterDown,
 	MonsterUIDown,
+	Shadow,
 	Player,
 	Attack,
 	Mouse,
