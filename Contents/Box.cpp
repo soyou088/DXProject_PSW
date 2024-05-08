@@ -7,12 +7,13 @@ UBox::UBox()
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 	Box = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Box->SetupAttachment(Root);
-	Box->SetPivot(EPivot::BOT);
 
-	BoxAnimation = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	BoxAnimation->SetupAttachment(Root);
-
-
+	ShakeBox = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	ShakeBox->SetupAttachment(Root);
+	ShakeBox->SetPivot(EPivot::BOT);
+	
+	OpenBox = CreateDefaultSubObject<USpriteRenderer>("Renderer");
+	OpenBox->SetupAttachment(Root);
 
 
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
@@ -39,24 +40,25 @@ void UBox::BeginPlay()
 	Box->SetOrder(ERenderOrder::Player);
 	Box->SetPosition(FVector{ APlayer::PlayerPos.X + 100, APlayer::PlayerPos.Y});
 	
-	BoxAnimation->CreateAnimation("ShakeBox", "ShakeBox", 0.1, true);
-	BoxAnimation->CreateAnimation("OpenBox", "OpenBox", 0.1, true);
-	BoxAnimation->SetAutoSize(ContentsValue::MultipleSize, true);
-	BoxAnimation->SetOrder(ERenderOrder::Player);
-
+	ShakeBox->CreateAnimation("ShakeBox", "ShakeBox", 0.1, 2.f);
+	ShakeBox->SetAutoSize(ContentsValue::MultipleSize, true);
+	ShakeBox->SetOrder(ERenderOrder::Player);
 	
+	OpenBox->CreateAnimation("OpenBox", "OpenBox", 0.1, true);
+	OpenBox->SetAutoSize(ContentsValue::MultipleSize, true);
+	OpenBox->SetOrder(ERenderOrder::Player);
 
-	BoxAnimation->ChangeAnimation("ShakeBox");
+	ShakeBox->ChangeAnimation("ShakeBox");
 
 }
 
 void UBox::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	BoxAnimation->SetPosition(APlayer::PlayerPos);
-	if (true == BoxAnimation->IsCurAnimationEnd())
+	ShakeBox->SetPosition(APlayer::PlayerPos);
+	if (true == ShakeBox->IsCurAnimationEnd())
 	{
-		BoxAnimation->ChangeAnimation("OpenBox");
+		OpenBox->ChangeAnimation("OpenBox");
 	}
 
 }
