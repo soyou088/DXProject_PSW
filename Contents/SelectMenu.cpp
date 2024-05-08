@@ -85,6 +85,15 @@ void ASelectMenu::BeginPlay()
 	ChAnimation->SetOrder(ERenderOrder::Player);
 
 	ChAnimation->ChangeAnimation("KiaraIdle");
+
+	SelectText = CreateWidget<UTextWidget>(GetWorld(), "SelectText");
+	SelectText->AddToViewPort(2);
+	SelectText->SetScale(ContentsValue::MultipleSize * 15);
+	SelectText->SetFont("Galmuri14");
+	SelectText->SetColor(Color8Bit::White);
+	SelectText->SetPosition(FVector(0.f, 315.f));
+	SelectText->SetText("아이돌을 선택하세요");
+
 }
 
 void ASelectMenu::Chanimation()

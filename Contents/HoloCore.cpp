@@ -19,6 +19,8 @@ void UHoloCore::Initialize()
 {
 	UEngineFont::Load("Galmuri9");
 	UEngineFont::Load("PixelMplus10-Regular");
+	UEngineFont::Load("Galmuri14");
+	
 
 	{
 		// 파일의 헤더

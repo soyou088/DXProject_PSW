@@ -607,7 +607,7 @@ void UIManager::CollisionChack()
 
 		if (true == IsDown(VK_LBUTTON) && true == ExitChack)
 		{
-			GEngine->EngineWindow.Off();
+			GEngine->ChangeLevel("TitleLevel");
 		}
 	}
 }

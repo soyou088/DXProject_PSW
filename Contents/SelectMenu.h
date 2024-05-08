@@ -1,6 +1,7 @@
 #pragma once
 #include <Enginecore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
+#include <EngineCore/TextWidget.h>
 
 // Ό³Έν :
 class ASelectMenu : public AActor
@@ -37,6 +38,8 @@ private:
 	USpriteRenderer* Explanation2;
 
 	USpriteRenderer* ExplanationFrame;
+
+	UTextWidget* SelectText;
 
 	int Count = 0;
 };

@@ -52,6 +52,7 @@ void ACharacterSelection::Tick(float _DeltaTime)
 	Collision->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			CharacterSelection0->SetSprite("menu_charselecLocked2_0.png");
+			ColChack = false;
 		}
 	);
 

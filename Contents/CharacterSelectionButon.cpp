@@ -38,6 +38,7 @@ void ACharacterSelectionButon::BeginPlay()
 		Selection->SetActorLocation({ -380.0f - (i * -95.0f),-255.0f });
 	}
 
+	
 }
 
 void ACharacterSelectionButon::Tick(float _DeltaTime)
