@@ -79,6 +79,9 @@
     <ClInclude Include="UIManager.h">
       <Filter>Level\PlayLevel\UIActor</Filter>
     </ClInclude>
+    <ClInclude Include="Bax.h">
+      <Filter>Level\PlayLevel\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -159,6 +162,9 @@
     <ClCompile Include="UIManager.cpp">
       <Filter>Level\PlayLevel\UIActor</Filter>
     </ClCompile>
+    <ClCompile Include="Bax.cpp">
+      <Filter>Level\PlayLevel\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -229,6 +235,9 @@
     </Filter>
     <Filter Include="Level\PlayLevel\Actor\Attack\Melee\Character">
       <UniqueIdentifier>{dfdbe2af-a6f5-4dff-a303-7b005732b5de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\Object">
+      <UniqueIdentifier>{372681f9-0642-49fa-9249-f73da7cfa638}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

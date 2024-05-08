@@ -167,6 +167,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bax.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="CharacterSelection.h">
       <SubType>
       </SubType>
@@ -264,6 +268,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bax.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="CharacterSelection.cpp">
       <SubType>
       </SubType>

@@ -105,6 +105,6 @@ protected:
 	std::vector<UImage*>::iterator StatLineIter = StatLineVector.begin();
 
 private:
-
+	float Hp = 0.0f;
 };
 

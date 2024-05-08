@@ -52,6 +52,8 @@ void UIManager::Tick(float _DeltaTime)
 	PauseChack();
 	CollisionChack();
 	CollisionPos();
+	Hp = APlayGameMode::MainPlayer->GetHp();
+	HPUpdate();
 }
 
 void UIManager::UISpawn()
@@ -413,7 +415,9 @@ void UIManager::KillCountUpdate()
 
 void UIManager::HPUpdate()
 {
-	//HPText->APlayer::GetHp();
+	HPText->SetText(std::to_string(Hp));
+	HPTextBack->SetText(std::to_string(Hp));
+	int a = 0;
 }
 
 void UIManager::PauseChack()
