@@ -245,7 +245,6 @@ void UTitleText::CollisionCheck()
 		}
 	);
 
-
 	if (true == IsPress(VK_LBUTTON) && true == ColChack)
 	{
 		GEngine->ChangeLevel("SelectLevel");
