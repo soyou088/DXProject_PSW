@@ -2,11 +2,10 @@
 #include "CharacterSelectionButon.h"
 #include "CharacterSelection.h"
 
+std::vector<std::shared_ptr<ACharacterSelection>> ACharacterSelectionButon::CharacterSelections;
+
 ACharacterSelectionButon::ACharacterSelectionButon()
 {
-
-
-
 }
 
 ACharacterSelectionButon::~ACharacterSelectionButon()
@@ -45,4 +44,6 @@ void ACharacterSelectionButon::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 }
+
+
 

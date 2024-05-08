@@ -159,6 +159,7 @@ void UTitleText::CollisionCheck()
 		{
 			NewGame->SetColor(Color8Bit::Black);
 			ColChack = true;
+
 		}
 	);
 	NewGameCol->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
@@ -245,8 +246,9 @@ void UTitleText::CollisionCheck()
 		}
 	);
 
-	if (true == IsPress(VK_LBUTTON) && true == ColChack)
+	if (true == IsDown(VK_LBUTTON) && true == ColChack)
 	{
 		GEngine->ChangeLevel("SelectLevel");
 	}
+
 }

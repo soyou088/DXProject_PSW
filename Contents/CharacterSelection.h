@@ -26,5 +26,7 @@ protected:
 private:
 	USpriteRenderer* CharacterSelection0;
 	UCollision* Collision;
+
+	bool ColChack = false;
 };
 

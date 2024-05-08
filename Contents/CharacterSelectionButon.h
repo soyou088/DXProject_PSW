@@ -9,6 +9,7 @@ class ACharacterSelectionButon : public AActor
 {
 	GENERATED_BODY(AActor)
 public:
+	static std::vector<std::shared_ptr<ACharacterSelection>> CharacterSelections;
 	// constrcuter destructer
 	ACharacterSelectionButon();
 	~ACharacterSelectionButon();
@@ -24,7 +25,6 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	std::vector<std::shared_ptr<ACharacterSelection>> CharacterSelections;
 private:
 
 };

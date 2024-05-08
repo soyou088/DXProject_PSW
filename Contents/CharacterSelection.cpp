@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "CharacterSelection.h"
+#include "CharacterSelectionButon.h"
 
 ACharacterSelection::ACharacterSelection()
 {
@@ -17,6 +18,7 @@ ACharacterSelection::ACharacterSelection()
 
 
 	SetRoot(Root);
+	InputOn();
 }
 
 ACharacterSelection::~ACharacterSelection()
@@ -44,6 +46,7 @@ void ACharacterSelection::Tick(float _DeltaTime)
 	Collision->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			CharacterSelection0->SetSprite("menu_charselecLocked_0.png");
+			ColChack = true;
 		}
 	);
 	Collision->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
@@ -52,5 +55,9 @@ void ACharacterSelection::Tick(float _DeltaTime)
 		}
 	);
 
+	if (true == IsDown(VK_LBUTTON) && true == ColChack)
+	{
+		GEngine->ChangeLevel("PlayLevel");
+	}
 }
 

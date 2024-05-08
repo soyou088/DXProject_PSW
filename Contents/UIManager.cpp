@@ -257,7 +257,7 @@ void UIManager::UISpawn()
 
 	// UI TEXT
 	HPText = CreateWidget<UTextWidget>(GetWorld(), "HP");
-	HPText->AddToViewPort(3);
+	HPText->AddToViewPort(4);
 	HPText->SetScale(15.f);
 	HPText->SetFont("Galmuri9");
 	HPText->SetColor(Color8Bit::White);
