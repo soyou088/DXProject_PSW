@@ -46,7 +46,8 @@ protected:
 	UImage* Gold = nullptr;
 	UImage* KillCount = nullptr;
 
-	UImage* PuaseBack = nullptr;
+	UImage* PauseBack = nullptr;
+	UImage* PausedText = nullptr;
 	UImage* SetBack = nullptr;
 	UImage* CharacterBack = nullptr;
 	UImage* HP = nullptr;
@@ -55,6 +56,7 @@ protected:
 	UImage* CRT = nullptr;
 	UImage* PickUP = nullptr;
 	UImage* Haste = nullptr;
+
 
 	UImage* Charge = nullptr;
 
@@ -74,12 +76,12 @@ protected:
 	UTextWidget* StatPickUPText = nullptr;
 	UTextWidget* StatHasteText = nullptr;
 	
-	UTextWidget* PuaseSkillText = nullptr;
-	UTextWidget* PuaseStampText = nullptr;
-	UTextWidget* PuaseCollaborationText = nullptr;
-	UTextWidget* PuaseContinueText = nullptr;
-	UTextWidget* PuaseSettingText = nullptr;
-	UTextWidget* PuaseExitText = nullptr;
+	UTextWidget* PauseSkillText = nullptr;
+	UTextWidget* PauseStampText = nullptr;
+	UTextWidget* PauseCollaborationText = nullptr;
+	UTextWidget* PauseContinueText = nullptr;
+	UTextWidget* PauseSettingText = nullptr;
+	UTextWidget* PauseExitText = nullptr;
 
 
 

@@ -150,12 +150,19 @@ void UIManager::UISpawn()
 	StageText->SetPosition(FVector(0.f, 305.f));
 
 	//ESC누른 후
-	PuaseBack = CreateWidget<UImage>(GetWorld(), "PuaseBack");
-	PuaseBack->AddToViewPort(1);
-	PuaseBack->SetSprite("menu_charselecLocked_0.png");
-	PuaseBack->SetAutoSize(ContentsValue::MultipleSize * 15, true);
-	PuaseBack->SetPosition(FVector(0.f, 0.f));
-	PuaseBack->SetActive(false);
+	PauseBack = CreateWidget<UImage>(GetWorld(), "PuaseBack");
+	PauseBack->AddToViewPort(1);
+	PauseBack->SetSprite("menu_charselecLocked_0.png");
+	PauseBack->SetAutoSize(ContentsValue::MultipleSize * 15, true);
+	PauseBack->SetPosition(FVector(0.f, 0.f));
+	PauseBack->SetActive(false);
+
+	PausedText = CreateWidget<UImage>(GetWorld(), "PausedText");
+	PausedText->AddToViewPort(5);
+	PausedText->SetSprite("Paused.png");
+	PausedText->SetAutoSize(ContentsValue::MultipleSize / 2, true);
+	PausedText->SetPosition(FVector(0.f, 200.f));
+	PausedText->SetActive(false);
 
 	SetBack = CreateWidget<UImage>(GetWorld(), "SetBack");
 	SetBack->AddToViewPort(1);
@@ -327,60 +334,60 @@ void UIManager::UISpawn()
 	StatHasteText->SetText("Haste");
 	StatHasteText->SetActive(false);
 	
-	PuaseSkillText = CreateWidget<UTextWidget>(GetWorld(), "PuaseSkillText");
-	PuaseSkillText->AddToViewPort(2);
-	PuaseSkillText->SetScale(ContentsValue::MultipleSize * 11);
-	PuaseSkillText->SetFont("Galmuri9");
-	PuaseSkillText->SetColor(Color8Bit::White);
-	PuaseSkillText->SetPosition(FVector(0.f, 125.f));
-	PuaseSkillText->SetText("스킬");
-	PuaseSkillText->SetActive(false);
-	
-	PuaseStampText = CreateWidget<UTextWidget>(GetWorld(), "PuaseStampText");
-	PuaseStampText->AddToViewPort(2);
-	PuaseStampText->SetScale(ContentsValue::MultipleSize * 11);
-	PuaseStampText->SetFont("Galmuri9");
-	PuaseStampText->SetColor(Color8Bit::White);
-	PuaseStampText->SetPosition(FVector(0.f, 65.f));
-	PuaseStampText->SetText("스탬프");
-	PuaseStampText->SetActive(false);
-
-	PuaseCollaborationText = CreateWidget<UTextWidget>(GetWorld(), "PuaseCollaborationText");
-	PuaseCollaborationText->AddToViewPort(2);
-	PuaseCollaborationText->SetScale(ContentsValue::MultipleSize * 11);
-	PuaseCollaborationText->SetFont("Galmuri9");
-	PuaseCollaborationText->SetColor(Color8Bit::White);
-	PuaseCollaborationText->SetPosition(FVector(0.f, 5.f));
-	PuaseCollaborationText->SetText("콜라보");
-	PuaseCollaborationText->SetActive(false);
-
-	PuaseContinueText = CreateWidget<UTextWidget>(GetWorld(), "PuaseContinueText");
-	PuaseContinueText->AddToViewPort(2);
-	PuaseContinueText->SetScale(ContentsValue::MultipleSize * 11);
-	PuaseContinueText->SetFont("Galmuri9");
-	PuaseContinueText->SetColor(Color8Bit::White);
-	PuaseContinueText->SetPosition(FVector(0.f, -55.f));
-	PuaseContinueText->SetText("이어서 하기");
-	PuaseContinueText->SetActive(false);
-
-	PuaseSettingText = CreateWidget<UTextWidget>(GetWorld(), "PuaseSettingText");
-	PuaseSettingText->AddToViewPort(2);
-	PuaseSettingText->SetScale(ContentsValue::MultipleSize * 11);
-	PuaseSettingText->SetFont("Galmuri9");
-	PuaseSettingText->SetColor(Color8Bit::White);
-	PuaseSettingText->SetPosition(FVector(0.f, -115.f));
-	PuaseSettingText->SetText("설정");
-	PuaseSettingText->SetActive(false);
-
-	PuaseExitText = CreateWidget<UTextWidget>(GetWorld(), "PuaseExitText");
-	PuaseExitText->AddToViewPort(2);
-	PuaseExitText->SetScale(ContentsValue::MultipleSize * 11);
-	PuaseExitText->SetFont("Galmuri9");
-	PuaseExitText->SetColor(Color8Bit::White);
-	PuaseExitText->SetPosition(FVector(0.f, -175.f));
-	PuaseExitText->SetText("나가기");
-	PuaseExitText->SetActive(false);
-
+	PauseSkillText = CreateWidget<UTextWidget>(GetWorld(), "PuaseSkillText");
+	PauseSkillText->AddToViewPort(2);
+	PauseSkillText->SetScale(ContentsValue::MultipleSize * 11);
+	PauseSkillText->SetFont("Galmuri9");
+	PauseSkillText->SetColor(Color8Bit::White);
+	PauseSkillText->SetPosition(FVector(0.f, 125.f));
+	PauseSkillText->SetText("스킬");
+	PauseSkillText->SetActive(false);
+	 
+	PauseStampText = CreateWidget<UTextWidget>(GetWorld(), "PuaseStampText");
+	PauseStampText->AddToViewPort(2);
+	PauseStampText->SetScale(ContentsValue::MultipleSize * 11);
+	PauseStampText->SetFont("Galmuri9");
+	PauseStampText->SetColor(Color8Bit::White);
+	PauseStampText->SetPosition(FVector(0.f, 65.f));
+	PauseStampText->SetText("스탬프");
+	PauseStampText->SetActive(false);
+	 
+	PauseCollaborationText = CreateWidget<UTextWidget>(GetWorld(), "PuaseCollaborationText");
+	PauseCollaborationText->AddToViewPort(2);
+	PauseCollaborationText->SetScale(ContentsValue::MultipleSize * 11);
+	PauseCollaborationText->SetFont("Galmuri9");
+	PauseCollaborationText->SetColor(Color8Bit::White);
+	PauseCollaborationText->SetPosition(FVector(0.f, 5.f));
+	PauseCollaborationText->SetText("콜라보");
+	PauseCollaborationText->SetActive(false);
+	 
+	PauseContinueText = CreateWidget<UTextWidget>(GetWorld(), "PuaseContinueText");
+	PauseContinueText->AddToViewPort(2);
+	PauseContinueText->SetScale(ContentsValue::MultipleSize * 11);
+	PauseContinueText->SetFont("Galmuri9");
+	PauseContinueText->SetColor(Color8Bit::White);
+	PauseContinueText->SetPosition(FVector(0.f, -55.f));
+	PauseContinueText->SetText("이어서 하기");
+	PauseContinueText->SetActive(false);
+	 
+	PauseSettingText = CreateWidget<UTextWidget>(GetWorld(), "PuaseSettingText");
+	PauseSettingText->AddToViewPort(2);
+	PauseSettingText->SetScale(ContentsValue::MultipleSize * 11);
+	PauseSettingText->SetFont("Galmuri9");
+	PauseSettingText->SetColor(Color8Bit::White);
+	PauseSettingText->SetPosition(FVector(0.f, -115.f));
+	PauseSettingText->SetText("설정");
+	PauseSettingText->SetActive(false);
+	 
+	PauseExitText = CreateWidget<UTextWidget>(GetWorld(), "PuaseExitText");
+	PauseExitText->AddToViewPort(2);
+	PauseExitText->SetScale(ContentsValue::MultipleSize * 11);
+	PauseExitText->SetFont("Galmuri9");
+	PauseExitText->SetColor(Color8Bit::White);
+	PauseExitText->SetPosition(FVector(0.f, -175.f));
+	PauseExitText->SetText("나가기");
+	PauseExitText->SetActive(false);
+	 
 	
 	
 	
@@ -424,7 +431,8 @@ void UIManager::PauseChack()
 {
 	if (true == APlayGameMode::PauseON)
 	{
-		PuaseBack->SetActive(true);
+		PauseBack->SetActive(true);
+		PausedText->SetActive(true);
 		SetBack->SetActive(true);
 		HP->SetActive(true);
 		ATK->SetActive(true);
@@ -454,17 +462,18 @@ void UIManager::PauseChack()
 			StatLine->SetActive(true);
 		}
 
-		PuaseSkillText->SetActive(true);
-		PuaseStampText->SetActive(true);
-		PuaseCollaborationText->SetActive(true);
-		PuaseContinueText->SetActive(true);
-		PuaseSettingText->SetActive(true);
-		PuaseExitText->SetActive(true);
+		PauseSkillText->SetActive(true);
+		PauseStampText->SetActive(true);
+		PauseCollaborationText->SetActive(true);
+		PauseContinueText->SetActive(true);
+		PauseSettingText->SetActive(true);
+		PauseExitText->SetActive(true);
 
 	}
 	else
 	{
-		PuaseBack->SetActive(false);
+		PauseBack->SetActive(false);
+		PausedText->SetActive(false);
 		SetBack->SetActive(false);
 		HP->SetActive(false);
 		ATK->SetActive(false);
@@ -495,12 +504,12 @@ void UIManager::PauseChack()
 			StatLine->SetActive(false);
 		}
 
-		PuaseSkillText->SetActive(false);
-		PuaseStampText->SetActive(false);
-		PuaseCollaborationText->SetActive(false);
-		PuaseContinueText->SetActive(false);
-		PuaseSettingText->SetActive(false);
-		PuaseExitText->SetActive(false);
+		PauseSkillText->SetActive(false);
+		PauseStampText->SetActive(false);
+		PauseCollaborationText->SetActive(false);
+		PauseContinueText->SetActive(false);
+		PauseSettingText->SetActive(false);
+		PauseExitText->SetActive(false);
 	}
 }
 
@@ -516,78 +525,78 @@ void UIManager::CollisionChack()
 		SetBurtonCollision0->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[0]->SetSprite("hud_Button_1.png");
-				PuaseSkillText->SetColor(Color8Bit::Black);
+				PauseSkillText->SetColor(Color8Bit::Black);
 			}
 		);
 		SetBurtonCollision0->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[0]->SetSprite("hud_Button_0.png");
-				PuaseSkillText->SetColor(Color8Bit::White);
+				PauseSkillText->SetColor(Color8Bit::White);
 			}
 		);
 
 		SetBurtonCollision1->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[1]->SetSprite("hud_Button_1.png");
-				PuaseStampText->SetColor(Color8Bit::Black);
+				PauseStampText->SetColor(Color8Bit::Black);
 			}
 		);
 		SetBurtonCollision1->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[1]->SetSprite("hud_Button_0.png");
-				PuaseStampText->SetColor(Color8Bit::White);
+				PauseStampText->SetColor(Color8Bit::White);
 			}
 		);
 
 		SetBurtonCollision2->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[2]->SetSprite("hud_Button_1.png");
-				PuaseCollaborationText->SetColor(Color8Bit::Black);
+				PauseCollaborationText->SetColor(Color8Bit::Black);
 			}
 		);
 		SetBurtonCollision2->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[2]->SetSprite("hud_Button_0.png");
-				PuaseCollaborationText->SetColor(Color8Bit::White);
+				PauseCollaborationText->SetColor(Color8Bit::White);
 			}
 		);
 
 		SetBurtonCollision3->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[3]->SetSprite("hud_Button_1.png");
-				PuaseContinueText->SetColor(Color8Bit::Black);
+				PauseContinueText->SetColor(Color8Bit::Black);
 			}
 		);
 		SetBurtonCollision3->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[3]->SetSprite("hud_Button_0.png");
-				PuaseContinueText->SetColor(Color8Bit::White);
+				PauseContinueText->SetColor(Color8Bit::White);
 			}
 		);
 
 		SetBurtonCollision4->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[4]->SetSprite("hud_Button_1.png");
-				PuaseSettingText->SetColor(Color8Bit::Black);
+				PauseSettingText->SetColor(Color8Bit::Black);
 			}
 		);
 		SetBurtonCollision4->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[4]->SetSprite("hud_Button_0.png");
-				PuaseSettingText->SetColor(Color8Bit::White);
+				PauseSettingText->SetColor(Color8Bit::White);
 			}
 		);
 
 		SetBurtonCollision5->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[5]->SetSprite("hud_Button_1.png");
-				PuaseExitText->SetColor(Color8Bit::Black);
+				PauseExitText->SetColor(Color8Bit::Black);
 			}
 		);
 		SetBurtonCollision5->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 			{
 				SetBurtonVector[5]->SetSprite("hud_Button_0.png");
-				PuaseExitText->SetColor(Color8Bit::White);
+				PauseExitText->SetColor(Color8Bit::White);
 			}
 		);
 	}

@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/Actor.h>
 #include <EngineCore/StateManager.h>
+#include <EngineCore/Image.h>
 
 // Ό³Έν :
 class UBax : public AActor
@@ -21,6 +22,6 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 private:
-
+	UImage* Bax;
 };
 
