@@ -270,7 +270,6 @@ void UIManager::UISpawn()
 	HPTextBack->SetColor(Color8Bit::Black);
 	HPTextBack->SetPosition(FVector(-225.f, 320.f));
 	
-
 	KillCountText = CreateWidget<UTextWidget>(GetWorld(), "KillCount");
 	KillCountText->AddToViewPort(3);
 	KillCountText->SetScale(ContentsValue::MultipleSize * 10);
