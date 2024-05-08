@@ -41,12 +41,12 @@ void ACharacterSelection::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	Collision->CollisionEnter(ECollisionOrder::Player, [=](std::shared_ptr<UCollision> _Collison)
+	Collision->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			CharacterSelection0->SetSprite("menu_charselecLocked_0.png");
 		}
 	);
-	Collision->CollisionExit(ECollisionOrder::Player, [=](std::shared_ptr<UCollision> _Collison)
+	Collision->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			CharacterSelection0->SetSprite("menu_charselecLocked2_0.png");
 		}

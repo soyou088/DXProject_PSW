@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "Menu.h"
-#include "Burton.h"
+#include "Burtton.h"
 
 AMenu::AMenu()
 {
@@ -19,7 +19,7 @@ void AMenu::BeginPlay()
 
 	for (int i = 0; i < 8; i++)
 	{
-		Burton = GetWorld()->SpawnActor<ABurton>("Burton");
+		Burton = GetWorld()->SpawnActor<ABurtton>("Burton");
 		Burton->SetActorLocation({430.0f, 220.0f - (i*70.0f)});
 	}
 }

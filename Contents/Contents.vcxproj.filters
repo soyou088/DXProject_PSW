@@ -52,7 +52,7 @@
     <ClInclude Include="Bullet.h">
       <Filter>Level\PlayLevel\Actor\Attack\Ranged</Filter>
     </ClInclude>
-    <ClInclude Include="Burton.h">
+    <ClInclude Include="Burtton.h">
       <Filter>Level\TitleLevel\Actor\Menu</Filter>
     </ClInclude>
     <ClInclude Include="SelectBack.h">
@@ -81,6 +81,9 @@
     </ClInclude>
     <ClInclude Include="Bax.h">
       <Filter>Level\PlayLevel\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleText.h">
+      <Filter>Level\TitleLevel\Actor\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -135,7 +138,7 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Level\PlayLevel\Actor\Attack\Ranged</Filter>
     </ClCompile>
-    <ClCompile Include="Burton.cpp">
+    <ClCompile Include="Burtton.cpp">
       <Filter>Level\TitleLevel\Actor\Menu</Filter>
     </ClCompile>
     <ClCompile Include="SelectBack.cpp">
@@ -164,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="Bax.cpp">
       <Filter>Level\PlayLevel\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleText.cpp">
+      <Filter>Level\TitleLevel\Actor\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

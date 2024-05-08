@@ -3,19 +3,19 @@
 #include <EngineCore/StateManager.h>
 
 // Ό³Έν :
-class ABurton : public AActor
+class ABurtton : public AActor
 {
 	GENERATED_BODY(AActor)
 public:
 	// constrcuter destructer
-	ABurton();
-	~ABurton();
+	ABurtton();
+	~ABurtton();
 
 	// delete Function
-	ABurton(const ABurton& _Other) = delete;
-	ABurton(ABurton&& _Other) noexcept = delete;
-	ABurton& operator=(const ABurton& _Other) = delete;
-	ABurton& operator=(ABurton&& _Other) noexcept = delete;
+	ABurtton(const ABurtton& _Other) = delete;
+	ABurtton(ABurtton&& _Other) noexcept = delete;
+	ABurtton& operator=(const ABurtton& _Other) = delete;
+	ABurtton& operator=(ABurtton&& _Other) noexcept = delete;
 
 protected:
 	void BeginPlay() override;

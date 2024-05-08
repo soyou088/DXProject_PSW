@@ -1,7 +1,7 @@
 #include "PreCompile.h"
-#include "Burton.h"
+#include "Burtton.h"
 
-ABurton::ABurton()
+ABurtton::ABurtton()
 {
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
 	MenuRenderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
@@ -20,33 +20,34 @@ ABurton::ABurton()
 
 }
 
-ABurton::~ABurton()
+ABurtton::~ABurtton()
 {
 }
 
-void ABurton::BeginPlay()
+void ABurtton::BeginPlay()
 {
 	Super::BeginPlay();
 	MenuRenderer->SetSprite("hud_OptionButton_0.png");
 	MenuRenderer->SetAutoSize(2.0f, true);
 }
 
-void ABurton::CollisionCheck()
+void ABurtton::CollisionCheck()
 {
-	Collision->CollisionEnter(ECollisionOrder::Player, [=](std::shared_ptr<UCollision> _Collison)
+	Collision->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			MenuRenderer->SetSprite("hud_OptionButton_1.png");
 		}
 	);
-	Collision->CollisionExit(ECollisionOrder::Player, [=](std::shared_ptr<UCollision> _Collison)
+	Collision->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			MenuRenderer->SetSprite("hud_OptionButton_0.png");
 		}
 	);
+	
 }
 
 
-void ABurton::Tick(float _DeltaTime)
+void ABurtton::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	

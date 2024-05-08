@@ -1,5 +1,5 @@
 #pragma once
-#include "Burton.h"
+#include "Burtton.h"
 #include <Enginecore/Actor.h>
 #include <EngineCore/SpriteRenderer.h>
 
@@ -23,10 +23,10 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void CollisionCheck();
+
 	bool CurCollision = false;
 	
-	std::shared_ptr<ABurton> Burton;
+	std::shared_ptr<ABurtton> Burton;
 
 private:
 

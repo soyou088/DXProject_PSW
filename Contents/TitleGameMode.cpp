@@ -4,6 +4,9 @@
 #include "Menu.h"
 #include <EngineCore/Camera.h>
 
+std::shared_ptr<class UTitleText> ATitleGameMode::TitleText;
+
+
 ATitleGameMode::ATitleGameMode()
 {
 	InputOn();
@@ -22,6 +25,7 @@ void ATitleGameMode::BeginPlay()
 	TitleLogo = GetWorld()->SpawnActor<ATitleLogo>("TitleLogo");
 	Menu = GetWorld()->SpawnActor<AMenu>("Menu");
 
+	TitleText = GetWorld()->SpawnActor<UTitleText>("UTitleText");
 
 	std::shared_ptr<ATitleBack> InitialTitleBack = GetWorld()->SpawnActor<ATitleBack>("TitleBack");
 	TitleBack.push_back(InitialTitleBack);
@@ -46,6 +50,7 @@ void ATitleGameMode::BeginPlay()
 
 
 	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
+
 
 
 }

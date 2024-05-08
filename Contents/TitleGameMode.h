@@ -1,6 +1,7 @@
 #pragma once
 #include "TitleLogo.h"
 #include "TitleBack.h"
+#include "TitleText.h"
 #include "Menu.h"
 #include "TitleCh.h"
 #include "Mouse.h"
@@ -12,6 +13,7 @@ class ATitleGameMode : public AGameMode
 	GENERATED_BODY(AGameMode)
 
 public:
+	static std::shared_ptr<class UTitleText> TitleText;
 	// constrcuter destructer
 	ATitleGameMode();
 	~ATitleGameMode();
