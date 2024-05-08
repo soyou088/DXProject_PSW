@@ -23,7 +23,7 @@ protected:
 	void Tick(float _DeltaTime) override;
 	void UISpawn();
 	void CollisionCheck();
-	int a = 0;
+
 private:
 	UTextWidget* NewGame = nullptr;
 	UTextWidget* HoloHouse= nullptr;
@@ -42,5 +42,7 @@ private:
 	UCollision* SettingCol = nullptr;
 	UCollision* ProducerCol = nullptr;
 	UCollision* ExitCol = nullptr;
+
+	bool ColChack = false;
 };
 

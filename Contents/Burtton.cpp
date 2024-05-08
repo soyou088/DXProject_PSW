@@ -37,6 +37,7 @@ void ABurtton::CollisionCheck()
 		{
 			MenuRenderer->SetSprite("hud_OptionButton_1.png");
 		}
+	
 	);
 	Collision->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 		{

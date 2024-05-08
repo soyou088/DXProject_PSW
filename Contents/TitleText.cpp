@@ -4,7 +4,6 @@
 
 UTitleText::UTitleText()
 {
-	int a = 10;
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Collision");
 
 	NewGameCol = CreateDefaultSubObject<UCollision>("Collision");
@@ -64,6 +63,7 @@ UTitleText::UTitleText()
 	ExitCol->SetupAttachment(Root);
 
 	SetRoot(Root);
+	InputOn();
 }
 
 UTitleText::~UTitleText()
@@ -81,6 +81,8 @@ void UTitleText::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	CollisionCheck();
+
+
 }
 
 void UTitleText::UISpawn()
@@ -156,6 +158,7 @@ void UTitleText::CollisionCheck()
 	NewGameCol->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			NewGame->SetColor(Color8Bit::Black);
+			ColChack = true;
 		}
 	);
 	NewGameCol->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
@@ -243,5 +246,8 @@ void UTitleText::CollisionCheck()
 	);
 
 
-
+	if (true == IsPress(VK_LBUTTON) && true == ColChack)
+	{
+		GEngine->ChangeLevel("SelectLevel");
+	}
 }
