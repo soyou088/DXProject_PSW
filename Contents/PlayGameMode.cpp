@@ -3,6 +3,7 @@
 #include "ContentsValue.h"
 #include "Monster.h"
 #include "UIManager.h"
+#include "Box.h"
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/Camera.h>
 #include <EngineCore/EngineDebugMsgWindow.h>
@@ -53,6 +54,9 @@ void APlayGameMode::BeginPlay()
 	AMouse::MouseCursorON = false;
 	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
 	Mouse->SetActorLocation(AMouse::MousePos);
+
+	//Object 스폰
+	Box = GetWorld()->SpawnActor<UBox>("Box");
 
 
 	//UI 스폰

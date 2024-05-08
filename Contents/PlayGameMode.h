@@ -3,6 +3,7 @@
 #include "PlayBack.h"
 #include "Player.h"
 #include "Mouse.h"
+#include "Box.h"
 
 struct FIntPoint
 {
@@ -54,7 +55,7 @@ protected:
 
 	std::shared_ptr<AMouse> Mouse;
 	std::shared_ptr<APlayer> Player;
-
+	std::shared_ptr<UBox> Box;
 	
 	float4 IndexToCenterPos(FIntPoint _Index);
 	FIntPoint PosToIndex(float4 _Pos);

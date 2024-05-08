@@ -79,7 +79,7 @@
     <ClInclude Include="UIManager.h">
       <Filter>Level\PlayLevel\UIActor</Filter>
     </ClInclude>
-    <ClInclude Include="Bax.h">
+    <ClInclude Include="Box.h">
       <Filter>Level\PlayLevel\Object</Filter>
     </ClInclude>
     <ClInclude Include="TitleText.h">
@@ -165,7 +165,7 @@
     <ClCompile Include="UIManager.cpp">
       <Filter>Level\PlayLevel\UIActor</Filter>
     </ClCompile>
-    <ClCompile Include="Bax.cpp">
+    <ClCompile Include="Box.cpp">
       <Filter>Level\PlayLevel\Object</Filter>
     </ClCompile>
     <ClCompile Include="TitleText.cpp">
