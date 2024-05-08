@@ -24,10 +24,12 @@ class APlayGameMode : public AGameMode
 	GENERATED_BODY(AGameMode)
 
 public:
-	// constrcuter destructer
 	static std::shared_ptr<APlayer> MainPlayer;
 	static std::shared_ptr<class UIManager> PlayUIManager;
 	static bool PauseON;
+	static bool IsPause;
+
+	// constrcuter destructer
 
 	APlayGameMode();
 	~APlayGameMode();
@@ -68,7 +70,7 @@ protected:
 	float4 RandomLocation(bool _Group);
 
 	void SpawnMonsterTimeSet(float _DeltaTime, float _SpawnBegin, float _SpawnEnd, float _Term, std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType, bool _Group = false, int _Quantity = 1);
-
+	void Pause(float _DeltaTime);
 
 	void PlayDebugText();
 
@@ -82,7 +84,7 @@ private:
 	float SpawnTerm = 0;
 
 	float PlayDeltaTime = 0.0f;
-	bool IsPause = false;
+
 
 	void CursorOFF();
 

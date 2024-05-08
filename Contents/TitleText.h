@@ -44,5 +44,6 @@ private:
 	UCollision* ExitCol = nullptr;
 
 	bool ColChack = false;
+	bool ExitChack = false;
 };
 

@@ -11,6 +11,8 @@
 std::shared_ptr<APlayer> APlayGameMode::MainPlayer = nullptr;
 std::shared_ptr<class UIManager> APlayGameMode::PlayUIManager;
 bool APlayGameMode::PauseON = false;
+bool APlayGameMode::IsPause = false;
+
 
 APlayGameMode::APlayGameMode()
 {
@@ -330,12 +332,8 @@ float4 APlayGameMode::RandomLocation(bool _Group)
 
 	return MonsterPos;
 }
-
-
-void APlayGameMode::Tick(float _DeltaTime)
+void APlayGameMode::Pause(float _DeltaTime)
 {
-	Super::Tick(_DeltaTime);
-
 
 	if (true == IsDown(VK_ESCAPE))
 	{
@@ -355,7 +353,7 @@ void APlayGameMode::Tick(float _DeltaTime)
 	if (false == IsPause)
 	{
 		PlayDeltaTime = _DeltaTime;
-		
+
 	}
 	else
 	{
@@ -364,6 +362,12 @@ void APlayGameMode::Tick(float _DeltaTime)
 	}
 	PlayTime += PlayDeltaTime;
 	_DeltaTime = 0.0f;
+}
+
+void APlayGameMode::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+	Pause(_DeltaTime);
 
 
 	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerColPos.X + AMouse::MousePos.X - 645, APlayer::PlayerColPos.Y - AMouse::MousePos.Y + 400 };

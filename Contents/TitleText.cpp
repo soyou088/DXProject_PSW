@@ -237,6 +237,7 @@ void UTitleText::CollisionCheck()
 	ExitCol->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			Exit->SetColor(Color8Bit::Black);
+			ExitChack = true;
 
 		}
 	);
@@ -250,5 +251,8 @@ void UTitleText::CollisionCheck()
 	{
 		GEngine->ChangeLevel("SelectLevel");
 	}
-
+	if (true == IsDown(VK_LBUTTON) && true == ExitChack)
+	{
+		GEngine->EngineWindow.Off();
+	}
 }

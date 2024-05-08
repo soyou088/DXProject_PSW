@@ -32,6 +32,7 @@ UIManager::UIManager()
 	SetBurtonCollision5->SetCollisionGroup(ECollisionOrder::Menu);
 	SetBurtonCollision5->SetCollisionType(ECollisionType::Rect);
 
+	InputOn();
 }
 
 UIManager::~UIManager()
@@ -421,8 +422,12 @@ void UIManager::KillCountUpdate()
 
 void UIManager::HPUpdate()
 {
-	HPText->SetText(std::to_string(Hp));
-	HPTextBack->SetText(std::to_string(Hp));
+
+	HPText->SetText(std::to_string(lround(Hp)));
+	HPTextBack->SetText(std::to_string(lround(Hp)));
+
+
+
 	int a = 0;
 }
 
@@ -590,6 +595,7 @@ void UIManager::CollisionChack()
 			{
 				SetBurtonVector[5]->SetSprite("hud_Button_1.png");
 				PauseExitText->SetColor(Color8Bit::Black);
+				ExitChack = true;
 			}
 		);
 		SetBurtonCollision5->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
@@ -598,6 +604,11 @@ void UIManager::CollisionChack()
 				PauseExitText->SetColor(Color8Bit::White);
 			}
 		);
+
+		if (true == IsDown(VK_LBUTTON) && true == ExitChack)
+		{
+			GEngine->EngineWindow.Off();
+		}
 	}
 }
 

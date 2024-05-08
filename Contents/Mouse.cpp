@@ -2,6 +2,7 @@
 #include "Mouse.h"
 #include "ContentsValue.h"
 #include "Player.h"
+#include "PlayGameMode.h"
 
 
 FVector AMouse::MousePos = FVector::Zero;
@@ -92,7 +93,10 @@ void AMouse::Tick(float _DeltaTime)
 	FVector MPos = ContentsValue::PlayLevelMousePos;
 	if ("PlayLevel" == GetWorld()->GetName())
 	{
-		CurCursor();
+		if (true != APlayGameMode::IsPause)
+		{
+			CurCursor();
+		}
 		Collision->SetPosition({ MPos.X + 5 , MPos.Y - 40.0f });
 	}
 	else

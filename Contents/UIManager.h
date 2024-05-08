@@ -108,5 +108,6 @@ protected:
 
 private:
 	float Hp = 0.0f;
+	bool ExitChack = false;
 };
 
