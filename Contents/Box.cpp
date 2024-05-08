@@ -49,7 +49,6 @@ void UBox::BeginPlay()
 	OpenBox->SetOrder(ERenderOrder::Player);
 
 	ShakeBox->ChangeAnimation("ShakeBox");
-
 }
 
 void UBox::Tick(float _DeltaTime)
