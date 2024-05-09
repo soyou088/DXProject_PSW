@@ -11,6 +11,7 @@
 
 std::shared_ptr<APlayer> APlayGameMode::MainPlayer = nullptr;
 std::shared_ptr<class UIManager> APlayGameMode::PlayUIManager;
+std::shared_ptr<class UBox> APlayGameMode::UIBox;
 bool APlayGameMode::PauseON = false;
 bool APlayGameMode::IsPause = false;
 
@@ -56,9 +57,8 @@ void APlayGameMode::BeginPlay()
 	Mouse->SetActorLocation(AMouse::MousePos);
 
 	//Object 스폰
-	Box = GetWorld()->SpawnActor<UBox>("Box");
-
-
+	UIBox = GetWorld()->SpawnActor<UBox>("Box");
+	
 	//UI 스폰
 	PlayUIManager = GetWorld()->SpawnActor<UIManager>("UIManager");
 

@@ -55,6 +55,40 @@ void UIManager::Tick(float _DeltaTime)
 	CollisionPos();
 	Hp = APlayGameMode::MainPlayer->GetHp();
 	HPUpdate();
+
+	if (true == APlayer::IsLevelUp)
+	{
+		LevelUpShop();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 void UIManager::UISpawn()
@@ -254,6 +288,10 @@ void UIManager::UISpawn()
 	Haste->SetAutoSize(ContentsValue::MultipleSize, true);
 	Haste->SetPosition(FVector(-550.f, -220.f));
 	Haste->SetActive(false);
+
+
+	// LevelUpÀÌ true¶ó¸é true
+
 	
 
 	// UI TEXT
@@ -602,6 +640,7 @@ void UIManager::CollisionChack()
 			{
 				SetBurtonVector[5]->SetSprite("hud_Button_0.png");
 				PauseExitText->SetColor(Color8Bit::White);
+				ExitChack = false;
 			}
 		);
 
@@ -626,6 +665,33 @@ void UIManager::CollisionPos()
 	SetBurtonCollision4->AddPosition(FVector::Down * 160);
 	SetBurtonCollision5->SetPosition(APlayer::PlayerPos);
 	SetBurtonCollision5->AddPosition(FVector::Down * 220);
+}
+
+void UIManager::LevelUpShop()
+{
+
+	LevelUpText = CreateWidget<UImage>(GetWorld(), "LevelUpText");
+	LevelUpText->AddToViewPort(2);
+	LevelUpText->SetSprite("ui_menu_upgrade_title_0.png");
+	LevelUpText->SetAutoSize(ContentsValue::MultipleSize, true);
+	LevelUpText->SetPosition(FVector(-400.f, 130.f));
+	LevelUpText->SetActive(false);
+	
+	for (int i = 0; i < 4; i++)
+	{
+		UImage* LevelUpSelectBack = CreateWidget<UImage>(GetWorld(), "LevelUpSelectBack");
+		LevelUpSelectBack->AddToViewPort(2);
+		LevelUpSelectBack->SetSprite("ui_menu_upgrade_window_0.png");
+		LevelUpSelectBack->SetAutoSize(ContentsValue::MultipleSize, true);
+		LevelUpSelectBack->SetPosition(FVector(200.0f, 180.f - 130.f * i));
+		LevelUpSelectBack->SetActive(false);
+		LevelUpSelectBackVector.push_back(LevelUpSelectBack);
+
+	}
+
+
+
+
 }
 
 

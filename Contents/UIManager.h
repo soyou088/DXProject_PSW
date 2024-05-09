@@ -30,6 +30,8 @@ protected:
 	void CollisionChack();
 	void CollisionPos();
 
+	void LevelUpShop();
+
 	UImage* Character = nullptr;
 	UImage* CharacterFrame = nullptr;
 	UImage* HPBar = nullptr;
@@ -83,6 +85,8 @@ protected:
 	UTextWidget* PauseSettingText = nullptr;
 	UTextWidget* PauseExitText = nullptr;
 
+	UImage* LevelUpText = nullptr;
+	//UImage* LevelUpSelect = nullptr;
 
 
 	std::vector<UImage*> WeaponIconBack;
@@ -100,11 +104,13 @@ protected:
 	UCollision* SetBurtonCollision4;
 	UCollision* SetBurtonCollision5;
 
-
-
-
+	// StatLine
 	std::vector<UImage*> StatLineVector;
 	std::vector<UImage*>::iterator StatLineIter = StatLineVector.begin();
+
+	//LevelUpSelectBack
+	std::vector<UImage*> LevelUpSelectBackVector;
+	std::vector<UImage*>::iterator LevelUpSelectBackIter = LevelUpSelectBackVector.begin();
 
 private:
 	float Hp = 0.0f;

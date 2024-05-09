@@ -9,6 +9,7 @@
 
 float4 APlayer::PlayerColPos = float4::Zero;
 float4 APlayer::PlayerPos = float4::Zero;
+bool APlayer::IsLevelUp = false;
 
 APlayer::APlayer()
 {

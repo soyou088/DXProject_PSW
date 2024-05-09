@@ -15,6 +15,7 @@ class APlayer : public AActor
 public:
 	static float4 PlayerColPos;
 	static float4 PlayerPos;
+	static bool IsLevelUp;
 	// constrcuter destructer
 	APlayer();
 	~APlayer();

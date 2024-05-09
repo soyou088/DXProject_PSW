@@ -76,14 +76,14 @@
     <ClInclude Include="Kiara.h">
       <Filter>Level\PlayLevel\Actor\Attack\Melee\Character</Filter>
     </ClInclude>
-    <ClInclude Include="UIManager.h">
-      <Filter>Level\PlayLevel\UIActor</Filter>
-    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Level\PlayLevel\Object</Filter>
     </ClInclude>
     <ClInclude Include="TitleText.h">
       <Filter>Level\TitleLevel\Actor\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Level\PlayLevel\UIActor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

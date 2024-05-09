@@ -27,6 +27,7 @@ class APlayGameMode : public AGameMode
 public:
 	static std::shared_ptr<APlayer> MainPlayer;
 	static std::shared_ptr<class UIManager> PlayUIManager;
+	static std::shared_ptr<class UBox> UIBox;
 	static bool PauseON;
 	static bool IsPause;
 

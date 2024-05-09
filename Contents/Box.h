@@ -24,8 +24,7 @@ protected:
 	void ColChack();
 private:
 	USpriteRenderer* Box;
-	USpriteRenderer* ShakeBox;
-	USpriteRenderer* OpenBox;
+	UImage* BoxAnimation;
 
 	UCollision* Collision;
 

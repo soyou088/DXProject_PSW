@@ -165,6 +165,7 @@ void UTitleText::CollisionCheck()
 	NewGameCol->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			NewGame->SetColor(Color8Bit::White);
+			ColChack = false;
 		}
 	);
 
@@ -244,6 +245,7 @@ void UTitleText::CollisionCheck()
 	ExitCol->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
 		{
 			Exit->SetColor(Color8Bit::White);
+			ExitChack = false;
 		}
 	);
 

@@ -8,18 +8,10 @@ UBox::UBox()
 	Box = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Box->SetupAttachment(Root);
 
-	ShakeBox = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	ShakeBox->SetupAttachment(Root);
-	ShakeBox->SetPivot(EPivot::BOT);
-	
-	OpenBox = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	OpenBox->SetupAttachment(Root);
-
-
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Root);
 	Collision->SetScale(FVector(40.f, 30.f));
-	Collision->SetPosition(APlayer::PlayerPos);
+	Collision->SetPosition(FVector{ APlayer::PlayerPos.X + 2560 , APlayer::PlayerPos.Y + 2450});
 	Collision->SetCollisionType(ECollisionType::Rect);
 
 	SetRoot(Root);
@@ -38,32 +30,32 @@ void UBox::BeginPlay()
 	Box->SetSprite("spr_holozonBox_0.png");
 	Box->SetAutoSize(ContentsValue::MultipleSize, true);
 	Box->SetOrder(ERenderOrder::Player);
-	Box->SetPosition(FVector{ APlayer::PlayerPos.X + 100, APlayer::PlayerPos.Y});
+	Box->SetPosition(FVector{ APlayer::PlayerPos.X + 2560 , APlayer::PlayerPos.Y + 2500 });
 	
-	ShakeBox->CreateAnimation("ShakeBox", "ShakeBox", 0.1, 2.f);
-	ShakeBox->SetAutoSize(ContentsValue::MultipleSize, true);
-	ShakeBox->SetOrder(ERenderOrder::Player);
-	
-	OpenBox->CreateAnimation("OpenBox", "OpenBox", 0.1, true);
-	OpenBox->SetAutoSize(ContentsValue::MultipleSize, true);
-	OpenBox->SetOrder(ERenderOrder::Player);
 
-	ShakeBox->ChangeAnimation("ShakeBox");
+	BoxAnimation = CreateWidget<UImage>(GetWorld(), "BoxAnimation");
+	BoxAnimation->CreateAnimation("ShakeBox", "ShakeBox", 0.1,true);
+	BoxAnimation->CreateAnimation("OpenBox", "OpenBox", 0.1, true);
+	BoxAnimation->SetPosition(APlayer::PlayerPos);
+	BoxAnimation->SetAutoSize(ContentsValue::MultipleSize, true);
+	BoxAnimation->SetOrder(ERenderOrder::Player);
+
+	BoxAnimation->ChangeAnimation("ShakeBox");
 }
 
 void UBox::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
-	ShakeBox->SetPosition(APlayer::PlayerPos);
-	if (true == ShakeBox->IsCurAnimationEnd())
-	{
-		OpenBox->ChangeAnimation("OpenBox");
-	}
-
+	ColChack();
 }
 
 void UBox::ColChack()
 {
+	Collision->CollisionEnter(ECollisionOrder::Player, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			//BoxAnimation->ChangeAnimation("OpenBox");
+		}
+	);
 
 }
 
