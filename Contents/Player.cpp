@@ -90,7 +90,6 @@ void APlayer::Tick(float _DeltaTime)
 	CursorDirChange();
 	PCursorDirCheck();
 	ChangeMouseAimAtkDir();
-	LevelUpex();
 	{
 		for (VPlayerWeaponsIter = VPlayerWeapons.begin(); VPlayerWeaponsIter != VPlayerWeapons.end(); ++VPlayerWeaponsIter)
 		{
@@ -124,20 +123,6 @@ void APlayer::CalStatus()
 	CalSpeed = ContentsValue::BaseSpeed * Speed;
 	LineSpeed = CalSpeed * 0.75f;
 }
-
-void APlayer::LevelUpex()
-{
-	if (true == IsDown('L'))
-	{
-		IsLevelUp = true;
-	}
-	else
-	{
-		IsLevelUp = false;
-	}
-
-}
-
 
 void APlayer::CursorDirChange()
 {

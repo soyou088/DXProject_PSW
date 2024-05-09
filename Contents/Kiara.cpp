@@ -32,11 +32,6 @@ void AKiara::BeginPlay()
 	SetKnifeTypeMeleeLocation(35.0f);
 	CollisionR0->SetActive(false);
 	CollisionR1->SetActive(false);
-	
-	
-	
-
-
 }
 
 void AKiara::Tick(float _DeltaTime)

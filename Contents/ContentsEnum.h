@@ -21,6 +21,7 @@ enum class ECollisionOrder
 {
 	Player,
 	Menu,
+	LevelMenu,
 	Mouse,
 	Weapon,
 	Monster,

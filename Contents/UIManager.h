@@ -26,12 +26,15 @@ protected:
 	void TimeUpdate(float _DeltaTime);
 	void KillCountUpdate();
 	void HPUpdate();
-	void PauseChack();
-	void CollisionChack();
-	void CollisionPos();
 
-	void LevelUpShop();
-	void LevelUpChack();
+	void ESCPauseChack();
+	void LevelPauseChack();
+	void PauseChack();
+	void SetBurtonColChack();
+	void CollisionPos();
+	void LevelUpColChack();
+	void LevelUpColPos();
+
 	void RendomIcon();
 
 	UImage* Character = nullptr;
@@ -93,7 +96,7 @@ protected:
 	UImage* LevelUpIconsItem = nullptr;
 	UImage* LevelUpIconsStar = nullptr;
 	UImage* LevelUpIconsWeapon = nullptr;
-	//std::vector<UImage*> LevelUpIcons;
+	
 	UTextWidget* ItemText = nullptr;
 	UTextWidget* CrossText = nullptr;
 	UTextWidget* StarText = nullptr;
@@ -104,12 +107,15 @@ protected:
 	UTextWidget* StarTextExplanation = nullptr;
 	UTextWidget* WeaponTextExplanation = nullptr;
 
-
 	UTextWidget* New0 = nullptr;
 	UTextWidget* New1 = nullptr;
 	UTextWidget* New2 = nullptr;
 	UTextWidget* New3 = nullptr;
 
+	UCollision* LevelUpCollision0;
+	UCollision* LevelUpCollision1;
+	UCollision* LevelUpCollision2;
+	UCollision* LevelUpCollision3;
 
 	//¿ÞÂÊ »ó´Ü ICon
 	std::vector<UImage*> WeaponIconBack;
@@ -137,6 +143,8 @@ protected:
 
 private:
 	float Hp = 0.0f;
+	float AtkTime = 0.0f;
+	float Atk = 0.0f;
 	bool ExitChack = false;
 };
 

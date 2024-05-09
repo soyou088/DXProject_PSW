@@ -32,6 +32,24 @@ UIManager::UIManager()
 	SetBurtonCollision5->SetCollisionGroup(ECollisionOrder::Menu);
 	SetBurtonCollision5->SetCollisionType(ECollisionType::Rect);
 
+
+	
+	LevelUpCollision0 = CreateDefaultSubObject<UCollision>("Collision");
+	LevelUpCollision0->SetCollisionGroup(ECollisionOrder::Menu);
+	LevelUpCollision0->SetCollisionType(ECollisionType::Rect);
+
+	LevelUpCollision1 = CreateDefaultSubObject<UCollision>("Collision");
+	LevelUpCollision1->SetCollisionGroup(ECollisionOrder::Menu);
+	LevelUpCollision1->SetCollisionType(ECollisionType::Rect);
+			
+	LevelUpCollision2 = CreateDefaultSubObject<UCollision>("Collision");
+	LevelUpCollision2->SetCollisionGroup(ECollisionOrder::Menu);
+	LevelUpCollision2->SetCollisionType(ECollisionType::Rect);
+		
+	LevelUpCollision3 = CreateDefaultSubObject<UCollision>("Collision");
+	LevelUpCollision3->SetCollisionGroup(ECollisionOrder::Menu);
+	LevelUpCollision3->SetCollisionType(ECollisionType::Rect);
+
 	InputOn();
 }
 
@@ -51,12 +69,14 @@ void UIManager::Tick(float _DeltaTime)
 	TimeUpdate(_DeltaTime);
 	KillCountUpdate();
 	PauseChack();
-	CollisionChack();
+	SetBurtonColChack();
 	CollisionPos();
 	Hp = APlayGameMode::MainPlayer->GetHp();
 	HPUpdate();
-	LevelUpChack();
-
+	ESCPauseChack();
+	LevelPauseChack();
+	LevelUpColPos();
+	LevelUpColChack();
 }
 
 void UIManager::UISpawn()
@@ -76,7 +96,6 @@ void UIManager::UISpawn()
 	EXPBar->SetPosition(FVector(10.0f, 340.0f));
 
 	//HUD
-	
 	Character = CreateWidget<UImage>(GetWorld(), "HUDCharacter");
 	Character->AddToViewPort(3);
 	Character->SetSprite("spr_KiaraPortrait_0.png");
@@ -257,6 +276,161 @@ void UIManager::UISpawn()
 	Haste->SetPosition(FVector(-550.f, -220.f));
 	Haste->SetActive(false);
 
+	// LevelUp UI
+	LevelUpText = CreateWidget<UImage>(GetWorld(), "LevelUpText");
+	LevelUpText->AddToViewPort(2);
+	LevelUpText->SetSprite("ui_menu_upgrade_title_0.png");
+	LevelUpText->SetAutoSize(ContentsValue::MultipleSize, true);
+	LevelUpText->SetPosition(FVector(-400.f, 130.f));
+
+	LevelUpIconsCross = CreateWidget<UImage>(GetWorld(), "LevelUpIconsCross");
+	LevelUpIconsCross->AddToViewPort(3);
+	LevelUpIconsCross->SetSprite("CrossIcon.png");
+	LevelUpIconsCross->SetAutoSize(ContentsValue::MultipleSize, true);
+	LevelUpIconsCross->SetPosition(FVector(-110.f, 170.f));
+
+	LevelUpIconsItem = CreateWidget<UImage>(GetWorld(), "LevelUpIconsItem");
+	LevelUpIconsItem->AddToViewPort(3);
+	LevelUpIconsItem->SetSprite("ItemIcon.png");
+	LevelUpIconsItem->SetAutoSize(ContentsValue::MultipleSize, true);
+	LevelUpIconsItem->SetPosition(FVector(-110.f, 40.f));
+
+	LevelUpIconsStar = CreateWidget<UImage>(GetWorld(), "LevelUpIconsStar");
+	LevelUpIconsStar->AddToViewPort(3);
+	LevelUpIconsStar->SetSprite("StarIcon.png");
+	LevelUpIconsStar->SetAutoSize(ContentsValue::MultipleSize, true);
+	LevelUpIconsStar->SetPosition(FVector(-110.f, -90.f));
+
+	LevelUpIconsWeapon = CreateWidget<UImage>(GetWorld(), "LevelUpIconsWeapon");
+	LevelUpIconsWeapon->AddToViewPort(3);
+	LevelUpIconsWeapon->SetSprite("WeaponIcon.png");
+	LevelUpIconsWeapon->SetAutoSize(ContentsValue::MultipleSize, true);
+	LevelUpIconsWeapon->SetPosition(FVector(-110.f, -220.f));
+
+	WeaponText = CreateWidget<UTextWidget>(GetWorld(), "WeaponText");
+	WeaponText->AddToViewPort(3);
+	WeaponText->SetScale(ContentsValue::MultipleSize * 9);
+	WeaponText->SetFont("Galmuri9");
+	WeaponText->SetColor(Color8Bit::White);
+	WeaponText->SetText("Test");
+	WeaponText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
+	WeaponText->SetPosition(FVector(-140.f, 240.f));
+
+	StarText = CreateWidget<UTextWidget>(GetWorld(), "StarText");
+	StarText->AddToViewPort(3);
+	StarText->SetScale(ContentsValue::MultipleSize * 9);
+	StarText->SetFont("Galmuri9");
+	StarText->SetColor(Color8Bit::White);
+	StarText->SetText("Test");
+	StarText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
+	StarText->SetPosition(FVector(-140.f, 110.f));
+
+	CrossText = CreateWidget<UTextWidget>(GetWorld(), "CrossText");
+	CrossText->AddToViewPort(3);
+	CrossText->SetScale(ContentsValue::MultipleSize * 9);
+	CrossText->SetFont("Galmuri9");
+	CrossText->SetColor(Color8Bit::White);
+	CrossText->SetText("Test");
+	CrossText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
+	CrossText->SetPosition(FVector(-140.f, -20.f));
+
+	ItemText = CreateWidget<UTextWidget>(GetWorld(), "ItemText");
+	ItemText->AddToViewPort(3);
+	ItemText->SetScale(ContentsValue::MultipleSize * 9);
+	ItemText->SetFont("Galmuri9");
+	ItemText->SetColor(Color8Bit::White);
+	ItemText->SetText("Test");
+	ItemText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
+	ItemText->SetPosition(FVector(-140.f, -150.f));
+
+	ItemTextExplanation = CreateWidget<UTextWidget>(GetWorld(), "ItemTextExplanation");
+	ItemTextExplanation->AddToViewPort(3);
+	ItemTextExplanation->SetScale(ContentsValue::MultipleSize * 9);
+	ItemTextExplanation->SetFont("Galmuri9");
+	ItemTextExplanation->SetColor(Color8Bit::White);
+	ItemTextExplanation->SetText("TestTestTestTestTestTestTestTestTestTestTestTestTest\nTestTestTestTest");
+	ItemTextExplanation->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
+	ItemTextExplanation->SetPosition(FVector(-50.f, 200.f));
+
+	CrossTextExplanation = CreateWidget<UTextWidget>(GetWorld(), "CrossTextExplanation");
+	CrossTextExplanation->AddToViewPort(3);
+	CrossTextExplanation->SetScale(ContentsValue::MultipleSize * 9);
+	CrossTextExplanation->SetFont("Galmuri9");
+	CrossTextExplanation->SetColor(Color8Bit::White);
+	CrossTextExplanation->SetText("TestTestTestTestTestTestTestTestTestTestTestTestTest\nTestTestTestTest");
+	CrossTextExplanation->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
+	CrossTextExplanation->SetPosition(FVector(-50.f, 70.f));
+
+	StarTextExplanation = CreateWidget<UTextWidget>(GetWorld(), "StarTextExplanation");
+	StarTextExplanation->AddToViewPort(3);
+	StarTextExplanation->SetScale(ContentsValue::MultipleSize * 9);
+	StarTextExplanation->SetFont("Galmuri9");
+	StarTextExplanation->SetColor(Color8Bit::White);
+	StarTextExplanation->SetText("TestTestTestTestTestTestTestTestTestTestTestTestTest\nTestTestTestTest");
+	StarTextExplanation->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
+	StarTextExplanation->SetPosition(FVector(-50.f, -60.f));
+
+	WeaponTextExplanation = CreateWidget<UTextWidget>(GetWorld(), "WeaponTextExplanation");
+	WeaponTextExplanation->AddToViewPort(3);
+	WeaponTextExplanation->SetScale(ContentsValue::MultipleSize * 9);
+	WeaponTextExplanation->SetFont("Galmuri9");
+	WeaponTextExplanation->SetColor(Color8Bit::White);
+	WeaponTextExplanation->SetText("TestTestTestTestTestTestTestTestTestTestTestTestTest\nTestTestTestTest");
+	WeaponTextExplanation->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
+	WeaponTextExplanation->SetPosition(FVector(-50.f, -190.f));
+
+
+	New0 = CreateWidget<UTextWidget>(GetWorld(), "New0");
+	New0->AddToViewPort(3);
+	New0->SetScale(ContentsValue::MultipleSize * 10);
+	New0->SetFont("Galmuri9");
+	New0->SetColor(Color8Bit::Yellow);
+	New0->SetText("신규!");
+	New0->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
+	New0->SetPosition(FVector(300.f, 240.f));
+
+	New1 = CreateWidget<UTextWidget>(GetWorld(), "New1");
+	New1->AddToViewPort(3);
+	New1->SetScale(ContentsValue::MultipleSize * 10);
+	New1->SetFont("Galmuri9");
+	New1->SetColor(Color8Bit::Yellow);
+	New1->SetText("신규!");
+	New1->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
+	New1->SetPosition(FVector(300.f, 110.f));
+
+	New2 = CreateWidget<UTextWidget>(GetWorld(), "New2");
+	New2->AddToViewPort(3);
+	New2->SetScale(ContentsValue::MultipleSize * 10);
+	New2->SetFont("Galmuri9");
+	New2->SetColor(Color8Bit::Yellow);
+	New2->SetText("신규!");
+	New2->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
+	New2->SetPosition(FVector(300.f, -20.f));
+
+	New3 = CreateWidget<UTextWidget>(GetWorld(), "New3");
+	New3->AddToViewPort(3);
+	New3->SetScale(ContentsValue::MultipleSize * 10);
+	New3->SetFont("Galmuri9");
+	New3->SetColor(Color8Bit::Yellow);
+	New3->SetText("신규!");
+	New3->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
+	New3->SetPosition(FVector(300.f, -150.f));
+
+	for (int i = 0; i < 4; i++)
+	{
+		UImage* LevelUpSelectBack = CreateWidget<UImage>(GetWorld(), "LevelUpSelectBack");
+		LevelUpSelectBack->AddToViewPort(2);
+		LevelUpSelectBack->SetSprite("ui_menu_upgrade_window_0.png");
+		LevelUpSelectBack->SetAutoSize(ContentsValue::MultipleSize, true);
+		LevelUpSelectBack->SetPosition(FVector(200.0f, 180.f - 130.f * i));
+		LevelUpSelectBackVector.push_back(LevelUpSelectBack);
+	}
+
+	LevelUpCollision0->SetScale({ 770.0f,125.0f });
+	LevelUpCollision1->SetScale({ 770.0f,125.0f });
+	LevelUpCollision2->SetScale({ 770.0f,125.0f });
+	LevelUpCollision3->SetScale({ 770.0f,125.0f });
+
 	// UI TEXT
 	HPText = CreateWidget<UTextWidget>(GetWorld(), "HP");
 	HPText->AddToViewPort(4);
@@ -389,12 +563,9 @@ void UIManager::UISpawn()
 	PauseExitText->SetText("나가기");
 	PauseExitText->SetActive(false);
 	 
-	
-	
-	
-	
 
 }
+
 
 
 void UIManager::TimeUpdate(float _DeltaTime)
@@ -432,13 +603,105 @@ void UIManager::HPUpdate()
 	int a = 0;
 }
 
-void UIManager::PauseChack()
+void UIManager::ESCPauseChack()
 {
 	if (true == APlayGameMode::ESCPauseON)
 	{
-		PauseBack->SetActive(true);
 		PausedText->SetActive(true);
 		SetBack->SetActive(true);
+		for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
+		{
+			UImage* SetBurton = *SetBurtonIter;
+
+			SetBurton->SetActive(true);
+		}
+		PauseSkillText->SetActive(true);
+		PauseStampText->SetActive(true);
+		PauseCollaborationText->SetActive(true);
+		PauseContinueText->SetActive(true);
+		PauseSettingText->SetActive(true);
+		PauseExitText->SetActive(true);
+	}
+	else
+	{
+		PausedText->SetActive(false);
+		SetBack->SetActive(false);
+		for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
+		{
+			UImage* SetBurton = *SetBurtonIter;
+
+			SetBurton->SetActive(false);
+		}
+		PauseSkillText->SetActive(false);
+		PauseStampText->SetActive(false);
+		PauseCollaborationText->SetActive(false);
+		PauseContinueText->SetActive(false);
+		PauseSettingText->SetActive(false);
+		PauseExitText->SetActive(false);
+	}
+
+}
+
+void UIManager::LevelPauseChack()
+{
+	if (true == APlayGameMode::LevelUpPauseON)
+	{
+		LevelUpText->SetActive(true);
+		LevelUpIconsCross->SetActive(true);
+		LevelUpIconsItem->SetActive(true);
+		LevelUpIconsStar->SetActive(true);
+		LevelUpIconsWeapon->SetActive(true);
+		WeaponText->SetActive(true);
+		StarText->SetActive(true);
+		CrossText->SetActive(true);
+		ItemText->SetActive(true);
+		ItemTextExplanation->SetActive(true);
+		CrossTextExplanation->SetActive(true);
+		StarTextExplanation->SetActive(true);
+		WeaponTextExplanation->SetActive(true);
+		New0->SetActive(true);
+		New1->SetActive(true);
+		New2->SetActive(true);
+		New3->SetActive(true);
+		for (int i = 0; i < 4; i++)
+		{
+			LevelUpSelectBackVector[i]->SetActive(true);
+
+		}
+	}
+	else
+	{
+		LevelUpText->SetActive(false);
+		LevelUpIconsCross->SetActive(false);
+		LevelUpIconsItem->SetActive(false);
+		LevelUpIconsStar->SetActive(false);
+		LevelUpIconsWeapon->SetActive(false);
+		WeaponText->SetActive(false);
+		StarText->SetActive(false);
+		CrossText->SetActive(false);
+		ItemText->SetActive(false);
+		ItemTextExplanation->SetActive(false);
+		CrossTextExplanation->SetActive(false);
+		StarTextExplanation->SetActive(false);
+		WeaponTextExplanation->SetActive(false);
+		New0->SetActive(false);
+		New1->SetActive(false);
+		New2->SetActive(false);
+		New3->SetActive(false);
+		for (int i = 0; i < 4; i++)
+		{
+			LevelUpSelectBackVector[i]->SetActive(false);
+		
+		}
+	}
+
+
+}
+void UIManager::PauseChack()
+{
+	if (true == APlayGameMode::IsPause)
+	{
+		PauseBack->SetActive(true);
 		HP->SetActive(true);
 		ATK->SetActive(true);
 		SPD->SetActive(true);
@@ -453,12 +716,7 @@ void UIManager::PauseChack()
 		StatCRTText->SetActive(true);
 		StatPickUPText->SetActive(true);
 		StatHasteText->SetActive(true);
-		for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
-		{
-			UImage* SetBurton = *SetBurtonIter;
 
-			SetBurton->SetActive(true);
-		}
 
 		for (StatLineIter = StatLineVector.begin(); StatLineIter != StatLineVector.end(); StatLineIter++)
 		{
@@ -466,20 +724,10 @@ void UIManager::PauseChack()
 
 			StatLine->SetActive(true);
 		}
-
-		PauseSkillText->SetActive(true);
-		PauseStampText->SetActive(true);
-		PauseCollaborationText->SetActive(true);
-		PauseContinueText->SetActive(true);
-		PauseSettingText->SetActive(true);
-		PauseExitText->SetActive(true);
-
 	}
 	else
 	{
 		PauseBack->SetActive(false);
-		PausedText->SetActive(false);
-		SetBack->SetActive(false);
 		HP->SetActive(false);
 		ATK->SetActive(false);
 		SPD->SetActive(false);
@@ -494,13 +742,6 @@ void UIManager::PauseChack()
 		StatCRTText->SetActive(false);
 		StatPickUPText->SetActive(false);
 		StatHasteText->SetActive(false);
-		for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
-		{
-			UImage* SetBurton = *SetBurtonIter;
-
-			SetBurton->SetActive(false);
-		}
-
 
 		for (StatLineIter = StatLineVector.begin(); StatLineIter != StatLineVector.end(); StatLineIter++)
 		{
@@ -508,17 +749,10 @@ void UIManager::PauseChack()
 
 			StatLine->SetActive(false);
 		}
-
-		PauseSkillText->SetActive(false);
-		PauseStampText->SetActive(false);
-		PauseCollaborationText->SetActive(false);
-		PauseContinueText->SetActive(false);
-		PauseSettingText->SetActive(false);
-		PauseExitText->SetActive(false);
 	}
 }
 
-void UIManager::CollisionChack()
+void UIManager::SetBurtonColChack()
 {
 
 	for (SetBurtonIter = SetBurtonVector.begin(); SetBurtonIter != SetBurtonVector.end(); SetBurtonIter++)
@@ -628,223 +862,86 @@ void UIManager::CollisionPos()
 	SetBurtonCollision5->AddPosition(FVector::Down * 220);
 }
 
-
-void UIManager::LevelUpShop()
+void UIManager::LevelUpColChack()
 {
-
 	if (true == APlayGameMode::LevelUpPauseON)
 	{
-
-		PauseBack->SetActive(true);
-		SetBack->SetActive(true);
-		HP->SetActive(true);
-		ATK->SetActive(true);
-		SPD->SetActive(true);
-		CRT->SetActive(true);
-		PickUP->SetActive(true);
-		Haste->SetActive(true);
-		CharacterBack->SetActive(true);
-
-		StatHPText->SetActive(true);
-		StatATKText->SetActive(true);
-		StatSPDText->SetActive(true);
-		StatCRTText->SetActive(true);
-		StatPickUPText->SetActive(true);
-		StatHasteText->SetActive(true);
-		for (StatLineIter = StatLineVector.begin(); StatLineIter != StatLineVector.end(); StatLineIter++)
+		for (LevelUpSelectBackIter = LevelUpSelectBackVector.begin(); LevelUpSelectBackIter != LevelUpSelectBackVector.end(); LevelUpSelectBackIter++)
 		{
-			UImage* StatLine = *StatLineIter;
-			StatLine->SetActive(true);
+			UImage* LevelUpSelectBack = *LevelUpSelectBackIter;
+
+
+			LevelUpCollision0->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+				{
+					LevelUpSelectBackVector[0]->SetSprite("ui_menu_upgrade_window_1.png");
+					PauseCollaborationText->SetColor(Color8Bit::Black);
+				}
+			);
+			LevelUpCollision0->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+				{
+					LevelUpSelectBackVector[0]->SetSprite("ui_menu_upgrade_window_0.png");
+					PauseCollaborationText->SetColor(Color8Bit::White);
+				}
+			);
+
+			LevelUpCollision1->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+				{
+					LevelUpSelectBackVector[1]->SetSprite("ui_menu_upgrade_window_1.png");
+					PauseContinueText->SetColor(Color8Bit::Black);
+				}
+			);
+			LevelUpCollision1->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+				{
+					LevelUpSelectBackVector[1]->SetSprite("ui_menu_upgrade_window_0.png");
+					PauseContinueText->SetColor(Color8Bit::White);
+				}
+			);
+
+			LevelUpCollision2->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+				{
+					LevelUpSelectBackVector[2]->SetSprite("ui_menu_upgrade_window_1.png");
+					PauseSettingText->SetColor(Color8Bit::Black);
+				}
+			);
+			LevelUpCollision2->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+				{
+					LevelUpSelectBackVector[2]->SetSprite("ui_menu_upgrade_window_0.png");
+					PauseSettingText->SetColor(Color8Bit::White);
+				}
+			);
+
+			LevelUpCollision3->CollisionEnter(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+				{
+					LevelUpSelectBackVector[3]->SetSprite("ui_menu_upgrade_window_1.png");
+					PauseExitText->SetColor(Color8Bit::Black);
+				}
+			);
+			LevelUpCollision3->CollisionExit(ECollisionOrder::Mouse, [=](std::shared_ptr<UCollision> _Collison)
+				{
+					LevelUpSelectBackVector[3]->SetSprite("ui_menu_upgrade_window_0.png");
+					PauseExitText->SetColor(Color8Bit::White);
+				}
+			);
 		}
-
-		LevelUpText = CreateWidget<UImage>(GetWorld(), "LevelUpText");
-		LevelUpText->AddToViewPort(2);
-		LevelUpText->SetSprite("ui_menu_upgrade_title_0.png");
-		LevelUpText->SetAutoSize(ContentsValue::MultipleSize, true);
-		LevelUpText->SetPosition(FVector(-400.f, 130.f));
-		LevelUpText->SetActive(true);
-
-
-		LevelUpIconsCross = CreateWidget<UImage>(GetWorld(), "LevelUpIconsCross");
-		LevelUpIconsCross->AddToViewPort(3);
-		LevelUpIconsCross->SetSprite("CrossIcon.png");
-		LevelUpIconsCross->SetAutoSize(ContentsValue::MultipleSize, true);
-		LevelUpIconsCross->SetPosition(FVector(-110.f, 170.f));
-		LevelUpIconsCross->SetActive(true);
-
-		LevelUpIconsItem = CreateWidget<UImage>(GetWorld(), "LevelUpIconsItem");
-		LevelUpIconsItem->AddToViewPort(3);
-		LevelUpIconsItem->SetSprite("ItemIcon.png");
-		LevelUpIconsItem->SetAutoSize(ContentsValue::MultipleSize, true);
-		LevelUpIconsItem->SetPosition(FVector(-110.f, 40.f));
-		LevelUpIconsItem->SetActive(true);
-
-
-		LevelUpIconsStar = CreateWidget<UImage>(GetWorld(), "LevelUpIconsStar");
-		LevelUpIconsStar->AddToViewPort(3);
-		LevelUpIconsStar->SetSprite("StarIcon.png");
-		LevelUpIconsStar->SetAutoSize(ContentsValue::MultipleSize, true);
-		LevelUpIconsStar->SetPosition(FVector(-110.f, -90.f));
-		LevelUpIconsStar->SetActive(true);
-
-		LevelUpIconsWeapon = CreateWidget<UImage>(GetWorld(), "LevelUpIconsWeapon");
-		LevelUpIconsWeapon->AddToViewPort(3);
-		LevelUpIconsWeapon->SetSprite("WeaponIcon.png");
-		LevelUpIconsWeapon->SetAutoSize(ContentsValue::MultipleSize, true);
-		LevelUpIconsWeapon->SetPosition(FVector(-110.f, -220.f));
-		LevelUpIconsWeapon->SetActive(true);
-
-		WeaponText = CreateWidget<UTextWidget>(GetWorld(), "WeaponText");
-		WeaponText->AddToViewPort(3);
-		WeaponText->SetScale(ContentsValue::MultipleSize * 9);
-		WeaponText->SetFont("Galmuri9");
-		WeaponText->SetColor(Color8Bit::White);
-		WeaponText->SetText("Test");
-		WeaponText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
-		WeaponText->SetPosition(FVector(-140.f, 240.f));
-		WeaponText->SetActive(true);
-
-		StarText = CreateWidget<UTextWidget>(GetWorld(), "StarText");
-		StarText->AddToViewPort(3);
-		StarText->SetScale(ContentsValue::MultipleSize * 9);
-		StarText->SetFont("Galmuri9");
-		StarText->SetColor(Color8Bit::White);
-		StarText->SetText("Test");
-		StarText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
-		StarText->SetPosition(FVector(-140.f, 110.f));
-		StarText->SetActive(true);
-
-		CrossText = CreateWidget<UTextWidget>(GetWorld(), "CrossText");
-		CrossText->AddToViewPort(3);
-		CrossText->SetScale(ContentsValue::MultipleSize * 9);
-		CrossText->SetFont("Galmuri9");
-		CrossText->SetColor(Color8Bit::White);
-		CrossText->SetText("Test");
-		CrossText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
-		CrossText->SetPosition(FVector(-140.f, -20.f));
-		CrossText->SetActive(true);
-
-		ItemText = CreateWidget<UTextWidget>(GetWorld(), "ItemText");
-		ItemText->AddToViewPort(3);
-		ItemText->SetScale(ContentsValue::MultipleSize * 9);
-		ItemText->SetFont("Galmuri9");
-		ItemText->SetColor(Color8Bit::White);
-		ItemText->SetText("Test");
-		ItemText->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
-		ItemText->SetPosition(FVector(-140.f, -150.f));
-		ItemText->SetActive(true);
-
-
-		ItemTextExplanation = CreateWidget<UTextWidget>(GetWorld(), "ItemTextExplanation");
-		ItemTextExplanation->AddToViewPort(3);
-		ItemTextExplanation->SetScale(ContentsValue::MultipleSize * 9);
-		ItemTextExplanation->SetFont("Galmuri9");
-		ItemTextExplanation->SetColor(Color8Bit::White);
-		ItemTextExplanation->SetText("TestTestTestTestTestTestTestTestTestTestTestTestTest\nTestTestTestTest");
-		ItemTextExplanation->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
-		ItemTextExplanation->SetPosition(FVector(-50.f, 200.f));
-		ItemTextExplanation->SetActive(true);
-
-		CrossTextExplanation = CreateWidget<UTextWidget>(GetWorld(), "CrossTextExplanation");
-		CrossTextExplanation->AddToViewPort(3);
-		CrossTextExplanation->SetScale(ContentsValue::MultipleSize * 9);
-		CrossTextExplanation->SetFont("Galmuri9");
-		CrossTextExplanation->SetColor(Color8Bit::White);
-		CrossTextExplanation->SetText("TestTestTestTestTestTestTestTestTestTestTestTestTest\nTestTestTestTest");
-		CrossTextExplanation->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
-		CrossTextExplanation->SetPosition(FVector(-50.f, 70.f));
-		CrossTextExplanation->SetActive(true);
-
-		StarTextExplanation = CreateWidget<UTextWidget>(GetWorld(), "StarTextExplanation");
-		StarTextExplanation->AddToViewPort(3);
-		StarTextExplanation->SetScale(ContentsValue::MultipleSize * 9);
-		StarTextExplanation->SetFont("Galmuri9");
-		StarTextExplanation->SetColor(Color8Bit::White);
-		StarTextExplanation->SetText("TestTestTestTestTestTestTestTestTestTestTestTestTest\nTestTestTestTest");
-		StarTextExplanation->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
-		StarTextExplanation->SetPosition(FVector(-50.f, -60.f));
-		StarTextExplanation->SetActive(true);
-
-		WeaponTextExplanation = CreateWidget<UTextWidget>(GetWorld(), "WeaponTextExplanation");
-		WeaponTextExplanation->AddToViewPort(3);
-		WeaponTextExplanation->SetScale(ContentsValue::MultipleSize * 9);
-		WeaponTextExplanation->SetFont("Galmuri9");
-		WeaponTextExplanation->SetColor(Color8Bit::White);
-		WeaponTextExplanation->SetText("TestTestTestTestTestTestTestTestTestTestTestTestTest\nTestTestTestTest");
-		WeaponTextExplanation->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
-		WeaponTextExplanation->SetPosition(FVector(-50.f, -190.f));
-		WeaponTextExplanation->SetActive(true);
-
-
-		New0 = CreateWidget<UTextWidget>(GetWorld(), "New0");
-		New0->AddToViewPort(3);
-		New0->SetScale(ContentsValue::MultipleSize * 10);
-		New0->SetFont("Galmuri9");
-		New0->SetColor(Color8Bit::Yellow);
-		New0->SetText("신규!");
-		New0->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
-		New0->SetPosition(FVector(300.f, 240.f));
-		New0->SetActive(true);
-
-		New1 = CreateWidget<UTextWidget>(GetWorld(), "New1");
-		New1->AddToViewPort(3);
-		New1->SetScale(ContentsValue::MultipleSize * 10);
-		New1->SetFont("Galmuri9");
-		New1->SetColor(Color8Bit::Yellow);
-		New1->SetText("신규!");
-		New1->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
-		New1->SetPosition(FVector(300.f, 110.f));
-		New1->SetActive(true);
-
-		New2 = CreateWidget<UTextWidget>(GetWorld(), "New2");
-		New2->AddToViewPort(3);
-		New2->SetScale(ContentsValue::MultipleSize * 10);
-		New2->SetFont("Galmuri9");
-		New2->SetColor(Color8Bit::Yellow);
-		New2->SetText("신규!");
-		New2->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
-		New2->SetPosition(FVector(300.f, -20.f));
-		New2->SetActive(true);
-
-		New3 = CreateWidget<UTextWidget>(GetWorld(), "New3");
-		New3->AddToViewPort(3);
-		New3->SetScale(ContentsValue::MultipleSize * 10);
-		New3->SetFont("Galmuri9");
-		New3->SetColor(Color8Bit::Yellow);
-		New3->SetText("신규!");
-		New3->SetFlag(static_cast<FW1_TEXT_FLAG>(FW1_TEXT_FLAG::FW1_LEFT));
-		New3->SetPosition(FVector(300.f, -150.f));
-		New3->SetActive(true);
-
-
-		for (int i = 0; i < 4; i++)
-		{
-			UImage* LevelUpSelectBack = CreateWidget<UImage>(GetWorld(), "LevelUpSelectBack");
-			LevelUpSelectBack->AddToViewPort(2);
-			LevelUpSelectBack->SetSprite("ui_menu_upgrade_window_0.png");
-			LevelUpSelectBack->SetAutoSize(ContentsValue::MultipleSize, true);
-			LevelUpSelectBack->SetPosition(FVector(200.0f, 180.f - 130.f * i));
-			LevelUpSelectBackVector.push_back(LevelUpSelectBack);
-			LevelUpSelectBack->SetActive(true);
-		}
-
 	}
-	
-	APlayGameMode::ESCPauseON = true;
-		
-
-
-
-
 }
 
-void UIManager::LevelUpChack()
+void UIManager::LevelUpColPos()
 {
-	if (true == APlayer::IsLevelUp)
-	{
-		LevelUpShop();
-	}
+	LevelUpCollision0->SetPosition(APlayer::PlayerPos);
+	LevelUpCollision0->AddPosition(FVector::Up * 144);
+	LevelUpCollision0->AddPosition(FVector::Right * 200);
+	LevelUpCollision1->SetPosition(APlayer::PlayerPos);
+	LevelUpCollision1->AddPosition(FVector::Up * 12);
+	LevelUpCollision1->AddPosition(FVector::Right * 200);
+	LevelUpCollision2->SetPosition(APlayer::PlayerPos);
+	LevelUpCollision2->AddPosition(FVector::Down * 117);
+	LevelUpCollision2->AddPosition(FVector::Right * 200);
+	LevelUpCollision3->SetPosition(APlayer::PlayerPos);
+	LevelUpCollision3->AddPosition(FVector::Down * 247);
+	LevelUpCollision3->AddPosition(FVector::Right * 200);
 }
+
 
 void UIManager::RendomIcon()
 {
