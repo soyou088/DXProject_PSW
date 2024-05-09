@@ -368,9 +368,10 @@ void APlayGameMode::Pause(float _DeltaTime)
 
 }
 
-void APlayGameMode::LEVELUPPause(float _DeltaTime)
+void APlayGameMode::LevelUpPause(float _DeltaTime)
 {
-	if (true == APlayer::IsLevelUp)
+
+	if (true == IsDown('L'))
 	{
 		if (true == IsPause)
 		{
@@ -399,13 +400,14 @@ void APlayGameMode::LEVELUPPause(float _DeltaTime)
 	_DeltaTime = 0.0f;
 
 
+
 }
 
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	Pause(_DeltaTime);
-	LEVELUPPause(_DeltaTime);
+	LevelUpPause(_DeltaTime);
 
 	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerColPos.X + AMouse::MousePos.X - 645, APlayer::PlayerColPos.Y - AMouse::MousePos.Y + 400 };
 

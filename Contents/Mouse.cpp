@@ -47,7 +47,7 @@ void AMouse::BeginPlay()
 	int a = 0;
 }
 
-void AMouse::CursorOFf()
+void AMouse::CursorOFF()
 {
 	ShowCursor(FALSE);
 }
@@ -72,13 +72,13 @@ void AMouse::CheckCurCursor(FVector _MousePos)
 {
 	if (true != MouseCursorON)
 	{
-		CursorOFf();
+		CursorOFF();
 		MouseCursorRenderer->SetSprite("spr_GameCursor_0.png");
 		MouseCursorRenderer->SetPosition({ _MousePos.X- 595, -_MousePos.Y+ 310 });
 	}
 	else
 	{
-		CursorOFf();
+		CursorOFF();
 		MouseCursorRenderer->SetSprite("spr_GameCursor1_0.png");
 		MouseCursorRenderer->SetPosition({ _MousePos.X - 640, -_MousePos.Y + 360 });
 	}

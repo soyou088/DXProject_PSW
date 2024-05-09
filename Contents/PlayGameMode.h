@@ -63,7 +63,7 @@ protected:
 	FIntPoint PosToIndex(float4 _Pos);
 
 	void InfinityGroundCheck();
-	void LEVELUPPause(float _DeltaTime);
+	void LevelUpPause(float _DeltaTime);
 	
 	// 몬스터 스폰 관련
 	template <typename Monster>

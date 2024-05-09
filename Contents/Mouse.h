@@ -27,7 +27,7 @@ protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
-	void CursorOFf();
+	void CursorOFF();
 	void CurCursor();
 	void CheckCurCursor(FVector _MousePos);
 

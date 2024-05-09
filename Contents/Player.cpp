@@ -131,6 +131,10 @@ void APlayer::LevelUpex()
 	{
 		IsLevelUp = true;
 	}
+	else
+	{
+		IsLevelUp = false;
+	}
 
 }
 
