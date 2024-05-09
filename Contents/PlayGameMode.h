@@ -28,7 +28,8 @@ public:
 	static std::shared_ptr<APlayer> MainPlayer;
 	static std::shared_ptr<class UIManager> PlayUIManager;
 	static std::shared_ptr<class UBox> UIBox;
-	static bool PauseON;
+	static bool ESCPauseON;
+	static bool LevelUpPauseON;
 	static bool IsPause;
 
 	// constrcuter destructer
@@ -62,7 +63,7 @@ protected:
 	FIntPoint PosToIndex(float4 _Pos);
 
 	void InfinityGroundCheck();
-	void Pause();
+	void LEVELUPPause(float _DeltaTime);
 	
 	// 몬스터 스폰 관련
 	template <typename Monster>

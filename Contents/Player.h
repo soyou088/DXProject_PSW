@@ -110,6 +110,7 @@ private:
 	void CursorDirChange();
 	void CalStatus();
 
+	void LevelUpex();
 
 	float4 MouseCursor;
 	//////////////////////// State

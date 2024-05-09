@@ -12,7 +12,8 @@
 std::shared_ptr<APlayer> APlayGameMode::MainPlayer = nullptr;
 std::shared_ptr<class UIManager> APlayGameMode::PlayUIManager;
 std::shared_ptr<class UBox> APlayGameMode::UIBox;
-bool APlayGameMode::PauseON = false;
+bool APlayGameMode::ESCPauseON = false;
+bool APlayGameMode::LevelUpPauseON = false;
 bool APlayGameMode::IsPause = false;
 
 
@@ -168,10 +169,7 @@ void APlayGameMode::InfinityGroundCheck()
 	}
 }
 
-void APlayGameMode::Pause()
-{
-	GEngine->SetOrderTimeScale(0, 0.f);
-}
+
 
 template <typename Monster>
 std::shared_ptr<Monster> APlayGameMode::SpawnMonster(std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType)
@@ -345,12 +343,12 @@ void APlayGameMode::Pause(float _DeltaTime)
 		{
 			IsPause = false;
 			GEngine->SetOrderTimeScale(0, 1.f);
-			PauseON = false;
+			ESCPauseON = false;
 		}
 		else
 		{
 			IsPause = true;
-			PauseON = true;
+			ESCPauseON = true;
 		}
 	}
 
@@ -366,13 +364,48 @@ void APlayGameMode::Pause(float _DeltaTime)
 	}
 	PlayTime += PlayDeltaTime;
 	_DeltaTime = 0.0f;
+
+
+}
+
+void APlayGameMode::LEVELUPPause(float _DeltaTime)
+{
+	if (true == APlayer::IsLevelUp)
+	{
+		if (true == IsPause)
+		{
+			IsPause = false;
+			GEngine->SetOrderTimeScale(0, 1.f);
+			LevelUpPauseON = false;
+		}
+		else
+		{
+			IsPause = true;
+			LevelUpPauseON = true;
+		}
+	}
+
+	if (false == IsPause)
+	{
+		PlayDeltaTime = _DeltaTime;
+
+	}
+	else
+	{
+		PlayDeltaTime = 0.0f;
+		GEngine->SetOrderTimeScale(0, 0.f);
+	}
+	PlayTime += PlayDeltaTime;
+	_DeltaTime = 0.0f;
+
+
 }
 
 void APlayGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	Pause(_DeltaTime);
-
+	LEVELUPPause(_DeltaTime);
 
 	ContentsValue::PlayLevelMousePos = FVector{ APlayer::PlayerColPos.X + AMouse::MousePos.X - 645, APlayer::PlayerColPos.Y - AMouse::MousePos.Y + 400 };
 
