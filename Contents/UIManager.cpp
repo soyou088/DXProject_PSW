@@ -56,10 +56,10 @@ void UIManager::Tick(float _DeltaTime)
 	Hp = APlayGameMode::MainPlayer->GetHp();
 	HPUpdate();
 
-	if (true == APlayer::IsLevelUp)
-	{
+	//if (true == APlayer::IsLevelUp)
+	//{
+	//}
 		LevelUpShop();
-	}
 
 
 
@@ -290,9 +290,40 @@ void UIManager::UISpawn()
 	Haste->SetActive(false);
 
 
-	// LevelUp이 true라면 true
-
 	
+
+	// LevelUp이 true라면 true
+	LevelUpIconsCross = CreateWidget<UImage>(GetWorld(), "LevelUpIconsCross");
+	LevelUpIconsCross->AddToViewPort(3);
+	LevelUpIconsCross->SetSprite("CrossIcon.png");
+	LevelUpIconsCross->SetAutoSize(ContentsValue::MultipleSize, true);
+	LevelUpIconsCross->SetPosition(FVector(-110.f, 170.f));
+	LevelUpIconsCross->SetActive(true);
+
+
+	LevelUpIconsItem = CreateWidget<UImage>(GetWorld(), "LevelUpIconsItem");
+	LevelUpIconsItem->AddToViewPort(3);
+	LevelUpIconsItem->SetSprite("ItemIcon.png");
+	LevelUpIconsItem->SetAutoSize(ContentsValue::MultipleSize, true);
+	LevelUpIconsItem->SetPosition(FVector(-110.f, 40.f));
+	LevelUpIconsItem->SetActive(true);
+
+
+	LevelUpIconsStar = CreateWidget<UImage>(GetWorld(), "LevelUpIconsStar");
+	LevelUpIconsStar->AddToViewPort(3);
+	LevelUpIconsStar->SetSprite("StarIcon.png");
+	LevelUpIconsStar->SetAutoSize(ContentsValue::MultipleSize, true);
+	LevelUpIconsStar->SetPosition(FVector(-110.f, -90.f));
+	LevelUpIconsStar->SetActive(true);
+
+	LevelUpIconsWeapon = CreateWidget<UImage>(GetWorld(), "LevelUpIconsWeapon");
+	LevelUpIconsWeapon->AddToViewPort(3);
+	LevelUpIconsWeapon->SetSprite("WeaponIcon.png");
+	LevelUpIconsWeapon->SetAutoSize(ContentsValue::MultipleSize, true);
+	LevelUpIconsWeapon->SetPosition(FVector(-110.f, -220.f));
+	LevelUpIconsWeapon->SetActive(true);		
+	
+
 
 	// UI TEXT
 	HPText = CreateWidget<UTextWidget>(GetWorld(), "HP");
@@ -675,7 +706,7 @@ void UIManager::LevelUpShop()
 	LevelUpText->SetSprite("ui_menu_upgrade_title_0.png");
 	LevelUpText->SetAutoSize(ContentsValue::MultipleSize, true);
 	LevelUpText->SetPosition(FVector(-400.f, 130.f));
-	LevelUpText->SetActive(false);
+	LevelUpText->SetActive(true);
 	
 	for (int i = 0; i < 4; i++)
 	{
@@ -684,7 +715,7 @@ void UIManager::LevelUpShop()
 		LevelUpSelectBack->SetSprite("ui_menu_upgrade_window_0.png");
 		LevelUpSelectBack->SetAutoSize(ContentsValue::MultipleSize, true);
 		LevelUpSelectBack->SetPosition(FVector(200.0f, 180.f - 130.f * i));
-		LevelUpSelectBack->SetActive(false);
+		LevelUpSelectBack->SetActive(true);
 		LevelUpSelectBackVector.push_back(LevelUpSelectBack);
 
 	}
@@ -692,6 +723,43 @@ void UIManager::LevelUpShop()
 
 
 
+}
+
+void UIManager::RendomIcon()
+{
+	//LevelUpIcons = CreateWidget<UImage>(GetWorld(), "CrossIcon");
+	//LevelUpIcons[0]->AddToViewPort(3);
+	//LevelUpIcons[0]->SetSprite("CrossIcon.png");
+	//LevelUpIcons[0]->SetAutoSize(ContentsValue::MultipleSize, true);
+	//LevelUpIcons[0]->SetPosition(FVector(200.0f, 180.f));
+	//LevelUpIcons[0]->SetActive(true);
+	//ITemIcon.push_back(LevelUpIcons[0]);
+
+	//LevelUpIcons[1] = CreateWidget<UImage>(GetWorld(), "ItemIcon");
+	//LevelUpIcons[1]->AddToViewPort(3);
+	//LevelUpIcons[1]->SetSprite("ItemIcon.png");
+	//LevelUpIcons[1]->SetAutoSize(ContentsValue::MultipleSize, true);
+	//LevelUpIcons[1]->SetPosition(FVector(200.0f, 180.f));
+	//LevelUpIcons[1]->SetActive(true);
+	//ITemIcon.push_back(LevelUpIcons[1]);
+
+	//LevelUpIcons[2] = CreateWidget<UImage>(GetWorld(), "StarIcon");
+	//LevelUpIcons[2]->AddToViewPort(3);
+	//LevelUpIcons[2]->SetSprite("StarIcon.png");
+	//LevelUpIcons[2]->SetAutoSize(ContentsValue::MultipleSize, true);
+	//LevelUpIcons[2]->SetPosition(FVector(200.0f, 180.f));
+	//LevelUpIcons[2]->SetActive(true);
+	//ITemIcon.push_back(LevelUpIcons[2]);
+
+	//LevelUpIcons[3] = CreateWidget<UImage>(GetWorld(), "WeaponIcon");
+	//LevelUpIcons[3]->AddToViewPort(3);
+	//LevelUpIcons[3]->SetSprite("WeaponIcon.png");
+	//LevelUpIcons[3]->SetAutoSize(ContentsValue::MultipleSize, true);
+	//LevelUpIcons[3]->SetPosition(FVector(200.0f, 180.f));
+	//LevelUpIcons[3]->SetActive(true);
+	//ITemIcon.push_back(LevelUpIcons[3]);
+
+	//WeaponIcon.push_back
 }
 
 

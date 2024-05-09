@@ -31,6 +31,7 @@ protected:
 	void CollisionPos();
 
 	void LevelUpShop();
+	void RendomIcon();
 
 	UImage* Character = nullptr;
 	UImage* CharacterFrame = nullptr;
@@ -85,10 +86,16 @@ protected:
 	UTextWidget* PauseSettingText = nullptr;
 	UTextWidget* PauseExitText = nullptr;
 
+	//LevelUpUI
 	UImage* LevelUpText = nullptr;
-	//UImage* LevelUpSelect = nullptr;
+	UImage* LevelUpIconsCross = nullptr;
+	UImage* LevelUpIconsItem = nullptr;
+	UImage* LevelUpIconsStar = nullptr;
+	UImage* LevelUpIconsWeapon = nullptr;
+	//std::vector<UImage*> LevelUpIcons;
 
 
+	//¿ÞÂÊ »ó´Ü ICon
 	std::vector<UImage*> WeaponIconBack;
 	std::vector<std::vector<UImage*>> WeaponIcon;
 
