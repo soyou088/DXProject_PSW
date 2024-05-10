@@ -7,7 +7,7 @@ AWamy::AWamy()
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetScale({ 50.0f * ContentsValue::MultipleSize, 50.f * ContentsValue::MultipleSize });
 	Collision->SetCollisionGroup(ECollisionOrder::Weapon);
-	Collision->SetCollisionType(ECollisionType::Box);
+	Collision->SetCollisionType(ECollisionType::Rect);
 }
 
 AWamy::~AWamy()
@@ -27,10 +27,8 @@ void AWamy::BeginPlay()
 
 	SetKnifeTypeMeleeLocation(35.0f);
 	
-	Collision->SetScale({ 50.0f * ContentsValue::MultipleSize, 50.f * ContentsValue::MultipleSize });
-	Collision->SetCollisionGroup(ECollisionOrder::Weapon);
-	Collision->SetCollisionType(ECollisionType::Box);
-	Collision->SetActive(true);
+
+	Collision->SetActive(false);
 
 }
 
@@ -43,15 +41,15 @@ void AWamy::Tick(float _DeltaTime)
 	if (true == Renderer->IsActive())
 	{
 
-		//CollisionR0->SetActive(true);
-		//CollisionR0->SetPosition(Root->GetLocalPosition());
-		//CollisionR0->AddPosition(Dir * 50.0f * ContentsValue::MultipleSize);
+		Collision->SetActive(true);
+		Collision->SetPosition(Root->GetLocalPosition());
+		Collision->AddPosition(Dir * ContentsValue::MultipleSize);
 
-		//CheckHit();
+		CheckHit();
 	}
 	else
 	{
-		//CollisionR0->SetActive(false);
+		Collision->SetActive(false);
 	}
 
 	{
