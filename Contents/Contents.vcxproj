@@ -167,6 +167,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Asacoco.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="AsacocoBullet.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Box.h">
       <SubType>
       </SubType>
@@ -276,6 +284,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Asacoco.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="AsacocoBullet.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Box.cpp">
       <SubType>
       </SubType>

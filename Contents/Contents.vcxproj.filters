@@ -88,6 +88,12 @@
     <ClInclude Include="Wamy.h">
       <Filter>Level\PlayLevel\Actor\Attack\Melee\BasicMelee</Filter>
     </ClInclude>
+    <ClInclude Include="Asacoco.h">
+      <Filter>Level\PlayLevel\Actor\Attack\Ranged\BasicRanged</Filter>
+    </ClInclude>
+    <ClInclude Include="AsacocoBullet.h">
+      <Filter>Level\PlayLevel\Actor\Attack\Ranged\BasicRanged</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -177,6 +183,12 @@
     <ClCompile Include="Wamy.cpp">
       <Filter>Level\PlayLevel\Actor\Attack\Melee\BasicMelee</Filter>
     </ClCompile>
+    <ClCompile Include="Asacoco.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack\Ranged\BasicRanged</Filter>
+    </ClCompile>
+    <ClCompile Include="AsacocoBullet.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack\Ranged\BasicRanged</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -253,6 +265,9 @@
     </Filter>
     <Filter Include="Level\PlayLevel\Actor\Attack\Melee\BasicMelee">
       <UniqueIdentifier>{147565b4-fd45-4322-a4be-0a98e1e5bd28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\Actor\Attack\Ranged\BasicRanged">
+      <UniqueIdentifier>{4a02e302-1eb0-4e06-9c20-ac074488c656}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

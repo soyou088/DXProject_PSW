@@ -7,6 +7,7 @@
 #include "Weapon.h"
 #include "Kiara.h"
 #include "Wamy.h"
+#include "Asacoco.h"
 
 float4 APlayer::PlayerColPos = float4::Zero;
 float4 APlayer::PlayerPos = float4::Zero;
@@ -73,6 +74,7 @@ void APlayer::BeginPlay()
 
 	AddWeapon<AKiara>("AKiara");
 	AddWeapon<AWamy>("AWamy");
+	AddWeapon<AAsacoco>("Asacoco");
 
 	StateInit();
 }
