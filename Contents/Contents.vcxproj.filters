@@ -85,6 +85,9 @@
     <ClInclude Include="UIManager.h">
       <Filter>Level\PlayLevel\UIActor</Filter>
     </ClInclude>
+    <ClInclude Include="Wamy.h">
+      <Filter>Level\PlayLevel\Actor\Attack\Melee\BasicMelee</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -171,6 +174,9 @@
     <ClCompile Include="TitleText.cpp">
       <Filter>Level\TitleLevel\Actor\Menu</Filter>
     </ClCompile>
+    <ClCompile Include="Wamy.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack\Melee\BasicMelee</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -244,6 +250,9 @@
     </Filter>
     <Filter Include="Level\PlayLevel\Object">
       <UniqueIdentifier>{372681f9-0642-49fa-9249-f73da7cfa638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\Actor\Attack\Melee\BasicMelee">
+      <UniqueIdentifier>{147565b4-fd45-4322-a4be-0a98e1e5bd28}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

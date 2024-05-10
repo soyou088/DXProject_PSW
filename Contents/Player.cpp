@@ -6,6 +6,7 @@
 #include "Mouse.h"
 #include "Weapon.h"
 #include "Kiara.h"
+#include "Wamy.h"
 
 float4 APlayer::PlayerColPos = float4::Zero;
 float4 APlayer::PlayerPos = float4::Zero;
@@ -71,6 +72,7 @@ void APlayer::BeginPlay()
 	// 공격 스폰
 
 	AddWeapon<AKiara>("AKiara");
+	AddWeapon<AWamy>("AWamy");
 
 	StateInit();
 }

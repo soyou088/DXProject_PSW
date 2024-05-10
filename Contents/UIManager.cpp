@@ -707,6 +707,10 @@ void UIManager::LevelPauseChack()
 			LevelUpSelectBackVector[i]->SetActive(false);
 		
 		}
+		if ( true == IsIcon)
+		{
+			IsIcon = false;
+		}
 	}
 
 
@@ -965,15 +969,16 @@ void UIManager::RendomIcon()
 		int Random = UEngineRandom::MainRandom.RandomInt(1, 5);
 		EWeapon RandomWeapon = static_cast<EWeapon>(Random);
 
-		/*for (EWeapon wea : WeaponList)
+		for (EWeapon wea : WeaponList)
 		{
 			if (wea == RandomWeapon)
 			{
 				continue;
 			}
-		}*/
+		}
 
 		WeaponList.push_back(RandomWeapon);
+		
 
 
 		switch (RandomWeapon)
