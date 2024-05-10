@@ -50,3 +50,14 @@ enum class EMonsterMoveType
 	StraightToLeft,
 	Stop,
 };
+
+enum class EWeapon
+{
+	None,
+	Asacoco,
+	BLBook,
+	Bucket,
+	SpiderCooking,
+	PsychoAxe,
+	WamyWater,
+};

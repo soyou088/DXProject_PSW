@@ -2,8 +2,8 @@
 #include "UIManager.h"
 #include "Player.h"
 #include "PlayGameMode.h"
-
 #include <EngineBase/EngineRandom.h>
+#include <EnginePlatform/EngineInput.h>
 
 UIManager::UIManager()
 {
@@ -61,6 +61,14 @@ void UIManager::BeginPlay()
 {
 	Super::BeginPlay();
 	UISpawn();
+
+	for (int i = 0; i < 4; i++)
+	{
+		ItemSprites.push_back(CreateWidget<UImage>(GetWorld(), "WeaponSprite"));
+		ItemSprites[i]->AddToViewPort(4);
+		ItemSprites[i]->SetAutoSize(ContentsValue::MultipleSize, true);
+		ItemSprites[i]->SetPosition(FVector(-110.f, 170.f - 130.f * i));
+	}
 }
 
 void UIManager::Tick(float _DeltaTime)
@@ -74,9 +82,9 @@ void UIManager::Tick(float _DeltaTime)
 	Hp = APlayGameMode::MainPlayer->GetHp();
 	HPUpdate();
 	ESCPauseChack();
-	LevelPauseChack();
 	LevelUpColPos();
 	LevelUpColChack();
+	LevelPauseChack();
 }
 
 void UIManager::UISpawn()
@@ -668,6 +676,12 @@ void UIManager::LevelPauseChack()
 			LevelUpSelectBackVector[i]->SetActive(true);
 
 		}
+
+		if (!IsIcon)
+		{
+			RendomIcon();
+			IsIcon = true;
+		}
 	}
 	else
 	{
@@ -945,6 +959,48 @@ void UIManager::LevelUpColPos()
 
 void UIManager::RendomIcon()
 {
+	WeaponList.clear();
+	for (int i = 0; i < 4; i++)
+	{
+		int Random = UEngineRandom::MainRandom.RandomInt(1, 5);
+		EWeapon RandomWeapon = static_cast<EWeapon>(Random);
+
+		/*for (EWeapon wea : WeaponList)
+		{
+			if (wea == RandomWeapon)
+			{
+				continue;
+			}
+		}*/
+
+		WeaponList.push_back(RandomWeapon);
+
+
+		switch (RandomWeapon)
+		{
+		case EWeapon::Asacoco:
+			ItemSprites[i]->SetSprite("Asacoco.png");
+			break;
+		case EWeapon::BLBook:
+			ItemSprites[i]->SetSprite("BLBook.png");
+			break;
+		case EWeapon::Bucket:
+			ItemSprites[i]->SetSprite("Bucket.png");
+			break;
+		case EWeapon::SpiderCooking:
+			ItemSprites[i]->SetSprite("PsychoAxe.png");
+			break;
+		case EWeapon::PsychoAxe:
+			ItemSprites[i]->SetSprite("SpiderCooking.png");
+			break;
+		case EWeapon::WamyWater:
+			ItemSprites[i]->SetSprite("WamyWater.png");
+			break;
+		default:
+			break;
+		}
+
+	}
 
 }
 

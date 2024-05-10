@@ -35,6 +35,8 @@ protected:
 	void LevelUpColChack();
 	void LevelUpColPos();
 
+	
+
 	void RendomIcon();
 
 	UImage* Character = nullptr;
@@ -141,10 +143,14 @@ protected:
 	std::vector<UImage*> LevelUpSelectBackVector;
 	std::vector<UImage*>::iterator LevelUpSelectBackIter = LevelUpSelectBackVector.begin();
 
+	std::vector<EWeapon> WeaponList;
+	std::vector<UImage*> ItemSprites;
+
 private:
 	float Hp = 0.0f;
 	float AtkTime = 0.0f;
 	float Atk = 0.0f;
 	bool ExitChack = false;
+	bool IsIcon = false;
 };
 
