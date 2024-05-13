@@ -167,6 +167,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CuttingBoard.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FanBeam.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Asacoco.h">
       <SubType>
       </SubType>
@@ -184,10 +192,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="CharacterSelectionButon.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="FanBeam.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -288,6 +292,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CuttingBoard.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FanBeam.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Asacoco.cpp">
       <SubType>
       </SubType>
@@ -305,10 +317,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="CharacterSelectionButon.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="FanBeam.cpp">
       <SubType>
       </SubType>
     </ClCompile>

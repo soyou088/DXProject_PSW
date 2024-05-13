@@ -9,7 +9,7 @@
 #include "Wamy.h"
 #include "Asacoco.h"
 #include "FanBeam.h"
-
+#include "CuttingBoard.h"
 
 float4 APlayer::PlayerColPos = float4::Zero;
 float4 APlayer::PlayerPos = float4::Zero;
@@ -77,8 +77,9 @@ void APlayer::BeginPlay()
 	//AddWeapon<AKiara>("AKiara");
 	//AddWeapon<AWamy>("AWamy");
 	//AddWeapon<AAsacoco>("Asacoco");
-	AddWeapon<AFanBeam>("FanBeam");
-
+	//AddWeapon<AFanBeam>("FanBeam");
+	AddWeapon<ACuttingBoard>("CuttingBoard");
+	
 	StateInit();
 }
 

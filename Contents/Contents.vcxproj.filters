@@ -97,6 +97,9 @@
     <ClInclude Include="FanBeam.h">
       <Filter>Level\PlayLevel\Actor\Attack\Melee\BasicMelee</Filter>
     </ClInclude>
+    <ClInclude Include="CuttingBoard.h">
+      <Filter>Level\PlayLevel\Actor\Attack\Ranged\BasicRanged</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -194,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="FanBeam.cpp">
       <Filter>Level\PlayLevel\Actor\Attack\Melee\BasicMelee</Filter>
+    </ClCompile>
+    <ClCompile Include="CuttingBoard.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack\Ranged\BasicRanged</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

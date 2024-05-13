@@ -2,12 +2,15 @@
 #include "FanBeam.h"
 #include "Monster.h"
 
+
 AFanBeam::AFanBeam()
 {
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetScale({ 450.0f * ContentsValue::MultipleSize, 5 * ContentsValue::MultipleSize });
 	Collision->SetCollisionGroup(ECollisionOrder::Weapon);
 	Collision->SetCollisionType(ECollisionType::Rect);
+
+
 }
 
 AFanBeam::~AFanBeam()
@@ -19,24 +22,25 @@ void AFanBeam::BeginPlay()
 	Super::BeginPlay();
 	Name = "FanBeam";
 
-
-
 	Renderer->CreateAnimation("FanBeam", "FanBeam", 0.05f);
 	Renderer->SetAutoSize(ContentsValue::MultipleSize, true);
+	Renderer->SetPosition(APlayer::PlayerPos);
 	Renderer->ChangeAnimation("FanBeam");
 
-	SetKnifeTypeMeleeLocation(35.0f);
 
 	Collision->SetActive(false);
 
+	SetKnifeTypeMeleeLocation(35.0f);
+
 
 }
-
 void AFanBeam::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
 	SetKnifeTypeMeleeLocation(250.0f);
+
+
 
 	if (true == Renderer->IsActive())
 	{
@@ -58,7 +62,6 @@ void AFanBeam::Tick(float _DeltaTime)
 	}
 
 }
-
 void AFanBeam::CheckHit()
 {
 	Collision->CollisionEnter(ECollisionOrder::Monster, [=](std::shared_ptr<UCollision> _Collison)
