@@ -94,6 +94,9 @@
     <ClInclude Include="AsacocoBullet.h">
       <Filter>Level\PlayLevel\Actor\Attack\Ranged\BasicRanged</Filter>
     </ClInclude>
+    <ClInclude Include="FanBeam.h">
+      <Filter>Level\PlayLevel\Actor\Attack\Melee\BasicMelee</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -188,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="AsacocoBullet.cpp">
       <Filter>Level\PlayLevel\Actor\Attack\Ranged\BasicRanged</Filter>
+    </ClCompile>
+    <ClCompile Include="FanBeam.cpp">
+      <Filter>Level\PlayLevel\Actor\Attack\Melee\BasicMelee</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

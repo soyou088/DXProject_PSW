@@ -8,6 +8,8 @@
 #include "Kiara.h"
 #include "Wamy.h"
 #include "Asacoco.h"
+#include "FanBeam.h"
+
 
 float4 APlayer::PlayerColPos = float4::Zero;
 float4 APlayer::PlayerPos = float4::Zero;
@@ -72,9 +74,10 @@ void APlayer::BeginPlay()
 
 	// 공격 스폰
 
-	AddWeapon<AKiara>("AKiara");
-	AddWeapon<AWamy>("AWamy");
-	AddWeapon<AAsacoco>("Asacoco");
+	//AddWeapon<AKiara>("AKiara");
+	//AddWeapon<AWamy>("AWamy");
+	//AddWeapon<AAsacoco>("Asacoco");
+	AddWeapon<AFanBeam>("FanBeam");
 
 	StateInit();
 }
