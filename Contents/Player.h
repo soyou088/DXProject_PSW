@@ -60,8 +60,12 @@ public:
 		return Speed;
 	}
 
-	template <typename WeaponType>
-	void AddWeapon(std::string _Name);
+	template<typename WeaponType>
+	void AddWeapon(std::string _Name)
+	{
+		std::shared_ptr<AWeapon> Weapon = GetWorld()->SpawnActor<WeaponType>(_Name);
+		MPlayerWeapons.insert({ _Name, Weapon });
+	}
 
 protected:
 	void BeginPlay() override;
@@ -97,8 +101,8 @@ private:
 	float LineSpeed = CalSpeed * 0.75f;
 	float Exp = 0;
 
-	std::vector<std::shared_ptr<AWeapon>> VPlayerWeapons;
-	std::vector<std::shared_ptr<AWeapon>>::iterator VPlayerWeaponsIter = VPlayerWeapons.begin();
+	std::map<std::string, std::shared_ptr<AWeapon>> MPlayerWeapons;
+	std::map<std::string, std::shared_ptr<AWeapon>>::iterator MPlayerWeaponsIter = MPlayerWeapons.begin();
 
 	float4 Color;
 	float4 MousePos;

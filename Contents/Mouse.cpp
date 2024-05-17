@@ -12,8 +12,6 @@ bool AMouse::MouseCursorON = false;
 AMouse::AMouse()
 {
 	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
-
-
 	
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Root);
@@ -21,8 +19,6 @@ AMouse::AMouse()
 	Collision->SetPosition({-10.0f,10.0f});
 	Collision->SetCollisionGroup(ECollisionOrder::Mouse);
 	Collision->SetCollisionType(ECollisionType::Rect);
-
-
 
 	SetRoot(Root);
 	InputOn();
@@ -39,7 +35,7 @@ void AMouse::BeginPlay()
 	MouseCursorRenderer = CreateWidget<UImage>(GetWorld(), "MouseCursor");
 	MouseCursorRenderer->AddToViewPort(10);
 	MouseCursorRenderer->SetSprite("spr_GameCursor_0.png");
-	MouseCursorRenderer->SetAutoSize(ContentsValue::MultipleSize, true);
+	MouseCursorRenderer->SetAutoSize(ContentsValue::MultipleSize * 0.5, true);
 
 
 
@@ -74,7 +70,7 @@ void AMouse::CheckCurCursor(FVector _MousePos)
 	{
 		CursorOFF();
 		MouseCursorRenderer->SetSprite("spr_GameCursor_0.png");
-		MouseCursorRenderer->SetPosition({ _MousePos.X- 595, -_MousePos.Y+ 310 });
+		MouseCursorRenderer->SetPosition({ _MousePos.X- 617, -_MousePos.Y+ 335 });
 	}
 	else
 	{

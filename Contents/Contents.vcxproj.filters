@@ -106,6 +106,9 @@
     <ClInclude Include="NomalMonster.h">
       <Filter>Level\PlayLevel\Actor\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="PlayGameModeGUI.h">
+      <Filter>Level\PlayLevel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -212,6 +215,9 @@
     </ClCompile>
     <ClCompile Include="NomalMonster.cpp">
       <Filter>Level\PlayLevel\Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGameModeGUI.cpp">
+      <Filter>Level\PlayLevel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

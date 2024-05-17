@@ -74,10 +74,10 @@ void APlayer::BeginPlay()
 
 	// 공격 스폰
 
-	//AddWeapon<AKiara>("AKiara");
+	AddWeapon<AKiara>("AKiara");
 	//AddWeapon<AWamy>("AWamy");
 	//AddWeapon<AAsacoco>("Asacoco");
-	AddWeapon<AFanBeam>("FanBeam");
+	//AddWeapon<AFanBeam>("FanBeam");
 	
 	StateInit();
 }
@@ -98,21 +98,15 @@ void APlayer::Tick(float _DeltaTime)
 	PCursorDirCheck();
 	ChangeMouseAimAtkDir();
 	{
-		for (VPlayerWeaponsIter = VPlayerWeapons.begin(); VPlayerWeaponsIter != VPlayerWeapons.end(); ++VPlayerWeaponsIter)
-		{
-			std::shared_ptr<AWeapon> Weapon = *VPlayerWeaponsIter;
 
-			*VPlayerWeaponsIter = Weapon;
+		{
+			for (MPlayerWeaponsIter = MPlayerWeapons.begin(); MPlayerWeaponsIter != MPlayerWeapons.end(); ++MPlayerWeaponsIter)
+			{
+				*MPlayerWeaponsIter;
+			}
 		}
 	}
 
-}
-
-template<typename WeaponType>
-void APlayer::AddWeapon(std::string _Name)
-{
-	std::shared_ptr<AWeapon> Weapon = GetWorld()->SpawnActor<WeaponType>(_Name);
-	VPlayerWeapons.push_back(Weapon);
 }
 
 

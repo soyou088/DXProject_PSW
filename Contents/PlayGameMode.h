@@ -99,6 +99,7 @@ private:
 	float SpawnTerm5 = 0;
 	float BossSpawn = 0.0f;
 
+	bool IsPrevMouseAim = false;
 
 	void CursorOFF();
 

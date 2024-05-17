@@ -3,6 +3,7 @@
 #include "PlayGameMode.h"
 #include "TitleGameMode.h"
 #include "SelectGametMode.h"
+#include "PlayGameModeGUI.h"
 #include <EngineCore/EngineSprite.h>
 #include <EngineCore/EngineEditorGUI.h>
 #include <EngineCore/EngineFont.h>
@@ -169,6 +170,7 @@ void UHoloCore::Initialize()
 			UEngineSound::Load(File.GetFullPath());
 		}
 	}
+	UEngineEditorGUI::CreateEditorWindow<PlayGameModeGUI>("Weapon");
 
 
 	GEngine->CreateLevel<ASelectGametMode>("SelectLevel");

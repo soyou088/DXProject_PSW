@@ -57,9 +57,6 @@ void APlayGameMode::BeginPlay()
 
 	//Mouse 스폰
 	Mouse = GetWorld()->SpawnActor<AMouse>("Mouse");
-	AMouse::MouseCursorON = false;
-	AMouse::MousePos = GEngine->EngineWindow.GetScreenMousePos();
-	Mouse->SetActorLocation(AMouse::MousePos);
 
 	//Object 스폰
 	UIBox = GetWorld()->SpawnActor<UBox>("Box");
@@ -372,12 +369,14 @@ void APlayGameMode::Pause(float _DeltaTime)
 		if (true == IsPause)
 		{
 			IsPause = false;
+			AMouse::MouseCursorON = IsPrevMouseAim;
 			GEngine->SetOrderTimeScale(0, 1.f);
 			ESCPauseON = false;
 		}
 		else
 		{
 			IsPause = true;
+			IsPrevMouseAim = AMouse::MouseCursorON;
 			ESCPauseON = true;
 		}
 	}
@@ -470,6 +469,13 @@ void APlayGameMode::Tick(float _DeltaTime)
 void APlayGameMode::LevelEnd(ULevel* _NextLevel)
 {
 	Super::LevelEnd(_NextLevel);
+
+	if (true == IsPause)
+	{
+		IsPause = false;
+		AMouse::MouseCursorON = IsPrevMouseAim;
+		GEngine->SetOrderTimeScale(0, 1.f);
+	}
 }
 
 void APlayGameMode::LevelStart(ULevel* _PrevLevel)
