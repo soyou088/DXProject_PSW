@@ -64,6 +64,21 @@ void AFanBeam::Tick(float _DeltaTime)
 
 	}
 
+		if (0 > Dir.X)
+		{
+			Renderer->SetDir(EEngineDir::Left);
+
+			FVector DirLeftPos = { (-32.0f * ContentsValue::MultipleSize), (50.0f * ContentsValue::MultipleSize) };
+			Collision->SetPosition(DirLeftPos);
+		}
+		else
+		{
+			Renderer->SetDir(EEngineDir::Right);
+
+			FVector DirRightPos = { (32.0f * ContentsValue::MultipleSize), (50.0f * ContentsValue::MultipleSize) };
+			Collision->SetPosition(DirRightPos);
+		}
+
 }
 void AFanBeam::CheckHit()
 {
