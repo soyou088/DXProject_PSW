@@ -1,13 +1,14 @@
 #include "PreCompile.h"
 #include "PlayGameMode.h"
 #include "ContentsValue.h"
-#include "Monster.h"
+#include "NomalMonster.h"
 #include "UIManager.h"
 #include "Box.h"
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/Camera.h>
 #include <EngineCore/EngineDebugMsgWindow.h>
 #include <EngineBase/EngineRandom.h>
+#include "Fubuzilla.h"
 
 std::shared_ptr<APlayer> APlayGameMode::MainPlayer = nullptr;
 std::shared_ptr<class UIManager> APlayGameMode::PlayUIManager;
@@ -15,15 +16,18 @@ std::shared_ptr<class UBox> APlayGameMode::UIBox;
 bool APlayGameMode::ESCPauseON = false;
 bool APlayGameMode::LevelUpPauseON = false;
 bool APlayGameMode::IsPause = false;
+bool APlayGameMode::IsPlayStart = true;
 
 
 APlayGameMode::APlayGameMode()
 {
 	InputOn();
+
 }
 
 APlayGameMode::~APlayGameMode()
 {
+	Sound.Off();
 }
 
 void APlayGameMode::BeginPlay()
@@ -88,6 +92,11 @@ void APlayGameMode::BeginPlay()
 
 		}
 	}
+
+	Sound = UEngineSound::SoundPlay("StageOneBGM.mp3");
+	Sound.On();
+
+
 }
 
 
@@ -169,23 +178,46 @@ void APlayGameMode::InfinityGroundCheck()
 	}
 }
 
-
-
-template <typename Monster>
-std::shared_ptr<Monster> APlayGameMode::SpawnMonster(std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType)
+void APlayGameMode::SpawnNomalMonsterTimeSet(float _DeltaTime, float _SpawnBegin, float _SpawnEnd, float _Term, float& _SpawnTerm,
+	std::string _Name, float _Size, int _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType,
+	bool _WillTimeOutDestroy, float _TimeOutDestoryDelay, bool _Group, int _Quantity)
 {
-	std::shared_ptr<AMonster> Monster;
-
-	Monster = GetWorld()->SpawnActor<AMonster>(_Name);
-	Monster->GetRenderer()->SetAutoSize(_Size * ContentsValue::MultipleSize, true);
-	Monster->GetRenderer()->ChangeAnimation(_Name);
-	Monster->SetMonsterStatus(_Hp, _Atk, _Speed, _Exp, _MoveType);
-	Monster->GetCollosion()->SetScale({ _Size * 16.0f * ContentsValue::MultipleSize, _Size * 16.0f * ContentsValue::MultipleSize });
-	Monster->GetCollosion()->SetPosition({ Monster->GetActorLocation().X, Monster->GetActorLocation().Y + (_Size * 10.0f * ContentsValue::MultipleSize) });
-	Monster->GetSavedRenderer()->SetPosition({ Monster->GetActorLocation().X, Monster->GetActorLocation().Y + (50.0f * ContentsValue::MultipleSize) });
-
-	return Monster;
+	if (PlayTime >= _SpawnBegin && PlayTime < _SpawnEnd)
+	{
+		if (0.0f >= _SpawnTerm)
+		{
+			RandomSpawnNomalMonster(_Name, _Size, _Hp, _Atk, _Speed, _Exp, _MoveType, _Group, _Quantity, _WillTimeOutDestroy, _TimeOutDestoryDelay);
+			_SpawnTerm = _Term;
+		}
+		else
+		{
+			_SpawnTerm -= PlayDeltaTime;
+		}
+	}
 }
+
+void APlayGameMode::SpawnBossMonsterTimeSet(float _SpawnTime, std::string _Name)
+{
+	if (PlayTime >= _SpawnTime && PlayTime < (_SpawnTime + 1.0f))
+	{
+		if (0.0f >= BossSpawn)
+		{
+			if (UEngineString::ToUpper("Fubuzilla") == UEngineString::ToUpper(_Name))
+			{
+				std::shared_ptr<AFubuzilla> Boss = GetWorld()->SpawnActor<AFubuzilla>("Fubuzilla");
+				Boss->SetActorLocation(RandomLocation());
+
+				BossSpawn = 1.5f;
+			}
+		}
+		else if (PlayTime >= (_SpawnTime + 1.0f) && PlayTime < (_SpawnTime + 2.0f))
+		{
+			BossSpawn = 0.0f;
+		}
+	}
+}
+
+
 
 void APlayGameMode::PlayDebugText()
 {
@@ -231,28 +263,27 @@ void APlayGameMode::PlayDebugText()
 }
 
 
-void APlayGameMode::SpawnMonsterTimeSet(float _DeltaTime, float _SpawnBegin, float _SpawnEnd, float _Term,
-	std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType,
-	bool _Group, int _Quantity)
-{
-	if (PlayTime >= _SpawnBegin && PlayTime < _SpawnEnd)
-	{
-		if (SpawnTerm <= 0)
-		{
-			RandomSpawnMonster(_Name, _Size, _Hp, _Atk, _Speed, _Exp, _MoveType, _Group, _Quantity);
-			SpawnTerm = _Term;
-			
 
-		}
-		else
-		{
-			SpawnTerm -= PlayDeltaTime;
-		}
-	}
+
+std::shared_ptr<ANomalMonster> APlayGameMode::SpawnNomalMonster(std::string _Name, float _Size, int _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType, bool _WillTimeOutDestroy, float _TimeOutDestoryDelay)
+{
+	std::shared_ptr<ANomalMonster> Monster;
+
+	Monster = GetWorld()->SpawnActor<ANomalMonster>(_Name);
+	Monster->GetRenderer()->SetAutoSize(_Size * ContentsValue::MultipleSize, true);
+	Monster->GetRenderer()->ChangeAnimation(_Name);
+	Monster->SetMonsterStatus(_Hp, _Atk, _Speed, _Exp, _MoveType, _WillTimeOutDestroy, _TimeOutDestoryDelay);
+	Monster->GetCollosion()->SetScale({ _Size * 16.0f * ContentsValue::MultipleSize, _Size * 16.0f * ContentsValue::MultipleSize });
+	Monster->GetCollosion()->SetPosition({ Monster->GetActorLocation().X, Monster->GetActorLocation().Y + (_Size * 10.0f * ContentsValue::MultipleSize) });
+	Monster->GetSavedRenderer()->SetPosition({ Monster->GetActorLocation().X, Monster->GetActorLocation().Y + (50.0f * ContentsValue::MultipleSize) });
+	Monster->GetOverCheckCollision()->SetScale({ _Size * 16.0f * ContentsValue::MultipleSize, _Size * 32.0f * ContentsValue::MultipleSize });
+	Monster->GetOverCheckCollision()->SetPosition({ Monster->GetActorLocation().X, Monster->GetActorLocation().Y + (_Size * 18.0f * ContentsValue::MultipleSize) });
+
+	return Monster;
 }
 
-void APlayGameMode::RandomSpawnMonster(std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType,
-	bool _Group, int _Quantity)
+void APlayGameMode::RandomSpawnNomalMonster(std::string _Name, float _Size, int _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType,
+	bool _WillTimeOutDestroy, float _TimeOutDestoryDelay, bool _Group, int _Quantity)
 {
 	if (0 >= _Quantity)
 	{
@@ -264,7 +295,7 @@ void APlayGameMode::RandomSpawnMonster(std::string _Name, float _Size, float _Hp
 
 	for (int i = 0; i < _Quantity; i++)
 	{
-		std::shared_ptr<AMonster> Monster = SpawnMonster<AMonster>(_Name, _Size, _Hp, _Atk, _Speed, _Exp, _MoveType);
+		std::shared_ptr<ANomalMonster> Monster = SpawnNomalMonster(_Name, _Size, _Hp, _Atk, _Speed, _Exp, _MoveType, _WillTimeOutDestroy, _TimeOutDestoryDelay);
 
 		FVector GroupPos = RandomLocation(_Group);
 		Monster->SetActorLocation(GroupPos);
@@ -291,7 +322,6 @@ void APlayGameMode::RandomSpawnMonster(std::string _Name, float _Size, float _Hp
 	GroupSpawn = false;
 }
 
-
 float4 APlayGameMode::RandomLocation(bool _Group)
 {
 	float4 MonsterPos;
@@ -300,13 +330,13 @@ float4 APlayGameMode::RandomLocation(bool _Group)
 	{
 		MonsterPos = APlayer::PlayerPos;
 
-		while (MonsterPos.X > (APlayer::PlayerPos.X - 300.0f) && MonsterPos.X < (APlayer::PlayerPos.X + 300.0f))
+		while (MonsterPos.X > (APlayer::PlayerPos.X - 350.0f) && MonsterPos.X < (APlayer::PlayerPos.X + 350.0f))
 		{
-			MonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 100.0f;
+			MonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-450.0f, 450.0f);
 		}
-		while (MonsterPos.Y > (APlayer::PlayerPos.Y - 250.0f) && MonsterPos.Y < (APlayer::PlayerPos.Y + 250.0f))
+		while (MonsterPos.Y > (APlayer::PlayerPos.Y - 300.0f) && MonsterPos.Y < (APlayer::PlayerPos.Y + 300.0f))
 		{
-			MonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 100.0f;
+			MonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-450.0f, 450.0f);
 		}
 	}
 	else
@@ -316,20 +346,20 @@ float4 APlayGameMode::RandomLocation(bool _Group)
 		{
 			GroupMonsterPos = APlayer::PlayerPos;
 
-			while (GroupMonsterPos.X > (APlayer::PlayerPos.X - 300.0f) && GroupMonsterPos.X < (APlayer::PlayerPos.X + 300.0f))
+			while (GroupMonsterPos.X > (APlayer::PlayerPos.X - 350.0f) && GroupMonsterPos.X < (APlayer::PlayerPos.X + 350.0f))
 			{
-				GroupMonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 100.0f;
+				GroupMonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-450.0f, 450.0f);
 			}
-			while (GroupMonsterPos.Y > (APlayer::PlayerPos.Y - 250.0f) && GroupMonsterPos.Y < (APlayer::PlayerPos.Y + 250.0f))
+			while (GroupMonsterPos.Y > (APlayer::PlayerPos.Y - 300.0f) && GroupMonsterPos.Y < (APlayer::PlayerPos.Y + 300.0f))
 			{
-				GroupMonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 100.0f;
+				GroupMonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-450.0f, 450.0f);
 			}
 		}
 
 		MonsterPos = GroupMonsterPos;
 
-		MonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 10.0f;
-		MonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-5.0f, 5.0f) * 10.0f;
+		MonsterPos.X += UEngineRandom::MainRandom.RandomFloat(-50.0f, 50.0f);
+		MonsterPos.Y += UEngineRandom::MainRandom.RandomFloat(-50.0f, 50.0f);
 	}
 
 	return MonsterPos;
@@ -413,20 +443,25 @@ void APlayGameMode::Tick(float _DeltaTime)
 
 	InfinityGroundCheck();
 
-	SpawnMonsterTimeSet(PlayTime, 0.0f, 20.0f, 5.0f,
-		"Shrimp", 2.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
+	if (true == IsPlayStart)
+	{
+		IsPlayStart = false;
+	}
+	SpawnNomalMonsterTimeSet(PlayTime, 0.5f, 20.0f, 5.0f, SpawnTerm1,
+		"Shrimp", 1.0f, 8, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
 		false, 10);
-	SpawnMonsterTimeSet(PlayTime, 0.0f, 20.0f, 10.0f,
-		"Shrimp", 1.0f, 8.0f, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
+	SpawnNomalMonsterTimeSet(PlayTime, 0.5f, 20.0f, 10.0f, SpawnTerm2,
+		"Shrimp", 1.0f, 8, 2.0f, 0.35f, 6.0f, EMonsterMoveType::Follow,
 		true, 10);
-	SpawnMonsterTimeSet(PlayTime, 20.0f, 40.0f, 5.0f,
-		"Deadbeat", 1.0f, 40.0f, 4.0f, 0.4f, 7.0f, EMonsterMoveType::Follow,
+	SpawnNomalMonsterTimeSet(PlayTime, 20.0f, 40.0f, 5.0f, SpawnTerm1,
+		"Deadbeat", 1.0f, 40, 4.0f, 0.4f, 7.0f, EMonsterMoveType::Follow,
 		false, 5);
-	SpawnMonsterTimeSet(PlayTime, 40.0f, 60.0f, 5.0f,
-		"Takodachi", 1.0f, 80.0f, 4.0f, 0.4f, 8.0f, EMonsterMoveType::Follow);
-	SpawnMonsterTimeSet(PlayTime, 60.0f, 80.0f, 5.0f,
-		"KFP", 1.0f, 20.0f, 2.0f, 1.0f, 3.0f, EMonsterMoveType::StraightToPlayer,
-		true, 10);
+	SpawnNomalMonsterTimeSet(PlayTime, 40.0f, 60.0f, 5.0f, SpawnTerm1,
+		"Takodachi", 1.0f, 80, 4.0f, 0.4f, 8.0f);
+	SpawnNomalMonsterTimeSet(PlayTime, 60.0f, 80.0f, 5.0f, SpawnTerm1,
+		"KFP", 1.0f, 20, 2.0f, 1.0f, 3.0f, EMonsterMoveType::StraightToPlayer,
+		true, 20.0f, true, 10);
+	SpawnBossMonsterTimeSet(5.0f, "Fubuzilla");
 
 	PlayDebugText();
 

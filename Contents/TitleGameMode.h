@@ -24,6 +24,9 @@ public:
 	ATitleGameMode& operator=(const ATitleGameMode& _Other) = delete;
 	ATitleGameMode& operator=(ATitleGameMode&& _Other) noexcept = delete;
 
+
+
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -78,6 +81,8 @@ private:
 	std::shared_ptr<ATitleCh> Zeta;
 
 	std::shared_ptr<AMouse> Mouse;
+
+
 
 	float BackSpawnTime = 0;
 	void CursorOFF();

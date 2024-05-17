@@ -195,7 +195,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Fubuzilla.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Kiara.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="NomalMonster.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -320,7 +328,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Fubuzilla.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Kiara.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="NomalMonster.cpp">
       <SubType>
       </SubType>
     </ClCompile>

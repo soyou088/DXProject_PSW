@@ -3,12 +3,11 @@
 #include "ContentsEnum.h"
 #include "ContentsValue.h"
 
-
-// Ό³Έν :
 class USpriteRenderer;
 class AMonster : public AActor
 {
 	GENERATED_BODY(AActor)
+
 public:
 	// constrcuter destructer
 	AMonster();
@@ -19,7 +18,6 @@ public:
 	AMonster(AMonster&& _Other) noexcept = delete;
 	AMonster& operator=(const AMonster& _Other) = delete;
 	AMonster& operator=(AMonster&& _Other) noexcept = delete;
-
 
 	void SetName(std::string _Name)
 	{
@@ -41,17 +39,33 @@ public:
 		return Collision;
 	}
 
-	float GetHp()
+	UCollision* GetOverCheckCollision()
+	{
+		return OverCheckCollision;
+	}
+
+	int GetHp()
 	{
 		return Hp;
 	}
 
-	void SetHp(float _Hp)
+	void SetHp(int _Hp)
 	{
 		Hp = _Hp;
 	}
 
-	void SetMonsterStatus(float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType);
+	float GetAtk()
+	{
+		return Atk;
+	}
+
+	void SetSpeed(float _Speed)
+	{
+		Speed = _Speed;
+		CalSpeed = ContentsValue::BaseSpeed * Speed;
+	}
+
+	void SetMonsterStatus(int _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType, bool _WillTimeOutDestroy, float _TimeOutDelay);
 
 	FVector CreateGroupToPlayerDir();
 
@@ -60,24 +74,28 @@ public:
 		ToPlayerDir = _ToPlayerDir;
 	}
 
+	void SetTimeOutDestoryDelay(float _TimeOutDestoryDelay)
+	{
+		TimeOutDestoryDelay = _TimeOutDestoryDelay;
+	}
+
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
 
+	UDefaultSceneComponent* Root;
 
-
-private:
 	USpriteRenderer* Renderer;
+	USpriteRenderer* ShadowRenderer;
 	USpriteRenderer* SavedRenderer;
-	USpriteRenderer* Shadow;
-
 	UCollision* Collision;
+	UCollision* OverCheckCollision;
 
 	FVector Dir = FVector::Zero;
 	FVector ToPlayerDir;
 
 	std::string Name = "Shrimp";
-	float Hp = 8.0f;
+	int Hp = 8;
 	float Atk = 2.0f;
 	float Speed = 0.35f;
 	float CalSpeed = ContentsValue::BaseSpeed * Speed;
@@ -85,19 +103,25 @@ private:
 
 	EMonsterMoveType MoveType = EMonsterMoveType::Follow;
 
+	bool IsContectPlayer = false;
+
 	bool IsSaved = false;
 	EEngineDir SavedDir = EEngineDir::MAX;
 	float RendererAlpha = 1.0f;
 
-	void CreateMonsterAnimation(std::string _Name, int _MaxIndex = 2);
+	bool WillTimeOutDestory = false;
+	float TimeOutDestoryDelay = 20.0f;
 
-	void Move(float _DeltaTime, EMonsterMoveType _MoveType);
+	virtual void Move(float _DeltaTime, EMonsterMoveType _MoveType = EMonsterMoveType::Follow);
+
 	void CheckPosComparePlayer();
 
-	void CheckHit();
+	void CheckOverPlayer();
 
-	void CheakSaved();
+	void CheckSaved();
 	void Saved(float _DeltaTime);
 
-};
+	void TimeOutDestory(float _DeltaTime);
+private:
 
+};

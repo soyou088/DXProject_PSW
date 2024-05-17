@@ -17,7 +17,7 @@ public:
 	UIManager(UIManager&& _Other) noexcept = delete;
 	UIManager& operator=(const UIManager& _Other) = delete;
 	UIManager& operator=(UIManager&& _Other) noexcept = delete;
-
+	UTextWidget* KillCountText = nullptr;
 protected:
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;
@@ -73,7 +73,7 @@ protected:
 	UTextWidget* HPTextBack = nullptr;
 	UTextWidget* TimeUI = nullptr;
 	UTextWidget* GoldText = nullptr;
-	UTextWidget* KillCountText = nullptr;
+
 	UTextWidget* StateText = nullptr;
 	UTextWidget* CharacterName = nullptr;
 

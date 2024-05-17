@@ -43,6 +43,8 @@ private:
 	UCollision* ProducerCol = nullptr;
 	UCollision* ExitCol = nullptr;
 
+
+	UEngineSoundPlayer Sound;
 	bool ColChack = false;
 	bool ExitChack = false;
 };

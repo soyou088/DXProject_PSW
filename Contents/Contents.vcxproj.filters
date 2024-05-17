@@ -100,6 +100,12 @@
     <ClInclude Include="CuttingBoard.h">
       <Filter>Level\PlayLevel\Actor\Attack\Ranged\BasicRanged</Filter>
     </ClInclude>
+    <ClInclude Include="Fubuzilla.h">
+      <Filter>Level\PlayLevel\Actor\Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="NomalMonster.h">
+      <Filter>Level\PlayLevel\Actor\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompile.cpp">
@@ -201,6 +207,12 @@
     <ClCompile Include="CuttingBoard.cpp">
       <Filter>Level\PlayLevel\Actor\Attack\Ranged\BasicRanged</Filter>
     </ClCompile>
+    <ClCompile Include="Fubuzilla.cpp">
+      <Filter>Level\PlayLevel\Actor\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="NomalMonster.cpp">
+      <Filter>Level\PlayLevel\Actor\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -280,6 +292,9 @@
     </Filter>
     <Filter Include="Level\PlayLevel\Actor\Attack\Ranged\BasicRanged">
       <UniqueIdentifier>{4a02e302-1eb0-4e06-9c20-ac074488c656}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\PlayLevel\Actor\Monster\Boss">
+      <UniqueIdentifier>{9d3c9aff-282a-430b-91ac-71041c79f772}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

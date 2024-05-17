@@ -74,7 +74,8 @@ void UTitleText::BeginPlay()
 {
 	Super::BeginPlay();
 	UISpawn();
-
+	Sound = UEngineSound::SoundPlay("TitleBGM.mp3");
+	Sound.On();
 }
 
 void UTitleText::Tick(float _DeltaTime)
@@ -252,6 +253,7 @@ void UTitleText::CollisionCheck()
 	if (true == IsDown(VK_LBUTTON) && true == ColChack)
 	{
 		GEngine->ChangeLevel("SelectLevel");
+		Sound.Off();
 	}
 	if (true == IsDown(VK_LBUTTON) && true == ExitChack)
 	{

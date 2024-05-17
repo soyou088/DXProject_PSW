@@ -30,6 +30,7 @@ private:
 
 	USpriteRenderer* TitleBack;
 
+	
 	float MoveSpeed = 0.5f;
 
 

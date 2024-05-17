@@ -158,23 +158,22 @@ void UHoloCore::Initialize()
 		UEngineDirectory Dir;
 		Dir.MoveToSearchChild("Resources");
 		Dir.Move("Sound");
-		std::vector<UEngineFile> Files = Dir.GetAllFile({ ".wav" });
+		std::vector<UEngineFile> Files = Dir.GetAllFile({ ".wav", ".mp3" });
 		for (UEngineFile& File : Files)
 		{
-			//File.Open(EIOOpenMode::Read, EIODataType::Binary);
+			File.Open(EIOOpenMode::Read, EIODataType::Binary);
 
-			//char Arr[100];
-			//File.Read(Arr, 100);
+			char Arr[100];
+			File.Read(Arr, 100);
 
 			UEngineSound::Load(File.GetFullPath());
 		}
-		// UEngineSound::SoundPlay("anipang_ingame_wav.wav");
 	}
 
-	GEngine->CreateLevel<APlayGameMode>("PlayLevel");
+
 	GEngine->CreateLevel<ASelectGametMode>("SelectLevel");
 	GEngine->CreateLevel<ATitleGameMode>("TitleLevel");
-	GEngine->ChangeLevel("PlayLevel");
+	GEngine->ChangeLevel("TitleLevel");
 
 
 }

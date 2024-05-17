@@ -9,7 +9,7 @@ ACuttingBoard::ACuttingBoard()
 	
 	Renderer->SetSprite("Board.png");
 	//Renderer->SetupAttachment(Root);
-	Renderer->SetAutoSize(ContentsValue::MultipleSize * 20, true);
+	Renderer->SetAutoSize(ContentsValue::MultipleSize, true);
 //	SetRoot(Root);
 }
 

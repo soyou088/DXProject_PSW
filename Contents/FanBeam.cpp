@@ -39,6 +39,7 @@ void AFanBeam::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	SetKnifeTypeMeleeLocation(250.0f);
+	DirChack(Renderer->GetDir());
 
 
 
@@ -48,6 +49,7 @@ void AFanBeam::Tick(float _DeltaTime)
 		Collision->SetActive(true);
 		Collision->SetPosition(Root->GetLocalPosition());
 		Collision->AddPosition(Dir * ContentsValue::MultipleSize);
+
 
 		CheckHit();
 	}
@@ -59,6 +61,7 @@ void AFanBeam::Tick(float _DeltaTime)
 	{
 		FVector Pos = Root->GetLocalPosition() * Dir;
 		UEngineDebugMsgWindow::PushMsg(std::format("RootPos : {}", Pos.ToString()));
+
 	}
 
 }
@@ -73,4 +76,20 @@ void AFanBeam::CheckHit()
 			Monster->SetHp(Hp);
 		}
 	);
+}
+
+void AFanBeam::DirChack(EEngineDir _Dir)
+{
+	Renderer->SetActive(true);
+	Renderer->SetDir(_Dir);
+	if (EEngineDir::Right == _Dir)
+	{
+		Renderer->SetPosition({ (1200.0f * ContentsValue::MultipleSize), (80.0f * ContentsValue::MultipleSize) });
+		Collision->SetPosition({ (1200.0f * ContentsValue::MultipleSize), (80.0f * ContentsValue::MultipleSize) });
+	}
+	else if (EEngineDir::Left == _Dir)
+	{
+		Renderer->SetPosition({ (-1200.0f * ContentsValue::MultipleSize), (80.0f * ContentsValue::MultipleSize) });
+		Collision->SetPosition({ (-1200.0f * ContentsValue::MultipleSize), (80.0f * ContentsValue::MultipleSize) });
+	}
 }

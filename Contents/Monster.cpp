@@ -1,34 +1,38 @@
 #include "PreCompile.h"
 #include "Monster.h"
 #include "Player.h"
-
-
+#include "Weapon.h"
+#include "UIManager.h"
 
 AMonster::AMonster()
 {
-	UDefaultSceneComponent* Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
+	Root = CreateDefaultSubObject<UDefaultSceneComponent>("Renderer");
+
 	Renderer = CreateDefaultSubObject<USpriteRenderer>("Renderer");
 	Renderer->SetupAttachment(Root);
 	Renderer->SetPivot(EPivot::BOT);
-
-	Shadow = CreateDefaultSubObject<USpriteRenderer>("Renderer");
-	Shadow->SetupAttachment(Root);
-	Shadow->SetPivot(EPivot::BOT);
 
 	SavedRenderer = CreateDefaultSubObject<USpriteRenderer>("SavedRenderer");
 	SavedRenderer->SetupAttachment(Root);
 	SavedRenderer->SetAutoSize(ContentsValue::MultipleSize, true);
 	SavedRenderer->SetActive(false);
 
+	ShadowRenderer = CreateDefaultSubObject<USpriteRenderer>("ShadowRenderer");
+	ShadowRenderer->SetupAttachment(Root);
+	ShadowRenderer->SetAutoSize(ContentsValue::MultipleSize, true);
+	ShadowRenderer->SetPivot(EPivot::BOT);
+
 	Collision = CreateDefaultSubObject<UCollision>("Collision");
 	Collision->SetupAttachment(Root);
-	Collision->SetScale({ 32.0f,32.0f });
 	Collision->SetCollisionGroup(ECollisionOrder::Monster);
 	Collision->SetCollisionType(ECollisionType::Rect);
-	
-	
-	SetRoot(Root);
 
+	OverCheckCollision = CreateDefaultSubObject<UCollision>("OverCheckCollision");
+	OverCheckCollision->SetupAttachment(Root);
+	OverCheckCollision->SetCollisionGroup(ECollisionOrder::Monster);
+	OverCheckCollision->SetCollisionType(ECollisionType::Rect);
+
+	SetRoot(Root);
 }
 
 AMonster::~AMonster()
@@ -39,25 +43,14 @@ void AMonster::BeginPlay()
 {
 	Super::BeginPlay();
 
-
-	//CreateMonsterAnimation("Fubuzilla",11);
-	CreateMonsterAnimation("Shrimp");
-	CreateMonsterAnimation("Deadbeat");
-	CreateMonsterAnimation("Takodachi");
-	CreateMonsterAnimation("KFP");
-
-	Renderer->SetAutoSize(ContentsValue::MultipleSize, true);
-	Renderer->ChangeAnimation(Name);
 	Renderer->SetOrder(ERenderOrder::MonsterUp);
-
-	Shadow->SetSprite("Shadow_0.png");
-	Shadow->SetAutoSize(ContentsValue::MultipleSize, true);
-	Shadow->SetOrder(ERenderOrder::Shadow);
-	Shadow->SetMulColor({ 1.f,1.f,1.f,0.7f });
 
 	SavedRenderer->CreateAnimation("MonsterSavedHeart", "MonsterSavedHeart", 0.1f, false);
 	SavedRenderer->SetOrder(ERenderOrder::MonsterUIUp);
 	SavedRenderer->ChangeAnimation("MonsterSavedHeart");
+
+	ShadowRenderer->SetSprite("Shadow_0.png");
+	ShadowRenderer->SetOrder(ERenderOrder::Shadow);
 }
 
 
@@ -65,31 +58,12 @@ void AMonster::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (false == IsSaved)
-	{
-		Move(_DeltaTime, MoveType);
-
-		if (0 > Dir.X)
-		{
-			Renderer->SetDir(EEngineDir::Left);
-		}
-		else
-		{
-			Renderer->SetDir(EEngineDir::Right);
-		}
-
-		CheakSaved();
-		CheckHit();
-	}
-	else
-	{
-		Saved(_DeltaTime);
-	}
-
 	CheckPosComparePlayer();
+	CheckOverPlayer();
+	TimeOutDestory(_DeltaTime);
 }
 
-void AMonster::SetMonsterStatus(float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType)
+void AMonster::SetMonsterStatus(int _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType, bool _WillTimeOutDestroy, float _TimeOutDestoryDelay)
 {
 	Hp = _Hp;
 	Atk = _Atk;
@@ -97,6 +71,8 @@ void AMonster::SetMonsterStatus(float _Hp, float _Atk, float _Speed, float _Exp,
 	CalSpeed = ContentsValue::BaseSpeed * Speed;
 	Exp = _Exp;
 	MoveType = _MoveType;
+	WillTimeOutDestory = _WillTimeOutDestroy;
+	TimeOutDestoryDelay = _TimeOutDestoryDelay;
 }
 
 FVector AMonster::CreateGroupToPlayerDir()
@@ -104,11 +80,6 @@ FVector AMonster::CreateGroupToPlayerDir()
 	FVector GroupDir = APlayer::PlayerColPos - GetActorLocation();
 	GroupDir = GroupDir.Normalize2DReturn();
 	return GroupDir;
-}
-
-void AMonster::CreateMonsterAnimation(std::string _Name, int _MaxIndex)
-{
-	Renderer->CreateAnimation(_Name, _Name, 0.1f, true, 0, _MaxIndex);
 }
 
 void AMonster::Move(float _DeltaTime, EMonsterMoveType _MoveType)
@@ -141,7 +112,6 @@ void AMonster::Move(float _DeltaTime, EMonsterMoveType _MoveType)
 	AddActorLocation(Dir * _DeltaTime * CalSpeed);
 }
 
-
 void AMonster::CheckPosComparePlayer()
 {
 	if (APlayer::PlayerColPos.Y <= GetActorLocation().Y)
@@ -156,16 +126,22 @@ void AMonster::CheckPosComparePlayer()
 	}
 }
 
-void AMonster::CheckHit()
+void AMonster::CheckOverPlayer()
 {
-	Collision->CollisionEnter(ECollisionOrder::Weapon, [=](std::shared_ptr<UCollision> _Collison)
+	OverCheckCollision->CollisionEnter(ECollisionOrder::Player, [=](std::shared_ptr<UCollision> _Collison)
 		{
+			Renderer->SetMulColor(float4{ 1.0f, 1.0f, 1.0f, 0.5f });
+		}
+	);
 
+	OverCheckCollision->CollisionExit(ECollisionOrder::Player, [=](std::shared_ptr<UCollision> _Collison)
+		{
+			Renderer->SetMulColor(float4::One);
 		}
 	);
 }
 
-void AMonster::CheakSaved()
+void AMonster::CheckSaved()
 {
 	if (0 >= Hp)
 	{
@@ -177,14 +153,15 @@ void AMonster::CheakSaved()
 void AMonster::Saved(float _DeltaTime)
 {
 	SavedRenderer->SetActive(true);
+	ShadowRenderer->SetActive(false);
 
 	if (EEngineDir::Left == SavedDir)
 	{
-		Renderer->AddPosition(FVector{ 1.0f, 0.0f } *_DeltaTime * 20.0f * ContentsValue::MultipleSize);
+		Renderer->AddPosition(FVector{ 1.0f, 0.0f } *_DeltaTime * 100.0f * ContentsValue::MultipleSize);
 	}
 	else if (EEngineDir::Right == SavedDir)
 	{
-		Renderer->AddPosition(FVector{ -1.0f, 0.0f } *_DeltaTime * 20.0f * ContentsValue::MultipleSize);
+		Renderer->AddPosition(FVector{ -1.0f, 0.0f } *_DeltaTime * 100.0f * ContentsValue::MultipleSize);
 	}
 	else
 	{
@@ -200,8 +177,23 @@ void AMonster::Saved(float _DeltaTime)
 		Destroy();
 		++ContentsValue::KillCount;
 	}
+
+
 }
 
-
-
-
+void AMonster::TimeOutDestory(float _DeltaTime)
+{
+	if (true == WillTimeOutDestory)
+	{
+		TimeOutDestoryDelay -= _DeltaTime;
+		if (0.0f >= TimeOutDestoryDelay)
+		{
+			Renderer->SetActive(false);
+			SavedRenderer->SetActive(true);
+			if (true == SavedRenderer->IsCurAnimationEnd())
+			{
+				Destroy();
+			}
+		}
+	}
+}

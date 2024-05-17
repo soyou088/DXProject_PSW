@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Mouse.h"
 #include "Box.h"
+#include "NomalMonster.h"
 
 struct FIntPoint
 {
@@ -31,6 +32,7 @@ public:
 	static bool ESCPauseON;
 	static bool LevelUpPauseON;
 	static bool IsPause;
+	static bool IsPlayStart;
 
 	// constrcuter destructer
 
@@ -66,20 +68,23 @@ protected:
 	void LevelUpPause(float _DeltaTime);
 	
 	// 몬스터 스폰 관련
-	template <typename Monster>
-	std::shared_ptr<Monster> SpawnMonster(std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType);
+	std::shared_ptr<ANomalMonster> SpawnNomalMonster(std::string _Name, float _Size, int _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType, bool _WillTimeOutDestroy, float _TimeOutDestoryDelay);
 
-	void RandomSpawnMonster(std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType, bool _Group, int _Quantity);
-	float4 RandomLocation(bool _Group);
+	float4 RandomLocation(bool _Group = false);
+	void RandomSpawnNomalMonster(std::string _Name, float _Size, int _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType, bool _WillTimeOutDestroy, float _TimeOutDestoryDelay, bool _Group, int _Quantity);
 
-	void SpawnMonsterTimeSet(float _DeltaTime, float _SpawnBegin, float _SpawnEnd, float _Term, std::string _Name, float _Size, float _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType, bool _Group = false, int _Quantity = 1);
+	void SpawnNomalMonsterTimeSet(float _DeltaTime, float _SpawnBegin, float _SpawnEnd, float _Term, float& _SpawnTerm,
+		std::string _Name, float _Size, int _Hp, float _Atk, float _Speed, float _Exp, EMonsterMoveType _MoveType = EMonsterMoveType::Follow,
+		bool _WillTimeOutDestroy = false, float _TimeOutDestoryDelay = 20.0f, bool _Group = false, int _Quantity = 1);
+
+	void SpawnBossMonsterTimeSet(float _SpawnTime, std::string _Name);
 	void Pause(float _DeltaTime);
 
 	void PlayDebugText();
 
 private:
 	FIntPoint CurIndex;
-
+	UEngineSoundPlayer Sound;
 	float4 GroupMonsterPos;
 	bool GroupSpawn = false;
 
@@ -87,6 +92,12 @@ private:
 	float SpawnTerm = 0;
 
 	float PlayDeltaTime = 0.0f;
+	float SpawnTerm1 = 0;
+	float SpawnTerm2 = 0;
+	float SpawnTerm3 = 0;
+	float SpawnTerm4 = 0;
+	float SpawnTerm5 = 0;
+	float BossSpawn = 0.0f;
 
 
 	void CursorOFF();

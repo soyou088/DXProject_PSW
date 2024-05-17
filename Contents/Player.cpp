@@ -74,11 +74,11 @@ void APlayer::BeginPlay()
 
 	// 공격 스폰
 
-	//AddWeapon<AKiara>("AKiara");
-	//AddWeapon<AWamy>("AWamy");
+	AddWeapon<AKiara>("AKiara");
+	AddWeapon<AWamy>("AWamy");
 	//AddWeapon<AAsacoco>("Asacoco");
 	//AddWeapon<AFanBeam>("FanBeam");
-	AddWeapon<ACuttingBoard>("CuttingBoard");
+	//AddWeapon<ACuttingBoard>("CuttingBoard");
 	
 	StateInit();
 }

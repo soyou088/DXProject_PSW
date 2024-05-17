@@ -3,6 +3,7 @@
 #include "SelectMenu.h"
 #include "CharacterSelection.h"
 #include "CharacterSelectionButon.h"
+#include "TitleGameMode.h"
 
 #include <EngineCore/Camera.h>
 
@@ -14,6 +15,7 @@ ASelectGametMode::ASelectGametMode()
 
 ASelectGametMode::~ASelectGametMode()
 {
+	
 }
 
 void ASelectGametMode::BeginPlay()

@@ -14,6 +14,7 @@ ATitleBack::ATitleBack()
 
 ATitleBack::~ATitleBack()
 {
+
 }
 
 void ATitleBack::BeginPlay()
@@ -30,6 +31,8 @@ void ATitleBack::BeginPlay()
 		{
 			Destroy();
 		});
+
+
 }
 
 

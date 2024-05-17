@@ -28,6 +28,7 @@ protected:
 private:
 	USpriteRenderer* MenuRenderer;
 
+	UEngineSoundPlayer Sound;
 
 	UCollision* Collision;
 };

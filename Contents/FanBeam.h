@@ -22,7 +22,9 @@ protected:
 	void Tick(float _DeltaTime) override;
 
 	void CheckHit();
+
 private:
 	UCollision* Collision;
 
+	void DirChack(EEngineDir _Dir);
 };

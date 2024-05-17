@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "CharacterSelection.h"
 #include "CharacterSelectionButon.h"
+#include "PlayGameMode.h"
 
 ACharacterSelection::ACharacterSelection()
 {
@@ -58,6 +59,7 @@ void ACharacterSelection::Tick(float _DeltaTime)
 
 	if (true == IsDown(VK_LBUTTON) && true == ColChack)
 	{
+		GEngine->CreateLevel<APlayGameMode>("PlayLevel");
 		GEngine->ChangeLevel("PlayLevel");
 	}
 }
